@@ -3,15 +3,47 @@ import { CircleHelp, MoveLeft } from "lucide-react"
 import Body from "@/components/ui/body";
 import React, { useState } from 'react';
 import Stepper from '@/components/ui/stepper'
+import Formulaire from '@/components/ui/formulaire'
 
 
 
 export default function Home() {
-  const question = {
-    name1: 'Etes-vous particulier ?',
-    name2: 'Possedez-vous une parcelle?',
-    name3: 'Exploitez-vous une parcelle',
-  }
+
+  const [step, setStep] = useState(0);
+
+  const questions = [
+    {
+      question: 'Etes-vous particulier ?',
+      answers: ['Particulier', 'Entrepreneur']
+    },
+    {
+      question: 'Possedez-vous une parcelle?',
+      answers: ['Oui', 'Non']
+    },
+    {
+      question: 'Exploitez-vous une parcelle?',
+      answers: ['Oui', 'Non']
+    }
+  ];
+
+  const handleAnswer = () => {
+    if (step < questions.length - 1) {
+      setStep(prevStep => prevStep + 1);
+    } else {
+      // Passer au second stepper
+      setStep(prevStep => prevStep + 1);
+    }
+  };
+
+  const handleBack = () => {
+    if (step > 0) {
+      setStep(prevStep => prevStep - 1);
+    }
+  };
+
+  const handleSubmit = () => {
+    // Logique pour soumettre le formulaire
+  };
 
   return (
     <main className="h-screen w- bg-[url('/nat-7.jpg')] bg-gradient-to-r from-gray-400 to-green-900 bg-no-repeat bg-cover bg-center overflow-hidden">
@@ -22,7 +54,7 @@ export default function Home() {
       <div className="flex justify-center items-center md:w-1/2 mx-auto shadow-xl rounded-2xl pb-2 bg-teal-2100">
         <div className="mb-10 space-y-5">
 
-          <Stepper />
+          {/* <Stepper /> */}
           {/* <div className='flex justify-center items-center'>
             <ul className="flex flex-row gap-x-3 ">
               <li>
@@ -60,8 +92,19 @@ export default function Home() {
               </li>
             </ul>
           </div> */}
-          <div>
-            <Body />
+          <div className="mb-10 space-y-6">
+            <Stepper currentStep={step} />
+            {step < 3 ? (
+              <>
+                <Body question={questions[step]} onAnswer={handleAnswer} />
+                <div className="flex justify-between mt-4">
+                  {step > 0 && <button onClick={handleBack} className="bg-gray-700 hover:bg-gray-700 border-1 rounded text-white p-1">Back</button>}
+                  <button onClick={handleAnswer} className="bg-green-700 hover:bg-green-400 border-1 rounded text-white p-1">Next</button>
+                </div>
+              </>
+            ) : (
+              <Formulaire />
+            )}
           </div>
         </div>
       </div>

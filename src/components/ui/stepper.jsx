@@ -1,7 +1,7 @@
 import React from 'react'
 import { CircleHelp } from "lucide-react"
 
-const stepper = () => {
+const stepper = ({ currentStep }) => {
   return (
     <div className='flex justify-center items-center'>
       <ul className="flex flex-row gap-x-3 ">

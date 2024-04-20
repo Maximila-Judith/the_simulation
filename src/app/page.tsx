@@ -1,16 +1,27 @@
+'use client'
 import { CircleHelp, MoveLeft } from "lucide-react"
 import Body from "@/components/ui/body";
-import Stepper from "@/components/ui/stepper";
+import React, { useState } from 'react';
+
 
 
 export default function Home() {
+  const question = {
+    name1: 'Etes-vous particulier ?',
+    name2: 'Possedez-vous une parcelle?',
+    name3: 'Exploitez-vous une parcelle',
+  }
+  const response = {
+    res1: 'NaN',
+    res2: 'Yes',
+    res3: 'No',
+  }
+
+
   return (
     <main className="h-screen w- bg-[url('/nat-7.jpg')] bg-gradient-to-r from-gray-400 to-green-900 bg-no-repeat bg-cover bg-center overflow-hidden">
-      <div className="flex flex-row justify-between my-6 text-white	">
-        <div>
-          <h1 className="mx-8">SI</h1>
-        </div>
-        <h2 className="flex flex-row item-center space-x-8 mx-8"> <MoveLeft /> Retour</h2>
+      <div className="flex flex-row item-center my-6 text-white	">
+        <h1 className=" flex flex-row mx-8 gap-x-3"> <MoveLeft /> Retour</h1>
       </div>
 
       <div className="flex justify-center items-center md:w-1/2 mx-auto shadow-xl rounded-2xl pb-2 bg-teal-2100">

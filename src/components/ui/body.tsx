@@ -13,9 +13,9 @@ import Response from '@/components/ui/response'
 
 const body = () => {
     return (
-        <div className='p-0'>
-            <Card>
-                <CardHeader>
+        <div>
+            <Card className='h-20'>
+                <CardHeader style={{ fontFamily: 'Italianno', fontStyle: 'italic', textAlign: 'center', fontSize: '35px' }}>
                     <CardContent>Etes-vous particulier ou entrepreneur ?</CardContent>
                 </CardHeader>
             </Card>
@@ -28,7 +28,7 @@ const body = () => {
                             <Response />
                             <Response />
                         </div>
-                        <div className='flex flex-row gap-4'>
+                        {/* <div className='flex flex-row gap-4'>
                             <Response />
                             <Response />
                             <Response />
@@ -39,13 +39,13 @@ const body = () => {
                             <Response />
                             <Response />
                             <Response />
-                        </div>
+                        </div> */}
 
                     </CardContent>
                 </CardHeader>
             </Card>
 
-        </div>
+        </div >
     )
 }
 

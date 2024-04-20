@@ -2,6 +2,7 @@
 import { CircleHelp, MoveLeft } from "lucide-react"
 import Body from "@/components/ui/body";
 import React, { useState } from 'react';
+import Stepper from '@/components/ui/stepper'
 
 
 
@@ -12,8 +13,6 @@ export default function Home() {
     name3: 'Exploitez-vous une parcelle',
   }
 
-
-
   return (
     <main className="h-screen w- bg-[url('/nat-7.jpg')] bg-gradient-to-r from-gray-400 to-green-900 bg-no-repeat bg-cover bg-center overflow-hidden">
       <div className="flex flex-row item-center my-6 text-white	">
@@ -22,7 +21,8 @@ export default function Home() {
 
       <div className="flex justify-center items-center md:w-1/2 mx-auto shadow-xl rounded-2xl pb-2 bg-teal-2100">
         <div className="mb-10 space-y-5">
-          <div className='flex justify-center items-center'>
+          < Stepper />
+          {/* <div className='flex justify-center items-center'>
             <ul className="flex flex-row gap-x-3 ">
               <li>
                 <div className="flex item-center justify-center">
@@ -58,7 +58,7 @@ export default function Home() {
                 </div>
               </li>
             </ul>
-          </div>
+          </div> */}
           <div>
             <Body />
           </div>

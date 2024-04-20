@@ -11,11 +11,7 @@ export default function Home() {
     name2: 'Possedez-vous une parcelle?',
     name3: 'Exploitez-vous une parcelle',
   }
-  const response = {
-    res1: 'NaN',
-    res2: 'Yes',
-    res3: 'No',
-  }
+
 
 
   return (

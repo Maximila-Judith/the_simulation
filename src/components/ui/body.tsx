@@ -11,6 +11,7 @@ import { X } from 'lucide-react'
 import Response from '@/components/ui/response'
 
 
+
 const body = ({ question, onAnswer }: { question: { question: string; answers: string[] }; onAnswer: () => void }) => {
     return (
         <div>
@@ -27,7 +28,7 @@ const body = ({ question, onAnswer }: { question: { question: string; answers: s
                                 <Response key={index} answer={answer} onSelect={onAnswer} />
                             ))}
                         </div>
-                        {/* <div className='flex flex-row gap-4'>
+                        {/* <div className='flex flex-row gap-4'> 
                             <Response />
                             <Response />
                             <Response />

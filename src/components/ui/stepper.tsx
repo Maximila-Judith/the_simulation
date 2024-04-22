@@ -1,5 +1,9 @@
-import React from 'react'
-import { CircleHelp } from "lucide-react"
+import React, { useState } from 'react'
+import { CheckCircle, CircleHelp } from "lucide-react"
+
+/* type StepperProps = {
+  currentStep: number;
+}; */
 
 const stepper = ({ currentStep }) => {
   return (
@@ -8,7 +12,7 @@ const stepper = ({ currentStep }) => {
         <li>
           <div className="flex item-center justify-center">
             <span className="size-[46px] flex justify-center items-center flex-shrink-0 size-[46px] rounded-full border-4 border-green-100 bg-green-200 text-white border-green-900 bg-green-800 text-white">
-              <CircleHelp />
+              {currentStep === 3 ? <CheckCircle className="text-green-500" /> : <CircleHelp />}
             </span>
             <div className="ms-2 w-36 h-px bg-gray-200 mt-5 place-content-center"></div>
           </div>

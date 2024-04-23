@@ -7,12 +7,11 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { X } from 'lucide-react'
 import Response from '@/components/ui/response'
 
 
 
-const body = ({ question, onAnswer }: { question: { question: string; answers: string[] }; onAnswer: () => void }) => {
+export const Body = ({ question, onAnswer }: { question: { question: string; answers: string[] }; onAnswer: () => void }) => {
     return (
         <div>
             <Card className='h-20'>
@@ -28,18 +27,6 @@ const body = ({ question, onAnswer }: { question: { question: string; answers: s
                                 <Response key={index} answer={answer} onSelect={onAnswer} />
                             ))}
                         </div>
-                        {/* <div className='flex flex-row gap-4'> 
-                            <Response />
-                            <Response />
-                            <Response />
-                            <Response />
-                        </div>
-                        <div className='flex flex-row gap-4'>
-                            <Response />
-                            <Response />
-                            <Response />
-                            <Response />
-                        </div> */}
 
                     </CardContent>
                 </CardHeader>
@@ -48,5 +35,3 @@ const body = ({ question, onAnswer }: { question: { question: string; answers: s
         </div >
     )
 }
-
-export default body

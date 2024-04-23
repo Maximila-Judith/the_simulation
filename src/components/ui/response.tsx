@@ -14,5 +14,4 @@ const Response = ({ answer, onSelect }: { answer: string; onSelect: () => void }
 
     )
 }
-
-export default Response 
+export default Response

@@ -1,0 +1,24 @@
+{
+    "question": " ?",
+    "answers": {
+        "type": "unique_choice, multiple_choice, input",
+        "name": "",
+        "inputOption": {
+            "label": "",
+            "type": ""
+        },
+        "choiceOption": [
+            {
+                "label": "",
+                "value": "",
+                "nextQuestion": ""
+            },
+            {
+                "label": "",
+                "value": "",
+                "nextQuestion": ""
+            }
+        ]
+    },
+    "nextQuestion": ""
+}

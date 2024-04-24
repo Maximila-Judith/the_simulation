@@ -40,9 +40,7 @@ export const Second = () => {
             if (currentQuestionIndex < questions.length - 1) {
                 setCurrentQuestionIndex(currentQuestionIndex + 1);
             } else {
-
                 console.log('Questionnaire terminé', answers);
-
             }
         }
     };

@@ -4,44 +4,45 @@ import { Body } from "@/components/ui/body";
 import React, { useState } from 'react';
 import { Stepper } from '@/components/ui/stepper'
 import { Second } from '@/components/ui/second'
-
+import { globalQuestion } from '@/components/questions/globalQuestion'
+import { Data } from "@/lib/type/type";
+import { entry } from "@/components/questions/entry";
+import { plot } from "@/components/questions/plot";
+import { associate } from "@/components/questions/associate";
+import { validateHeaderValue } from "http";
 
 
 export default function Home() {
+  const tab = {
+    plot: plot,
+    associate: associate,
+    entry: entry
+  }
+  const [step, setStep] = useState<Data>(entry);
+  const next = '';
 
-  const [step, setStep] = useState(0);
+  const forAnswer = (value: string) => {
 
-  const questions = [
-    {
-      question: 'Etes-vous particulier ou une entreprise?',
-      answers: ['Particulier', 'Entreprise']
-    },
-    {
-      question: 'Possedez-vous une parcelle?',
-      answers: ['Oui', 'Non', 'oui mais pan encore payé']
-    },
-    {
-      question: 'Exploitez-vous la parcelle?',
-      answers: ['Oui', 'Non']
+    for (let i in tab) {
+      if (i.hasOwnProperty(value)) {
+        setStep(beforeSet => beforeSet = tab[value]);
+      }
     }
-  ];
 
-  const theQuestions = ['Combien de parcelle possédez vous', 'Quel est votre revenu']
-
-  const forAnswer = () => {
-    if (step < questions.length - 1) {
-      setStep(beforeSet => beforeSet + 1);
+    if (step ===  ) {
+      setStep(beforeSet => beforeSet = tab.entry.answers.choiceOptions.value);
     } else {
       setStep(beforeSet => beforeSet + 1);
     }
-  };
+    console.log(value)
+  }
+
 
   const forBack = () => {
     if (step > 0) {
       setStep(beforeSet => beforeSet - 1);
     }
   };
-
 
 
   return (
@@ -54,24 +55,25 @@ export default function Home() {
         <div className="mb-10 space-y-5">
           <div className="mb-10 space-y-6">
             <Stepper currentStep={step} />
-            {step < 3 ? (
-              <>
-                <Body question={questions[step]} onAnswer={forAnswer} />
-                <div className="flex justify-between mt-4">
-                  <button onClick={forBack} className={`bg-gray-700 hover:bg-gray-700 border-1 rounded text-white p-1 ${step === 0 ? 'hidden' : ''}`}>Back</button>
-                </div>
-              </>
-            ) : (
+            (
+            <>
+              <Body questionData={step} onAnswer={forAnswer} />
+              <div className="flex justify-between mt-4">
+                <button className={`bg-gray-700 hover:bg-gray-700 border-1 rounded text-white p-1 ${step === 0 ? 'hidden' : ''}`}>Back</button>
+              </div>
+            </>
+            )
+            { /* : (
               <>
                 <Second />
                 <div className="flex justify-between mt-4">
-                  <button onClick={forBack} className="bg-gray-700 hover:bg-gray-700 border-1 rounded text-white p-1">
+                  <button className="bg-gray-700 hover:bg-gray-700 border-1 rounded text-white p-1">
                     Back
                   </button>
                 </div>
 
               </>
-            )}
+            ) */}
           </div>
 
         </div>

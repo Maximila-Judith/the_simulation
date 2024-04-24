@@ -9,9 +9,8 @@ const Response = ({ answer, onSelect }: { answer: string; onSelect: () => void }
 
     return (
         <div className='gap-5'>
-            <Button variant="outline" onClick={handleSelect}>{answer}</Button>
+            <Button variant="outline" onClick={handleSelect} >{answer}</Button>
         </div>
-
     )
 }
 export default Response

@@ -2,6 +2,7 @@ import {
     Data
 } from "@/lib/type/type"
 export const associate: Data = {
+    id: 'associate',
     question: "Possedez-vous des associés ?",
     answers: {
         type: "multiple_choice",

@@ -2,6 +2,7 @@ import {
     Data
 } from "@/lib/type/type"
 export const plot: Data = {
+    id: "plot",
     question: "Possedez-vous une parcelle ?",
     answers: {
         type: "unique_choice",

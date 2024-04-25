@@ -1,4 +1,6 @@
 export interface Data {
+    id: string;
+    
     question: string;
 
     answers: {

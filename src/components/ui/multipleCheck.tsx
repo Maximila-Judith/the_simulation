@@ -27,6 +27,11 @@ const FormSchema = z.object({
         message: "Vous devez sélectionner au moins un élément.",
     }),
 })
+/* const OtherQuestion = z.object({
+    items: z.array(z.string()).refine((value) => value.find((item) => item), {
+    }),
+})
+ */
 
 export function CheckboxReactHookFormMultiple({ onValide, question }: { onValide: (value: string[], next: string) => void; question: Data }) {
 
@@ -37,8 +42,6 @@ export function CheckboxReactHookFormMultiple({ onValide, question }: { onValide
             items: [],
         },
     })
-
-
 
     function onSubmit(data: z.infer<typeof FormSchema>) {
         setResult(data.items)

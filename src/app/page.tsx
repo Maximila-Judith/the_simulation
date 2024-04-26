@@ -3,7 +3,6 @@ import { CheckCircle, CircleHelp, MoveLeft } from "lucide-react"
 import { Body } from "@/components/ui/body";
 import React, { useEffect, useState } from 'react';
 import { Stepper } from '@/components/ui/stepper'
-import { Second } from '@/components/ui/second'
 import { Questions } from '@/components/questions/globalQuestion'
 import { Data } from "@/lib/type/type"
 import { string } from "zod";
@@ -31,16 +30,13 @@ export default function Home() {
     }
   }
   useEffect(() => {
-    console.log(back)
+    console.log(answers)
   }, [answers]);
-
-
 
   const forBack = () => {
     setBack(beforeBack => beforeBack.slice(1))
     setStep(beforeSet => beforeSet = newTab[back[0]])
   }
-
 
   return (
     <main className="h-screen w- bg-[url('/nat-7.jpg')] bg-gradient-to-r from-gray-400 to-green-900 bg-no-repeat bg-cover bg-center overflow-hidden">

@@ -15,7 +15,7 @@ export const plot: Data = {
             {
                 label: "oui",
                 value: "yes",
-                nextQuestion: "plot"
+                nextQuestion: "amount"
             },
             {
                 label: "non",

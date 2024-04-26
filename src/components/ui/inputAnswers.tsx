@@ -6,54 +6,39 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Data } from "@/lib/type/type"
+import { Target } from 'lucide-react';
 
 
-const questions = [
-    {
-        id: 1,
-        content: 'Quel est votre chiffre d\'affaire ?',
-        type: 'text'
-    },
-    {
-        id: 2,
-        content: 'Quels sont vos revenus ?',
-        type: 'text'
-    },
-    {
-        id: 2,
-        content: 'Quels sont vos chiffre ?',
-        type: 'text'
-    },
-];
+export const TypeInput = ({ onSubmit, question }: { onSubmit: (label: string[], next: string) => void; question: Data }) => {
+    const [response, setResponse] = useState([''])
 
-export const Second = () => {
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [answers, setAnswers] = useState<string[]>([]);
-    const inputRef = useRef<HTMLInputElement>(null);
+    const handleAnswerSubmit = (event: Event) => {
+        const a = (event.target).value;
 
+        setResponse(event.target)
+    }
 
-    const handleAnswerSubmit = () => {
-        const answerValue = inputRef.current?.value;
-        if (answerValue) {
-            setAnswers(prevAnswers => [...prevAnswers, answerValue]);
+    const handleSend = () => {
+        onSubmit(response, question.nextQuestion)
 
-            if (currentQuestionIndex < questions.length - 1) {
-                setCurrentQuestionIndex(currentQuestionIndex + 1);
-            } else {
-                console.log('Questionnaire terminé', answers);
-            }
-        }
-    };
+    }
 
     return (
-        <div>
-            <Card>
+        <div className="flex flex-col space-y-2">
+            <Input type={question.answers.inputOption.type} placeholder={question.answers.inputOption.label} onInput={handleAnswerSubmit(event)} />
+            <Button type="submit" className='w-20' onClick={handleSend}>Submit</Button>
+        </div>
+    )
+}
+
+{/* <Card>
                 <CardHeader className='h-20'>
                     <CardContent style={{ fontFamily: 'Italianno', fontStyle: 'italic', textAlign: 'center', fontSize: '35px' }}>
                         <p>{questions[currentQuestionIndex].content}</p>
                     </CardContent>
                 </CardHeader>
-            </Card>
+            </Card> 
 
             <Card className='mt-2'>
                 <CardHeader>
@@ -64,7 +49,4 @@ export const Second = () => {
                         </div>
                     </CardContent>
                 </CardHeader>
-            </Card>
-        </div>
-    );
-};
+            </Card> */}

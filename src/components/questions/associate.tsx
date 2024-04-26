@@ -20,12 +20,12 @@ export const associate: Data = {
             {
                 label: "Oui, des entreprises",
                 value: "yes_company",
-                nextQuestion: ""
+                nextQuestion: "amount"
             },
             {
                 label: "Oui, des individus",
                 value: "yes_individual",
-                nextQuestion: ""
+                nextQuestion: "amount"
             }
         ]
     },

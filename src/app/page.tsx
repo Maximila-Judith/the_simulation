@@ -1,11 +1,12 @@
 'use client'
 import { CheckCircle, CircleHelp, MoveLeft } from "lucide-react"
 import { Body } from "@/components/ui/body";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Stepper } from '@/components/ui/stepper'
 import { Second } from '@/components/ui/second'
 import { Questions } from '@/components/questions/globalQuestion'
 import { Data } from "@/lib/type/type"
+import { string } from "zod";
 
 
 export default function Home() {
@@ -14,20 +15,32 @@ export default function Home() {
   const [back, setBack] = useState([0]);
   const newTab = Object.values(Questions)
 
-  const forAnswer = (value: string) => {
+  const [answers, setAnswers] = useState([['']])
+  const [nextQuestion, setnextQuestion] = useState('')
+
+  const forAnswer = (Answers: string[], nextQuestion: string) => {
+
+    setAnswers(beforeAnswer => [...beforeAnswer, Answers])
+    setnextQuestion(nextQuestion)
+
     for (let i = 0; i < newTab.length; i++) {
-      if (newTab[i].id === value) {
-        setStep(beforeSet => beforeSet = newTab[i])
+      if (newTab[i].id === nextQuestion) {
+        setStep(newTab[i])
         setBack(beforeBack => [i, ...beforeBack])
       }
     }
   }
+  useEffect(() => {
+    console.log(back)
+  }, [answers]);
+
+
 
   const forBack = () => {
     setBack(beforeBack => beforeBack.slice(1))
     setStep(beforeSet => beforeSet = newTab[back[0]])
   }
-  console.log(back)
+
 
   return (
     <main className="h-screen w- bg-[url('/nat-7.jpg')] bg-gradient-to-r from-gray-400 to-green-900 bg-no-repeat bg-cover bg-center overflow-hidden">

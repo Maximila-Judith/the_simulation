@@ -32,7 +32,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/components/ui/test.js"
+    "src/components/ui/multipleCheck.tsx"
   ],
   "exclude": [
     "node_modules"

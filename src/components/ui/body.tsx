@@ -11,11 +11,13 @@ import { Data } from "@/lib/type/type"
 import Response from '@/components/ui/response'
 import { Input } from './input';
 import { CheckBoxChoice } from './CheckBoxChoice';
-const [coche, setCoche] = useState(false);
+import { CheckboxReactHookFormMultiple } from '@/components/ui/multipleCheck'
+import { string } from 'zod';
+//const [coche, setCoche] = useState(false);
 
 interface BodyProps {
     questionData: Data;
-    onAnswer: (value: string) => void
+    onAnswer: (value: string[], nextQuestion: string) => void
 }
 
 export const Body: React.FC<BodyProps> = ({ questionData, onAnswer }) => {
@@ -36,18 +38,14 @@ export const Body: React.FC<BodyProps> = ({ questionData, onAnswer }) => {
 
                             {(type_answer === "unique_choice") && (
                                 choiceOptions.map((choice) => (
-                                    <Response key={choice.value} answer={choice.label} onSelect={() => onAnswer(choice.nextQuestion)} />
+                                    <Response key={choice.value} answer={choice.label} value={[choice.value]} nextQuestion={choice.nextQuestion} onSelect={onAnswer} />
                                 ))
                             )
 
                             }
                             {(type_answer === "multiple_choice") && (
-                                choiceOptions.map((choice) => (
-                                    <CheckBoxChoice key={choice.value} label={choice.label} value={choice.value} checked={coche} onCheck={(event) => { setCoche(event.target.checked) }} />
 
-                                )
-
-                                )
+                                < CheckboxReactHookFormMultiple onValide={onAnswer} question={questionData} />
 
                             )
                             }

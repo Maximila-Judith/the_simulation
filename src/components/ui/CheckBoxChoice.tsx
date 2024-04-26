@@ -1,6 +1,9 @@
 import React from 'react'
-import { Checkbox } from "@/components/ui/checkbox"
+import { Input } from './input';
+import { CheckboxReactHookFormMultiple } from '@/components/ui/multipleCheck'
 import { useState } from 'react';
+
+
 export const CheckBoxChoice = ({ value, label, onCheck }: { value: string, label: string, onCheck: () => void }) => {
 
     const handleChange = () => {
@@ -8,8 +11,8 @@ export const CheckBoxChoice = ({ value, label, onCheck }: { value: string, label
     }
     return (
         <div>
-            <div className="items-top flex space-x-2">
-                <Checkbox id={value} onChange={handleChange} />
+            <div className="items-top flex space-x-2 ">
+                <Input type='checkbox' id={value} onChange={handleChange} />
                 <div className="grid gap-1.5 leading-none">
                     <label
                         htmlFor={value}

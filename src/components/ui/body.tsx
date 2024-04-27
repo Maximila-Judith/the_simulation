@@ -15,7 +15,7 @@ import { string } from 'zod';
 
 interface BodyProps {
     questionData: Data;
-    onAnswer: (value: string[], type: string, nextQuestion: string, response: string) => void
+    onAnswer: (value: string[], nextQuestion: string) => void
 }
 
 export const Body: React.FC<BodyProps> = ({ questionData, onAnswer }) => {

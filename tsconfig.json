@@ -32,7 +32,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/components/ui/multipleCheck.tsx"
+    "src/components/ui/multipleCheck.tsx",
+    "src/components/ui/inputAnswers.tsx"
   ],
   "exclude": [
     "node_modules"

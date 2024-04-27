@@ -28,6 +28,7 @@ export default function Home() {
         setBack(beforeBack => [i, ...beforeBack])
       }
     }
+
   }
   useEffect(() => {
     console.log(answers)

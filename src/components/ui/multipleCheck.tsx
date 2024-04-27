@@ -35,7 +35,6 @@ const FormSchema = z.object({
 
 export function CheckboxReactHookFormMultiple({ onValide, question }: { onValide: (value: string[], next: string) => void; question: Data }) {
 
-    const [result, setResult] = useState([''])
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -44,8 +43,7 @@ export function CheckboxReactHookFormMultiple({ onValide, question }: { onValide
     })
 
     function onSubmit(data: z.infer<typeof FormSchema>) {
-        setResult(data.items)
-        onValide(result, question.nextQuestion)
+        onValide(data.items, question.nextQuestion)
     }
 
     return (

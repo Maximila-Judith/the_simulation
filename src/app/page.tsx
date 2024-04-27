@@ -31,16 +31,18 @@ export default function Home() {
 
   }
   useEffect(() => {
+    console.log(back)
+    setStep(beforeSet => beforeSet = newTab[back[0]])
     console.log(answers)
-  }, [answers]);
+
+  }, [back, answers]);
 
   const forBack = () => {
     setBack(beforeBack => beforeBack.slice(1))
-    setStep(beforeSet => beforeSet = newTab[back[0]])
   }
 
   return (
-    <main className="h-screen w- bg-[url('/nat-7.jpg')] bg-gradient-to-r from-gray-400 to-green-900 bg-no-repeat bg-cover bg-center overflow-hidden">
+    <main className="h-screen w- bg-[url('/nat-7.jpg')] bg-gradient-to-r from-gray-400 to-green-900 bg-no-repeat bg-cover bg-center overflow-hidden text-center md:text-left lg:text-righ">
       <div className="flex flex-row item-center my-6 text-white	">
         <h1 className=" flex flex-row mx-8 gap-x-3"> <MoveLeft /> Retour</h1>
       </div>

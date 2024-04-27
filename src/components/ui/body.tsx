@@ -24,35 +24,40 @@ export const Body: React.FC<BodyProps> = ({ questionData, onAnswer }) => {
         choiceOptions = questionData.answers.choiceOptions,
         inputOption = questionData.answers.inputOption
     return (
-        <div>
-            <Card className='h-20'>
-                <CardHeader style={{ fontFamily: 'Italianno', fontStyle: 'italic', textAlign: 'center', fontSize: '35px' }}>
-                    <CardContent>{question}</CardContent>
-                </CardHeader>
-            </Card>
-            <Card className='mt-2'>
-                <CardHeader>
-                    <CardContent className='space-y-2'>
-                        <div className='flex flex-row gap-4'>
+        <div className="text-center md:text-left lg:text-right">
+            <div className='max-w-screen-md mx-auto'>
+                <Card className="md-w-1/2 mx-4 mt-4 h-20">
+                    <CardHeader style={{ fontFamily: 'inter', fontStyle: 'italic', textAlign: 'center', fontSize: '25px' }}>
+                        <CardContent className="font-italic text-center text-2xl">
+                            {question}
+                        </CardContent>
+                    </CardHeader>
+                </Card>
+                <Card className="md-w-1/2 mx-4 mt-4">
+                    <CardHeader>
+                        <CardContent className='p-10'>
+                            <div className="flex flex-row item-center space-x-6">
 
-                            {(type_answer === "unique_choice") && (
-                                choiceOptions.map((choice) => (
-                                    <Response key={choice.value} answer={choice.label} value={[choice.value]} nextQuestion={choice.nextQuestion} onSelect={onAnswer} />
-                                ))
-                            )}
+                                {(type_answer === "unique_choice") && (
+                                    choiceOptions.map((choice) => (
+                                        <Response key={choice.value} answer={choice.label} value={[choice.value]} nextQuestion={choice.nextQuestion} onSelect={onAnswer} />
+                                    ))
+                                )}
 
-                            {(type_answer === "multiple_choice") && (
-                                < CheckboxReactHookFormMultiple onValide={onAnswer} question={questionData} />
-                            )}
+                                {(type_answer === "multiple_choice") && (
+                                    < CheckboxReactHookFormMultiple onValide={onAnswer} question={questionData} />
+                                )}
 
-                            {(type_answer === "input") && (
-                                <TypeInput key={questionData.id} type={questionData.answers.inputOption.type} question={questionData} label={inputOption.label} onSubmit={onAnswer} />
-                            )}
-                        </div>
+                                {(type_answer === "input") && (
+                                    <TypeInput key={questionData.id} question={questionData} onSubmit={onAnswer} />
+                                )}
+                            </div>
 
-                    </CardContent>
-                </CardHeader>
-            </Card>
+                        </CardContent>
+                    </CardHeader>
+                </Card>
+            </div>
+
 
         </div >
     )

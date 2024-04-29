@@ -16,14 +16,14 @@ export default function Home() {
   const [back, setBack] = useState([0]);
   const newTab = Object.values(Questions)
   const [answers, setAnswers] = useState([['']])
-  const [level, setLevel] = useState([0]) 
+  const [level, setLevel] = useState([0])
 
   const forAnswer = (Answers: string[], next: string) => {
-    setAnswers(beforeAnswer => [Answers,...beforeAnswer])
-    if(!next){
+    setAnswers(beforeAnswer => [Answers, ...beforeAnswer])
+    if (!next) {
       setLevel((before) => [before.length, ...before])
     }
-      for (let i = 0; i < newTab.length; i++) {
+    for (let i = 0; i < newTab.length; i++) {
       if (newTab[i].id === next) {
         setStep(newTab[i])
         setBack(beforeBack => [i, ...beforeBack])
@@ -32,15 +32,15 @@ export default function Home() {
 
   }
 
-    useEffect(() => {
-      if (level.length === 2){
-        setStep(Questions.entryCalcul)
-        setBack([newTab.indexOf(Questions.entryCalcul)])
-      }
-      if (level.length === 3){
-        setBack([0])
-        setStep(Questions.entry)
-      }
+  useEffect(() => {
+    if (level.length === 2) {
+      setStep(Questions.entryCalcul)
+      setBack([newTab.indexOf(Questions.entryCalcul)])
+    }
+    if (level.length === 3) {
+      setBack([0])
+      setStep(Questions.entry)
+    }
   }, [level]);
 
   useEffect(() => {
@@ -51,7 +51,6 @@ export default function Home() {
   const forBack = () => {
     setBack(beforeBack => beforeBack.slice(1))
     setAnswers(before => before.slice(1))
-   
   }
 
   return (
@@ -65,7 +64,7 @@ export default function Home() {
           <div className="mb-10 space-y-6">
             <Stepper currentStep={level} />
             <>
-             {(level.length < 3)? (<Body questionData={step} onAnswer={forAnswer} />) : (<Result/>)} 
+              {(level.length < 3) ? (<Body questionData={step} onAnswer={forAnswer} />) : (<Result />)}
               <div className="flex justify-between mt-4">
                 <button onClick={forBack} className={`bg-gray-700 hover:bg-gray-700 border-1 rounded text-white p-1 ${back.length === 1 ? 'hidden' : ''}`} >Back</button>
               </div>

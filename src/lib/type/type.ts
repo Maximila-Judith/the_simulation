@@ -8,7 +8,8 @@ export interface Data {
         name: string;
         inputOption: {
             label: string;
-            type: string
+            type: string;
+            nextQuestion: string
         };
         choiceOptions: { label: string; value: string; nextQuestion: string }[]
     };

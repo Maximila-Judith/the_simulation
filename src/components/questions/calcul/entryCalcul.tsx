@@ -1,14 +1,14 @@
 import {
     Data
 } from "@/lib/type/type"
-export const rising: Data = {
-    id: 'amount',
-    question: "Entrez vos revenus",
+export const Ca: Data = {
+    id: 'entryCalcul',
+    question: "Quel est votre chiffre d'affaire de l'année dernière ?",
     answers: {
         type: "input",
         name: "",
         inputOption: {
-            label: "Montant",
+            label: "en Fcfa",
             type: "text",
             nextQuestion:""
         },
@@ -30,5 +30,5 @@ export const rising: Data = {
             }
         ]
     },
-    nextQuestion: ""
+    nextQuestion: "encaissable"
 }

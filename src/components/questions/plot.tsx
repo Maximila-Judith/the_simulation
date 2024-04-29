@@ -9,7 +9,8 @@ export const plot: Data = {
         name: "",
         inputOption: {
             label: "",
-            type: ""
+            type: "",
+            nextQuestion:""
         },
         choiceOptions: [
             {

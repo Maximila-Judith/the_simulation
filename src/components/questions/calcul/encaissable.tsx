@@ -1,14 +1,15 @@
 import {
     Data
 } from "@/lib/type/type"
-export const rising: Data = {
-    id: 'amount',
-    question: "Entrez vos revenus",
+
+export const Encaissable: Data = {
+    id: 'encaissable',
+    question: "Quel est le prix de vos encaissables ?",
     answers: {
         type: "input",
         name: "",
         inputOption: {
-            label: "Montant",
+            label: "en Fcfa",
             type: "text",
             nextQuestion:""
         },

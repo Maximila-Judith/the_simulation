@@ -12,12 +12,15 @@ export const TypeInput = ({ onSubmit, question }: { onSubmit: (label: string[], 
 
     const handleSend = () => {
         onSubmit(response, question.nextQuestion)
+        setResponse(['']);
     }
 
     return (
         <div className="flex flex-col space-y-2">
             <Input type={question.answers.inputOption.type} value={response[0]} placeholder={question.answers.inputOption.label} onChange={handleAnswerSubmit} />
-            <Button type="submit" className='w-20' onClick={handleSend}>Submit</Button>
+            {response[0].trim() !== '' && (
+                <Button type="submit" className='w-20' onClick={handleSend}>Submit</Button>
+            )}
         </div>
     )
 }

@@ -7,7 +7,8 @@ export const entry: Data = {
         name: "",
         inputOption: {
             label: "",
-            type: ""
+            type: "",
+            nextQuestion:""
         },
         choiceOptions: [
             {

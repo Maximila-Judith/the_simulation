@@ -9,7 +9,8 @@ export const associate: Data = {
         name: "",
         inputOption: {
             label: "",
-            type: ""
+            type: "",
+            nextQuestion:""
         },
         choiceOptions: [
             {
@@ -20,12 +21,12 @@ export const associate: Data = {
             {
                 label: "Oui, des entreprises",
                 value: "yes_company",
-                nextQuestion: "amount"
+                nextQuestion: ""
             },
             {
                 label: "Oui, des individus",
                 value: "yes_individual",
-                nextQuestion: "amount"
+                nextQuestion: ""
             }
         ]
     },

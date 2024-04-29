@@ -45,7 +45,7 @@ export default function Home() {
 
   useEffect(() => {
     setStep(newTab[back[0]])
-    console.log(back)
+    console.log(answers)
   }, [back]);
 
   const forBack = () => {

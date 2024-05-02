@@ -7,13 +7,16 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { CheckboxReactHookFormMultiple } from '@/components/ui/multipleCheck'
+import { ImpotType } from '@/lib/functions/impotType';
 
-interface ResultProps {
 
+export interface ResultProps {
+Answers : { Question: string; response: string[]}[]
 }
 
-export const Result: React.FC<ResultProps> = ({}) => {
+export const Result: React.FC<ResultProps> = ({Answers}) => {
+    
+
     return (
         <div className="text-center md:text-left lg:text-right">
             <div className='max-w-screen-md mx-auto'>
@@ -21,6 +24,12 @@ export const Result: React.FC<ResultProps> = ({}) => {
                     <CardHeader>
                         <CardContent className='p-10'>
                             <div className="flex flex-row item-center space-x-6">
+                                {
+                                Answers.map(answer=> (
+                                    <ul>
+                                        <li key = {answer.response.length++} >  {answer.Question }: {answer.response}</li>
+                                    </ul>
+                                ))}
                             </div>
 
                         </CardContent>

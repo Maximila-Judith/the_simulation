@@ -33,8 +33,10 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/components/ui/multipleCheck.tsx",
-    "src/components/ui/inputAnswers.tsx"
-, "src/app/page.tsx"  ],
+    "src/components/ui/inputAnswers.tsx",
+    "src/app/page.tsx",
+    "src/components/questions/typeImpot"
+  ],
   "exclude": [
     "node_modules"
   ]

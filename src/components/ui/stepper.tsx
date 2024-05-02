@@ -37,7 +37,7 @@ export const Stepper: React.FC<StepperProps> = ({ currentStep }) => {
         <li>
           <div className="min-w-7 min-h-7 w-full inline-flex items-center text-xs align-middle">
             <span className="size-[46px] flex justify-center items-center flex-shrink-0 size-[46px] rounded-full border-4 border-green-100 bg-green-200 text-white border-green-900 bg-green-800 text-white">
-            {currentStep[2]? <CheckCircle className="text-green-500" /> : <CircleHelp />}
+            {currentStep[1]? <CheckCircle className="text-green-500" /> : <CircleHelp />}
             </span>
             <div className="ms-2 w-full h-px flex-1 bg-gray-200 group-last:hidden dark:bg-gray-700"></div>
           </div>

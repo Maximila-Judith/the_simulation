@@ -13,5 +13,5 @@ export interface Data {
         };
         choiceOptions: { label: string; value: string; nextQuestion: string }[]
     };
-    nextQuestion: string
+    nextQuestion: string 
 }

@@ -2,9 +2,9 @@ import React from 'react'
 import { Button } from "@/components/ui/button"
 
 
-const Response = ({ answer, onSelect, value, nextQuestion }: { answer: string; onSelect: (value: string[],nextQuestion : string) => void; value: string[];nextQuestion : string }) => {
+const Response = ({ answer, onSelect, value, nextQuestion, nowQuestion}: { answer: string; onSelect: (value: string[],next : string, now: string) => void; value: string[];nextQuestion : string; nowQuestion: string }) => {
     const handleSelect = () => {
-        onSelect(value,nextQuestion)
+        onSelect(value,nextQuestion,nowQuestion)
     };
 
     return (

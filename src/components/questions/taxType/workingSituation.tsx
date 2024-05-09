@@ -1,6 +1,7 @@
 import { Data } from "@/lib/type/type"
 export const workingSituation: Data = {
     id: 'workingSituation',
+    info:"infoRealEstate",
     question: "Avec qui travaillez-vous ? ",
     answers: {
         type: "unique_choice",
@@ -17,14 +18,14 @@ export const workingSituation: Data = {
                 nextQuestion: ""
             },
             {   name: "IS",
-                label: "Je possède une entreprise et j'ai des associés avec qui je partage les bénéfices",
+                label: "J'ai des associés avec qui je partage les bénéfices de l'entreprise",
                 value: "associate",
                 nextQuestion: ""
             },
-            {   name: "IRF",
-                label: "Je suis un associé dans une société qui possède des biens immobiliers et qui ne paie pas l'impôt sur les sociétés",
+            {   name: "",
+                label: "Je suis un associé d'une société qui utilise les biens immobilers pour se faire de l'argent",
                 value: "realEstateAssociate",
-                nextQuestion: ""
+                nextQuestion: "realEstateAssociate"
             }
         ]
     },

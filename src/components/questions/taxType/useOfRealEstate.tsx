@@ -1,6 +1,7 @@
 import { Data } from "@/lib/type/type"
 export const useOfRealEstate: Data = {
     id: 'useOfRealEstate',
+    info:"",
     question: "Ces personnes utilisent-elles ces biens pour faire des activités qui leurs font gagner de l'argent ?",
     answers: {
         type: "unique_choice",

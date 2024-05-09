@@ -1,6 +1,7 @@
 import { Data } from "@/lib/type/type"
 export const expensiveRealEstateLocation: Data = {
     id: 'expensiveRealEstateLocation',
+    info:"",
     question: "Ces biens immobiliers sont-ils situés au Bénin ? ",
     answers: {
         type: "unique_choice",

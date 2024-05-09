@@ -16,45 +16,45 @@ import { QuestionContext } from "@/lib/questionContext";
 
 interface BodyProps {
     onAnswer: (value: string[], nextQuestion: string, nowQuestion: string, name: string) => void
-    taxType: string
 }
 
-export const Body: React.FC<BodyProps> = ({ onAnswer, taxType }) => {
+export const Body: React.FC<BodyProps> = ({ onAnswer}) => {
     const the_question = useContext(QuestionContext)
 
-    const question = the_question.question,
-        type_answer = the_question.answers.type,
-        choiceOptions = the_question.answers.choiceOptions
+    const question = the_question?the_question.question:"",
+        type_answer = the_question?the_question.answers.type:"",
+        choiceOptions = the_question?the_question.answers.choiceOptions:[]
 
     return (
-        <div className="text-center md:text-left lg:text-right">
+        <div className="text-center md:text-left lg:text-left">
             <div className='max-w-screen-md mx-auto'>
-                <Card className="md-w-1/2 mx-4 mt-4 h-20">
-                    <CardHeader style={{ fontFamily: 'inter', fontStyle: 'italic', textAlign: 'center', fontSize: '25px' }}>
+                <Card className="md-w-1/2 mx-4 mt-4 h-20 md:text-left lg:text-left">
+                    <CardHeader style={{ fontFamily: 'inter', fontStyle: 'italic', textAlign: 'center', fontSize: '15px' }}>
                         <CardContent className="font-italic text-center text-2xl mx-auto">
                             {question}
                         </CardContent>
                     </CardHeader>
                 </Card>
-                <Card className="md-w-1/2 mx-4 mt-4">
+                <Card className="md-w-1/2 mx-4 mt-4 md:text-left lg:text-left">
                     <CardHeader>
                         <CardContent className=''>
                             <div className="flex flex-col space-y-4">
 
                                 {(type_answer === "unique_choice") && (
                                     choiceOptions.map((choice) => (
-                                        <Response key={choice.value} nowQuestion={the_question.question} value={choice} onSelect={onAnswer} />
+                                        <Response key={choice.value} nowQuestion =  {the_question.id} value={choice} onSelect={onAnswer} />
                                     ))
                                 )}
 
                                 {(type_answer === "multiple_choice") && (
-                                    <CheckboxReactHookFormMultiple onValide={onAnswer} question={the_question} />
+                                    < CheckboxReactHookFormMultiple onValide={onAnswer} question= {the_question} />
                                 )}
 
                                 {(type_answer === "input") && (
-                                    <TypeInput key={the_question.id} question={the_question} onSubmit={onAnswer} />
+                                    <TypeInput key= {the_question.id} question= {the_question} onSubmit={onAnswer} />
                                 )}
                             </div>
+
                         </CardContent>
                     </CardHeader>
                 </Card>

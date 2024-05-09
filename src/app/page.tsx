@@ -3,21 +3,30 @@ import { CheckCircle, CircleHelp, MoveLeft } from "lucide-react"
 import { Body } from "@/components/ui/body";
 import React, { useEffect, useState } from 'react';
 import { Stepper } from '@/components/ui/stepper'
-import { Questions } from '@/components/questions/globalQuestion'
-import { Data } from "@/lib/type/type"
+import { Questions, valQuestions } from '@/components/questions/globalQuestion'
+import { Data, Info } from "@/lib/type/type"
 import { Result } from "@/components/result/result";
 import { QuestionContext } from "@/lib/questionContext";
-import { Landing } from '@/components/landingPage/landing-page'
+import { InfoCard } from "@/components/informations";
+import { infos, valInfos } from "@/components/informations/globalInfo";
+import {
+  valQuestionsIBA, valQuestionsIS, valQuestionsIRF,
+  valQuestionsITS, valQuestionsTPS, valQuestionsTFU
+} from "@/components/questions/calcul/global";
+import { object } from "zod";
+import { entry } from "@/components/questions/taxType/entry";
 import Link from "next/link";
-
 
 export default function Home() {
   const [step, setStep] = useState<Data>(Questions.entry);
   const [back, setBack] = useState([0]);
   const [answers, setAnswers] = useState([{ question: '', response: [''] }])
   const [level, setLevel] = useState([0])
+  const [info, setInfo] = useState<Info>(infos.init)
+  const [valsTable, setValsTable] = useState(valQuestions)
   const [taxType, setTaxType] = useState("")
-  const newTab = Object.values(Questions)
+  const valInfo = (step) ? valInfos.find(info => info.id === step.info) : infos.init
+
 
   const forAnswer = (answer: string[], next: string, now: string, name: string) => {
     setAnswers(beforeAnswer => [{ question: now, response: answer }, ...beforeAnswer])
@@ -25,40 +34,109 @@ export default function Home() {
     if (!next && name) {
       setTaxType(name)
       setLevel((before) => [before.length, ...before])
-    } else if (!next && !name) {
+
+    } else if (!next && !name && level.length < 1) {
       console.log("Désolé, pas d'impôt")
+
+    } else if (!next && level.length > 1) {
+      setLevel((before) => [before.length, ...before])
     }
 
-    for (let i = 0; i < newTab.length; i++) {
-      if (newTab[i].id === next) {
-        setStep(newTab[i])
-        setBack(beforeBack => [i, ...beforeBack])
-      }
-    }
+    let valQuestion = valsTable.find(question => question.id === next)
+    setStep(valQuestion ? valQuestion : Questions.entry)
+    setBack(beforeBack => [valsTable.indexOf(valQuestion ? valQuestion : Questions.entry), ...beforeBack])
 
   }
 
+
   useEffect(() => {
     if (level.length === 2) {
-      setStep(Questions.entryCalcul)
-      setBack([newTab.indexOf(Questions.entryCalcul)])
+      console.log(answers)
+      switch (taxType) {
+        case "IS": {
+          setValsTable(valQuestionsIS);
+          break;
+        }
+
+        case "IBA": {
+          let alone = result("aloneManagementSituation")[0]
+          let val = add([], valQuestionsIBA, "profit")
+          val[0].nextQuestion = ""
+          setValsTable((alone === "yesRealEstate" && val) ? val : valQuestionsIBA);
+          break;
+        }
+        case "IBA&TFU": {
+          let val = add([], valQuestionsIBA, "profit")
+          val[0].nextQuestion = "entryTfu"
+          val = add([...val], valQuestionsTFU, "builtProperties")
+          val = add([...val], valQuestionsTFU, "entryTfu")
+          val = add([...val], valQuestionsTFU, "undevelopedProperties")
+
+          setValsTable((val) ? val : valQuestionsIBA);
+          break;
+        }
+        case "IRF&TFU": {
+          let val = add(valQuestionsIRF, valQuestionsTFU, "builtProperties")
+          val = add([...val], valQuestionsTFU, "entryTfu")
+          val = add([...val], valQuestionsTFU, "undevelopedProperties")
+          let obj = val.find(quest => quest.id === 'landlordsExpensesPrice')
+          obj ? obj.nextQuestion = 'entryTfu' : ''
+          let obj1 = val.find(quest => quest.id === 'landlordsExpenses')
+          obj1 ? obj1.answers.choiceOptions[1].nextQuestion = 'entryTfu' : ''
+          setValsTable((val) ? val : valQuestionsIRF);
+          break;
+        }
+        case "TFU": {
+          setValsTable(valQuestionsTFU);
+          break;
+        }
+        case "IRF": {
+          setValsTable(valQuestionsIRF);
+          break;
+        }
+        case "TPS": {
+          setValsTable(valQuestionsTPS);
+          break;
+        }
+        case "ITS": {
+          setValsTable(valQuestionsITS);
+          break;
+        }
+      }
     }
-    if (level.length === 3) {
-      setBack([0])
-      setStep(Questions.entry)
+    if (level.length > 2) {
+      setInfo(infos.init)
     }
+    setBack([0])
   }, [level]);
-  console.log(taxType)
+
 
   useEffect(() => {
-
-    setStep(newTab[back[0]])
+    setStep(valsTable[back[0]])
+    console.log(valsTable)
   }, [back]);
 
   const forBack = () => {
     setBack(beforeBack => beforeBack.slice(1))
     setAnswers(before => before.slice(1))
 
+  }
+
+  const forInfo = () => {
+    setInfo(valInfo ? valInfo : infos.init)
+  }
+  const forClick = () => {
+    setInfo(infos.init)
+  }
+
+  function result(quest: string) {
+    let obj = answers.find(answer => answer.question === quest)
+    return obj ? obj.response : [""]
+  }
+  function add(obj: Data[], val: Data[], id: string) {
+    let quest = val.find(question => question.id === id)
+    obj = quest ? [...obj, quest] : [...obj]
+    return obj
   }
 
   return (
@@ -71,10 +149,13 @@ export default function Home() {
           <div className="mb-10 space-y-5">
             <div className="mb-10 space-y-6">
               <Stepper currentStep={level} />
+              {step && (step.info && info === infos.init) && <div className="flex justify-between mt-4">
+                <button onClick={forInfo} className={`bg-gray-700 hover:bg-gray-700 border-1 rounded text-white p-1 `} >Info</button>
+              </div>}
               <>
-                {(level.length < 3) ? (<Body taxType={taxType} onAnswer={forAnswer} />) : (<Result answers={answers} />)}
+                {info !== infos.init ? <InfoCard onClick={forClick} infos={info} /> : ((level.length < 3) ? (<Body onAnswer={forAnswer} />) : (<Result tax={taxType} answers={answers} />))}
                 <div className="flex justify-between mt-4">
-                  <button onClick={forBack} className={`bg-gray-700 hover:bg-gray-700 border-1 rounded text-white p-1 ${back.length === 1 ? 'hidden' : ''}`} >Back</button>
+                  {(info === infos.init) && <button onClick={forBack} className={`bg-gray-700 hover:bg-gray-700 border-1 rounded text-white p-1 ${back.length === 1 ? 'hidden' : ''}`} >Back</button>}
                 </div>
 
               </>

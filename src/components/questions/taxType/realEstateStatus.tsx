@@ -1,6 +1,7 @@
 import { Data } from "@/lib/type/type"
 export const realEstateStatus: Data = {
     id: 'realEstateStatus',
+    info:"",
     question: "Avez-vous des biens immobiliers ? (maisons, terrains, etc.) ",
     answers: {
         type: "unique_choice",

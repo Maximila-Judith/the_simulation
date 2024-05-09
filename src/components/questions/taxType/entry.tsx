@@ -1,6 +1,7 @@
 import { Data } from "@/lib/type/type"
 export const entry: Data = {
     id: 'entry',
+    info:"",
     question: "Avez-vous une activité/ un business qui vous rapporte de l'argent ? ",
     answers: {
         type: "unique_choice",

@@ -1,6 +1,6 @@
 export interface Data {
     id: string;
-    
+    info: string;
     question: string;
 
     answers: {
@@ -14,4 +14,12 @@ export interface Data {
         choiceOptions: {  name: string; label: string; value: string; nextQuestion: string }[]
     };
     nextQuestion: string 
+}
+
+export interface Info {
+    id: string;
+    title : string;
+    values: {title: string, 
+        description: string
+    }[]
 }

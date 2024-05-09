@@ -9,7 +9,7 @@ const Response = ({  onSelect, value, nowQuestion}: { onSelect: (value: string[]
 
     return (
         <div className='gap-5'>
-            <Button variant="outline" onClick={handleSelect} >{value.label}</Button>
+            <Button variant="secondary" onClick={handleSelect} className="w-full">{value.label}</Button>
         </div>
     )
 }

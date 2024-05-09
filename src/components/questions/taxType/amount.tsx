@@ -1,6 +1,7 @@
 import { Data } from "@/lib/type/type"
 export const amount: Data = {
     id: 'amount',
+    info:"",
     question: "Quel est le montant approximatif de votre chiffre d'affaires annuel ? ",
     answers: {
         type: "unique_choice",
@@ -13,12 +14,12 @@ export const amount: Data = {
         choiceOptions: [
             {   name: "TPS",
                 label: "50 millions de francs CFA ou moins ",
-                value: "more",
+                value: "less",
                 nextQuestion: ""
             },
             {   name: "IBA",
                 label: "Plus de 50 millions de francs CFA ",
-                value: "less",
+                value: "more",
                 nextQuestion: ""
             }
         ]

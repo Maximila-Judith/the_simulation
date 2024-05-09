@@ -1,6 +1,7 @@
 import { Data } from "@/lib/type/type"
 export const realEstateRole: Data = {
     id: 'realEstateRole',
+    info:"",
     question: "Que faites-vous précisément ?  ",
     answers: {
         type: "unique_choice",
@@ -17,7 +18,7 @@ export const realEstateRole: Data = {
                 nextQuestion: "useOfRealEstate"
             },
             {   name : "IBA",
-                label: "J'agis en tant qu'intermédiaire pour l'achat ou la vente d'immeubles",
+                label: "J'aide les gens à acheter ou à vendre des biens immobiliers",
                 value: "intermediate",
                 nextQuestion: ""
             },
@@ -27,7 +28,7 @@ export const realEstateRole: Data = {
                 nextQuestion: ""
             },
             {   name : "IBA",
-                label: "Je procède au partage/division de terrains en vue de leur vente",
+                label: "Je partage/divise des terrains pour qu'ils soient vendus après",
                 value: "subdivision",
                 nextQuestion: ""
             }

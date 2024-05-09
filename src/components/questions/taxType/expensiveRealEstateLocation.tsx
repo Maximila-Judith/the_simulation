@@ -11,14 +11,14 @@ export const expensiveRealEstateLocation: Data = {
             nextQuestion: ""
         },
         choiceOptions: [
-            {
-                label: "Oui ",
-                value: "IBA & TFU",
+            {   name: "IBA&TFU",
+                label: "Oui",
+                value: "yes",
                 nextQuestion: ""
             },
-            {
-                label: "Non, c'est uniquement pour y habiter ",
-                value: "IRF",
+            {   name: "IRF",
+                label: "Non",
+                value: "no",
                 nextQuestion: ""
             }
         ]

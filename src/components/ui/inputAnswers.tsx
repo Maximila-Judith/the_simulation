@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Data } from "@/lib/type/type"
 
-export const TypeInput = ({ onSubmit, question }: { onSubmit: (label: string[], next: string, now: string) => void; question: Data }) => {
+export const TypeInput = ({ onSubmit, question }: { onSubmit: (label: string[], next: string, now: string, name:string) => void; question: Data }) => {
     const [response, setResponse] = useState<string[]>(['']);
 
     const handleAnswerSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -11,7 +11,7 @@ export const TypeInput = ({ onSubmit, question }: { onSubmit: (label: string[], 
     }
 
     const handleSend = () => {
-        onSubmit(response, question.nextQuestion, question.id )
+        onSubmit(response, question.nextQuestion, question.id, question.answers.name )
         setResponse(['']);
     }
 

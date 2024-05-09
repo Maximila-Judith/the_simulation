@@ -11,12 +11,12 @@ export const entry: Data = {
             nextQuestion: ""
         },
         choiceOptions: [
-            {
+            {   name: "",
                 label: "Oui",
                 value: "yes",
                 nextQuestion: "aloneManagement"
             },
-            {
+            {   name: "",
                 label: "Non",
                 value: "no",
                 nextQuestion: "realEstateStatus"

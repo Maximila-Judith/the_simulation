@@ -11,19 +11,19 @@ export const workingSituation: Data = {
             nextQuestion: ""
         },
         choiceOptions: [
-            {
-                label: "Je travaille pour quelqu’un et je reçois un salaire  ",
-                value: "ITS",
+            {   name: "ITS",
+                label: "Je travaille pour quelqu'un et je reçois un salaire",
+                value: "employee",
                 nextQuestion: ""
             },
-            {
-                label: "Oui, je possède une entreprise et j’ai des associés avec qui je partage les bénéfices   ",
-                value: "IS",
+            {   name: "IS",
+                label: "Je possède une entreprise et j'ai des associés avec qui je partage les bénéfices",
+                value: "associate",
                 nextQuestion: ""
             },
-            {
-                label: "c) Je suis un associé dans une société qui possède principalement des biens immobiliers et qui ne paie pas l'impôt sur les sociétés   ",
-                value: "IRF",
+            {   name: "IRF",
+                label: "Je suis un associé dans une société qui possède des biens immobiliers et qui ne paie pas l'impôt sur les sociétés",
+                value: "realEstateAssociate",
                 nextQuestion: ""
             }
         ]

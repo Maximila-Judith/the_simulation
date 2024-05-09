@@ -11,24 +11,24 @@ export const realEstateRole: Data = {
             nextQuestion: ""
         },
         choiceOptions: [
-            {
-                label: "Je suis propriétaire et je loue ces biens immobiliers aux gens ",
-                value: "yes",
+            {   name : "",
+                label: "Je suis propriétaire et je loue ces biens immobiliers aux gens",
+                value: "location",
                 nextQuestion: "useOfRealEstate"
             },
-            {
-                label: "J'agis en tant qu'intermédiaire pour l'achat ou la vente d'immeubles ?  ",
-                value: "IBA",
+            {   name : "IBA",
+                label: "J'agis en tant qu'intermédiaire pour l'achat ou la vente d'immeubles",
+                value: "intermediate",
                 nextQuestion: ""
             },
-            {
-                label: "J'achète des immeubles dans le but de les revendre   ",
-                value: "IBA",
+            {   name : "IBA",
+                label: "J'achète des immeubles dans le but de les revendre",
+                value: "resell",
                 nextQuestion: ""
             },
-            {
-                label: "Je procède au partage/division de terrains en vue de leur vente  ",
-                value: "IBA",
+            {   name : "IBA",
+                label: "Je procède au partage/division de terrains en vue de leur vente",
+                value: "subdivision",
                 nextQuestion: ""
             }
         ]

@@ -11,7 +11,7 @@ export interface Data {
             type: string;
             nextQuestion: string
         };
-        choiceOptions: { label: string; value: string; nextQuestion: string }[]
+        choiceOptions: {  name: string; label: string; value: string; nextQuestion: string }[]
     };
     nextQuestion: string 
 }

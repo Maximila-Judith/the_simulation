@@ -33,7 +33,7 @@ const FormSchema = z.object({
 })
  */
 
-export function CheckboxReactHookFormMultiple({ onValide, question }: { onValide: (value: string[], next: string, now:string) => void; question: Data }) {
+export function CheckboxReactHookFormMultiple({ onValide, question }: { onValide: (value: string[], next: string, now:string, name:string) => void; question: Data }) {
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -43,7 +43,7 @@ export function CheckboxReactHookFormMultiple({ onValide, question }: { onValide
     })
 
     function onSubmit(data: z.infer<typeof FormSchema>) {
-        onValide(data.items, question.nextQuestion, question.id)
+        onValide(data.items, question.nextQuestion, question.id, question.answers.name)
     }
 
     return (

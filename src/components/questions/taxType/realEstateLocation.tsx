@@ -1,7 +1,7 @@
 import { Data } from "@/lib/type/type"
 export const realEstateLocation: Data = {
     id: 'realEstateLocation',
-    question: "Quel est le montant approximatif de votre chiffre d'affaires annuel ? ",
+    question: "Ces biens immobiliers sont-ils situés au Bénin ?",
     answers: {
         type: "unique_choice",
         name: "",
@@ -11,12 +11,12 @@ export const realEstateLocation: Data = {
             nextQuestion: ""
         },
         choiceOptions: [
-            {
+            {   name: "TFU",
                 label: "Oui",
-                value: "TFU",
+                value: "yes",
                 nextQuestion: ""
             },
-            {
+            {   name: "",
                 label: "Non ",
                 value: "no",
                 nextQuestion: ""

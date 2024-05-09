@@ -1,7 +1,7 @@
 import { Data } from "@/lib/type/type"
 export const realEstateStatus: Data = {
     id: 'realEstateStatus',
-    question: "Quel est le montant approximatif de votre chiffre d'affaires annuel ? ",
+    question: "Avez-vous des biens immobiliers ? (maisons, terrains, etc.) ",
     answers: {
         type: "unique_choice",
         name: "",
@@ -11,12 +11,12 @@ export const realEstateStatus: Data = {
             nextQuestion: ""
         },
         choiceOptions: [
-            {
+            {   name: "",
                 label: "Oui ",
                 value: "yes",
                 nextQuestion: "realEstateLocation"
             },
-            {
+            {   name: "",
                 label: "Non ",
                 value: "no",
                 nextQuestion: ""

@@ -11,14 +11,14 @@ export const amount: Data = {
             nextQuestion: ""
         },
         choiceOptions: [
-            {
+            {   name: "TPS",
                 label: "50 millions de francs CFA ou moins ",
-                value: "TPS",
+                value: "more",
                 nextQuestion: ""
             },
-            {
+            {   name: "IBA",
                 label: "Plus de 50 millions de francs CFA ",
-                value: "IBA",
+                value: "less",
                 nextQuestion: ""
             }
         ]

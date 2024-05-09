@@ -1,7 +1,7 @@
 import { Data } from "@/lib/type/type"
 export const notExpensiveRealEstateLocation: Data = {
     id: 'notExpensiveRealEstateLocation',
-    question: "Ces biens immobiliers sont-ils situés au Bénin ?  ",
+    question: "Ces biens immobiliers sont-ils situés au Bénin ?",
     answers: {
         type: "unique_choice",
         name: "",
@@ -11,14 +11,14 @@ export const notExpensiveRealEstateLocation: Data = {
             nextQuestion: ""
         },
         choiceOptions: [
-            {
+            {   name: "IRF&TFU",
                 label: "Oui ",
-                value: "IRF & TFU",
+                value: "yes",
                 nextQuestion: ""
             },
-            {
-                label: "Non, c'est uniquement pour y habiter ",
-                value: "IRF",
+            {   name: "IRF",
+                label: "Non",
+                value: "no",
                 nextQuestion: ""
             }
         ]

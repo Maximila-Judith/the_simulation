@@ -14,17 +14,7 @@ export const Encaissable: Data = {
             nextQuestion:""
         },
         choiceOptions: [
-            {
-                label: "",
-                value: "",
-                nextQuestion: ""
-            },
-            {
-                label: "",
-                value: "",
-                nextQuestion: ""
-            },
-            {
+            {   name: "",
                 label: "",
                 value: "",
                 nextQuestion: ""

@@ -13,14 +13,13 @@ import { TypeInput } from './inputAnswers';
 import { CheckboxReactHookFormMultiple } from '@/components/ui/multipleCheck'
 import { useState, useContext } from 'react'
 import { QuestionContext } from "@/lib/questionContext";
-import { entry } from '@/components/questions/taxType/entry';
 
 interface BodyProps {
-    onAnswer: (value: string[], nextQuestion: string, nowQuestion: string) => void
+    onAnswer: (value: string[], nextQuestion: string, nowQuestion: string, name: string) => void
     taxType: string
 }
 
-export const Body: React.FC<BodyProps> = ({ onAnswer }) => {
+export const Body: React.FC<BodyProps> = ({ onAnswer, taxType }) => {
     const the_question = useContext(QuestionContext)
 
     const question = the_question.question,
@@ -44,19 +43,18 @@ export const Body: React.FC<BodyProps> = ({ onAnswer }) => {
 
                                 {(type_answer === "unique_choice") && (
                                     choiceOptions.map((choice) => (
-                                        <Response key={choice.value} answer={choice.label} value={[choice.value]} nowQuestion={the_question.id} nextQuestion={choice.nextQuestion} onSelect={onAnswer} />
+                                        <Response key={choice.value} nowQuestion={the_question.question} value={choice} onSelect={onAnswer} />
                                     ))
                                 )}
 
                                 {(type_answer === "multiple_choice") && (
-                                    < CheckboxReactHookFormMultiple onValide={onAnswer} question={the_question} />
+                                    <CheckboxReactHookFormMultiple onValide={onAnswer} question={the_question} />
                                 )}
 
                                 {(type_answer === "input") && (
                                     <TypeInput key={the_question.id} question={the_question} onSubmit={onAnswer} />
                                 )}
                             </div>
-
                         </CardContent>
                     </CardHeader>
                 </Card>

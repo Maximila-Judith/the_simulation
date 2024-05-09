@@ -1,7 +1,7 @@
 import { Data } from "@/lib/type/type"
 export const aloneManagement: Data = {
     id: 'aloneManagement',
-    question: "Avez-vous une activité/ un business qui vous rapporte de l'argent ? ",
+    question: "Gérez-vous seul votre activité (sans partager le bénéfice avec quelqu'un d'autre) ?",
     answers: {
         type: "unique_choice",
         name: "",
@@ -11,24 +11,24 @@ export const aloneManagement: Data = {
             nextQuestion: ""
         },
         choiceOptions: [
-            {
+            {    name: "",
                 label: "Oui",
                 value: "yes",
                 nextQuestion: "amount"
             },
-            {
+            {    name: "IS",
                 label: "Oui, je dirige une entreprise enregistrée en tant que société (SARL, SA, SAS, etc.) ",
-                value: "IS",
+                value: "company",
                 nextQuestion: ""
             },
-            {
+            {    name: "",
                 label: "Oui, je fais certains business ayant rapport avec l'immobilier (terrains, maisons, boutiques, usines, etc.)",
-                value: "yesRealEstateStatus",
+                value: "yesRealEstate",
                 nextQuestion: "realEstateRole"
             },
-            {
+            {   name: "",
                 label: "non",
-                value: "yesCompany",
+                value: "no",
                 nextQuestion: "workingSituation"
             }
         ]

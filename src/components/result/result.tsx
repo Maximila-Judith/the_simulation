@@ -11,10 +11,10 @@ import { ImpotType } from '@/lib/functions/impotType';
 
 
 export interface ResultProps {
-Answers : { Question: string; response: string[]}[]
+answers : { question: string; response: string[]}[]
 }
 
-export const Result: React.FC<ResultProps> = ({Answers}) => {
+export const Result: React.FC<ResultProps> = ({answers}) => {
     
 
     return (
@@ -25,9 +25,9 @@ export const Result: React.FC<ResultProps> = ({Answers}) => {
                         <CardContent className='p-10'>
                             <div className="flex flex-row item-center space-x-6">
                                 {
-                                Answers.map(answer=> (
+                                answers.map(answer=> (
                                     <ul>
-                                        <li key = {answer.response.length++} >  {answer.Question }: {answer.response}</li>
+                                        <li key = {answer.response.length++} >  {answer.question }: {answer.response}</li>
                                     </ul>
                                 ))}
                             </div>

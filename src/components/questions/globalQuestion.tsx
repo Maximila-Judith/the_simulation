@@ -12,15 +12,15 @@ import { workingSituation } from '@/components/questions/taxType/workingSituatio
 import { Encaissable } from "./calcul/encaissable";
 
 
-export const Questions = {
-    aloneManagement: aloneManagement,
+export const Questions = { 
     entry: entry,
-    amount: amount,
+    aloneManagement: aloneManagement,
+    amount: amount, 
+    realEstateStatus: realEstateStatus, 
+    realEstateRole: realEstateRole,
+    useOfRealEstate: useOfRealEstate,
     expensiveRealEstateLocation: expensiveRealEstateLocation,
     notExpensiveRealEstateLocation: notExpensiveRealEstateLocation,
-    useOfRealEstate: useOfRealEstate,
-    realEstateRole: realEstateRole,
-    realEstateStatus: realEstateStatus,
     realEstateLocation: realEstateLocation,
     workingSituation: workingSituation,
     entryCalcul: Ca,

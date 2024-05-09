@@ -7,7 +7,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { ImpotType } from '@/lib/functions/impotType';
+import { taxCalcul } from '@/lib/functions/taxCalcul';
 import {useState} from 'react';
 import { landlordsExpenses } from '../questions/calcul/IRF/questions/landlordsExpenses';
 import { realEstateExpensesPrice } from '../questions/calcul/IRF/questions/realEstateExpensesPrice';
@@ -40,7 +40,6 @@ export const Result: React.FC<ResultProps> = ({tax,answers}) => {
             let liter = parseFloat(result('liter')[0])
                 liter = isNaN(liter)?0:liter
             let literMin = liter*0.6
-                literMin = arround(literMin)
             let min = literMin === 0 && nature !=='station'? cashable*minRate : literMin
                 min = min<250000?250000:min
 
@@ -123,7 +122,6 @@ export const Result: React.FC<ResultProps> = ({tax,answers}) => {
             let liter = parseFloat(result('liter')[0])
                 liter = isNaN(liter)?0:liter
             let literMin = liter*0.6
-                literMin = arround(literMin)
             let min 
                 if(literMin === 0 && nature !=='station'){
                 min = (cashable*minRate <500000)?500000: cashable*minRate
@@ -199,30 +197,6 @@ export const Result: React.FC<ResultProps> = ({tax,answers}) => {
         return obj?obj.response:[""]
         }
 
-        function taxCalcul (amount: number,rate: number,min : number ,fee :number){
-          if (!isNaN(amount) && !isNaN(rate) && !isNaN(min) && !isNaN(fee) ){
-            let res = (amount*rate)/100
-                res = (res >= min)? res: min
-                res = res+(fee?fee:0)
-                res =  arround(res)
-                return res
-          }
-          return
-        }
-
-        function arround(amount : number) {
-          const rest = amount % 10;
-      
-          if (rest >= 0 && rest < 3) {
-            amount -= rest; 
-          } else if (rest >= 3 && rest < 8) {
-            amount += (5 - rest);
-          } else if (rest >= 8) {
-            amount += (10 - rest);
-          }
-        
-          return amount;
-        }
         
     return (
         <div className="text-center md:text-left lg:text-right">

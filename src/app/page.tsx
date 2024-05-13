@@ -145,7 +145,7 @@ export default function Home() {
         <div className="flex flex-row item-center my-6 text-white ">
           <Link href="/accueil" className=" flex flex-row mx-8 gap-x-3"> <MoveLeft /> Retour</Link>
         </div>
-        <div className="flex justify-center items-center md:w-1/2 mx-auto shadow-xl rounded-2xl pb-2 bg-teal-2100">
+        <div className="flex justify-center items-center md:w-1/2 mx-auto rounded-2xl pb-2 ">
           <div className="mb-10 space-y-5">
             <div className="mb-10 space-y-6">
               <Stepper currentStep={level} />
@@ -153,9 +153,11 @@ export default function Home() {
                 <button onClick={forInfo} className={`bg-gray-700 hover:bg-gray-700 border-1 rounded text-white p-1 `} >Info</button>
               </div>}
               <>
-                {info !== infos.init ? <InfoCard onClick={forClick} infos={info} /> : ((level.length < 3) ? (<Body onAnswer={forAnswer} />) : (<Result tax={taxType} answers={answers} />))}
-                <div className="flex justify-between mt-4">
-                  {(info === infos.init) && <button onClick={forBack} className={`bg-gray-700 hover:bg-gray-700 border-1 rounded text-white p-1 ${back.length === 1 ? 'hidden' : ''}`} >Back</button>}
+                <div className="min-w-80 ">
+                  {info !== infos.init ? <InfoCard onClick={forClick} infos={info} /> : ((level.length < 3) ? (<Body onAnswer={forAnswer} />) : (<Result tax={taxType} answers={answers} />))}
+                  <div className="flex justify-between mt-4">
+                    {(info === infos.init) && <button onClick={forBack} className={`bg-gray-700 hover:bg-gray-700 border-1 rounded text-white p-1 ${back.length === 1 ? 'hidden' : ''}`} >Back</button>}
+                  </div>
                 </div>
 
               </>

@@ -8,8 +8,8 @@ const Response = ({ onSelect, value, nowQuestion }: { onSelect: (value: string[]
     };
 
     return (
-        <div className='gap-5'>
-            <Button variant="secondary" onClick={handleSelect} className="w-full">{value.label}</Button>
+        <div className='gap-2'>
+            <Button variant="secondary" onClick={handleSelect} style={{ overflow: 'hidden' }} className="w-full h-full bg-blue-200"><div style={{ whiteSpace: 'nowrap' }}>{value.label}</div></Button>
         </div>
     )
 }

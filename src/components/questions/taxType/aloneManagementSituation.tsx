@@ -1,8 +1,8 @@
 import { Data } from "@/lib/type/type"
 export const aloneManagementSituation: Data = {
-    
+
     id: 'aloneManagementSituation',
-    info:"infoAloneManagementSituation",
+    info: "infoAloneManagementSituation",
     question: "Dans quel cas êtes-vous ?",
     answers: {
         type: "unique_choice",
@@ -13,21 +13,24 @@ export const aloneManagementSituation: Data = {
             nextQuestion: ""
         },
         choiceOptions: [
-            {    name: "IS",
-                label: "Je dirige une entreprise enregistrée en tant que société (SARL, SA, SAS, etc.) ",
+            {
+                name: "IS",
+                label: "Je dirige une entreprise enregistrée en tant que société (SARL,SA,SAS,etc.)",
                 value: "company",
                 nextQuestion: ""
             },
-            {    name: "",
-                label: "Je fais certains business ayant rapport avec l'immobilier (terrains, maisons, usines, etc.)",
+            {
+                name: "",
+                label: "Je fais certains business ayant rapport avec l'immobilier (terrains,maisons,etc.)",
                 value: "yesRealEstate",
                 nextQuestion: "realEstateRole"
             },
-            {    name: "",
-            label: "Dans aucun de ces cas",
-            value: "none",
-            nextQuestion: "amount"
-        },
+            {
+                name: "",
+                label: "Dans aucun de ces cas",
+                value: "none",
+                nextQuestion: "amount"
+            },
         ]
     },
     nextQuestion: ""

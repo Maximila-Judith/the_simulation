@@ -1,10 +1,11 @@
 'use client'
-import { CheckCircle, CircleHelp, MoveLeft } from "lucide-react"
+import styles from './wizard.module.css'
+import { CheckCircle, CircleHelp, Info, MoveLeft } from "lucide-react"
 import { Body } from "@/components/ui/body";
 import React, { useEffect, useState } from 'react';
 import { Stepper } from '@/components/ui/stepper'
 import { Questions, valQuestions } from '@/components/questions/globalQuestion'
-import { Data, Info } from "@/lib/type/type"
+import { Data, Infor } from "@/lib/type/type"
 import { Result } from "@/components/result/result";
 import { QuestionContext } from "@/lib/questionContext";
 import { InfoCard } from "@/components/informations";
@@ -22,7 +23,7 @@ export default function Home() {
   const [back, setBack] = useState([0]);
   const [answers, setAnswers] = useState([{ question: '', response: [''] }])
   const [level, setLevel] = useState([0])
-  const [info, setInfo] = useState<Info>(infos.init)
+  const [info, setInfo] = useState<Infor>(infos.init)
   const [valsTable, setValsTable] = useState(valQuestions)
   const [taxType, setTaxType] = useState("")
   const valInfo = (step) ? valInfos.find(info => info.id === step.info) : infos.init
@@ -147,22 +148,23 @@ export default function Home() {
         </div>
         <div className="flex justify-center items-center md:w-1/2 mx-auto rounded-2xl pb-2 ">
           <div className="mb-10 space-y-5">
-            <div className="mb-10 space-y-6">
+            <div className={styles.wizard}>
               <Stepper currentStep={level} />
-              {step && (step.info && info === infos.init) && <div className="flex justify-between mt-4">
-                <button onClick={forInfo} className={`bg-gray-700 hover:bg-gray-700 border-1 rounded text-white p-1 `} >Info</button>
-              </div>}
+              <div className="flex justify-between mt-4">
+                {step && (step.info && info === infos.init) ? <button onClick={forInfo} className={`bg-gray-700 hover:bg-gray-700 border-1 rounded-full text-white p-1 `} ><Info /></button> : <div style={{ height: '32px' }}></div>}
+              </div>
               <>
                 <div className="min-w-80 ">
+
                   {info !== infos.init ? <InfoCard onClick={forClick} infos={info} /> : ((level.length < 3) ? (<Body onAnswer={forAnswer} />) : (<Result tax={taxType} answers={answers} />))}
-                  <div className="flex justify-between mt-4">
-                    {(info === infos.init) && <button onClick={forBack} className={`bg-gray-700 hover:bg-gray-700 border-1 rounded text-white p-1 ${back.length === 1 ? 'hidden' : ''}`} >Back</button>}
-                  </div>
                 </div>
+
 
               </>
             </div>
-
+            <div className="flex justify-between mt-4">
+              {(info === infos.init) && <button onClick={forBack} className={`bg-gray-700 hover:bg-gray-700 border-1 rounded text-white p-1 ${back.length === 1 ? 'hidden' : ''}`} >Back</button>}
+            </div>
           </div>
         </div>
       </main>

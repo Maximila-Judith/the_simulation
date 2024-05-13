@@ -185,7 +185,7 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
       let sal = parseFloat(result('salary')[0])
       let rate = sal <= 60000 ? 0 : sal >= 60001 && sal <= 150000 ? 10 : sal >= 150001 && sal <= 250000 ? 15 : sal >= 250001 && sal <= 500000 ? 19 : sal > 500000 ? 30 : 0
 
-      let new_num = taxCalcul(sal, rate, 0, fee)
+      let new_num = taxCalcul(sal, rate, 0, fee) 
       price[0] = new_num ? new_num : 0
       break;
     }

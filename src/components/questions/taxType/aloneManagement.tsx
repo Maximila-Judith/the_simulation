@@ -2,7 +2,7 @@ import { Data } from "@/lib/type/type"
 export const aloneManagement: Data = {
     id: 'aloneManagement',
     info:"",
-    question: "Gérez-vous seul votre activité (sans partager le bénéfice avec quelqu'un d'autre) ?",
+    question: "Gérez-vous seul votre activité ?(sans partager le bénéfice avec quelqu'un d'autre)",
     answers: {
         type: "unique_choice",
         name: "",

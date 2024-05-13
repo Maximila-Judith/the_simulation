@@ -11,15 +11,16 @@ export interface Data {
             type: string;
             nextQuestion: string
         };
-        choiceOptions: {  name: string; label: string; value: string; nextQuestion: string }[]
+        choiceOptions: { name: string; label: string; value: string; nextQuestion: string }[]
     };
-    nextQuestion: string 
+    nextQuestion: string
 }
 
-export interface Info {
+export interface Infor {
     id: string;
-    title : string;
-    values: {title: string, 
+    title: string;
+    values: {
+        title: string,
         description: string
     }[]
 }

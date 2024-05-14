@@ -14,12 +14,15 @@ import { CheckboxReactHookFormMultiple } from '@/components/ui/multipleCheck'
 import { useState, useContext } from 'react'
 import { QuestionContext } from "@/lib/questionContext";
 import styles from '@/app/cardContent.module.css'
+import { Button } from './button';
+import { Info } from 'lucide-react';
 
 interface BodyProps {
-    onAnswer: (value: string[], nextQuestion: string, nowQuestion: string, name: string) => void
+    onAnswer: (value: string[], nextQuestion: string, nowQuestion: string, name: string) => void;
+    onInfo: () => void;
 }
 
-export const Body: React.FC<BodyProps> = ({ onAnswer }) => {
+export const Body: React.FC<BodyProps> = ({ onAnswer, onInfo }) => {
     const the_question = useContext(QuestionContext)
 
     const question = the_question ? the_question.question : "",
@@ -29,10 +32,11 @@ export const Body: React.FC<BodyProps> = ({ onAnswer }) => {
     return (
         <div className="text-center md:text-left lg:text-left">
             <div className='max-w-screen-md mx-auto'>
-                <Card className=" mx-4 mt-0.5 h-20 md:text-left lg:text-left">
+                <Card className="mx-4 mt-0.5 h-20 md:text-left lg:text-left">
                     <CardHeader>
-                        <CardContent className="italic text-extrabold text-center text-sm mx-auto">
+                        <CardContent className="italic text-extrabold text-center text-sm mx-auto overflow-hidden flex">
                             {question}
+                            {the_question.info && (<div className='inline-bloc mx-3'><button className='rounded-full' onClick={onInfo}><Info className='size-[20px] hover:bg-blue-300 rounded-full' /></button></div>)}
                         </CardContent>
                     </CardHeader>
                 </Card>
@@ -58,7 +62,6 @@ export const Body: React.FC<BodyProps> = ({ onAnswer }) => {
                     </CardContent>
                 </Card>
             </div>
-
 
         </div >
     )

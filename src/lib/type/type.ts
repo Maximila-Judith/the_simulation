@@ -16,7 +16,7 @@ export interface Data {
     nextQuestion: string
 }
 
-export interface Infor {
+export interface Info {
     id: string;
     title: string;
     values: {

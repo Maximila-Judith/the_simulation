@@ -185,7 +185,7 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
       let sal = parseFloat(result('salary')[0])
       let rate = sal <= 60000 ? 0 : sal >= 60001 && sal <= 150000 ? 10 : sal >= 150001 && sal <= 250000 ? 15 : sal >= 250001 && sal <= 500000 ? 19 : sal > 500000 ? 30 : 0
 
-      let new_num = taxCalcul(sal, rate, 0, fee) 
+      let new_num = taxCalcul(sal, rate, 0, fee)
       price[0] = new_num ? new_num : 0
       break;
     }
@@ -205,11 +205,22 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
         <Card className="md-w-1/2 mx-4 mt-4">
           <CardHeader>
             <CardContent className='p-10'>
-              <div className="flex flex-row item-center space-x-6">
-                <p>Type d'impôt :{tax}</p>
-                <ul>
-                  <li >  Prix: {price.length === 1 ? price[0] + ' Fcfa' : price.length === 2 ? 'le prix se trouve entre ' + price[0] + ' et ' + price[1] + ' Fcfa' : tax.split("&")[0] + ": " + price[0] + ' Fcfa; ' + tax.split("&")[1] + ' : entre ' + price[1] + ' et ' + price[2] + ' Fcfa'}</li>
-                </ul>
+              <div className="flex flex-col space-y-4">
+                <div className="flex flex-row item-center space-x-4">
+                  <span className="flex h-2 w-2 translate-y-1 rounded-full bg-green-500" />
+                  <p className='-mt-1'>
+                    <span className='text-bold text-lg'>Type d'impôt :</span>
+                    {tax}
+                  </p>
+                </div>
+                <div className="flex flex-row item-center space-x-4">
+                  <span className="flex h-2 w-2 translate-y-1 rounded-full bg-green-500" />
+                  <ul className='-mt-1'>
+                    <li>
+                      <span>Prix:</span>
+                      {price.length === 1 ? price[0] + ' Fcfa' : price.length === 2 ? 'le prix se trouve entre ' + price[0] + ' et ' + price[1] + ' Fcfa' : tax.split("&")[0] + ": " + price[0] + ' Fcfa; ' + tax.split("&")[1] + ' : entre ' + price[1] + ' et ' + price[2] + ' Fcfa'}</li>
+                  </ul>
+                </div>
               </div>
 
             </CardContent>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Check, CheckCircle, CircleHelp } from "lucide-react"
 import { number } from 'zod';
+import styles from '@/app/progress.module.css'
+
 
 
 interface StepperProps {
@@ -12,7 +14,10 @@ export const Stepper: React.FC<StepperProps> = ({ currentStep }) => {
   return (
     <div className='flex justify-center items-center'>
       <ul className="flex flex-row gap-x-3 ">
-        <li>
+        <div className={styles.progressbar}>
+          <div style={{ width: currentStep[0] ? "33.3%" : currentStep[1] ? "66.6%" : "100%" }}></div>
+        </div>
+        {/* <li>
           <div className="flex item-center justify-center">
             <span className="size-[40px] flex justify-center items-center flex-shrink-0 size-[40px] rounded-full border-4 border-green-100 bg-green-200 text-white border-green-900 bg-green-800 text-white">
               {currentStep[0] ? <Check className="text-green-500" /> : <CircleHelp className='animate-ping' />}
@@ -43,7 +48,7 @@ export const Stepper: React.FC<StepperProps> = ({ currentStep }) => {
           <div className="mt-3 block text-md text-white ">
             R
           </div>
-        </li>
+        </li> */}
       </ul>
     </div>
   )

@@ -1,11 +1,11 @@
 'use client'
 import styles from './wizard.module.css'
-import { CheckCircle, CircleHelp, Info, MoveLeft } from "lucide-react"
+import { CheckCircle, CircleHelp, MoveLeft } from "lucide-react"
 import { Body } from "@/components/ui/body";
 import React, { useEffect, useState } from 'react';
 import { Stepper } from '@/components/ui/stepper'
 import { Questions, valQuestions } from '@/components/questions/globalQuestion'
-import { Data, Infor } from "@/lib/type/type"
+import { Data, Info } from "@/lib/type/type"
 import { Result } from "@/components/result/result";
 import { QuestionContext } from "@/lib/questionContext";
 import { InfoCard } from "@/components/informations";
@@ -14,7 +14,6 @@ import {
   valQuestionsIBA, valQuestionsIS, valQuestionsIRF,
   valQuestionsITS, valQuestionsTPS, valQuestionsTFU
 } from "@/components/questions/calcul/global";
-import { object } from "zod";
 import { entry } from "@/components/questions/taxType/entry";
 import Link from "next/link";
 
@@ -23,7 +22,7 @@ export default function Home() {
   const [back, setBack] = useState([0]);
   const [answers, setAnswers] = useState([{ question: '', response: [''] }])
   const [level, setLevel] = useState([0])
-  const [info, setInfo] = useState<Infor>(infos.init)
+  const [info, setInfo] = useState<Info>(infos.init)
   const [valsTable, setValsTable] = useState(valQuestions)
   const [taxType, setTaxType] = useState("")
   const valInfo = (step) ? valInfos.find(info => info.id === step.info) : infos.init
@@ -111,10 +110,8 @@ export default function Home() {
     setBack([0])
   }, [level]);
 
-
   useEffect(() => {
     setStep(valsTable[back[0]])
-    console.log(valsTable)
   }, [back]);
 
   const forBack = () => {
@@ -151,12 +148,10 @@ export default function Home() {
           <div className="mb-10 space-y-5">
             <div className={styles.wizard}>
               <Stepper currentStep={level} />
-              <div className="flex justify-between mt-4">
-                {step && (step.info && info === infos.init) ? <button onClick={forInfo} className={`bg-gray-700 hover:bg-gray-700 border-1 rounded-full text-white p-1 `} ><Info /></button> : <div style={{ height: '32px' }}></div>}
-              </div>
+                <div style={{ height: '32px' }}></div>
               <>
                 <div className="min-w-80 ">
-                  {info !== infos.init ? <InfoCard onClick={forClick} infos={info} /> : ((level.length < 3) ? (<Body onAnswer={forAnswer} />) : (<Result tax={taxType} answers={answers} />))}
+                  {info !== infos.init ? <InfoCard onClick={forClick} infos={info} /> : ((level.length < 3) ? (<Body onAnswer={forAnswer} onInfo={forInfo} />) : (<Result tax={taxType} answers={answers} />))}
                 </div>
               </>
             </div>

@@ -23,7 +23,8 @@ export const Landing = () => {
     return (
         <div >
             <div className="flex flex-col pt-3 bg-[url('/nnn.jpg')] bg-no-repeat bg-cover bg-center min-h-screen">
-                <Menubar className="pr-6 justify-end bg-transparent border-none text-white">
+                <div className="absolute inset-0 bg-black opacity-40 "></div>
+                <Menubar className="pr-6 justify-end bg-transparent border-none opacity-95 text-white">
                     <MenubarMenu >
                         <MenubarTrigger>Accueil</MenubarTrigger>
                     </MenubarMenu>
@@ -37,14 +38,14 @@ export const Landing = () => {
                         <MenubarTrigger>A Propos</MenubarTrigger>
                     </MenubarMenu>
                 </Menubar>
-                <div className="flex items-center justify-start flex-col w-2/4 pl-8 space-y-4 mt-20 pt-20 overflow-x-hidden overflow-y-hidden">
-                    <h1 className="text-5xl text-left font-semibold text-white">Simuler vos Impôts grâce au Code Géneral des Impôts (CIG) 2024</h1>
-                    <p className="text-white text-base text-left mx-auto ">
+                <div className="flex items-center justify-start flex-col opacity-95 w-2/4 pl-8 space-y-4 mt-20 pt-20 overflow-x-hidden overflow-y-hidden">
+                    <h1 className="text-5xl text-left font-semibold text-white opacity-95">Simuler vos Impôts grâce au Code Géneral des Impôts (CIG) 2024</h1>
+                    <p className="text-white text-base text-left mx-auto opacity-95 ">
                         Estimer facilement le montant de vos impôts à payer en fonction de votre situation fiscale.
                         Elle est accessible à tous, même à ceux qui ne sont pas familiers avec les déclarations fiscales.
                     </p>
 
-                    <Link href="" onClick={handleClick} className="mt-6 bg-white text-black font-bold py-2 px-6 rounded-full self-start hover:bg-gray-200 transition duration-200">Simuler</Link>
+                    <Link href="" onClick={handleClick} className="mt-6 opacity-95 bg-white text-black font-bold py-2 px-6 rounded-full self-start hover:bg-gray-200 transition duration-200">Simuler</Link>
                 </div>
             </div>
             <div className=" pt-10 mt-10 text-center justify-center mb-5 p-20">

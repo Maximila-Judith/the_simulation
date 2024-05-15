@@ -30,7 +30,7 @@ export const Body: React.FC<BodyProps> = ({ onAnswer, onInfo }) => {
         choiceOptions = the_question ? the_question.answers.choiceOptions : []
 
     return (
-        <div className="text-center md:text-left lg:text-left">
+        <div className="text-center md:text-left lg:text-left pt-8">
             <div className='max-w-screen-md mx-auto'>
                 <Card className="mx-4 mt-0.5 h-20 md:text-left lg:text-left">
                     <CardHeader>

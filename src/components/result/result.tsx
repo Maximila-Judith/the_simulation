@@ -12,6 +12,9 @@ import { useState } from 'react';
 import { landlordsExpenses } from '../questions/calcul/IRF/questions/landlordsExpenses';
 import { realEstateExpensesPrice } from '../questions/calcul/IRF/questions/realEstateExpensesPrice';
 import { liter } from '../questions/calcul/IS/questions/liter';
+import { Button } from "@/components/ui/button"
+import Link from 'next/link';
+
 
 
 export interface ResultProps {
@@ -192,11 +195,14 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
   }
 
 
-
   function result(quest: string) {
     let obj = answers.find(answer => answer.question === quest)
     return obj ? obj.response : [""]
   }
+
+  const handleClick = () => {
+    window.location.href = '/accueil';
+  };
 
 
   return (
@@ -204,30 +210,46 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
       <div className='max-w-screen-md mx-auto'>
         <Card className="md-w-1/2 mx-4 mt-4">
           <CardHeader>
-            <CardContent className='p-10'>
-              <div className="flex flex-col space-y-4">
-                <div className="flex flex-row item-center space-x-4">
-                  <span className="flex h-2 w-2 translate-y-1 rounded-full bg-green-500" />
-                  <p className='-mt-1'>
-                    <span className='text-bold text-lg'>Type d'impôt :</span>
+            <CardContent className='p-4'>
+              <div className="flex flex-col space-y-4 ">
+                <ul className="max-w-xs flex flex-col">
+                  <div className='flex flex-row place-self-start gap-x-6 mb-4 '>
+                    <p className='text-extrabold text-md'>
+                      Type d'impôt :
+                    </p>
                     {tax}
-                  </p>
-                </div>
-                <div className="flex flex-row item-center space-x-4">
-                  <span className="flex h-2 w-2 translate-y-1 rounded-full bg-green-500" />
-                  <ul className='-mt-1'>
-                    <li>
-                      <span>Prix:</span>
-                      {price.length === 1 ? price[0] + ' Fcfa' : price.length === 2 ? 'le prix se trouve entre ' + price[0] + ' et ' + price[1] + ' Fcfa' : tax.split("&")[0] + ": " + price[0] + ' Fcfa; ' + tax.split("&")[1] + ' : entre ' + price[1] + ' et ' + price[2] + ' Fcfa'}</li>
-                  </ul>
+                  </div>
+
+                  <li className='inline-flex flex-col gap-x-10 py-3 px-6 pr-8 text-sm font-medium bg-white border-2 border-gray-200 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-neutral-900 dark:border-neutral-700 dark:text-white'>
+                    <p className='text-bold text-sm uppercase text-center'>Montant à payer</p>
+                    <div className='place-self-statrt flex flex-col place-self-start gap-x-6 mb-6'>
+                      <span>30% ...............</span>
+                      <span>30% ...............</span>
+                      <span>30% ...............</span>
+                      <span>30% ...............</span>
+                    </div>
+                    <div className='place-self-statrt flex flex-row place-self-start gap-x-6'>
+                      <span>Montant:</span>
+                      {price.length === 1 ? price[0] + ' Fcfa' : price.length === 2 ? ('le prix se trouve entre ' + price[0]) + ' et ' + price[1] + ' Fcfa' : tax.split("&")[0] + ": " + price[0] + ' Fcfa; ' + tax.split("&")[1] + ' : entre ' + price[1] + ' et ' + price[2] + ' Fcfa'}
+
+                    </div>
+
+                  </li>
+                </ul>
+                <div className='place-self-statrt flex flex-col place-self-start gap-y-1'>
+                  <p className='text-bold text-md'>Possibilité de réduction :</p>
                 </div>
               </div>
-
+              <div className='place-self-statrt flex flex-row place-self-statrt gap-x-10 mt-4'>
+                <Button variant="secondary" className="w-full h-full bg-blue-200 hover:bg-blue-300 ">Voir les exonérations</Button>
+                <Link href='' onClick={handleClick}>
+                  <Button variant="secondary" className="w-full h-full bg-blue-200 hover:bg-blue-300 ">Faire une autre simulation</Button>
+                </Link>
+              </div>
             </CardContent>
           </CardHeader>
         </Card>
       </div>
-
 
     </div >
   )

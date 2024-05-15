@@ -11,9 +11,15 @@ import {
 } from "@/components/ui/menubar"
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "../ui/button";
 
 
 export const Landing = () => {
+
+    const handleClick = () => {
+        window.location.href = '/accueil';
+    };
+
     return (
         <div >
             <div className="flex flex-col pt-3 bg-[url('/nnn.jpg')] bg-no-repeat bg-cover bg-center min-h-screen">
@@ -37,7 +43,8 @@ export const Landing = () => {
                         Estimer facilement le montant de vos impôts à payer en fonction de votre situation fiscale.
                         Elle est accessible à tous, même à ceux qui ne sont pas familiers avec les déclarations fiscales.
                     </p>
-                    <Link href="/accueil" className="mt-6 bg-white text-black font-bold py-2 px-6 rounded-full self-start hover:bg-gray-200 transition duration-200">Simuler</Link>
+
+                    <Link href="" onClick={handleClick} className="mt-6 bg-white text-black font-bold py-2 px-6 rounded-full self-start hover:bg-gray-200 transition duration-200">Simuler</Link>
                 </div>
             </div>
             <div className=" pt-10 mt-10 text-center justify-center mb-5 p-20">

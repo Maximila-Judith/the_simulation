@@ -16,6 +16,7 @@ import {
 } from "@/components/questions/calcul/global";
 import { entry } from "@/components/questions/taxType/entry";
 import Link from "next/link";
+import { Button } from '@/components/ui/button';
 
 export default function Home() {
     const [step, setStep] = useState<Data>(Questions.entry);
@@ -135,13 +136,18 @@ export default function Home() {
         obj = quest ? [...obj, quest] : [...obj]
         return obj
     }
+    const handleClick = () => {
+        window.location.href = '/';
+    };
 
     return (
         <QuestionContext.Provider value={step}>
             <main className="h-screen w-full bg-[url('/bgg.jpg')] relative bg-cover bg-no-repeat  bg-center overflow-hidden text-center md:text-left lg:text-righ">
                 <div className="absolute inset-0 bg-black opacity-85 "></div>
                 <div className="flex flex-row item-center my-6 text-white relative z-9">
-                    <Link href="/" className=" flex flex-row mx-8 gap-x-3"> <MoveLeft /> Retour</Link>
+                    <Link href="" onClick={handleClick} className=" flex flex-row mx-8 gap-x-3">
+                        <Button variant="secondary" className="w-full h-full bg-blue-200 hover:bg-blue-300 "><MoveLeft /> Retour</Button>
+                    </Link>
                 </div>
                 <div className="relative z-10 flex justify-center items-center md:w-1/2 mx-auto rounded-2xl pb-2  ">
 

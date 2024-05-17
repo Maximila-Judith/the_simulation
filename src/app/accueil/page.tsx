@@ -1,6 +1,6 @@
 'use client'
 import styles from '@/app/wizard.module.css'
-import { CheckCircle, CircleHelp, MoveLeft } from "lucide-react"
+import { CheckCircle, CircleHelp, CornerUpLeft, MoveLeft } from "lucide-react"
 import { Body } from "@/components/ui/body";
 import React, { useEffect, useState } from 'react';
 import { Stepper } from '@/components/ui/stepper'
@@ -151,7 +151,7 @@ export default function Home() {
                 </div>
                 <div className="relative z-10 flex justify-center items-center md:w-1/2 mx-auto rounded-2xl pb-2  ">
 
-                    <div className="mb-10 space-y-5">
+                    <div className="mb-4 space-y-5">
                         <div className={styles.wizard}>
                             <Stepper currentStep={level} />
                             <div style={{ height: '32px' }}></div>
@@ -162,7 +162,7 @@ export default function Home() {
                             </>
                         </div>
                         <div className="flex justify-between mt-4">
-                            {(info === infos.init) && <button onClick={forBack} className={`bg-gray-700 hover:bg-gray-700 border-1 rounded text-white p-1 ${back.length === 1 ? 'hidden' : ''}`} >Back</button>}
+                            {(info === infos.init) && <button onClick={forBack} className={`text-green-700 p-1 ${back.length === 1 ? 'hidden' : ''}`} ><MoveLeft /></button>}
                         </div>
                     </div>
                 </div>

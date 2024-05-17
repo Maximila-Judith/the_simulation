@@ -1,54 +1,127 @@
 'use client'
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     Menubar,
+    MenubarCheckboxItem,
     MenubarContent,
     MenubarItem,
     MenubarMenu,
+    MenubarRadioGroup,
+    MenubarRadioItem,
     MenubarSeparator,
     MenubarShortcut,
+    MenubarSub,
+    MenubarSubContent,
+    MenubarSubTrigger,
     MenubarTrigger,
 } from "@/components/ui/menubar"
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../ui/button";
+import { setInterval } from "timers"
+import styles from '@/app/diaporama.module.css'
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card"
+
+
 
 
 export const Landing = () => {
+    const images = ['/111.jpg', '/222.jpg', '/333.jpg']
+    const [image, setImage] = useState(0)
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setImage((index) =>
+                index === images.length - 1 ? 0 : index + 1
+            )
+        }, 4000)
+        return () => clearInterval(interval)
+    }, [])
 
     const handleClick = () => {
-        window.location.href = '/accueil';
-    };
+        window.location.href = '/accueil'
+    }
 
     return (
-        <div >
-            <div className="flex flex-col pt-3 bg-[url('/nnn.jpg')] bg-no-repeat bg-cover bg-center min-h-screen">
-                <div className="absolute inset-0 bg-black opacity-40 "></div>
-                <Menubar className="pr-6 justify-end bg-transparent border-none opacity-95 text-white">
-                    <MenubarMenu >
-                        <MenubarTrigger>Accueil</MenubarTrigger>
-                    </MenubarMenu>
-                    <MenubarMenu>
-                        <MenubarTrigger>Documentation</MenubarTrigger>
-                    </MenubarMenu>
-                    <MenubarMenu>
-                        <MenubarTrigger>Simulation</MenubarTrigger>
-                    </MenubarMenu>
-                    <MenubarMenu>
-                        <MenubarTrigger>A Propos</MenubarTrigger>
-                    </MenubarMenu>
-                </Menubar>
-                <div className="flex items-center justify-start flex-col opacity-95 w-2/4 pl-8 space-y-4 mt-20 pt-20 overflow-x-hidden overflow-y-hidden">
-                    <h1 className="text-5xl text-left font-semibold text-white opacity-95">Simuler vos Impôts grâce au Code Géneral des Impôts (CIG) 2024</h1>
-                    <p className="text-white text-base text-left mx-auto opacity-95 ">
-                        Estimer facilement le montant de vos impôts à payer en fonction de votre situation fiscale.
-                        Elle est accessible à tous, même à ceux qui ne sont pas familiers avec les déclarations fiscales.
-                    </p>
+        <div className="">
+            <div className={` flex flex-col pt-3 bg-no-repeat bg-cover bg-center max-h-96 block ${styles['background-slide']}`} style={{ backgroundImage: `url(${images[image]})` }}>
+                <div className="flex flex-row justify-between p-3">
+                    <Image
+                        src="/dgi-white.webp"
+                        alt="icon 1"
+                        width={200}
+                        height={350}
+                        priority
+                    />
+                    <Menubar className="justify-end bg-transparent opacity-100 border-none text-white">
+                        <MenubarMenu >
+                            <MenubarTrigger>
+                                <Link rel="stylesheet" href="/">Accueil</Link>
+                            </MenubarTrigger>
+                        </MenubarMenu>
+                        <MenubarMenu>
+                            <MenubarTrigger>
+                                <Link rel="stylesheet" href="">Simulation</Link>
+                            </MenubarTrigger>
+                            <MenubarContent>
+                                <MenubarItem className="text-md text-semibold italic">
+                                    Impot sur les Sociétés (IS)
+                                </MenubarItem>
+                                <MenubarItem className="text-md text-semibold italic">
+                                    Impot sur les Bénéfices d'Affaire (IBA)
+                                </MenubarItem>
+                                <MenubarItem className="text-md text-semibold italic">
+                                    Impot sur les Revenus Fonciers (IRF)
+                                </MenubarItem>
+                                <MenubarItem className="text-md text-semibold italic">
+                                    Impot sur les Traitement de Salaire (ITS)
+                                </MenubarItem>
+                                <MenubarItem className="text-md text-semibold italic">
+                                    Taxe Professionnelle Synthétique (TPS)
+                                </MenubarItem>
+                                <MenubarItem className="text-md text-semibold italic">
+                                    Taxe Foncière Unique (TFU)
+                                </MenubarItem>
+                            </MenubarContent>
+                        </MenubarMenu>
+                        <MenubarMenu>
+                            <MenubarTrigger>
+                                <Link rel="stylesheet" href="">Documentation</Link>
+                            </MenubarTrigger>
+                            <MenubarContent>
+                                <MenubarItem className="text-md text-semibold italic">
+                                    <Link rel="stylesheet" href="https://api.impots.bj/media/65d5ae32a155a_B%C3%A9nin-Code%20G%C3%A9n%C3%A9ral%20des%20Imp%C3%B4ts%202024.pdf">
+                                        Code Général des Impôts 2024 (CGI)
+                                    </Link>
+                                </MenubarItem>
+                                <MenubarItem className="text-md text-semibold italic">
+                                    <Link rel="stylesheet" href="https://api.impots.bj//media/63b450bf40bf1_Code%20G%C3%A9n%C3%A9ral%20des%20Imp%C3%B4ts%20(Version%20citoyenne).pdf">
+                                        Code Général des Impôts 2024 (V.C)
+                                    </Link>
+                                </MenubarItem>
+                            </MenubarContent>
+                        </MenubarMenu>
+                        <MenubarMenu>
+                            <MenubarTrigger>
+                                <Link rel="stylesheet" href="">A Propos</Link>
+                            </MenubarTrigger>
+                        </MenubarMenu>
+                    </Menubar>
+                </div>
 
-                    <Link href="" onClick={handleClick} className="mt-6 opacity-95 bg-white text-black font-bold py-2 px-6 rounded-full self-start hover:bg-gray-200 transition duration-200">Simuler</Link>
+                <div className="flex flex-col mb-20 w-2/4 place-self-center bg-transparent opacity-100 pl-8 space-y-4 mt-10 pt-10 overflow-x-hidden overflow-y-hidden">
+                    <h1 className="text-2xl text-center font-bold text-white">Simuler vos Impôts conformément au Code Géneral des Impôts 2024</h1>
+                    <Link href="" onClick={handleClick} className="mt-6 bg-white text-black font-bold py-2 px-6 rounded-full self-center hover:bg-gray-200 transition duration-200">Simuler</Link>
                 </div>
             </div>
-            <div className=" pt-10 mt-10 text-center justify-center mb-5 p-20">
+            <div className=" pt-10 mt-8 text-center justify-center mb-5 p-20">
                 <h1 className="text-extrabold text-2xl">Comment simuler ses impôts ?</h1>
                 <p>
                     La simulation est régulièrement mis à jour pour refléter les dernières modifications apportées au CIG, ce qui vous permet de rester en conformité avec les lois fiscales en vigueur au Bénin.
@@ -56,40 +129,54 @@ export const Landing = () => {
                 </p>
 
                 <div className="flex justify-center items-center gap-x-10 pt-10">
-                    <div className="flex flex-col items-center space-y-4">
-                        <Image
-                            src="/l1.jpg"
-                            alt="icon 1"
-                            width={100}
-                            height={100}
-                            priority
-                            className="rounded-full"
-                        />
-                        <h5>Simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler </h5>
-                    </div>
-                    <div className="flex flex-col items-center space-y-4">
-                        <Image
-                            src="/l2.jpg"
-                            alt="icon 1"
-                            width={100}
-                            height={100}
-                            priority
-                            className="rounded-full"
-                        />
-                        <h5>Simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler </h5>
-                    </div>
+                    <Card className={`drop-shadow-md ${styles['card']}`}>
+                        <CardHeader>
+                            <div className="flex flex-col items-center space-y-4">
+                                <Image
+                                    src="/l1.jpg"
+                                    alt="icon 1"
+                                    width={50}
+                                    height={50}
+                                    priority
+                                    className="rounded-full"
+                                />
+                                <h5>Simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler </h5>
+                            </div>
+                        </CardHeader>
+                    </Card>
 
-                    <div className="flex flex-col items-center space-y-4">
-                        <Image
-                            src="/l3.jpg"
-                            alt="icon 1"
-                            width={100}
-                            height={100}
-                            priority
-                            className="rounded-full"
-                        />
-                        <h5>Simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler </h5>
-                    </div>
+                    <Card className={`drop-shadow-md ${styles['card']}`}>
+                        <CardHeader>
+                            <div className="flex flex-col items-center space-y-4">
+                                <Image
+                                    src="/l2.jpg"
+                                    alt="icon 1"
+                                    width={50}
+                                    height={50}
+                                    priority
+                                    className="rounded-full"
+                                />
+                                <h5>Simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler </h5>
+                            </div>
+                        </CardHeader>
+                    </Card>
+
+                    <Card className={`drop-shadow-md ${styles['card']}`}>
+                        <CardHeader>
+                            <div className="flex flex-col items-center space-y-4">
+                                <Image
+                                    src="/l3.jpg"
+                                    alt="icon 1"
+                                    width={50}
+                                    height={50}
+                                    priority
+                                    className="rounded-full"
+                                />
+                                <h5>Simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler </h5>
+                            </div>
+                        </CardHeader>
+                    </Card>
+
                 </div>
             </div>
 
@@ -141,7 +228,15 @@ export const Landing = () => {
                 <div className="mt-auto w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 lg:pt-20 mx-auto">
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
                         <div className="col-span-full lg:col-span-1">
-                            <a className="flex-none text-xl font-semibold text-white" href="#" aria-label="Brand">Simulation</a>
+                            <a className="flex-none text-xl font-semibold text-white" href="#" aria-label="Brand">
+                                <Image
+                                    src="/dgi-white.webp"
+                                    alt="icon 1"
+                                    width={200}
+                                    height={350}
+                                    priority
+                                />
+                            </a>
                         </div>
 
                         <div className="col-span-1">
@@ -201,6 +296,6 @@ export const Landing = () => {
                 </div>
             </footer>
 
-        </div>
+        </div >
     )
 }

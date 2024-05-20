@@ -27,6 +27,5 @@ export const Questions = {
     notExpensiveRealEstateLocation: notExpensiveRealEstateLocation,
     realEstateLocation: realEstateLocation,
     workingSituation: workingSituation
-
 } 
 export const valQuestions = Object.values(Questions)

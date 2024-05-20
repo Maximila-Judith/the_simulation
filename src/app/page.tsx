@@ -1,7 +1,7 @@
 import { Landing } from '@/components/landingPage/landing-page'
 import React from 'react'
 
-const page = () => {
+function page (){
   return (
     <div>
       <Landing />

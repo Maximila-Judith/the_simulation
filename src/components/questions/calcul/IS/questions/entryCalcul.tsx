@@ -15,7 +15,7 @@ export const entryCalcul: Data = {
         },
         choiceOptions: [
             {   name: "",
-                label: "Ecoles privées d'enseignement scolaire, universitaire, technique et professionnel.",
+                label: "Ecoles privées d'enseignement scolaire, universitaire, technique et professionnel",
                 value: "school",
                 nextQuestion: "profit"
             },

@@ -32,7 +32,7 @@ import {
 
 
 
-export const Landing = () => {
+export function Landing () {
     const images = ['/111.jpg', '/222.jpg', '/333.jpg']
     const [image, setImage] = useState(0)
 

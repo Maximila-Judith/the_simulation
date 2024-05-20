@@ -47,9 +47,6 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
       min = min < 250000 ? 250000 : min
 
       let new_num = taxCalcul(amount, rate, min, 4000)
-      console.log(amount)
-      console.log(rate)
-      console.log(min)
       price[0] = new_num ? new_num : 0
 
       break;
@@ -134,7 +131,6 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
 
       let new_num = taxCalcul(amount, rate, min, 4000)
       price[0] = new_num ? new_num : 0
-
       break;
     }
 
@@ -174,6 +170,7 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
     case "TPS": {
       let ca = parseFloat(result('entryCalcul')[0])
       if (ca > 50000000) {
+        
         console.log("Votre chiffre d'affaire est suppérieur à 50 millions vous devez être soumis à l'IBA")
       } else {
         let new_num = taxCalcul(ca, 5, 10000, 4000)

@@ -23,7 +23,7 @@ export const workingSituation: Data = {
                 nextQuestion: ""
             },
             {   name: "",
-                label: "Je suis un associé d'une société qui utilise les biens immobilers pour se faire de l'argent",
+                label: "Je suis un associé d'une société à prépondérance immobilière",
                 value: "realEstateAssociate",
                 nextQuestion: "realEstateAssociate"
             }

@@ -1,6 +1,6 @@
-import {
-    Data
-} from "@/lib/type/type"
+
+import { Data } from "@/lib/type/type"
+
 export const entryCalcul: Data = {
     id: 'entryCalcul',
     info:"infoMonthOfSalary",

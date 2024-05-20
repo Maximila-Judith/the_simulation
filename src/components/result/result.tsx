@@ -175,8 +175,8 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
       let ca = parseFloat(result('entryCalcul')[0])
       if (ca > 50000000) {
         console.log("Votre chiffre d'affaire est suppérieur à 50 millions vous devez être soumis à l'IBA")
-      } else {
-        let new_num = taxCalcul(ca, 5, 10000, 4000)
+      } else { 
+        let new_num = taxCalcul(ca, 5, 10000, 4000) 
         price[0] = new_num ? new_num : 0
       }
       break;

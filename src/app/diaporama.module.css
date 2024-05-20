@@ -1,22 +1,3 @@
-/* .background-blur-container {
-    position: relative;
-    overflow: hidden;
-}
-
-.background-blur-container::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    filter: blur(8px);
-    z-index: -1;
-} */
-
 @keyframes backgroundAnimation {
     0% {
         background-image: url('/111.jpg');
@@ -49,7 +30,7 @@
     background-size: cover;
     background-position: center;
     will-change: transform;
-    filter: brightness(.5);
+    filter: brightness(.75);
 }
 
 .card {
@@ -61,43 +42,19 @@
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
-
-
-/* @keyframes changeBackground {
-    0% {
-        background-image: url('/111.jpg');
+@keyframes slidein {
+    from {
+        margin-left: 100%;
+        width: 300%;
     }
 
-    33% {
-        background-image: url('/222.jpg');
-    }
-
-    66% {
-        background-image: url('/333.jpg');
-    }
-
-    100% {
-        background-image: url('/111.jpg');
+    to {
+        margin-left: 0%;
+        width: 100%;
     }
 }
 
-.background {
-    position: relative;
-    width: 100%;
-    height: 100%;
+.slidein {
+    animation-name: slidein;
+    animation-duration: 3s;
 }
-
-.background::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    filter: blur(8px);
-    animation: changeBackground 12s infinite;
-} */

@@ -26,6 +26,7 @@ export default function Home() {
     const [info, setInfo] = useState<Info>(infos.init)
     const [valsTable, setValsTable] = useState(valQuestions)
     const [taxType, setTaxType] = useState("")
+    const [alert,setAlert] =useState("")
     const valInfo = (step) ? valInfos.find(info => info.id === step.info) : infos.init
 
 
@@ -37,7 +38,7 @@ export default function Home() {
             setLevel((before) => [before.length, ...before])
 
         } else if (!next && !name && level.length < 1) {
-            console.log("Désolé, pas d'impôt")
+            setAlert("Désolé, pas d'impôt")
 
         } else if (!next && level.length > 1) {
             setLevel((before) => [before.length, ...before])
@@ -52,7 +53,6 @@ export default function Home() {
 
     useEffect(() => {
         if (level.length === 2) {
-            console.log(answers)
             switch (taxType) {
                 case "IS": {
                     setValsTable(valQuestionsIS);
@@ -73,7 +73,7 @@ export default function Home() {
                     val = add([...val], valQuestionsTFU, "entryTfu")
                     val = add([...val], valQuestionsTFU, "undevelopedProperties")
 
-                    setValsTable((val) ? val : valQuestionsIBA);
+                    setValsTable(val ? val: valQuestionsIBA);
                     break;
                 }
                 case "IRF&TFU": {
@@ -154,15 +154,12 @@ export default function Home() {
                     <div className="mb-4 space-y-5">
                         <div className={styles.wizard}>
                             <Stepper currentStep={level} />
-                            <div style={{ height: '32px' }}></div>
+                            <div className='mt-10'></div>
                             <>
                                 <div className="min-w-80 ">
-                                    {info !== infos.init ? <InfoCard onClick={forClick} infos={info} /> : ((level.length < 3) ? (<Body onAnswer={forAnswer} onInfo={forInfo} />) : (<Result tax={taxType} answers={answers} />))}
+                                    {info !== infos.init ? <InfoCard onClick={forClick} infos={info} /> : ((level.length < 3) ? (<Body onAnswer={forAnswer} onInfo={forInfo} length={back.length} onBack={forBack} />) : (<Result tax={taxType} answers={answers} />))}
                                 </div>
                             </>
-                        </div>
-                        <div className="flex justify-between mt-4">
-                            {(info === infos.init) && <button onClick={forBack} className={`text-green-700 p-1 ${back.length === 1 ? 'hidden' : ''}`} ><MoveLeft /></button>}
                         </div>
                     </div>
                 </div>

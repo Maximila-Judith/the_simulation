@@ -1,11 +1,9 @@
 import { BellRing, Check } from "lucide-react"
-
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -18,7 +16,6 @@ export interface InfoProps {
 }
 
 export const InfoCard: React.FC<InfoProps> = ({ infos, onClick }) => {
-
 
   return (
     <div className="text-center md:text-left lg:text-left">

@@ -10,6 +10,9 @@ export const aloneManagementSituation: Data = {
         inputOption: {
             label: "",
             type: "",
+            condition: "",
+            alert:"",
+            conditionValue: 0,
             nextQuestion: ""
         },
         choiceOptions: [

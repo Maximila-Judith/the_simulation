@@ -11,6 +11,9 @@ export const Ca: Data = {
         inputOption: {
             label: "en Fcfa",
             type: "text",
+            condition: "less",
+            alert:"Le chiffre d'affaire que vous entrez est supérieur à 50millions",
+            conditionValue: 50000001,
             nextQuestion:""
         },
         choiceOptions: [

@@ -56,7 +56,7 @@ export function Landing () {
 
     return (
         <div className="">
-            <div className="flex flex-col pt-3 bg-no-repeat bg-[url('/111.jpg')] bg-cover bg-center h-screen block">
+            <div className={` flex flex-col pt-3 bg-no-repeat bg-cover bg-center max-h-96 block ${styles['background-slide']}`} style={{ backgroundImage: `url(${images[image]})` }}>
                 <div className="flex flex-row justify-between p-3">
                     <Image
                         src="/dgi-white.webp"
@@ -65,7 +65,7 @@ export function Landing () {
                         height={350}
                         priority
                     />
-                    <div>
+                    <div className={`${styles.menuIcons} ${menuOpen ? 'active' : ''}`}>
                         <Menubar className="justify-end bg-transparent opacity-100 border-none text-white">
                             <MenubarMenu >
                                 <MenubarTrigger>
@@ -149,28 +149,12 @@ export function Landing () {
                 <div className="flex justify-center items-center gap-x-10 pt-10">
                     <Card className={`drop-shadow-md ${styles['card']}`}>
                         <CardHeader>
-                            <div className="flex flex-col items-center space-y-10">
+                            <div className="flex flex-col items-center space-y-4">
                                 <Image
-                                    src="/aaa.jpg"
+                                    src="/l1.jpg"
                                     alt="icon 1"
-                                    width={80}
-                                    height={80}
-                                    priority
-                                    className="rounded-full text-sky-400"
-                                />
-                                <h5>Simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler </h5>
-                            </div>
-                        </CardHeader>
-                    </Card>
-
-                    <Card className={`drop-shadow-md ${styles['card']}`}>
-                        <CardHeader>
-                            <div className="flex flex-col items-center space-y-10">
-                                <Image
-                                    src="/ccc.jpg"
-                                    alt="icon 1"
-                                    width={80}
-                                    height={80}
+                                    width={50}
+                                    height={50}
                                     priority
                                     className="rounded-full"
                                 />
@@ -181,12 +165,28 @@ export function Landing () {
 
                     <Card className={`drop-shadow-md ${styles['card']}`}>
                         <CardHeader>
-                            <div className="flex flex-col items-center space-y-10">
+                            <div className="flex flex-col items-center space-y-4">
                                 <Image
-                                    src="/ddd.jpg"
+                                    src="/l2.jpg"
                                     alt="icon 1"
-                                    width={80}
-                                    height={80}
+                                    width={50}
+                                    height={50}
+                                    priority
+                                    className="rounded-full"
+                                />
+                                <h5>Simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler </h5>
+                            </div>
+                        </CardHeader>
+                    </Card>
+
+                    <Card className={`drop-shadow-md ${styles['card']}`}>
+                        <CardHeader>
+                            <div className="flex flex-col items-center space-y-4">
+                                <Image
+                                    src="/l3.jpg"
+                                    alt="icon 1"
+                                    width={50}
+                                    height={50}
                                     priority
                                     className="rounded-full"
                                 />

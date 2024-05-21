@@ -10,6 +10,7 @@
     padding-inline: 0px;
     padding-top: 4%;
     margin-top: 2%;
+    height: 36vh;
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
 
@@ -37,19 +38,30 @@ background-color: rgb(190, 190, 164);
     align-items: center;
 }
 .backDiv{
+background-color: rgb(229, 238, 238);
     display: inline-block;
-    padding-top: 2.5%;
-    padding-left: 0%;
+    margin-left: -5%;
+    margin-top: -0.3%;
+    height: 5rem;
+    width: 3rem;
+    border-radius: 8px 0px 0px 8px;
 }
+
+.backDiv:hover{
+background-color: rgb(176, 194, 194);
+}
+
 .question{
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family:'Times New Roman', Times, serif;
     font-style: italic;
-    padding-top: 2%;
-    font-size:92%;
+    padding-top: 5.6%;
+    font-size:100%;
+    height: 100%;
+    justify-content: center;
     display: inline-block;
     text-align: center;
 }
 .help{
     display: inline-block;
-    padding-top: 2.8%;
+    padding-top: 6%;
 }

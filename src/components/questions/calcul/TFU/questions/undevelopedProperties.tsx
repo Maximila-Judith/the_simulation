@@ -12,6 +12,9 @@ export const undevelopedProperties: Data = {
         inputOption: {
             label: "en  fcfa",
             type: "text",
+            condition: "",
+            alert:"",
+            conditionValue: 0,
             nextQuestion:""
         },
         choiceOptions: [

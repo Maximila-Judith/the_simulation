@@ -12,6 +12,9 @@ export const realEstateExpenses: Data = {
         inputOption: {
             label: "",
             type: "",
+            condition: "",
+            alert:"",
+            conditionValue: 0,
             nextQuestion:""
         },
         choiceOptions: [

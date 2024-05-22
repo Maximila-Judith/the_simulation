@@ -1,11 +1,15 @@
 {
     "question": " ?",
+    "id" : "",
+    "idInfo":"",
     "answers": {
         "type": "unique_choice, multiple_choice, input",
         "name": "",
         "inputOption": {
             "label": "",
-            "type": ""
+            "type": "",
+            "regex": "",
+            "messageRegex": ""
         },
         "choiceOption": [
             {

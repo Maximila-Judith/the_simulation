@@ -15,7 +15,7 @@ import { useState, useContext } from 'react'
 import { QuestionContext } from "@/lib/questionContext";
 import styles from '@/app/wizard.module.css'
 import { Button } from './button';
-import { HelpCircle, Info, MoveLeft } from 'lucide-react';
+import { HelpCircle, Info, ChevronLeft } from 'lucide-react';
 
 interface BodyProps {
     onAnswer: (value: string[], nextQuestion: string, nowQuestion: string, name: string) => void;
@@ -35,11 +35,11 @@ export const Body: React.FC<BodyProps> = ({ onAnswer, onInfo, onBack, length }) 
         <div className="text-center md:text-left lg:text-left pt-2">
             <div className='max-w-screen-md mx-auto'>
                 <Card className="mx-0 mt-0.5 h-20 md:text-left lg:text-left flex text-center">
-                        <CardContent className='flex space-x-2 w-full h-full justify-center pt-4'>
-                            {length > 1 && <div className={styles.backDiv}><button onClick={onBack}><MoveLeft className='size-[25px] pb-1.5' /></button></div>}
+                        <CardContent className='flex space-x-2 w-full h-full justify-center'>
+                            {length > 1 && <div className={styles.backDiv}><button className='ml-0 mt-0 w-full h-full' onClick={onBack}><ChevronLeft className='size-[18px] ml-3' /></button></div>}
                         <div className={styles.questionContent}>
                             <div className={styles.question}>{question}</div> 
-                            {the_question.info && (<div className={styles.help}><button className='rounded-full' onClick={onInfo}><HelpCircle className='size-[18px] hover:bg-blue-300 rounded-full' /></button></div>)}
+                            {the_question.info && (<div className={styles.help}><button className='rounded-full' onClick={onInfo}><HelpCircle className='size-[16px] hover:bg-slate-300 rounded-full' /></button></div>)}
                         </div>
                         </CardContent>
                 </Card>

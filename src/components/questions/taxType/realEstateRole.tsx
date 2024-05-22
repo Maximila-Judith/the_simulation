@@ -9,6 +9,9 @@ export const realEstateRole: Data = {
         inputOption: {
             label: "",
             type: "",
+            condition: "",
+            alert:"",
+            conditionValue: 0,
             nextQuestion: ""
         },
         choiceOptions: [

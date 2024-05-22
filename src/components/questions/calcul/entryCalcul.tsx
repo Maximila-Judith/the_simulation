@@ -10,6 +10,8 @@ export const Ca: Data = {
         inputOption: {
             label: "en Fcfa",
             type: "text",
+             regex: "",
+            messageRegex: "",
             nextQuestion:""
         },
         choiceOptions: [

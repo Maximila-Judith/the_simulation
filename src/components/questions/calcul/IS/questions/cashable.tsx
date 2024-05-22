@@ -12,6 +12,9 @@ export const cashable: Data = {
         inputOption: {
             label: "en Fcfa",
             type: "text",
+            condition: "",
+            alert:"",
+            conditionValue: 0,
             nextQuestion:""
         },
         choiceOptions: [

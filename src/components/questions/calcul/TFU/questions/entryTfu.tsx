@@ -12,6 +12,9 @@ export const entryTfu: Data = {
         inputOption: {
             label: "",
             type: "",
+            condition: "",
+            alert:"",
+            conditionValue: 0,
             nextQuestion:""
         },
         choiceOptions: [

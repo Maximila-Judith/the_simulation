@@ -9,6 +9,9 @@ export interface Data {
         inputOption: {
             label: string;
             type: string;
+            condition: string;
+            conditionValue: number;
+            alert: string;
             nextQuestion: string
         };
         choiceOptions: { name: string; label: string; value: string; nextQuestion: string }[]

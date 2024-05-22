@@ -12,6 +12,9 @@ export const liter: Data = {
         inputOption: {
             label: "en litre",
             type: "text",
+            condition: "",
+            alert:"",
+            conditionValue: 0,
             nextQuestion:""
         },
         choiceOptions: [

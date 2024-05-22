@@ -14,6 +14,7 @@ import { realEstateExpensesPrice } from '../questions/calcul/IRF/questions/realE
 import { liter } from '../questions/calcul/IS/questions/liter';
 import { Button } from "@/components/ui/button"
 import Link from 'next/link';
+import { numberFormatRegex } from "@/lib/regex/numberRegex"
 
 
 
@@ -25,11 +26,13 @@ export interface ResultProps {
 export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
   const [alert, setAlert] = useState("")
   const [message, setMessage] = useState("")
-  let price = [0];
+  let price = [];
+  let taxName =""
 
   switch (tax) {
 
     case "IS": {
+      taxName ="Impôt de Société (IS)"
       let profit = parseFloat(result('profit')[0])
       let otherProfit = parseFloat(result('otherProfit')[0])
       let amount = isNaN(profit) ? otherProfit : profit
@@ -53,6 +56,7 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
     }
     case "IBA&TFU": {
       //IBA
+      taxName ="Impôt sur le Bénéfice d'Affaire (IBA) ainsi que la Taxe Foncière Unique (TFU)"
       let profit = parseFloat(result('profit')[0])
       let amount = isNaN(profit) ? 0 : profit
       let numIba = taxCalcul(amount, 30, 1.5, 4000)
@@ -78,6 +82,7 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
     }
     case "IRF&TFU": {
       //IRF
+      taxName ="Impôt sur les Revenus Fonciers (IRF) ainsi que la Taxe Foncière Unique (TFU)"
       let amount = parseFloat(result('entryCalcul')[0])
       let landlordsExp = parseFloat(result('landlordsExpensesPrice')[0])
       landlordsExp = isNaN(landlordsExp) ? 0 : landlordsExp
@@ -109,6 +114,7 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
       break;
     }
     case "IBA": {
+      taxName ="Impôt sur le Bénéfice d'Affaire (IBA)"
       let profit = parseFloat(result('profit')[0])
       let otherProfit = parseFloat(result('otherProfit')[0])
       let amount = isNaN(profit) ? otherProfit : profit
@@ -135,6 +141,7 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
     }
 
     case "TFU": {
+      taxName ="Taxe Foncière Unique (TFU)"
       let built = parseFloat(result('builtProperties')[0])
       built = isNaN(built) ? 0 : built
       let undeveloped = parseFloat(result('undevelopedProperties')[0])
@@ -155,6 +162,7 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
     }
 
     case "IRF": {
+      taxName ="Impôt sur les Revenus Fonciers (IRF)"
       let amount = parseFloat(result('entryCalcul')[0])
       let landlordsExp = parseFloat(result('landlordsExpensesPrice')[0])
       landlordsExp = isNaN(landlordsExp) ? 0 : landlordsExp
@@ -168,18 +176,15 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
     }
 
     case "TPS": {
+      taxName ="Taxe Professionnelle Synthétique (TPS)"
       let ca = parseFloat(result('entryCalcul')[0])
-      if (ca > 50000000) {
-        
-        console.log("Votre chiffre d'affaire est suppérieur à 50 millions vous devez être soumis à l'IBA")
-      } else { 
         let new_num = taxCalcul(ca, 5, 10000, 4000) 
         price[0] = new_num ? new_num : 0
-      }
       break;
     }
 
     case "ITS": {
+      taxName ="Impôt sur les Traitements et Salaire (ITS)"
       let salaryMonth = result('entryCalcul')[0]
       let fee = (salaryMonth === 'march') ? 1000 : (salaryMonth === 'june') ? 3000 : 0
       let sal = parseFloat(result('salary')[0])
@@ -206,18 +211,17 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
     <div className="text-center md:text-left lg:text-right">
       <div className='max-w-screen-md mx-auto'>
         <Card className="md-w-1/2 mx-4 mt-4">
-          <CardHeader>
             <CardContent className='p-4'>
-              <div className="flex flex-col space-y-4 ">
+              <div className="flex flex-col space-y-4 justify-center ">
                 <ul className="max-w-xs flex flex-col">
                   <div className='flex flex-row place-self-start gap-x-6 mb-4 '>
                     <p className='text-extrabold text-md'>
                       Type d'impôt :
                     </p>
-                    {tax}
+                    {taxName}
                   </div>
 
-                  <li className='inline-flex flex-col gap-x-10 py-3 px-6 pr-8 text-sm font-medium bg-white border-2 border-gray-200 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-neutral-900 dark:border-neutral-700 dark:text-white'>
+                  <li className='inline-flex flex-col gap-x-10 py-3 px-6 pr-8 text-sm font-medium bg-white border-2 border-gray-200 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-neutral-900 dark:border-neutral-700 dark:text-white w-full'>
                     <p className='text-bold text-sm uppercase text-center'>Montant à payer</p>
                     <div className='place-self-statrt flex flex-col place-self-start gap-x-6 mb-6'>
                       <span>30% ...............</span>
@@ -227,7 +231,7 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
                     </div>
                     <div className='place-self-statrt flex flex-row place-self-start gap-x-6'>
                       <span>Montant:</span>
-                      {price.length === 1 ? price[0] + ' Fcfa' : price.length === 2 ? ('le prix se trouve entre ' + price[0]) + ' et ' + price[1] + ' Fcfa' : tax.split("&")[0] + ": " + price[0] + ' Fcfa; ' + tax.split("&")[1] + ' : entre ' + price[1] + ' et ' + price[2] + ' Fcfa'}
+                      {price.length === 1 ? String(price[0]).replace(...numberFormatRegex) + ' Fcfa' : (price.length === 2) ? 'le prix se trouve entre ' + String(price[0]).replace(...numberFormatRegex) + ' et ' + String(price[1]).replace(...numberFormatRegex) + ' Fcfa' : tax.split("&")[0] + ": " + String(price[0]).replace(...numberFormatRegex) + ' Fcfa; ' + tax.split("&")[1] + ' : entre ' + String(price[1]).replace(...numberFormatRegex) + ' et ' + String(price[2]).replace(...numberFormatRegex) + ' Fcfa'}
 
                     </div>
 
@@ -244,7 +248,6 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
                 </Link>
               </div>
             </CardContent>
-          </CardHeader>
         </Card>
       </div>
 

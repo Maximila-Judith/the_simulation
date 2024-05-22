@@ -10,6 +10,8 @@ export const level: Data = {
         inputOption: {
             label: "Montant",
             type: "text"
+             regex: "",
+            messageRegex: "",
         },
         choiceOptions: [
             {

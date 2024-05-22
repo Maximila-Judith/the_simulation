@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from 'react'
-import styles from '@/app/slideshow.module.css'
+import React, { useState } from 'react';
+import styles from '@/app/slideshow.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
-
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const Slideshow = () => {
-    const images = ['/img/e1.jpg', '/img/e2.jpg', '/img/e3.jpg']
+    const images = ['/img/e1.jpg', '/img/e2.jpg', '/img/e3.jpg'];
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [isHovered, setIsHovered] = useState(false);
 
-    useEffect(() => {
-        let interval: NodeJS.Timeout;
-        if (isHovered) {
-            interval = setInterval(() => {
-                setCurrentIndex((one) => (one + 1) % images.length);
-            }, 3000);
-        }
-        return () => {
-            if (interval) clearInterval(interval);
-        };
-    }, [isHovered])
+    const next = () => {
+        setCurrentIndex((index) => (index + 1) % images.length);
+    }
+
+    const previous = () => {
+        setCurrentIndex((index) => (index - 1 + images.length) % images.length);
+    }
+
+    const goToSlide = (index: number) => {
+        setCurrentIndex(index);
+    }
+
     return (
-        <div className="flex flex-row items-center gap-x-20 pl-20 pr-20" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-            <div className={`flex flex-col space-y-3 ${styles.slideon}`}>
+        <div className="flex flex-row items-center gap-x-20 pl-20 pr-20">
+            <div className={`flex flex-col w-1/2 space-y-3 ${styles.slideon}`}>
                 <h1 className="font-bold text-xl uppercase text-center">Impôt pour entreprise</h1>
                 <p className="text-lg text-center">
                     Tout savoir sur les impôts pour particuliers au Bénin.
@@ -33,18 +33,31 @@ export const Slideshow = () => {
                 </p>
                 <Link href="/" className="mt-6 bg-gray-200 font-semibold text-lg py-2 px-6 rounded-full self-center hover:bg-gray-200 transition duration-200">Simuler</Link>
             </div>
-            <div className={`${styles.slideshow}`}>
-                {images.map((src, index) => (
+            <div className="relative">
+                <div className="flex items-center">
+                    <button onClick={previous} className="absolute left-0 z-10 p-2 h-20 hover:opacity-40 hover:bg-black shadow-md">
+                        <ChevronLeft className='text-white' size={24} />
+                    </button>
                     <Image
-                        key={index}
-                        src={src}
-                        alt={`image ${index + 1}`}
+                        src={images[currentIndex]}
+                        alt={`image ${currentIndex + 1}`}
                         width={400}
-                        height={600}
+                        height={400}
                         priority
-                        className={`${styles.card} ${index === currentIndex ? styles.active : ''}`}
                     />
-                ))}
+                    <button onClick={next} className="absolute right-0 z-10 p-2 h-20 hover:opacity-40 hover:bg-black shadow-md">
+                        <ChevronRight className='text-white' size={24} />
+                    </button>
+                </div>
+                <div className="flex justify-center mt-4 space-x-5">
+                    {images.map((_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => goToSlide(index)}
+                            className={`h-2 w-2 rounded-full ${currentIndex === index ? 'bg-gray-800' : 'bg-gray-300'}`}
+                        />
+                    ))}
+                </div>
             </div>
         </div>
     )

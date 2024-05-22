@@ -1,4 +1,6 @@
+
 import React from 'react'
+import styles from '@/app/wizard.module.css'
 import {
   Card,
   CardContent,
@@ -9,9 +11,6 @@ import {
 } from "@/components/ui/card"
 import { taxCalcul } from '@/lib/functions/taxCalcul';
 import { useState } from 'react';
-import { landlordsExpenses } from '../questions/calcul/IRF/questions/landlordsExpenses';
-import { realEstateExpensesPrice } from '../questions/calcul/IRF/questions/realEstateExpensesPrice';
-import { liter } from '../questions/calcul/IS/questions/liter';
 import { Button } from "@/components/ui/button"
 import Link from 'next/link';
 import { numberFormatRegex } from "@/lib/regex/numberRegex"
@@ -24,15 +23,22 @@ export interface ResultProps {
 }
 
 export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
-  const [alert, setAlert] = useState("")
-  const [message, setMessage] = useState("")
+  let res = {
+    taxName: "",
+    taxBase: [""],
+      amount: [0],
+      rate: [0],
+      minimum: 0,
+      priceAdd: 0,
+      taxPrice: ""
+  }
   let price = [];
   let taxName =""
 
   switch (tax) {
 
     case "IS": {
-      taxName ="Impôt de Société (IS)"
+
       let profit = parseFloat(result('profit')[0])
       let otherProfit = parseFloat(result('otherProfit')[0])
       let amount = isNaN(profit) ? otherProfit : profit
@@ -48,24 +54,37 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
       let literMin = liter * 0.6
       let min = literMin === 0 && nature !== 'station' ? cashable * minRate : literMin
       min = min < 250000 ? 250000 : min
-
       let new_num = taxCalcul(amount, rate, min, 4000)
       price[0] = new_num ? new_num : 0
+       res = {
+         taxName: "Impôt sur les sociétés",
+         taxBase:["Le chiffre d'affaire réalisé"], 
+         amount: [amount],
+         rate: [rate],
+         minimum: min,
+         priceAdd: 4000,
+         taxPrice: String(price[0]).replace(...numberFormatRegex) + ' Fcfa'
+            }
 
       break;
     }
     case "IBA&TFU": {
       //IBA
-      taxName ="Impôt sur le Bénéfice d'Affaire (IBA) ainsi que la Taxe Foncière Unique (TFU)"
       let profit = parseFloat(result('profit')[0])
       let amount = isNaN(profit) ? 0 : profit
       let numIba = taxCalcul(amount, 30, 1.5, 4000)
       price[0] = numIba ? numIba : 0
+
       //TFU
       let built = parseFloat(result('builtProperties')[0])
       built = isNaN(built) ? 0 : built
       let undeveloped = parseFloat(result('undevelopedProperties')[0])
       undeveloped = isNaN(undeveloped) ? 0 : undeveloped
+
+      let taxB = built !== 0 ?"Prix de propriété": undeveloped !== 0? "Prix de terrains": ""
+      let amountTfu = built !== 0 ? built : undeveloped !== 0 ? undeveloped : 0
+      let rate = built !== 0 ? [4, 8] : undeveloped !== 0 ? [3, 7] : [0]
+
       if (built !== 0) {
         let min = taxCalcul(built, 4, 0, 0)
         price[1] = min ? min : 0
@@ -78,6 +97,15 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
         let max = taxCalcul(undeveloped, 7, 0, 0)
         price[2] = max ? max : 0
       }
+      res = {
+      taxName: "Impôt sur le Bénéfice d'Affaire (IBA) ainsi que la Taxe Foncière Unique (TFU)",
+      taxBase:["Le chiffre d'affaire réalisé", taxB],
+      amount: [amount, amountTfu],
+      rate: [30, rate[0], rate[1]],
+      minimum: 0,
+      priceAdd: 0,
+      taxPrice: 'IBA :' + String(price[0]).replace(...numberFormatRegex) + ' Fcfa, ' + 'TFU entre ' +String(price[1]).replace(...numberFormatRegex) + ' Fcfa et '+ String(price[2]).replace(...numberFormatRegex) + ' Fcfa'
+        }
       break;
     }
     case "IRF&TFU": {
@@ -98,6 +126,11 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
       built = isNaN(built) ? 0 : built
       let undeveloped = parseFloat(result('undevelopedProperties')[0])
       undeveloped = isNaN(undeveloped) ? 0 : undeveloped
+      
+      let taxB = built !== 0 ? "Prix de propriété" : undeveloped !== 0 ? "Prix de terrains" : ""
+      let amountTfu = built !== 0 ? built : undeveloped !== 0 ? undeveloped : 0
+      let rate = built !== 0 ? [4, 8] : undeveloped !== 0 ? [3, 7] : [0]
+
       if (built !== 0) {
         let min = taxCalcul(built, 4, 0, 0)
         price[1] = min ? min : 0
@@ -111,10 +144,18 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
         price[2] = max ? max : 0
       }
 
+      res = {
+      taxName: "Impôt sur les Revenus Fonciers (IRF) ainsi que la Taxe Foncière Unique (TFU)",
+      taxBase:["Les revenus fonctiers", taxB],
+      amount: [rev, amountTfu],
+      rate: [30, rate[0], rate[1]],
+      minimum: 0,
+      priceAdd: 0,
+      taxPrice: 'IRF :' + String(price[0]).replace(...numberFormatRegex) + ' Fcfa, '+ 'TFU entre ' +String(price[1]).replace(...numberFormatRegex) + ' Fcfa et '+ String(price[2]).replace(...numberFormatRegex) + ' Fcfa'
+        }
       break;
     }
     case "IBA": {
-      taxName ="Impôt sur le Bénéfice d'Affaire (IBA)"
       let profit = parseFloat(result('profit')[0])
       let otherProfit = parseFloat(result('otherProfit')[0])
       let amount = isNaN(profit) ? otherProfit : profit
@@ -137,15 +178,29 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
 
       let new_num = taxCalcul(amount, rate, min, 4000)
       price[0] = new_num ? new_num : 0
+    
+      res = {
+        taxName: "Impôt sur le Bénéfice d'Affaire (IBA)",
+        taxBase: ["Le bénéfice réalisé"],
+      amount: [amount],
+      rate: [rate],
+      minimum: min,
+      priceAdd: 4000,
+      taxPrice: String(price[0]).replace(...numberFormatRegex) + ' Fcfa'
+        }
       break;
     }
 
     case "TFU": {
       taxName ="Taxe Foncière Unique (TFU)"
       let built = parseFloat(result('builtProperties')[0])
-      built = isNaN(built) ? 0 : built
+          built = isNaN(built) ? 0 : built
       let undeveloped = parseFloat(result('undevelopedProperties')[0])
-      undeveloped = isNaN(undeveloped) ? 0 : undeveloped
+          undeveloped = isNaN(undeveloped) ? 0 : undeveloped
+      let taxB = built !== 0 ?"Le prix de propriété": undeveloped !== 0? "Le prix de terrains": ""
+      let amount = built !== 0 ? built : undeveloped !== 0 ? undeveloped : 0
+      let rate = built !== 0 ? [4, 8] : undeveloped !== 0 ? [3, 7] : [0]
+
       if (built !== 0) {
         let min = taxCalcul(built, 4, 0, 0)
         price[0] = min ? min : 0
@@ -158,11 +213,19 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
         let max = taxCalcul(undeveloped, 7, 0, 0)
         price[1] = max ? max : 0
       }
+      res = {
+        taxName: "Taxe Foncière Unique (TFU)",
+        taxBase:[taxB],
+      amount: [amount],
+      rate: rate,
+      minimum: 0,
+      priceAdd: 0,
+      taxPrice: 'Entre ' +String(price[0]).replace(...numberFormatRegex) + ' Fcfa et '+ String(price[1]).replace(...numberFormatRegex) + ' Fcfa'
+        }
       break;
     }
 
     case "IRF": {
-      taxName ="Impôt sur les Revenus Fonciers (IRF)"
       let amount = parseFloat(result('entryCalcul')[0])
       let landlordsExp = parseFloat(result('landlordsExpensesPrice')[0])
       landlordsExp = isNaN(landlordsExp) ? 0 : landlordsExp
@@ -172,19 +235,37 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
 
       let new_num = taxCalcul(rev, 12, 0, 4000)
       price[0] = new_num ? new_num : 0
+
+      res = {
+      taxName: "Impôt sur les Revenus Fonciers (IRF)",
+      taxBase:["Les revenus fonctiers"],
+      amount: [rev],
+      rate: [12],
+      minimum: 0,
+      priceAdd: 4000,
+      taxPrice: String(price[0]).replace(...numberFormatRegex) + ' Fcfa'
+        }
       break;
     }
 
     case "TPS": {
-      taxName ="Taxe Professionnelle Synthétique (TPS)"
       let ca = parseFloat(result('entryCalcul')[0])
         let new_num = taxCalcul(ca, 5, 10000, 4000) 
-        price[0] = new_num ? new_num : 0
+      price[0] = new_num ? new_num : 0
+       res = {
+      taxName: "Taxe Professionnelle Synthétique (TPS)",
+      taxBase:["Le chiffre d'affaire"],
+      amount: [ca],
+      rate: [5],
+      minimum: 10000,
+      priceAdd: 4000,
+      taxPrice: String(price[0]).replace(...numberFormatRegex) + ' Fcfa'
+        }
       break;
     }
 
     case "ITS": {
-      taxName ="Impôt sur les Traitements et Salaire (ITS)"
+    
       let salaryMonth = result('entryCalcul')[0]
       let fee = (salaryMonth === 'march') ? 1000 : (salaryMonth === 'june') ? 3000 : 0
       let sal = parseFloat(result('salary')[0])
@@ -192,6 +273,16 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
 
       let new_num = taxCalcul(sal, rate, 0, fee)
       price[0] = new_num ? new_num : 0
+
+      res = {
+      taxName: "Impôt sur les Traitements et Salaire (ITS)",
+      taxBase:["Le salaire reçu"],
+      amount: [sal],
+      rate: [rate],
+      minimum: 0,
+      priceAdd: fee,
+      taxPrice: String(price[0]).replace(...numberFormatRegex) + ' Fcfa'
+        }
       break;
     }
   }
@@ -208,49 +299,64 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
 
 
   return (
-    <div className="text-center md:text-left lg:text-right">
-      <div className='max-w-screen-md mx-auto'>
-        <Card className="md-w-1/2 mx-4 mt-4">
-            <CardContent className='p-4'>
-              <div className="flex flex-col space-y-4 justify-center ">
-                <ul className="max-w-xs flex flex-col">
-                  <div className='flex flex-row place-self-start gap-x-6 mb-4 '>
-                    <p className='text-extrabold text-md'>
-                      Type d'impôt :
-                    </p>
-                    {taxName}
+    <div className=" lg:text-left ">
+      <Card className={styles.result}>
+                      <div className='ml-3 mt-3 '>
+                        <p className='text-center text-xl text-indigo-900 pb-1'>Résultat de la simulation </p>
+                          <p className='flex gap-x-1 text-md'>
+                          <p className='text-blue-800 text-sm '>Type d'impôt :</p> {res.taxName}
+                          </p>  
+                        <p className='text-bold text-blue-800 text-sm'>Montant à payer</p>
+                      </div>
+                  <div className=' pl-2 gap-x-2 gap-y-3 mx-2.5 py-1 text-sm border-2 border-blue-200 text-gray-800 first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-neutral-900 dark:border-neutral-700 dark:text-white'>
+                  {res.amount.length < 2 ? 
+                        (<>
+                            <div className='flex gap-x-1'><p className='text-orange-800 text-sm '>{res.taxBase[0]} :</p> <p className='font-medium '>{String(res.amount[0]).replace(...numberFormatRegex) +" Fcfa"}</p></div>
+                      {res.rate.length < 2 ? 
+                          (
+                            <div className='flex gap-x-1'><p className='text-orange-800 text-sm '>Pourcentage appliqué :</p><p className='font-medium '>{res.rate[0]}%</p> sur<p className='lowercase '>{res.taxBase[0]}</p></div>
+                          )
+                        : 
+                          (<div className='flex gap-x-1'>
+                           <p className='text-orange-800 text-sm '>Pourcentages appliqués :</p>minimum :<p className='font-medium '>{res.rate[0]}%</p> et maximum : <p className='font-medium '>{res.rate[1]}%</p>  sur<p className='lowercase '>{res.taxBase[0]}</p>
+                           </div>)
+                          } 
+                        </>) : 
+                         (<>
+                            <div className='flex gap-x-1'><p className='text-orange-800 text-sm '>{res.taxBase[0]} :</p> <p className='font-medium '>{String(res.amount[0]).replace(...numberFormatRegex) +" Fcfa"}</p></div>
+                            <div className='flex gap-x-1'><p className='text-orange-800 text-sm '>{res.taxBase[1]} :</p> <p className='font-medium '>{String(res.amount[1]).replace(...numberFormatRegex) +" Fcfa"}</p></div>
+                           
+                      {res.rate.length < 3 ? 
+                          (<div className=' flex gap-x-1'>
+                            <div className='flex gap-x-1'><p className='text-orange-800 text-sm '>Pourcentage appliqué :</p><p className='font-medium '>{res.rate[0]}%</p> sur<p className='lowercase '>{res.taxBase[0]}</p></div>
+                            <div className='flex gap-x-1'><p className='text-orange-800 text-sm '>Pourcentage appliqué :</p><p className='font-medium '>{res.rate[1]}%</p> sur<p className='lowercase '>{res.taxBase[1]}</p></div>
+                           </div>)
+                        : 
+                        (<div className='flex gap-x-1'>
+                              <div className='flex gap-x-1'><p className='text-orange-800 text-sm '>Pourcentage appliqué :</p><p className='font-medium '>{res.rate[0]}%</p> sur<p className='lowercase '>{res.taxBase[0]}</p></div>
+                              <p className='text-orange-800 text-sm '>Pourcentages appliqués :</p>minimum :<p className='font-medium '>{res.rate[1]}%</p> et maximum : <p className='font-medium '>{res.rate[2]}%</p>  sur<p className='lowercase '>{res.taxBase[1]}</p>
+                           </div>)
+                          }
+                          </>
+                        )}
+                           {res.priceAdd && <div className='flex gap-x-1'><p className='text-orange-800 text-sm '>Redevance additionnelle :</p> <p className='font-medium '>{ String(res.priceAdd  ).replace(...numberFormatRegex) +" Fcfa"}</p></div>} 
+                           {res.minimum && <div className='flex gap-x-1'><p className='text-orange-800 text-sm '>Minimum de perception :</p> <p className='font-medium '>{ String(res.minimum ).replace(...numberFormatRegex) +" Fcfa"}</p></div>}
+                          <div className=' flex flex-row place-self-start gap-x-6 mt-3'>
+                            <p className='text-orange-800 text-sm  '>Montant total :</p>
+                                <p className='font-medium '> {res.taxPrice }</p>
+                          </div>
                   </div>
-
-                  <li className='inline-flex flex-col gap-x-10 py-3 px-6 pr-8 text-sm font-medium bg-white border-2 border-gray-200 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-neutral-900 dark:border-neutral-700 dark:text-white w-full'>
-                    <p className='text-bold text-sm uppercase text-center'>Montant à payer</p>
-                    <div className='place-self-statrt flex flex-col place-self-start gap-x-6 mb-6'>
-                      <span>30% ...............</span>
-                      <span>30% ...............</span>
-                      <span>30% ...............</span>
-                      <span>30% ...............</span>
-                    </div>
-                    <div className='place-self-statrt flex flex-row place-self-start gap-x-6'>
-                      <span>Montant:</span>
-                      {price.length === 1 ? String(price[0]).replace(...numberFormatRegex) + ' Fcfa' : (price.length === 2) ? 'le prix se trouve entre ' + String(price[0]).replace(...numberFormatRegex) + ' et ' + String(price[1]).replace(...numberFormatRegex) + ' Fcfa' : tax.split("&")[0] + ": " + String(price[0]).replace(...numberFormatRegex) + ' Fcfa; ' + tax.split("&")[1] + ' : entre ' + String(price[1]).replace(...numberFormatRegex) + ' et ' + String(price[2]).replace(...numberFormatRegex) + ' Fcfa'}
-
-                    </div>
-
-                  </li>
-                </ul>
-                <div className='place-self-statrt flex flex-col place-self-start gap-y-1'>
+                <div className='flex flex-col place-self-start gap-y-1'>
                   <p className='text-bold text-md'>Possibilité de réduction :</p>
                 </div>
-              </div>
-              <div className='place-self-statrt flex flex-row place-self-statrt gap-x-10 mt-4'>
+
+              <div className=' flex flex-row place-self-start gap-x-10 mt-4'>
                 <Button variant="secondary" className="w-full h-full bg-blue-200 hover:bg-blue-300 ">Voir les exonérations</Button>
                 <Link href='' onClick={handleClick}>
                   <Button variant="secondary" className="w-full h-full bg-blue-200 hover:bg-blue-300 ">Faire une autre simulation</Button>
                 </Link>
               </div>
-            </CardContent>
-        </Card>
+            </Card>
       </div>
-
-    </div >
   )
 }

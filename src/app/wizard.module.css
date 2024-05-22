@@ -65,3 +65,11 @@ background-color: rgb(176, 194, 194);
     display: inline-block;
     padding-top: 6%;
 }
+
+.resultCard{
+    background-color: rgb(39, 90, 73);
+    display: flex;
+    justify-content: center;
+    padding: 0%;
+    margin: 0%;
+}

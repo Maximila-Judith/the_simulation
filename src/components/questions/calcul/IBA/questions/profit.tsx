@@ -12,7 +12,7 @@ export const profit: Data = {
         inputOption: {
             label: "en Fcfa",
             type: "text",
-            condition: "less",
+            condition: "more",
             alert:"Entrez un nombre supérieur à 50 millions",
             conditionValue: 50000000,
             nextQuestion:""

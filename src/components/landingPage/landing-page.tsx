@@ -1,145 +1,139 @@
 'use client'
 import React, { useEffect, useState } from "react";
+import Slider from "react-slick";
 import {
     Menubar,
-    MenubarCheckboxItem,
     MenubarContent,
     MenubarItem,
     MenubarMenu,
-    MenubarRadioGroup,
-    MenubarRadioItem,
-    MenubarSeparator,
-    MenubarShortcut,
-    MenubarSub,
-    MenubarSubContent,
-    MenubarSubTrigger,
     MenubarTrigger,
-} from "@/components/ui/menubar"
+} from "@/components/ui/menubar";
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "../ui/button";
-import { setInterval } from "timers"
-import styles from '@/app/diaporama.module.css'
+import styles from '@/app/diaporama.module.css';
 import {
     Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
     CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
+import { Slideshow } from "../ui/slideshow";
+import { Myslides } from "../ui/myslides";
 
+export function Landing() {
+    const images = ['/111.jpg', '/222.jpg', '/333.jpg'];
 
-
-
-export function Landing () {
-    const images = ['/111.jpg', '/222.jpg', '/333.jpg']
-    const [image, setImage] = useState(0)
-    const [menuOpen, setMenuOpen] = useState(false)
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setImage((index) =>
-                index === images.length - 1 ? 0 : index + 1
-            )
-        }, 4000)
-        return () => clearInterval(interval)
-    }, [])
-
-    const handleMenuToggle = () => {
-        setMenuOpen(!menuOpen);
-    }
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        cssEase: "linear"
+    };
 
     const handleClick = () => {
-        window.location.href = '/accueil'
-    }
+        window.location.href = '/accueil';
+    };
 
     return (
         <div className="">
-            <div className={` flex flex-col pt-3 bg-no-repeat bg-cover bg-center max-h-96 block ${styles['background-slide']}`} style={{ backgroundImage: `url(${images[image]})` }}>
-                <div className="flex flex-row justify-between p-3">
-                    <Image
-                        src="/dgi-white.webp"
-                        alt="icon 1"
-                        width={200}
-                        height={350}
-                        priority
-                    />
-                    <div className={`${styles.menuIcons} ${menuOpen ? 'active' : ''}`}>
-                        <Menubar className="justify-end bg-transparent opacity-100 border-none text-white">
-                            <MenubarMenu >
-                                <MenubarTrigger>
-                                    <Link rel="stylesheet" href="/">Accueil</Link>
-                                </MenubarTrigger>
-                            </MenubarMenu>
-                            <MenubarMenu>
-                                <MenubarTrigger>
-                                    <Link rel="stylesheet" href="">Simulation</Link>
-                                </MenubarTrigger>
-                                <MenubarContent>
-                                    <MenubarItem className="text-md text-semibold italic">
-                                        <Link rel="stylesheet" href="" onClick={handleClick}>
-                                            Impot sur les Sociétés (IS)
-                                        </Link>
-                                    </MenubarItem>
-                                    <MenubarItem className="text-md text-semibold italic">
-                                        <Link rel="stylesheet" href="" onClick={handleClick}>
-                                            Impot sur les Bénéfices d'Affaire (IBA)
-                                        </Link>
-                                    </MenubarItem>
-                                    <MenubarItem className="text-md text-semibold italic">
-                                        <Link rel="stylesheet" href="" onClick={handleClick}>
-                                            Impot sur les Revenus Fonciers (IRF)
-                                        </Link>
-                                    </MenubarItem>
-                                    <MenubarItem className="text-md text-semibold italic">
-                                        <Link rel="stylesheet" href="" onClick={handleClick}>
-                                            Impot sur les Traitement de Salaire (ITS)
-                                        </Link>
-                                    </MenubarItem>
-                                    <MenubarItem className="text-md text-semibold italic">
-                                        <Link rel="stylesheet" href="" onClick={handleClick}>
-                                            Taxe Professionnelle Synthétique (TPS)
-                                        </Link>
-                                    </MenubarItem>
-                                    <MenubarItem className="text-md text-semibold italic">
-                                        <Link rel="stylesheet" href="" onClick={handleClick}>
-                                            Taxe Foncière Unique (TFU)
-                                        </Link>
-                                    </MenubarItem>
-                                </MenubarContent>
-                            </MenubarMenu>
-                            <MenubarMenu>
-                                <MenubarTrigger>
-                                    <Link rel="stylesheet" href="">Documentation</Link>
-                                </MenubarTrigger>
-                                <MenubarContent>
-                                    <MenubarItem className="text-md text-semibold italic">
-                                        <Link rel="stylesheet" href="https://api.impots.bj/media/65d5ae32a155a_B%C3%A9nin-Code%20G%C3%A9n%C3%A9ral%20des%20Imp%C3%B4ts%202024.pdf">
-                                            Code Général des Impôts 2024 (CGI)
-                                        </Link>
-                                    </MenubarItem>
-                                    <MenubarItem className="text-md text-semibold italic">
-                                        <Link rel="stylesheet" href="https://api.impots.bj//media/63b450bf40bf1_Code%20G%C3%A9n%C3%A9ral%20des%20Imp%C3%B4ts%20(Version%20citoyenne).pdf">
-                                            Code Général des Impôts 2024 (V.C)
-                                        </Link>
-                                    </MenubarItem>
-                                </MenubarContent>
-                            </MenubarMenu>
-                            <MenubarMenu>
-                                <MenubarTrigger>
-                                    <Link rel="stylesheet" href="">A Propos</Link>
-                                </MenubarTrigger>
-                            </MenubarMenu>
-                        </Menubar>
-                    </div>
-                </div>
+            <div className="flex flex-col bg-no-repeat bg-cover bg-center max-h-96 block">
+                <Slider {...settings} className={styles['carousel']}>
+                    {images.map((src, index) => (
+                        <div key={index}>
+                            <div
+                                className="flex flex-col items-center justify-center bg-cover bg-center h-96"
+                                style={{ backgroundImage: `url(${src})` }}
+                            >
+                                <div className="flex flex-row justify-between p-3 w-full">
+                                    <Image
+                                        src="/dgi-white.webp"
+                                        alt="icon 1"
+                                        width={200}
+                                        height={350}
+                                        priority
+                                    />
+                                    <div>
+                                        <Menubar className="justify-end bg-transparent opacity-100 border-none text-white">
+                                            <MenubarMenu >
+                                                <MenubarTrigger>
+                                                    <Link rel="stylesheet" href="/">Accueil</Link>
+                                                </MenubarTrigger>
+                                            </MenubarMenu>
+                                            <MenubarMenu>
+                                                <MenubarTrigger>
+                                                    <Link rel="stylesheet" href="">Simulation</Link>
+                                                </MenubarTrigger>
+                                                <MenubarContent>
+                                                    <MenubarItem className="text-md text-semibold italic">
+                                                        <Link rel="stylesheet" href="" onClick={handleClick}>
+                                                            Impot sur les Sociétés (IS)
+                                                        </Link>
+                                                    </MenubarItem>
+                                                    <MenubarItem className="text-md text-semibold italic">
+                                                        <Link rel="stylesheet" href="" onClick={handleClick}>
+                                                            Impot sur les Bénéfices d'Affaire (IBA)
+                                                        </Link>
+                                                    </MenubarItem>
+                                                    <MenubarItem className="text-md text-semibold italic">
+                                                        <Link rel="stylesheet" href="" onClick={handleClick}>
+                                                            Impot sur les Revenus Fonciers (IRF)
+                                                        </Link>
+                                                    </MenubarItem>
+                                                    <MenubarItem className="text-md text-semibold italic">
+                                                        <Link rel="stylesheet" href="" onClick={handleClick}>
+                                                            Impot sur les Traitement de Salaire (ITS)
+                                                        </Link>
+                                                    </MenubarItem>
+                                                    <MenubarItem className="text-md text-semibold italic">
+                                                        <Link rel="stylesheet" href="" onClick={handleClick}>
+                                                            Taxe Professionnelle Synthétique (TPS)
+                                                        </Link>
+                                                    </MenubarItem>
+                                                    <MenubarItem className="text-md text-semibold italic">
+                                                        <Link rel="stylesheet" href="" onClick={handleClick}>
+                                                            Taxe Foncière Unique (TFU)
+                                                        </Link>
+                                                    </MenubarItem>
+                                                </MenubarContent>
+                                            </MenubarMenu>
+                                            <MenubarMenu>
+                                                <MenubarTrigger>
+                                                    <Link rel="stylesheet" href="">Documentation</Link>
+                                                </MenubarTrigger>
+                                                <MenubarContent>
+                                                    <MenubarItem className="text-md text-semibold italic">
+                                                        <Link rel="stylesheet" href="https://api.impots.bj/media/65d5ae32a155a_B%C3%A9nin-Code%20G%C3%A9n%C3%A9ral%20des%20Imp%C3%B4ts%202024.pdf">
+                                                            Code Général des Impôts 2024 (CGI)
+                                                        </Link>
+                                                    </MenubarItem>
+                                                    <MenubarItem className="text-md text-semibold italic">
+                                                        <Link rel="stylesheet" href="https://api.impots.bj//media/63b450bf40bf1_Code%20G%C3%A9n%C3%A9ral%20des%20Imp%C3%B4ts%20(Version%20citoyenne).pdf">
+                                                            Code Général des Impôts 2024 (V.C)
+                                                        </Link>
+                                                    </MenubarItem>
+                                                </MenubarContent>
+                                            </MenubarMenu>
+                                            <MenubarMenu>
+                                                <MenubarTrigger>
+                                                    <Link rel="stylesheet" href="">A Propos</Link>
+                                                </MenubarTrigger>
+                                            </MenubarMenu>
+                                        </Menubar>
+                                    </div>
+                                </div>
 
-                <div className="flex flex-col mb-20 w-2/4 place-self-center bg-transparent opacity-100 pl-8 space-y-4 mt-10 pt-10 overflow-x-hidden overflow-y-hidden">
-                    <h1 className="text-2xl text-center font-bold text-white">Simuler vos Impôts conformément au Code Géneral des Impôts 2024</h1>
-                    <Link href="" onClick={handleClick} className="mt-6 bg-white text-black font-bold py-2 px-6 rounded-full self-center hover:bg-gray-200 transition duration-200">Simuler</Link>
-                </div>
+                                <div className="flex flex-col mb-20 w-2/4 place-self-center bg-transparent opacity-100 pl-8 space-y-4 mt-10 pt-10">
+                                    <h1 className="text-2xl text-center font-bold text-white">Simuler vos Impôts conformément au Code Géneral des Impôts 2024</h1>
+                                    <Link href="" onClick={handleClick} className="mt-6 bg-white text-black font-bold py-2 px-6 rounded-full self-center hover:bg-gray-200 transition duration-200">Simuler</Link>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </Slider>
             </div>
+
             <div className="bg-gray-100 text-center justify-center p-20">
                 <h1 className="font-bold uppercase text-xl">Comment simuler ses impôts ?</h1>
                 <p className="pt-5 text-center">
@@ -149,12 +143,12 @@ export function Landing () {
                 <div className="flex justify-center items-center gap-x-10 pt-10">
                     <Card className={`drop-shadow-md ${styles['card']}`}>
                         <CardHeader>
-                            <div className="flex flex-col items-center space-y-4">
+                            <div className="flex flex-col items-center space-y-10">
                                 <Image
-                                    src="/l1.jpg"
+                                    src="/aaa.jpg"
                                     alt="icon 1"
-                                    width={50}
-                                    height={50}
+                                    width={70}
+                                    height={70}
                                     priority
                                     className="rounded-full"
                                 />
@@ -165,12 +159,12 @@ export function Landing () {
 
                     <Card className={`drop-shadow-md ${styles['card']}`}>
                         <CardHeader>
-                            <div className="flex flex-col items-center space-y-4">
+                            <div className="flex flex-col items-center space-y-10">
                                 <Image
-                                    src="/l2.jpg"
+                                    src="/ccc.jpg"
                                     alt="icon 1"
-                                    width={50}
-                                    height={50}
+                                    width={70}
+                                    height={70}
                                     priority
                                     className="rounded-full"
                                 />
@@ -181,12 +175,12 @@ export function Landing () {
 
                     <Card className={`drop-shadow-md ${styles['card']}`}>
                         <CardHeader>
-                            <div className="flex flex-col items-center space-y-4">
+                            <div className="flex flex-col items-center space-y-10">
                                 <Image
-                                    src="/l3.jpg"
+                                    src="/ddd.jpg"
                                     alt="icon 1"
-                                    width={50}
-                                    height={50}
+                                    width={70}
+                                    height={70}
                                     priority
                                     className="rounded-full"
                                 />
@@ -199,49 +193,8 @@ export function Landing () {
             </div>
 
             <div className="pt-10 pr-20 pl-20 text-2xl pb-20 space-y-20">
-                <div className="flex flex-row items-center gap-x-20 pl-20 pr-20 ">
-                    <Image
-                        src="/ent.jpg"
-                        alt="icon 1"
-                        width={400}
-                        height={600}
-                        priority
-                        className={`drop-shadow-md ${styles['card']}`}
-                    />
-                    <div className={`flex flex-col space-y-3 w-2/4 ${styles.slidein}`}>
-                        <h1 className="font-bold text-xl uppercase text-center">Impôt pour particulier</h1>
-                        <p className="text-lg text-center">
-                            Tout savoir sur les impôts pour particuliers au Bénin.
-                            Comprendre les démarches et les obligations fiscales.
-                            Restez informé des dernières actualités fiscales béninoises.
-                            Restez informé des dernières actualités fiscales béninoises.
-                            Restez informé des dernières actualités fiscales béninoises.
-                        </p>
-                        <Link href="/" className="mt-6 bg-gray-200 font-semibold text-lg py-2 px-6 rounded-full self-center hover:bg-gray-200 transition duration-200">Simuler</Link>
-                    </div>
-                </div>
-
-                <div className="flex flex-row items-center gap-x-20 pl-20 pr-20 ">
-                    <div className="flex flex-col space-y-3">
-                        <h1 className="font-bold text-xl uppercase text-center">Impôt pour entreprise</h1>
-                        <p className="text-lg text-center">
-                            Tout savoir sur les impôts pour particuliers au Bénin.
-                            Comprendre les démarches et les obligations fiscales.
-                            Restez informé des dernières actualités fiscales béninoises.
-                            Restez informé des dernières actualités fiscales béninoises.
-                            Restez informé des dernières actualités fiscales béninoises.
-                        </p>
-                        <Link href="/" className="mt-6 bg-gray-200 font-semibold text-lg py-2 px-6 rounded-full self-center hover:bg-gray-200 transition duration-200">Simuler</Link>
-                    </div>
-                    <Image
-                        src="/part.jpg"
-                        alt="icon 1"
-                        width={400}
-                        height={600}
-                        priority
-                        className={`drop-shadow-md ${styles['card']}`}
-                    />
-                </div>
+                <Myslides />
+                <Slideshow />
             </div>
 
             <footer className="bg-gray-900 w-full">

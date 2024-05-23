@@ -36,7 +36,7 @@ export const Myslides = () => {
                         height={400}
                         priority
                     />
-                    <button onClick={next} className="absolute right-0 z-10 p-2 h-20 hover:opacity-40 hover:bg-black shadow-md">
+                    <button onClick={next} className="absolute right-0 z-10 p-2 h-20 hover:bg-opacity-30 hover:bg-black shadow-md">
                         <ChevronRight className='text-white' size={24} />
                     </button>
                 </div>

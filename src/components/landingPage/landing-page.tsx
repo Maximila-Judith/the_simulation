@@ -1,139 +1,141 @@
 'use client'
 import React, { useEffect, useState } from "react";
-import Slider from "react-slick";
 import {
     Menubar,
+    MenubarCheckboxItem,
     MenubarContent,
     MenubarItem,
     MenubarMenu,
+    MenubarRadioGroup,
+    MenubarRadioItem,
+    MenubarSeparator,
+    MenubarShortcut,
+    MenubarSub,
+    MenubarSubContent,
+    MenubarSubTrigger,
     MenubarTrigger,
-} from "@/components/ui/menubar";
+} from "@/components/ui/menubar"
 import Link from "next/link";
 import Image from "next/image";
-import styles from '@/app/diaporama.module.css';
+import { Button } from "../ui/button";
+import { setInterval } from "timers"
+import styles from '@/app/diaporama.module.css'
 import {
     Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
     CardHeader,
-} from "@/components/ui/card";
+    CardTitle,
+} from "@/components/ui/card"
 import { Slideshow } from "../ui/slideshow";
 import { Myslides } from "../ui/myslides";
 
-export function Landing() {
-    const images = ['/111.jpg', '/222.jpg', '/333.jpg'];
 
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        cssEase: "linear"
-    };
+
+export function Landing() {
+    const images = ['/111.jpg', '/222.jpg', '/333.jpg']
+    const [image, setImage] = useState(0)
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setImage((index) =>
+                index === images.length - 1 ? 0 : index + 1
+            )
+        }, 4000)
+        return () => clearInterval(interval)
+    }, [])
 
     const handleClick = () => {
-        window.location.href = '/accueil';
-    };
+        window.location.href = '/accueil'
+    }
 
     return (
         <div className="">
-            <div className="flex flex-col bg-no-repeat bg-cover bg-center max-h-96 block">
-                <Slider {...settings} className={styles['carousel']}>
-                    {images.map((src, index) => (
-                        <div key={index}>
-                            <div
-                                className="flex flex-col items-center justify-center bg-cover bg-center h-96"
-                                style={{ backgroundImage: `url(${src})` }}
-                            >
-                                <div className="flex flex-row justify-between p-3 w-full">
-                                    <Image
-                                        src="/dgi-white.webp"
-                                        alt="icon 1"
-                                        width={200}
-                                        height={350}
-                                        priority
-                                    />
-                                    <div>
-                                        <Menubar className="justify-end bg-transparent opacity-100 border-none text-white">
-                                            <MenubarMenu >
-                                                <MenubarTrigger>
-                                                    <Link rel="stylesheet" href="/">Accueil</Link>
-                                                </MenubarTrigger>
-                                            </MenubarMenu>
-                                            <MenubarMenu>
-                                                <MenubarTrigger>
-                                                    <Link rel="stylesheet" href="">Simulation</Link>
-                                                </MenubarTrigger>
-                                                <MenubarContent>
-                                                    <MenubarItem className="text-md text-semibold italic">
-                                                        <Link rel="stylesheet" href="" onClick={handleClick}>
-                                                            Impot sur les Sociétés (IS)
-                                                        </Link>
-                                                    </MenubarItem>
-                                                    <MenubarItem className="text-md text-semibold italic">
-                                                        <Link rel="stylesheet" href="" onClick={handleClick}>
-                                                            Impot sur les Bénéfices d'Affaire (IBA)
-                                                        </Link>
-                                                    </MenubarItem>
-                                                    <MenubarItem className="text-md text-semibold italic">
-                                                        <Link rel="stylesheet" href="" onClick={handleClick}>
-                                                            Impot sur les Revenus Fonciers (IRF)
-                                                        </Link>
-                                                    </MenubarItem>
-                                                    <MenubarItem className="text-md text-semibold italic">
-                                                        <Link rel="stylesheet" href="" onClick={handleClick}>
-                                                            Impot sur les Traitement de Salaire (ITS)
-                                                        </Link>
-                                                    </MenubarItem>
-                                                    <MenubarItem className="text-md text-semibold italic">
-                                                        <Link rel="stylesheet" href="" onClick={handleClick}>
-                                                            Taxe Professionnelle Synthétique (TPS)
-                                                        </Link>
-                                                    </MenubarItem>
-                                                    <MenubarItem className="text-md text-semibold italic">
-                                                        <Link rel="stylesheet" href="" onClick={handleClick}>
-                                                            Taxe Foncière Unique (TFU)
-                                                        </Link>
-                                                    </MenubarItem>
-                                                </MenubarContent>
-                                            </MenubarMenu>
-                                            <MenubarMenu>
-                                                <MenubarTrigger>
-                                                    <Link rel="stylesheet" href="">Documentation</Link>
-                                                </MenubarTrigger>
-                                                <MenubarContent>
-                                                    <MenubarItem className="text-md text-semibold italic">
-                                                        <Link rel="stylesheet" href="https://api.impots.bj/media/65d5ae32a155a_B%C3%A9nin-Code%20G%C3%A9n%C3%A9ral%20des%20Imp%C3%B4ts%202024.pdf">
-                                                            Code Général des Impôts 2024 (CGI)
-                                                        </Link>
-                                                    </MenubarItem>
-                                                    <MenubarItem className="text-md text-semibold italic">
-                                                        <Link rel="stylesheet" href="https://api.impots.bj//media/63b450bf40bf1_Code%20G%C3%A9n%C3%A9ral%20des%20Imp%C3%B4ts%20(Version%20citoyenne).pdf">
-                                                            Code Général des Impôts 2024 (V.C)
-                                                        </Link>
-                                                    </MenubarItem>
-                                                </MenubarContent>
-                                            </MenubarMenu>
-                                            <MenubarMenu>
-                                                <MenubarTrigger>
-                                                    <Link rel="stylesheet" href="">A Propos</Link>
-                                                </MenubarTrigger>
-                                            </MenubarMenu>
-                                        </Menubar>
-                                    </div>
-                                </div>
+            <div className={` flex flex-col pt-3 bg-no-repeat bg-cover bg-center max-h-96 block ${styles['background-slide']}`} style={{ backgroundImage: `url(${images[image]})` }}>
+                <div className="flex flex-row justify-between p-3">
+                    <Image
+                        src="/dgi-white.webp"
+                        alt="icon 1"
+                        width={200}
+                        height={350}
+                        priority
+                    />
+                    <div>
+                        <Menubar className="justify-end bg-transparent opacity-100 border-none text-white">
+                            <MenubarMenu >
+                                <MenubarTrigger>
+                                    <Link rel="stylesheet" href="/">Accueil</Link>
+                                </MenubarTrigger>
+                            </MenubarMenu>
+                            <MenubarMenu>
+                                <MenubarTrigger>
+                                    <Link rel="stylesheet" href="">Simulation</Link>
+                                </MenubarTrigger>
+                                <MenubarContent>
+                                    <MenubarItem className="text-md text-semibold italic">
+                                        <Link rel="stylesheet" href="" onClick={handleClick}>
+                                            Impot sur les Sociétés (IS)
+                                        </Link>
+                                    </MenubarItem>
+                                    <MenubarItem className="text-md text-semibold italic">
+                                        <Link rel="stylesheet" href="" onClick={handleClick}>
+                                            Impot sur les Bénéfices d'Affaire (IBA)
+                                        </Link>
+                                    </MenubarItem>
+                                    <MenubarItem className="text-md text-semibold italic">
+                                        <Link rel="stylesheet" href="" onClick={handleClick}>
+                                            Impot sur les Revenus Fonciers (IRF)
+                                        </Link>
+                                    </MenubarItem>
+                                    <MenubarItem className="text-md text-semibold italic">
+                                        <Link rel="stylesheet" href="" onClick={handleClick}>
+                                            Impot sur les Traitement de Salaire (ITS)
+                                        </Link>
+                                    </MenubarItem>
+                                    <MenubarItem className="text-md text-semibold italic">
+                                        <Link rel="stylesheet" href="" onClick={handleClick}>
+                                            Taxe Professionnelle Synthétique (TPS)
+                                        </Link>
+                                    </MenubarItem>
+                                    <MenubarItem className="text-md text-semibold italic">
+                                        <Link rel="stylesheet" href="" onClick={handleClick}>
+                                            Taxe Foncière Unique (TFU)
+                                        </Link>
+                                    </MenubarItem>
+                                </MenubarContent>
+                            </MenubarMenu>
+                            <MenubarMenu>
+                                <MenubarTrigger>
+                                    <Link rel="stylesheet" href="">Documentation</Link>
+                                </MenubarTrigger>
+                                <MenubarContent>
+                                    <MenubarItem className="text-md text-semibold italic">
+                                        <Link rel="stylesheet" href="https://api.impots.bj/media/65d5ae32a155a_B%C3%A9nin-Code%20G%C3%A9n%C3%A9ral%20des%20Imp%C3%B4ts%202024.pdf">
+                                            Code Général des Impôts 2024 (CGI)
+                                        </Link>
+                                    </MenubarItem>
+                                    <MenubarItem className="text-md text-semibold italic">
+                                        <Link rel="stylesheet" href="https://api.impots.bj//media/63b450bf40bf1_Code%20G%C3%A9n%C3%A9ral%20des%20Imp%C3%B4ts%20(Version%20citoyenne).pdf">
+                                            Code Général des Impôts 2024 (V.C)
+                                        </Link>
+                                    </MenubarItem>
+                                </MenubarContent>
+                            </MenubarMenu>
+                            <MenubarMenu>
+                                <MenubarTrigger>
+                                    <Link rel="stylesheet" href="">A Propos</Link>
+                                </MenubarTrigger>
+                            </MenubarMenu>
+                        </Menubar>
+                    </div>
+                </div>
 
-                                <div className="flex flex-col mb-20 w-2/4 place-self-center bg-transparent opacity-100 pl-8 space-y-4 mt-10 pt-10">
-                                    <h1 className="text-2xl text-center font-bold text-white">Simuler vos Impôts conformément au Code Géneral des Impôts 2024</h1>
-                                    <Link href="" onClick={handleClick} className="mt-6 bg-white text-black font-bold py-2 px-6 rounded-full self-center hover:bg-gray-200 transition duration-200">Simuler</Link>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </Slider>
+                <div className="flex flex-col mb-20 w-2/4 place-self-center bg-transparent opacity-100 pl-8 space-y-4 mt-10 pt-10 overflow-x-hidden overflow-y-hidden">
+                    <h1 className="text-2xl text-center font-bold text-white">Simuler vos Impôts conformément au Code Géneral des Impôts 2024</h1>
+                    <Link href="" onClick={handleClick} className="mt-6 bg-white text-black font-bold py-2 px-6 rounded-full self-center hover:bg-gray-200 transition duration-200">Simuler</Link>
+                </div>
             </div>
-
             <div className="bg-gray-100 text-center justify-center p-20">
                 <h1 className="font-bold uppercase text-xl">Comment simuler ses impôts ?</h1>
                 <p className="pt-5 text-center">

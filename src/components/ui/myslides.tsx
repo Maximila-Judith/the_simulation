@@ -23,10 +23,10 @@ export const Myslides = () => {
     }
 
     return (
-        <div className="flex flex-row items-center gap-x-20 pl-20 pr-20">
+        <div className="flex flex-row items-center gap-y-10 gap-x-20 pl-20 pr-20 ">
             <div className="relative">
                 <div className="flex items-center">
-                    <button onClick={previous} className="absolute left-0 z-10 p-2 h-20 hover:opacity-40 hover:bg-black shadow-md">
+                    <button onClick={previous} className="absolute left-0 z-10 p-2 h-20 hover:bg-opacity-30 hover:bg-black shadow-md">
                         <ChevronLeft className='text-white' size={24} />
                     </button>
                     <Image

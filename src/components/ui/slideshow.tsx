@@ -21,7 +21,7 @@ export const Slideshow = () => {
     }
 
     return (
-        <div className="flex flex-row items-center gap-x-20 pl-20 pr-20">
+        <div className="flex flex-row items-center gap-x-20 pl-20 pr-20 ">
             <div className={`flex flex-col w-1/2 space-y-3 ${styles.slideon}`}>
                 <h1 className="font-bold text-xl uppercase text-center">Impôt pour entreprise</h1>
                 <p className="text-lg text-center">
@@ -35,7 +35,7 @@ export const Slideshow = () => {
             </div>
             <div className="relative">
                 <div className="flex items-center">
-                    <button onClick={previous} className="absolute left-0 z-10 p-2 h-20 hover:opacity-40 hover:bg-black shadow-md">
+                    <button onClick={previous} className="absolute left-0 z-10 p-2 h-20 hover:bg-opacity-30 hover:bg-black shadow-md">
                         <ChevronLeft className='text-white' size={24} />
                     </button>
                     <Image
@@ -45,7 +45,7 @@ export const Slideshow = () => {
                         height={400}
                         priority
                     />
-                    <button onClick={next} className="absolute right-0 z-10 p-2 h-20 hover:opacity-40 hover:bg-black shadow-md">
+                    <button onClick={next} className="absolute right-0 z-10 p-2 h-20 hover:bg-opacity-30 hover:bg-black shadow-md">
                         <ChevronRight className='text-white' size={24} />
                     </button>
                 </div>

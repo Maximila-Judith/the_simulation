@@ -15,17 +15,6 @@ import {
     MenubarSubTrigger,
     MenubarTrigger,
 } from "@/components/ui/menubar"
-import {
-    NavigationMenu,
-    NavigationMenuContent,
-    NavigationMenuIndicator,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-    NavigationMenuTrigger,
-    NavigationMenuViewport,
-} from "@/components/ui/navigation-menu"
-
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../ui/button";
@@ -42,7 +31,6 @@ import {
 import { Slideshow } from "../ui/slideshow";
 import { Myslides } from "../ui/myslides";
 import { Menu, X } from "lucide-react";
-import { PasMenu } from "../ui/maMemu";
 
 
 
@@ -91,7 +79,7 @@ export function Landing() {
                             </MenubarMenu>
                             <MenubarMenu>
                                 <MenubarTrigger>
-                                    <PasMenu />
+                                    {/* <PasMenu /> */}
                                 </MenubarTrigger>
                             </MenubarMenu>
                             <MenubarMenu>

@@ -34,16 +34,16 @@ export const Body: React.FC<BodyProps> = ({ onAnswer, onInfo, onBack, length }) 
     return (
         <div className="flex flex-col gap-2 h-50 text-center pt-0">
 
-          <Card className= "flex ml-0 mt-0.5 h-20 text-xs  ">
+          <Card className= "flex ml-0 mt-0.5 h-20 text-xs rounded-sm overflow-hidden ">
             <div className='flex ml-0 space-x-2 h-full'>
-      {length > 1 && <button className={styles.backButton} onClick={onBack}><ChevronLeft className='size-[18px]' /></button>}
+      {length > 1 && <button className="rounded-l-sm overflow-hidden flex items-center justify-center content-center p-0 m-0 h-full w-11  bg-slate-200  hover:bg-slate-300 " onClick={onBack}><ChevronLeft className='size-[18px] hover:size-[21px] ' /></button>}
             </div>
             <div className='flex space-x-1  w-full justify-center text-center m-auto px-2 '>
                       <p className=' text-center'>{question}</p> 
 {the_question.info && (<div className='content-center'><button className='rounded-full' onClick={onInfo}><HelpCircle className='size-[16px] hover:bg-slate-300 rounded-full' /></button></div>)}
             </div>
           </Card>
-          <Card className='bg-gray-200 bg-opacity-70'>
+          <Card className='bg-gray-200 bg-opacity-70 rounded-sm overflow-hidden'>
             <div className='flex justify-center content-center text-center h-60  gap-4 mx-1.5'>
                 <div className="content-center space-y-3 w-full text-x" >
 

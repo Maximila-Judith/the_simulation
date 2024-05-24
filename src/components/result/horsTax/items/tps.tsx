@@ -4,10 +4,10 @@ export const tps :Htax = {
     id: "tps",
     description : "Qu'est-ce que ces dépenses impliquent ?",
     values:[
-        {title: "Rénovations", 
-        description: "Ces dépenses font référence aux frais liés à des améliorations ou des rénovations spécifiques demandées par les locataires et que vous avez financées."
+        {title: "Les agriculteurs", 
+        description: ""
        },
-       {title: "Entretien et réparation", 
+       {title: "Ecoles", 
        description: "Les frais liés à l'entretien et à la réparation du bien que vous avez pris en charge pour le compte des locataires."
       },
       {title: "Autres dépenses", 

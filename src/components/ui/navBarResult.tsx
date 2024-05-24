@@ -14,26 +14,26 @@ import {
 } from "@/components/ui/navigation-menu"
 
 
-export function ResultMoreOption({ onHelp, onHorsTax }: { onHelp: () => void; onHorsTax: ()=> void }) {
+export function ResultMoreOption({ onHelp, onHorsTax, htName }: { onHelp: () => void; onHorsTax: () => void; htName:string}) {
   return (
     <NavigationMenu className="mb-11 bg-opacity-0  ">
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className=" ">Plus</NavigationMenuTrigger>
+          <NavigationMenuTrigger className=" text-xs">Plus</NavigationMenuTrigger>
           <NavigationMenuContent >
             <ul className="hover:text-blue-900 ">
-                <ListItem
-                  key="horsTaxe"
-                  title= "Voir les exonérations associées à ce type d'impôt"
-                   onClick={onHorsTax}
-                >
-                </ListItem>
-                <ListItem
-                  key="help"
-                  title= "voir la procédure de calcul"
-                  onClick={onHelp}
-                >
-                </ListItem>
+  {htName && <ListItem
+                key="horsTaxe"
+                title="Voir les exonérations associées à ce type d'impôt"
+                onClick={onHorsTax}
+              >
+              </ListItem>}
+              <ListItem
+                key="help"
+                title= "voir la procédure de calcul"
+                onClick={onHelp}
+              >
+              </ListItem>
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
@@ -52,12 +52,12 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "  flex m-auto w-[320px] h-[30px] mt-0 select-none space-y-1 rounded-md p-1.5 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            " flex flex-col  h-auto w-[315px] mt-0 select-none space-y-1 rounded-md p-1.5 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className
           )}
           {...props}
         >
-          <div className="text-sm text-center">{title}</div>
+          <div className="text-xs text-start">{title}</div>
         </a>
       </NavigationMenuLink>
     </li>

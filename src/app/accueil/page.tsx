@@ -17,6 +17,7 @@ import {
 import { entry } from "@/components/questions/taxType/entry";
 import Link from "next/link";
 import { Button } from '@/components/ui/button';
+import { Alert } from '@/components/ui/alert';
 
 export default function Home() {
     const [step, setStep] = useState<Data>(Questions.entry);
@@ -37,21 +38,22 @@ export default function Home() {
             setTaxType(name)
             setLevel((before) => [before.length, ...before])
 
-        } else if (!next && !name && level.length < 1) {
+        } else if (!next && !name && level.length < 2) {
             setAlert("Désolé, pas d'impôt")
+            setBack(before =>before.slice(1))
 
         } else if (!next && level.length > 1) {
             setLevel((before) => [before.length, ...before])
         }
 
         let valQuestion = valsTable.find(question => question.id === next)
-        setStep(valQuestion ? valQuestion : Questions.entry)
-        setBack(beforeBack => [valsTable.indexOf(valQuestion ? valQuestion : Questions.entry), ...beforeBack])
+        valQuestion?setStep(valQuestion): setStep(before => before)
+        setBack(beforeBack => [valsTable.indexOf(valQuestion ? valQuestion : step), ...beforeBack])
 
     }
+           console.log(back)
 
-
-    useEffect(() => {
+    useEffect(() =>{
         if (level.length === 2) {
             switch (taxType) {
                 case "IS": {
@@ -111,8 +113,8 @@ export default function Home() {
         setBack([0])
     }, [level]);
 
-    useEffect(() => {
-        setStep(valsTable[back[0]])
+    useEffect(() => { 
+      setStep(valsTable[back[0]])
     }, [back]);
 
     const forBack = () => {
@@ -127,6 +129,10 @@ export default function Home() {
     const forClick = () => {
         setInfo(infos.init)
     }
+        const forAlert = () => {
+        setAlert("")
+    }
+    
     function result(quest: string) {
         let obj = answers.find(answer => answer.question === quest)
         return obj ? obj.response : [""]
@@ -155,11 +161,17 @@ export default function Home() {
                         <div className={styles.wizard}>
                             <Stepper currentStep={level} />
                             <div className='mt-10'></div>
-                            <>
-                                <div className="min-w-80 ">
-                                    {info !== infos.init ? <InfoCard onClick={forClick} infos={info} /> : ((level.length < 3) ? (<Body onAnswer={forAnswer} onInfo={forInfo} length={back.length} onBack={forBack} />) : (<Result tax={taxType} answers={answers} />))}
-                                </div>
-                            </>
+                            <div className="min-w-80 "> 
+                    {(info !== infos.init || taxType && level.length ===3|| alert) ?
+                               <div>   
+                      {info !== infos.init && <InfoCard onClick={forClick} infos={info} />}
+                      {taxType && level.length ===3 && <Result tax={taxType} answers={answers} />}
+                      {alert && <Alert alert = {alert} onClick={forAlert} />}
+                                </div> :
+                               <Body onAnswer={forAnswer} onInfo={forInfo} length={back.length} onBack={forBack} />
+                            }
+                            
+                            </div>
                         </div>
                     </div>
                 </div>

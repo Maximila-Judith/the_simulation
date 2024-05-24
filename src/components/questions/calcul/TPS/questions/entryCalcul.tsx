@@ -12,7 +12,7 @@ export const Ca: Data = {
             label: "en Fcfa",
             type: "text",
             condition: "less",
-            alert:"Le chiffre d'affaire que vous entrez est supérieur à 50millions",
+            alert:"Le montant que vous entrez est supérieur à 50millions",
             conditionValue: 50000001,
             nextQuestion:""
         },

@@ -1,72 +1,38 @@
 .wizard {
     padding-top: 4%;
-    width: 43vw;
+    width: 40vw;
     height: 60vh;
     opacity: 0.78;
 }
-.cardContent {
-     opacity: 0.75;
-    overflow:hidden;
-    padding-inline: 0px;
-    padding-top: 4%;
-    margin-top: 2%;
-    height: 36vh;
-    background-color: rgb(255, 255, 255);
-    border-radius: 8px;
-
-}
 .response{
-color: rgb(58, 24, 24);
+color: rgb(29, 17, 17);
 width: 100%;
 padding: 0%;
-font-size: 79%;
-background-color: rgb(223, 231, 240);
+font-size: 75%;
+background-color: rgb(199, 207, 218);
 }
 .response:hover{
-color: rgb(46, 39, 39);
-font-size:92%;
-background-color: rgb(190, 190, 164);
+color: rgb(37, 38, 41);
+font-size:80%;
+background-color: rgb(118, 133, 151);
 }
-.questionContent{
-    display: flex;   
-    text-align: center;
-    justify-content: center;
-    padding-left: 0%;
-    width: 100%;
-    height: 100%;
-    gap: 4px;
-    align-items: center;
-}
-.backDiv{
+.backButton{
 background-color: rgb(229, 238, 238);
-    display: inline-block;
-    margin-left: -5%;
-    margin-top: -0.3%;
-    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
     width: 3rem;
     border-radius: 8px 0px 0px 8px;
 }
 
-.backDiv:hover{
+.backButton:hover{
 background-color: rgb(176, 194, 194);
 }
 
-.question{
-    font-family:'Times New Roman', Times, serif;
-    font-style: italic;
-    padding-top: 5.6%;
-    font-size:100%;
-    height: 100%;
-    justify-content: center;
-    display: inline-block;
-    text-align: center;
-}
-.help{
-    display: inline-block;
-    padding-top: 6%;
-}
 
 .resultCard{
+    overflow: hidden;
     background-color: rgb(39, 90, 73);
     display: flex;
     justify-content: center;

@@ -42,6 +42,7 @@ import {
 import { Slideshow } from "../ui/slideshow";
 import { Myslides } from "../ui/myslides";
 import { Menu, X } from "lucide-react";
+import { PasMenu } from "../ui/maMemu";
 
 
 
@@ -82,7 +83,7 @@ export function Landing() {
                         <button className="relative items-center justify-center lg:hidden block rounded-lg w-10 h-10 hover:bg-gray-300 hover:bg-opacity-40 focus:outline-none" onClick={displaymenu}>
                             {menu ? (<X className='absolute inset-0 shrink-0 top-5 left-5 text-white transform -translate-x-1/2 -translate-y-1/2 fill-current ' />) : (<Menu className="absolute inset-0 shrink-0 top-5 left-5 text-white transform -translate-x-1/2 -translate-y-1/2 fill-current" />)}
                         </button>
-                        {/* <Menubar className={`flex justify-end self-end lg:flex bg-transparent opacity-100 border-none text-white ${menu ? 'block' : 'hidden'}`}>
+                        <Menubar className={`flex justify-end self-end lg:flex bg-transparent opacity-100 border-none text-white ${menu ? 'block' : 'hidden'}`}>
                             <MenubarMenu >
                                 <MenubarTrigger>
                                     <Link rel="stylesheet" href="/">Accueil</Link>
@@ -90,40 +91,8 @@ export function Landing() {
                             </MenubarMenu>
                             <MenubarMenu>
                                 <MenubarTrigger>
-                                    <Link rel="stylesheet" href="">Simulation</Link>
+                                    <PasMenu />
                                 </MenubarTrigger>
-                                <MenubarContent>
-                                    <MenubarItem className="text-md text-semibold italic">
-                                        <Link rel="stylesheet" href="" onClick={handleClick}>
-                                            Impot sur les Sociétés (IS)
-                                        </Link>
-                                    </MenubarItem>
-                                    <MenubarItem className="text-md text-semibold italic">
-                                        <Link rel="stylesheet" href="" onClick={handleClick}>
-                                            Impot sur les Bénéfices d'Affaire (IBA)
-                                        </Link>
-                                    </MenubarItem>
-                                    <MenubarItem className="text-md text-semibold italic">
-                                        <Link rel="stylesheet" href="" onClick={handleClick}>
-                                            Impot sur les Revenus Fonciers (IRF)
-                                        </Link>
-                                    </MenubarItem>
-                                    <MenubarItem className="text-md text-semibold italic">
-                                        <Link rel="stylesheet" href="" onClick={handleClick}>
-                                            Impot sur les Traitement de Salaire (ITS)
-                                        </Link>
-                                    </MenubarItem>
-                                    <MenubarItem className="text-md text-semibold italic">
-                                        <Link rel="stylesheet" href="" onClick={handleClick}>
-                                            Taxe Professionnelle Synthétique (TPS)
-                                        </Link>
-                                    </MenubarItem>
-                                    <MenubarItem className="text-md text-semibold italic">
-                                        <Link rel="stylesheet" href="" onClick={handleClick}>
-                                            Taxe Foncière Unique (TFU)
-                                        </Link>
-                                    </MenubarItem>
-                                </MenubarContent>
                             </MenubarMenu>
                             <MenubarMenu>
                                 <MenubarTrigger>
@@ -147,8 +116,8 @@ export function Landing() {
                                     <Link rel="stylesheet" href="">A Propos</Link>
                                 </MenubarTrigger>
                             </MenubarMenu>
-                        </Menubar> */}
-                        <NavigationMenu className={`flex justify-end self-end lg:flex border-none text-white ${menu ? 'block' : 'hidden'}`}>
+                        </Menubar>
+                        {/*  <NavigationMenu className={`flex justify-end self-end lg:flex border-none text-white ${menu ? 'block' : 'hidden'}`}>
                             <NavigationMenuList>
                                 <NavigationMenuItem>
                                     <NavigationMenuTrigger>
@@ -222,7 +191,7 @@ export function Landing() {
                                     <NavigationMenuTrigger>A propos</NavigationMenuTrigger>
                                 </NavigationMenuItem>
                             </NavigationMenuList>
-                        </NavigationMenu>
+                        </NavigationMenu> */}
 
                     </div>
                 </div>

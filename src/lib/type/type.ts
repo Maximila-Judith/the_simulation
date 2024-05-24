@@ -27,3 +27,11 @@ export interface Info {
         description: string
     }[]
 }
+export interface Htax {
+    id: string;
+    description: string;
+    values: {
+        title: string,
+        description: string
+    }[]
+}

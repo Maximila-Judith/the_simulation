@@ -25,6 +25,7 @@ import { Exoneration } from './horsTax'
 
 
 
+
 export interface ResultProps {
   tax: string;
   answers: { question: string; response: string[] }[]

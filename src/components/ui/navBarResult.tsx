@@ -16,7 +16,7 @@ import {
 
 export function ResultMoreOption({ onHelp, onExoneration }: { onHelp: () => void; onExoneration: () => void}) {
   return (
-    <NavigationMenu className="mb-11 bg-opacity-0  ">
+    <NavigationMenu className="mb-11 bg-opacity-0 ">
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger className=" text-xs">Plus</NavigationMenuTrigger>

@@ -21,7 +21,6 @@ import { ResultMoreOption } from "@/components/ui/navBarResult"
 import { Help } from './help';
 import { Htax} from "@/lib/type/type"
 import { Exoneration } from './horsTax'
-import BackgroundCard from '@/';
 
 
 

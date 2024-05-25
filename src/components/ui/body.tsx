@@ -27,16 +27,16 @@ interface BodyProps {
 export const Body: React.FC<BodyProps> = ({ onAnswer, onInfo, onBack, length }) => {
     const the_question = useContext(QuestionContext)
 
-    const question = the_question ? the_question.question : "",
-        type_answer = the_question ? the_question.answers.type : "",
-        choiceOptions = the_question ? the_question.answers.choiceOptions : []
+    const question =  the_question.question,
+        type_answer = the_question.answers.type ,
+        choiceOptions = the_question.answers.choiceOptions
 
     return (
         <div className="flex flex-col gap-2 h-50 text-center pt-0">
 
           <Card className= "flex ml-0 mt-0.5 h-20 text-xs rounded-sm overflow-hidden ">
             <div className='flex ml-0 space-x-2 h-full'>
-      {length > 1 && <button className="rounded-l-sm overflow-hidden flex items-center justify-center content-center p-0 m-0 h-full w-11  bg-slate-200  hover:bg-slate-300 " onClick={onBack}><ChevronLeft className='size-[18px] hover:size-[21px] ' /></button>}
+     {length > 1 && <button className="rounded-l-sm overflow-hidden flex items-center justify-center content-center p-0 m-0 h-full w-11  bg-slate-200  hover:bg-slate-300 " onClick={onBack}><ChevronLeft className='size-[18px] hover:size-[21px] ' /></button>}
             </div>
             <div className='flex space-x-1  w-full justify-center text-center m-auto px-2 '>
                       <p className=' text-center'>{question}</p> 

@@ -51,7 +51,6 @@ export default function Home() {
         setBack(beforeBack => [valsTable.indexOf(valQuestion ? valQuestion : step), ...beforeBack])
 
     }
-           console.log(back)
 
     useEffect(() =>{
         if (level.length === 2) {

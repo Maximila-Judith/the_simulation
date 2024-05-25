@@ -56,6 +56,8 @@ export function Landing() {
         setMenu(!menu)
     }
 
+
+
     useEffect(() => {
         const interval = setInterval(() => {
             setImage((index) =>
@@ -65,8 +67,9 @@ export function Landing() {
         return () => clearInterval(interval)
     }, [])
 
-    const handleClick = () => {
-        window.location.href = '/accueil'
+    const handleClick = (name: string) => {
+        console.log(name)
+
     }
 
     return (
@@ -90,7 +93,7 @@ export function Landing() {
 
                 <div className="flex flex-col lg:mb-10 w-full lg:w-2/4 place-self-center bg-transparent opacity-100 pl-8 space-y-4 lg:mt-10 pt-20 mt-10 overflow-x-hidden overflow-y-hidden">
                     <h1 className="text-2xl text-center font-bold text-white inline-block ">Simuler vos Impôts conformément au Code Géneral des Impôts 2024</h1>
-                    <Link href="" onClick={handleClick} className="mt-6 bg-white inline-block text-black font-bold py-2 px-6 rounded-full self-center hover:bg-gray-200 transition duration-200">Simuler</Link>
+                    <Link href="" onClick={() => handleClick} className="mt-6 bg-white inline-block text-black font-bold py-2 px-6 rounded-full self-center hover:bg-gray-200 transition duration-200">Simuler</Link>
                 </div>
             </div>
 

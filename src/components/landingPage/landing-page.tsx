@@ -30,12 +30,14 @@ import {
 } from "@/components/ui/card"
 import { Slideshow } from "../ui/slideshow";
 import { Myslides } from "../ui/myslides";
-
+import { useRouter } from 'next/router';
 
 
 export function Landing() {
     const images = ['/111.jpg', '/222.jpg', '/333.jpg']
     const [image, setImage] = useState(0)
+
+
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -46,13 +48,14 @@ export function Landing() {
         return () => clearInterval(interval)
     }, [])
 
-    const handleClick = () => {
-        window.location.href = '/accueil'
+    const handleClick = (name:string) => {
+        console.log(name)
+
     }
 
     return (
         <div className="">
-            <div className={` flex flex-col pt-3 bg-no-repeat bg-cover bg-center max-h-96 block ${styles['background-slide']}`} style={{ backgroundImage: `url(${images[image]})` }}>
+            <div className={` flex flex-col pt-3 bg-no-repeat bg-cover bg-center max-h-96 ${styles['background-slide']}`} style={{ backgroundImage: `url(${images[image]})` }}>
                 <div className="flex flex-row justify-between p-3">
                     <Image
                         src="/dgi-white.webp"
@@ -74,32 +77,32 @@ export function Landing() {
                                 </MenubarTrigger>
                                 <MenubarContent>
                                     <MenubarItem className="text-md text-semibold italic">
-                                        <Link rel="stylesheet" href="" onClick={handleClick}>
+                                        <Link rel="stylesheet" href="" onClick = { ()=> handleClick("IS")}>
                                             Impot sur les Sociétés (IS)
                                         </Link>
                                     </MenubarItem>
                                     <MenubarItem className="text-md text-semibold italic">
-                                        <Link rel="stylesheet" href="" onClick={handleClick}>
+                                        <Link rel="stylesheet" href="" onClick={()=>handleClick("IBA")}>
                                             Impot sur les Bénéfices d'Affaire (IBA)
                                         </Link>
                                     </MenubarItem>
                                     <MenubarItem className="text-md text-semibold italic">
-                                        <Link rel="stylesheet" href="" onClick={handleClick}>
+                                        <Link rel="stylesheet" href="" onClick={()=>handleClick("IRF")}>
                                             Impot sur les Revenus Fonciers (IRF)
                                         </Link>
                                     </MenubarItem>
                                     <MenubarItem className="text-md text-semibold italic">
-                                        <Link rel="stylesheet" href="" onClick={handleClick}>
+                                        <Link rel="stylesheet" href="" onClick={ ()=> handleClick("ITS")}>
                                             Impot sur les Traitement de Salaire (ITS)
                                         </Link>
                                     </MenubarItem>
                                     <MenubarItem className="text-md text-semibold italic">
-                                        <Link rel="stylesheet" href="" onClick={handleClick}>
+                                        <Link rel="stylesheet" href="" onClick={ ()=> handleClick("TPS")}>
                                             Taxe Professionnelle Synthétique (TPS)
                                         </Link>
                                     </MenubarItem>
                                     <MenubarItem className="text-md text-semibold italic">
-                                        <Link rel="stylesheet" href="" onClick={handleClick}>
+                                        <Link rel="stylesheet" href="" onClick={ ()=>handleClick("TFU")}>
                                             Taxe Foncière Unique (TFU)
                                         </Link>
                                     </MenubarItem>
@@ -133,7 +136,7 @@ export function Landing() {
 
                 <div className="flex flex-col mb-20 w-2/4 place-self-center bg-transparent opacity-100 pl-8 space-y-4 mt-10 pt-10 overflow-x-hidden overflow-y-hidden">
                     <h1 className="text-2xl text-center font-bold text-white">Simuler vos Impôts conformément au Code Géneral des Impôts 2024</h1>
-                    <Link href="" onClick={handleClick} className="mt-6 bg-white text-black font-bold py-2 px-6 rounded-full self-center hover:bg-gray-200 transition duration-200">Simuler</Link>
+                    <Link href="" onClick={ ()=> handleClick} className="mt-6 bg-white text-black font-bold py-2 px-6 rounded-full self-center hover:bg-gray-200 transition duration-200">Simuler</Link>
                 </div>
             </div>
             <div className="bg-gray-100 text-center justify-center p-20">

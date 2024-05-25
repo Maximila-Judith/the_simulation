@@ -5,6 +5,7 @@ import { irf } from "./items/irf"
 import { tfu } from "./items/tfu"
 import { tps } from "./items/tps"
 import { its } from "./items/its"
+import { init } from "./items/init"
 
 export const ht = {
     iba: iba,
@@ -12,6 +13,7 @@ export const ht = {
     tps: tps,
     irf: irf,
     tfu: tfu,
-    its:its
+    its: its,
+    init:init
 }
-export const valHT = Object.values(ht)
+export const exonerationValues = Object.values(ht)

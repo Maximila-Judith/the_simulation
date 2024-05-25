@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from '@/app/wizard.module.css'
 import {
   Card,
@@ -20,8 +20,9 @@ import { RadioGroup } from '@radix-ui/react-menubar';
 import { ResultMoreOption } from "@/components/ui/navBarResult"
 import { Help } from './help';
 import { Htax} from "@/lib/type/type"
-import {HorsTax} from './horsTax'
-import { valHT } from './horsTax/globalExonerations';
+import { Exoneration } from './horsTax'
+import BackgroundCard from '@/';
+
 
 
 
@@ -32,18 +33,19 @@ export interface ResultProps {
 
 export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
   let res = {
-      taxName: [""],
-      taxBase: [""],
-      amount: [0],
-      rate: [0],
-      minimum: 0,
-      priceAdd: 0,
-      taxPrice: [""],
-      hTax: ""
+    taxName: [""],
+    taxBase: [""],
+    amount: [0],
+    rate: [0],
+    minimum: 0,
+    priceAdd: 0,
+    taxPrice: [""],
+    hTax: ""
   }
   let price = [];
-  const [horsTax, setHorsTax] = useState<Htax>()
+  const [exoneration, setExoneration] = useState(false)
   const [help, setHelp] = useState(false)
+
 
 
   switch (tax) {
@@ -305,7 +307,6 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
     }
   }
 
-  const valH = (res.hTax) ? valHT.find(ht => ht.id === res.hTax) : undefined
 
   const forHelp = ()=> {
     setHelp(true)
@@ -314,11 +315,12 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
     setHelp(false)
   }
   
-  const forHorsTax = ()=> {
-    setHorsTax(valH)
+  const forExoneration = () => {   
+    setExoneration(true)
   }
-    const backHorsTax = ()=> {
-    setHorsTax(undefined)
+
+    const backExoneration = ()=> {
+      setExoneration(false)
   }
 
   function result(quest: string) {
@@ -334,52 +336,70 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
   return (
     <div className=" lg:text-left">
 
-      {(help || horsTax) ?
+      {(help || exoneration) ?
         <div>
           {help && <Help onClick = {backHelp} />}
-          {horsTax && <HorsTax Click = {backHorsTax} val= {valH?valH:valHT[0]} />}
+          {exoneration && <Exoneration Click = {backExoneration} val= {res.hTax} />}
         </div> :
         <div className="bg-white rounded-sm overflow-hidden">
           <div className=' flex flex-col space-y-1'>
-            <div className='flex justify-center h-8 pt-1 mb-2 rounded-t-md bg-slate-200'>
-              <p className='text-gray-900 text-center text-x'>Résultat de la simulation</p>
-            </div>
-            <div className='flex flex-col space-y-3.5 pt-1 pb-1 ml-3 text-sm'>
-              <div className='flex gap-x-1 h-5'>
-                <Image
-                  src="/financier.png"
-                  alt="icon 1"
-                  width={23}
-                  height={25}
-                  priority
-                />
-                            
+              <div className='flex justify-center h-8 pt-1 mb-2 rounded-t-md bg-slate-200'>
+                <p className='text-gray-900 text-center text-x'>Résultat de la simulation</p>
+              </div>
+            
+            <div className='flex flex-col space-y-1.5 pb-1 pt-2 ml-3 text-sm'>
+              <div className='flex items-center space-x-0.5 '>
+          
                 {res.taxName.length < 2 ?
-                  <div className='flex space-x-1 text-xs pt-1'>
-                    <p className='text-blue-800 pt-0.5 flex'>Type d'impôt :</p> <p className=' pt-0.5'>{res.taxName}</p>
+                 <div className='flex items-center space-x-0.5'>
+                    <Image
+                        src="/financier.png"
+                        alt="icon 1"
+                        width={22}
+                        height={20}
+                        priority
+                      />
+                
+                    <div className='flex space-x-1 pt-1 text-xs  '>
+                    <p className='text-blue-800 flex'>Type d'impôt :</p> <p className=''>{res.taxName}</p>
+                    </div>
                   </div>
                   :
-                  <div className=' flex gap-x-5 h-full '>
+                <div className=' flex space-x-5 h-full text-xs items-start  '>
+                  <div className=' flex space-x-0.5 h-full text-xs items-center  '>
+                      <div className=''>
+                          <Image
+                              src="/financier.png"
+                              alt="icon 1"
+                              width={22}
+                              height={20}
+                              priority
+                            />
+                        </div>
                     <div className='flex space-x-1'>
-                      <p className='text-blue-800 pt-0.5  flex'>Impôts à payer :</p>
+                      <p className='text-blue-800  flex text-xs'>Impôts à payer :</p>
                     </div>
-                    <ul className='pb-8 pt-0.5 space-y-0.5'>
-                      <li className=' flex gap-x-1'>
-                        <span className="flex h-2 w-2 translate-y-1 rounded-full bg-green-500" />
-                        <p className=''>{res.taxName[0]}</p>
+                  </div>
+                  
+                    <ul className=' space-y-0.5 text-xs'>
+                      <li className=' flex space-x-1 '>
+                        <span className="flex h-2 w-2 translate-y-1 items-center rounded-full bg-green-500" />
+                        <p className='text-xs'>{res.taxName[0]}</p>
                       </li>
-                      <li className='flex gap-x-1 '>
-                        <span className="flex h-2 w-2 translate-y-1 rounded-full bg-green-500" />
-                        <p className=''>{res.taxName[1]}</p>
+                      <li className='flex space-x-1 '>
+                        <span className="flex h-2 w-2 translate-y-1 items-center rounded-full bg-green-500" />
+                        <p className='text-xs'>{res.taxName[1]}</p>
                       </li>
                     </ul>
                   </div>
                 }
               </div>
-                      
-              <p className='text-bold text-blue-800  flex space-x-1 mb-2'> <Calculator className='size-5 text-gray-400' /><p className='mt-1'>Montant à payer</p></p>
+              <div className='flex items-center space-x-1 '>    
+                  <Calculator className='size-5 text-gray-400' /><p className=' text-xs'>Montant à payer</p>
+              </div>
             </div>
           </div>
+
           <div className='text-xs space-y-8 mb-3 pt-3 flex flex-col gap-y-1 mx-2.5 py-1  border-2 border-blue-200 text-gray-800 first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-neutral-900 dark:border-neutral-700 dark:text-white'>
             < div className='flex flex-col space-y-2'>
               {res.amount.length < 2 ?
@@ -390,27 +410,27 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
                       <div className='flex gap-x-1 bg-slate-100 p-1.5 pl-5'><Percent className='size-3.5 ' /><p className='text-gray-900  '>Pourcentage appliqué </p><Equal className='size-3.5 ' /><p className='font-bold '>{res.rate[0]}%</p> sur<p className='lowercase '>{res.taxBase[0]}</p></div>
                     )
                     :
-                    (<div className='flex gap-x-1 truncate pl-5'>
+                    (<div className='flex gap-x-1 truncate pl-5 bg-slate-100 '>
                       <Percent className='size-3.5 ' />
                       <p className='text-gray-900  '> Pourcentage applicable </p><Equal className='size-3.5 ' />varie entre <p className='font-medium '>{res.rate[0]}%</p> et <p className='font-medium '>{res.rate[1]}%</p>  sur<p className='lowercase '>{res.taxBase[0]}</p>
                     </div>)
                   }
                 </>) :
-                (< div className='flex flex-col space-y-0.5 '>
+                (< div className='flex flex-col space-y-2  '>
                   <div className='flex gap-x-1 pl-5 '><Coins className='size-4 ' /><p className='text-gray-900  '>{res.taxBase[0]} </p><Equal className='size-3.5 ' /> <p className='font-medium '>{String(res.amount[0]).replace(...numberFormatRegex) + " Fcfa"}</p></div>
-                  <div className='flex gap-x-1 pl-5'><Coins className='size-4 ' /><p className='text-gray-900  '>{res.taxBase[1]} </p><Equal className='size-3.5 ' /> <p className='font-medium '>{String(res.amount[1]).replace(...numberFormatRegex) + " Fcfa"}</p></div>
+                  <div className='flex gap-x-1 pl-5 '><Coins className='size-4 ' /><p className='text-gray-900  '>{res.taxBase[1]} </p><Equal className='size-3.5 ' /> <p className='font-medium '>{String(res.amount[1]).replace(...numberFormatRegex) + " Fcfa"}</p></div>
                             
                   {res.rate.length < 3 ?
-                    <>
-                      <div className='flex gap-x-1 pl-5'><Percent className='size-3.5 ' /><p className='text-gray-900  '>Pourcentage appliqué </p><Equal className='size-3.5 ' /><p className='font-medium '>{res.rate[0]}%</p> sur<p className='lowercase '>{res.taxBase[0]}</p></div>
-                      <div className='flex gap-x-1 pl-5'><Percent className='size-3.5 ' /><p className='text-gray-900  '>Pourcentage appliqué </p><Equal className='size-3.5 ' /><p className='font-medium '>{res.rate[1]}%</p> sur<p className='lowercase '>{res.taxBase[1]}</p></div>
-                    </>
+                    <div className='flex flex-col space-y-1 bg-slate-100'>
+                      <div className='flex gap-x-1 pl-5 '><Percent className='size-3.5 ' /><p className='text-gray-900  '>Pourcentage appliqué </p><Equal className='size-3.5 ' /><p className='font-medium '>{res.rate[0]}%</p> sur<p className='lowercase '>{res.taxBase[0]}</p></div>
+                      <div className='flex gap-x-1 pl-5 '><Percent className='size-3.5 ' /><p className='text-gray-900  '>Pourcentage appliqué </p><Equal className='size-3.5 ' /><p className='font-medium '>{res.rate[1]}%</p> sur<p className='lowercase '>{res.taxBase[1]}</p></div>
+                    </div>
                     :
-                    (<div className=' flex gap-x-1 pt-3 pl-5'>
+                    (<div className=' flex gap-x-1 pt-3 pl-5 bg-slate-100'>
                       <Percent className='size-3.5 ' />
-                      <p className='text-gray-900  '>Pourcentages appliqués :</p>
+                      <p className='text-gray-900 '>Pourcentages appliqués :</p>
                   
-                      <ul className=' space-y-0.5 ml-4'>
+                      <ul className=' space-y-1 ml-4'>
                         <li className=' flex gap-x-1'>
                           <span className="flex h-2 w-2 translate-y-1 rounded-full bg-slate-400" />
                           <p className='font-medium'>{res.rate[0]}% </p>sur<p className='lowercase '>{res.taxBase[0]}</p>
@@ -435,10 +455,10 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
                 <p className='font-medium '> {res.taxPrice[0]}</p>
               </div>
               :
-              <div className=' flex gap-x-1 text-sm'>
+              <div className=' flex gap-x-1 text-xs'>
                 <HandCoins />
                 <p className='text-blue-900  '>Montant total  :</p>
-                <ul className='space-y-0.5 ml-4'>
+                <ul className='space-y-1 ml-4'>
                   <li className=' flex gap-x-1'>
                     <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
                     <p className='font-medium'>{res.taxPrice[0]}</p>
@@ -452,7 +472,7 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
             }
               
           </div>
-          <ResultMoreOption onHelp={forHelp} onHorsTax={forHorsTax}  htName = {res.hTax} />
+          <ResultMoreOption onHelp={forHelp} onExoneration={forExoneration} />
           <div className=' flex flex-col gap-y-2 mt-6  '>
               
             <Link href='' onClick={handleClick} className=" h-full">

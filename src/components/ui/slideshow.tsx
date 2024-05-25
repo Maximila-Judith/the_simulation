@@ -23,15 +23,15 @@ export const Slideshow = () => {
     return (
         <div className="flex flex-row items-center gap-x-20 pl-20 pr-20 ">
             <div className={`flex flex-col w-1/2 space-y-3 ${styles.slideon}`}>
-                <h1 className="font-bold text-xl uppercase text-center">Impôt pour entreprise</h1>
-                <p className="text-lg text-center">
+                <h1 className="font-bold text-md text-white uppercase text-center">Impôt pour entreprise</h1>
+                <p className="text-sm text-center text-white">
                     Tout savoir sur les impôts pour particuliers au Bénin.
                     Comprendre les démarches et les obligations fiscales.
                     Restez informé des dernières actualités fiscales béninoises.
                     Restez informé des dernières actualités fiscales béninoises.
                     Restez informé des dernières actualités fiscales béninoises.
                 </p>
-                <Link href="/" className="mt-6 bg-gray-200 font-semibold text-lg py-2 px-6 rounded-full self-center hover:bg-gray-200 transition duration-200">Simuler</Link>
+                <Link href="/" className="mt-6 bg-gray-700 hover:bg-gray-600 font-semibold text-lg py-2 px-4 rounded-full self-center text-white transition duration-200">Simuler</Link>
             </div>
             <div className="relative">
                 <div className="flex items-center">

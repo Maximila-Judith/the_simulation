@@ -43,13 +43,12 @@ import { Slideshow } from "../ui/slideshow";
 import { Myslides } from "../ui/myslides";
 import { Menu, X } from "lucide-react";
 import { ThisMenu } from "../ui/thisMenu";
-
-
+import { Separator } from "@/components/ui/separator"
 
 
 
 export function Landing() {
-    const images = ['/111.jpg', '/222.jpg', '/333.jpg']
+    const images = ['/g1.jpg', '/g2.jpg', '/g3.jpg', '/333.jpg']
     const [image, setImage] = useState(0)
     const [menu, setMenu] = useState(false)
 
@@ -71,7 +70,7 @@ export function Landing() {
     }
 
     return (
-        <div className="mx-auto">
+        <div className="mx-auto bg-neutral-300">
             <div className={` flex flex-col pt-3 bg-no-repeat bg-cover bg-center h-96 lg:max-h-96 max-w-full block ${styles['background-slide']}`} style={{ backgroundImage: `url(${images[image]})` }}>
                 <div className="flex flex-row justify-between p-3">
                     <Image
@@ -86,104 +85,6 @@ export function Landing() {
                             {menu ? (<X className='absolute inset-0 shrink-0 top-5 left-5 text-white transform -translate-x-1/2 -translate-y-1/2 fill-current ' />) : (<Menu className="absolute inset-0 shrink-0 top-5 left-5 text-white transform -translate-x-1/2 -translate-y-1/2 fill-current" />)}
                         </button>
                         <ThisMenu />
-                        {/* <Menubar className={`flex justify-end self-end lg:flex bg-transparent opacity-100 border-none text-white ${menu ? 'block' : 'hidden'}`}>
-                            <MenubarMenu >
-                                <MenubarTrigger>
-                                    <Link rel="stylesheet" href="/">Accueil</Link>
-                                </MenubarTrigger>
-                            </MenubarMenu>
-                            <MenubarMenu>
-                                <MenubarTrigger>
-
-                                </MenubarTrigger>
-                            </MenubarMenu>
-                            <MenubarMenu>
-                                <MenubarTrigger>
-
-                                </MenubarTrigger>
-                            </MenubarMenu>
-                            <MenubarMenu>
-                                <MenubarTrigger>
-                                    <Link rel="stylesheet" href="">A Propos</Link>
-                                </MenubarTrigger>
-                            </MenubarMenu>
-                        </Menubar> */}
-                        {/* <NavigationMenu className={`flex justify-end self-end lg:flex border-none text-white ${menu ? 'block' : 'hidden'}`}>
-                            <NavigationMenuList>
-                                <NavigationMenuItem>
-                                    <NavigationMenuTrigger>
-                                        <Link rel="stylesheet" href="/">Accueil</Link>
-                                    </NavigationMenuTrigger>
-                                </NavigationMenuItem>
-                            </NavigationMenuList>
-
-                            <NavigationMenuList>
-                                <NavigationMenuItem>
-                                    <NavigationMenuTrigger>
-                                        <Link rel="stylesheet" href="">Simulation</Link>
-                                    </NavigationMenuTrigger>
-                                    <NavigationMenuContent>
-                                        <NavigationMenuLink className="text-md text-semibold italic">
-                                            <Link rel="stylesheet" href="" onClick={handleClick}>
-                                                Impot sur les Sociétés (IS)
-                                            </Link>
-                                        </NavigationMenuLink>
-                                        <NavigationMenuLink className="text-md text-semibold italic">
-                                            <Link rel="stylesheet" href="" onClick={handleClick}>
-                                                Impot sur les Bénéfices d'Affaire (IBA)
-                                            </Link>
-                                        </NavigationMenuLink>
-                                        <NavigationMenuLink className="text-md text-semibold italic">
-                                            <Link rel="stylesheet" href="" onClick={handleClick}>
-                                                Impot sur les Revenus Fonciers (IRF)
-                                            </Link>
-                                        </NavigationMenuLink>
-                                        <NavigationMenuLink className="text-md text-semibold italic">
-                                            <Link rel="stylesheet" href="" onClick={handleClick}>
-                                                Impot sur les Traitement de Salaire (ITS)
-                                            </Link>
-                                        </NavigationMenuLink>
-                                        <NavigationMenuLink className="text-md text-semibold italic">
-                                            <Link rel="stylesheet" href="" onClick={handleClick}>
-                                                Taxe Professionnelle Synthétique (TPS)
-                                            </Link>
-                                        </NavigationMenuLink>
-                                        <NavigationMenuLink className="text-md text-semibold italic">
-                                            <Link rel="stylesheet" href="" onClick={handleClick}>
-                                                Taxe Foncière Unique (TFU)
-                                            </Link>
-                                        </NavigationMenuLink>
-                                    </NavigationMenuContent>
-                                </NavigationMenuItem>
-                            </NavigationMenuList>
-
-                            <NavigationMenuList>
-                                <NavigationMenuItem>
-                                    <NavigationMenuTrigger>
-                                        <Link rel="stylesheet" href="">Documentation</Link>
-                                    </NavigationMenuTrigger>
-                                    <NavigationMenuContent>
-                                        <NavigationMenuLink >
-                                            <Link rel="stylesheet" href="https://api.impots.bj/media/65d5ae32a155a_B%C3%A9nin-Code%20G%C3%A9n%C3%A9ral%20des%20Imp%C3%B4ts%202024.pdf">
-                                                Code Général des Impôts 2024 (CGI)
-                                            </Link>
-                                        </NavigationMenuLink>
-                                        <NavigationMenuLink >
-                                            <Link rel="stylesheet" href="https://api.impots.bj//media/63b450bf40bf1_Code%20G%C3%A9n%C3%A9ral%20des%20Imp%C3%B4ts%20(Version%20citoyenne).pdf">
-                                                Code Général des Impôts 2024 (V.C)
-                                            </Link>
-                                        </NavigationMenuLink>
-                                    </NavigationMenuContent>
-                                </NavigationMenuItem>
-                            </NavigationMenuList>
-
-                            <NavigationMenuList>
-                                <NavigationMenuItem>
-                                    <NavigationMenuTrigger>A propos</NavigationMenuTrigger>
-                                </NavigationMenuItem>
-                            </NavigationMenuList>
-                        </NavigationMenu> */}
-
                     </div>
                 </div>
 
@@ -192,71 +93,80 @@ export function Landing() {
                     <Link href="" onClick={handleClick} className="mt-6 bg-white inline-block text-black font-bold py-2 px-6 rounded-full self-center hover:bg-gray-200 transition duration-200">Simuler</Link>
                 </div>
             </div>
-            <div className="bg-gray-100 text-center w-full justify-center p-20 ">
+
+            <div className=" text-center w-full justify-center p-20 ">
                 <div className="flex flex-col justify-center mr-40 ml-40 p-30">
-                    <h1 className="font-bold self-center inline-block text-xl">Comment simuler ses impôts ?</h1>
-                    <p className="pt-5 text-center inline-block">
-                        La simulation est régulièrement mis à jour pour refléter les dernières modifications apportées au CIG, ce qui vous permet de rester en conformité avec les lois fiscales en vigueur au Bénin.
+                    <h1 className="font-bold self-center text-violet-900 inline-block text-xl">Comment simuler ses impôts ?</h1>
+                    <p className="pt-5 text-center text-md inline-block">
+                        Simuler ses impôts au Bénin est simple et rapide grâce à notre application intuitive. Suivez ces trois étapes faciles pour obtenir une estimation précise de vos impôts.
                     </p>
                 </div>
-                <div className="flex flex-col lg:flex-row bg-blue-300 justify-center items-center gap-y-10 lg:gap-x-10 pt-10 ">
-                    <Card className={`drop-shadow-md ${styles['card']}`}>
+                <div className="flex flex-col lg:flex-row justify-center items-center gap-y-10 lg:gap-x-10 pt-10 ">
+                    <Card className={`drop-shadow-md space-y-2 ${styles['card']}`}>
                         <CardHeader>
-                            <div className="flex flex-col items-center space-y-10">
+                            <div className="flex flex-col items-center">
                                 <Image
-                                    src="/aaa.jpg"
+                                    src="/img/c1.jpg"
                                     alt="icon 1"
-                                    width={70}
-                                    height={70}
+                                    width={100}
+                                    height={100}
                                     priority
-                                    className="rounded-full"
+                                    className=""
                                 />
-                                <h5>Simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler </h5>
                             </div>
                         </CardHeader>
+                        <CardContent className="space-y-2">
+                            <h2 className="uppercase font-bold inline-block text-center text-violet-800">Accéder à la plateforme</h2>
+                            <CardDescription className="text-sm p-1 text-semibold text-black">Accéder à l'application de simulation d'impôts et commencez par entrer vos informations de base.</CardDescription>
+                        </CardContent>
                     </Card>
 
-                    <Card className={`drop-shadow-md ${styles['card']}`}>
+                    <Card className={`drop-shadow-md space-y-2 ${styles['card']}`}>
                         <CardHeader>
-                            <div className="flex flex-col items-center space-y-10">
+                            <div className="flex flex-col items-center">
                                 <Image
-                                    src="/ccc.jpg"
+                                    src="/img/c2.jpg"
                                     alt="icon 1"
-                                    width={70}
-                                    height={70}
+                                    width={100}
+                                    height={100}
                                     priority
-                                    className="rounded-full"
+                                    className=""
                                 />
-                                <h5>Simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler </h5>
                             </div>
                         </CardHeader>
+                        <CardContent className="space-y-2">
+                            <h2 className="uppercase font-bold inline-block text-center text-violet-800">Répondre aux questions </h2>
+                            <CardDescription className="text-sm p-1 text-semibold text-black">L'application vous posera une série de questions spécifiques concernant vos revenus, dépenses et situation fiscale.</CardDescription>
+                        </CardContent>
                     </Card>
 
-                    <Card className={`drop-shadow-md ${styles['card']}`}>
+                    <Card className={`drop-shadow-md space-y-2 ${styles['card']}`}>
                         <CardHeader>
-                            <div className="flex flex-col items-center space-y-10">
+                            <div className="flex flex-col items-center">
                                 <Image
-                                    src="/ddd.jpg"
+                                    src="/img/c3.jpg"
                                     alt="icon 1"
-                                    width={70}
-                                    height={70}
+                                    width={100}
+                                    height={100}
                                     priority
-                                    className="rounded-full"
+                                    className=""
                                 />
-                                <h5>Simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler simuler </h5>
                             </div>
                         </CardHeader>
+                        <CardContent className="space-y-2">
+                            <h2 className="uppercase font-bold inline-block text-center text-violet-800">Obtenir le résultat </h2>
+                            <CardDescription className="text-sm p-1 text-semibold text-black">En fonction de vos réponses, vous recevrez une estimation détaillée de la nature de chaque impôt applicable.</CardDescription>
+                        </CardContent>
                     </Card>
 
                 </div>
             </div>
-
-            <div className="pt-10 pr-20 pl-20 text-2xl pb-20 space-y-20">
+            <div className="pt-10 pr-20 pl-20 pb-20 space-y-20 bg-gray-500">
                 <Myslides />
                 <Slideshow />
             </div>
 
-            <footer className="bg-gray-900 w-full">
+            <footer className=" bg-gradient-to-b from-gray-200 to-neutral-800 w-full">
                 <div className="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 lg:pt-20 mx-auto">
                     <div className="mt-5 sm:mt-12 grid gap-y-2 sm:gap-y-0 sm:flex sm:justify-between sm:items-center">
                         <div className="flex justify-between items-center">
@@ -273,7 +183,7 @@ export function Landing() {
                             </div>
                         </div>
                         <div className="flex flex-col items-center space-y-4">
-                            <p className="text-sm text-gray-400 dark:text-neutral-400">© 2024 BENIN. All rights reserved.</p>
+                            <p className="text-sm text-gray-400 dark:text-neutral-400"></p>
                             <div className="flex flex-row items-center space-x-6">
                                 <a className="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-white/10 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600" href="#">
                                     <svg className="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
@@ -304,8 +214,13 @@ export function Landing() {
                         </div>
                     </div>
                 </div>
+                <p className="text-center text-white text-sm">© 2024 Direction Générale des Impots Bénin. Tous droits réservés.</p>
+                <div className="flex flex-row h-2">
+                    <span className="flex-1 bg-green-600"></span>
+                    <span className="flex-1 bg-yellow-500"></span>
+                    <span className="flex-1 bg-red-700"></span>
+                </div>
             </footer>
-
         </div >
     )
 }

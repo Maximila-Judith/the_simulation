@@ -21,7 +21,7 @@ import { ResultMoreOption } from "@/components/ui/navBarResult"
 import { Help } from './help';
 import { Htax} from "@/lib/type/type"
 import {HorsTax} from './horsTax'
-import { valHT } from './horsTax/globalHorsTax';
+import { valHT } from './horsTax/globalExonerations';
 
 
 
@@ -337,9 +337,9 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
       {(help || horsTax) ?
         <div>
           {help && <Help onClick = {backHelp} />}
-          {horsTax && <HorsTax Click = {backHorsTax} />}
+          {horsTax && <HorsTax Click = {backHorsTax} val= {valH?valH:valHT[0]} />}
         </div> :
-        <Card className={styles.result}>
+        <div className="bg-white rounded-sm overflow-hidden">
           <div className=' flex flex-col space-y-1'>
             <div className='flex justify-center h-8 pt-1 mb-2 rounded-t-md bg-slate-200'>
               <p className='text-gray-900 text-center text-x'>Résultat de la simulation</p>
@@ -452,7 +452,7 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
             }
               
           </div>
-          <ResultMoreOption onHelp={forHelp} onHorsTax={forHorsTax} />
+          <ResultMoreOption onHelp={forHelp} onHorsTax={forHorsTax}  htName = {res.hTax} />
           <div className=' flex flex-col gap-y-2 mt-6  '>
               
             <Link href='' onClick={handleClick} className=" h-full">
@@ -464,7 +464,7 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
               </Button>
             </Link>
           </div>
-        </Card>
+        </div>
       }
     </div>
   )

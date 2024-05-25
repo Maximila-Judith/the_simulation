@@ -16,21 +16,6 @@ color: rgb(37, 38, 41);
 font-size:80%;
 background-color: rgb(118, 133, 151);
 }
-.backButton{
-background-color: rgb(229, 238, 238);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 3rem;
-    border-radius: 8px 0px 0px 8px;
-}
-
-.backButton:hover{
-background-color: rgb(176, 194, 194);
-}
-
-
 .resultCard{
     overflow: hidden;
     background-color: rgb(39, 90, 73);

@@ -1,4 +1,4 @@
-import { BellRing, Check } from "lucide-react"
+import { BellRing, Check, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -18,10 +18,15 @@ export interface InfoProps {
 export const InfoCard: React.FC<InfoProps> = ({ infos, onClick }) => {
 
   return (
-    <div className="text-center md:text-left lg:text-left">
-      <Card className=" md:text-left lg:text-left">
-        <CardHeader>
-          <CardTitle>{infos.title}</CardTitle>
+    <div className="text-center md:text-left lg:text-left text-xs">
+      <div className=" bg-white md:text-left lg:text-left rounded-sm overflow-hidden">
+        <div className="flex justify-end mt-0 mr-0">
+          <button onClick={onClick} className=" hover:text-white w-8 h-6 bg-red-700 rounded-none p-1 bg-opacity-0 hover:bg-opacity-100 hover: color-white ">
+            <X className="h-full w-full " />
+          </button>
+        </div>
+        <CardHeader className="flex justify-center pt-0 h-full w-full">
+          <CardTitle className=" text-center text-xl ">{infos.title}</CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4">
           <div>
@@ -35,20 +40,16 @@ export const InfoCard: React.FC<InfoProps> = ({ infos, onClick }) => {
                   <p className="text-sm font-medium leading-none">
                     {info.title}
                   </p>
-                  <p className="text-sm text-muted-foreground">
+      {info.description && <p className="text-xs text-muted-foreground">
                     {info.description}
-                  </p>
+                  </p>}
                 </div>
               </div>
             ))}
           </div>
         </CardContent>
-        <CardFooter>
-          <Button onClick={onClick} className="w-full">
-            <Check className="mr-2 h-4 w-4" /> J'ai compris
-          </Button>
-        </CardFooter>
-      </Card>
+
+      </div>
 
     </div >
   )

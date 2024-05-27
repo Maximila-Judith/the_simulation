@@ -35,3 +35,14 @@ export interface Htax {
         description: string
     }[]
 }
+
+export interface ResultInterface {
+    taxName: string[],
+    taxBase: string[],
+    amount: Number[],
+    rate: Number[],
+    minimum: Number,
+    priceAdd: Number,
+    taxPrice: Number[],
+    exoneration: string
+}

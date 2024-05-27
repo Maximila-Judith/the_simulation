@@ -14,24 +14,18 @@ import {
 } from "@/components/ui/navigation-menu"
 
 
-export function ResultMoreOption({ onHelp, onExoneration }: { onHelp: () => void; onExoneration: () => void}) {
+export function ResultMoreOption({ onExoneration }: { onExoneration: () => void}) {
   return (
-    <NavigationMenu className="mb-11 bg-opacity-0 ">
+    <NavigationMenu className="bg-opacity-0 ">
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className=" text-xs">Plus</NavigationMenuTrigger>
+          <NavigationMenuTrigger className=" text-center text-x">Resultat de la simulation</NavigationMenuTrigger>
           <NavigationMenuContent >
-            <ul className="hover:text-blue-900 ">
+            <ul className="hover:text-blue-900  ">
               <ListItem
                 key="horsTaxe"
-                title="Voir les exonérations associées à ce type d'impôt"
+                title="Voir les exonérations de cet impôt"
                 onClick={onExoneration}
-              >
-              </ListItem>
-              <ListItem
-                key="help"
-                title= "En savoir plus sur la procédure de calcul"
-                onClick={onHelp}
               >
               </ListItem>
             </ul>

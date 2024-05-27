@@ -28,7 +28,7 @@ export const TypeInput = ({ onSubmit, question }: { onSubmit: (label: string[], 
             Number(event.target.value.replace(...spaceDeleteRegex)) < conditionValue ? setIsAccepted(true): setIsAccepted(false)
          }
       }
-        //mise à jour de response
+  
         setResponse(event.target.value.replace(...spaceDeleteRegex));
     }
 

@@ -93,7 +93,7 @@ export function Landing() {
 
                 <div className="flex flex-col lg:mb-10 w-full lg:w-2/4 place-self-center bg-transparent opacity-100 pl-8 space-y-4 lg:mt-10 pt-20 mt-10 overflow-x-hidden overflow-y-hidden">
                     <h1 className="text-2xl text-center font-bold text-white inline-block ">Simuler vos Impôts conformément au Code Géneral des Impôts 2024</h1>
-                    <Link href="" onClick={() => handleClick} className="mt-6 bg-white inline-block text-black font-bold py-2 px-6 rounded-full self-center hover:bg-gray-200 transition duration-200">Simuler</Link>
+                    <Link href="" onClick={() => handleClick} className="mt-6 bg-white inline-block text-black font-bold py-2 px-6 rounded-lg self-center hover:bg-gray-400 transition duration-200">Simuler</Link>
                 </div>
             </div>
 
@@ -105,7 +105,7 @@ export function Landing() {
                     </p>
                 </div>
                 <div className="flex flex-col lg:flex-row justify-center items-center gap-y-10 lg:gap-x-10 pt-10 ">
-                    <Card className={`drop-shadow-md space-y-2 ${styles['card']}`}>
+                    <Card className={`drop-shadow-md ${styles['card']}`}>
                         <CardHeader>
                             <div className="flex flex-col items-center">
                                 <Image
@@ -124,7 +124,7 @@ export function Landing() {
                         </CardContent>
                     </Card>
 
-                    <Card className={`drop-shadow-md space-y-2 ${styles['card']}`}>
+                    <Card className={`drop-shadow-md ${styles['card']}`}>
                         <CardHeader>
                             <div className="flex flex-col items-center">
                                 <Image
@@ -143,7 +143,7 @@ export function Landing() {
                         </CardContent>
                     </Card>
 
-                    <Card className={`drop-shadow-md space-y-2 ${styles['card']}`}>
+                    <Card className={`drop-shadow-md ${styles['card']}`}>
                         <CardHeader>
                             <div className="flex flex-col items-center">
                                 <Image
@@ -166,7 +166,7 @@ export function Landing() {
             </div>
             <div className="pt-10 pr-20 pl-20 pb-20 space-y-20 bg-gray-500">
                 <Myslides />
-                <Slideshow />
+                <Slideshow /> 
             </div>
 
             <footer className=" bg-gradient-to-b from-gray-200 to-neutral-800 w-full">
@@ -177,6 +177,7 @@ export function Landing() {
                                 <a className="flex-none text-xl font-semibold text-white" href="#" aria-label="Brand">
                                     <Image
                                         src="/dgi-white.webp"
+                                        
                                         alt="icon 1"
                                         width={200}
                                         height={350}

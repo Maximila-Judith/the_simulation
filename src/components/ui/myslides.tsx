@@ -23,7 +23,7 @@ export const Myslides = () => {
     }
 
     return (
-        <div className="flex flex-row items-center gap-y-10 gap-x-20 pl-20 pr-20 ">
+        <div className="flex flex-row items-center gap-y-10 gap-x-20 -mr-20">
             <div className="relative">
                 <div className="flex items-center">
                     <button onClick={previous} className="absolute left-0 z-10 p-2 h-20 hover:bg-opacity-30 hover:bg-black shadow-md">
@@ -45,7 +45,7 @@ export const Myslides = () => {
                         <button
                             key={index}
                             onClick={() => goToSlide(index)}
-                            className={`h-2 w-2 rounded-full ${currentIndex === index ? 'bg-gray-800' : 'bg-gray-300'}`}
+                            className={`h-2 w-2 rounded-full ${currentIndex === index ? 'bg-gray-800' : 'bg-gray-600'}`}
                         />
                     ))}
                 </div>

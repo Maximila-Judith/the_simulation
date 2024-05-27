@@ -21,7 +21,7 @@ export const Slideshow = () => {
     }
 
     return (
-        <div className="flex flex-row items-center gap-x-20 pl-20 pr-20 ">
+        <div className="flex flex-row items-center gap-x-20 -mr-20 ">
             <div className={`flex flex-col w-1/2 space-y-3 ${styles.slideon}`}>
                 <h1 className="font-bold text-md text-white uppercase text-center">Impôt pour entreprise</h1>
                 <p className="text-sm text-center text-white">
@@ -54,7 +54,7 @@ export const Slideshow = () => {
                         <button
                             key={index}
                             onClick={() => goToSlide(index)}
-                            className={`h-2 w-2 rounded-full ${currentIndex === index ? 'bg-gray-800' : 'bg-gray-300'}`}
+                            className={`h-2 w-2 rounded-full ${currentIndex === index ? 'bg-gray-800' : 'bg-gray-600'}`}
                         />
                     ))}
                 </div>

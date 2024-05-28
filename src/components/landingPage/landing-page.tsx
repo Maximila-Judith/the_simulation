@@ -44,18 +44,32 @@ import { Myslides } from "../ui/myslides";
 import { Menu, X } from "lucide-react";
 import { ThisMenu } from "../ui/thisMenu";
 import { Separator } from "@/components/ui/separator"
+import { Theslide } from "../ui/theslide";
+import { TypedText } from "../ui/typetext";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
+AOS.init({
+    duration: 1500,
+    easing: 'ease-in-out',
+    once: true
+});
 
 
 export function Landing() {
     const images = ['/g1.jpg', '/g2.jpg', '/g3.jpg', '/333.jpg']
     const [image, setImage] = useState(0)
     const [menu, setMenu] = useState(false)
+    const [currentSlide, setCurrentSlide] = useState('Myslides');
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setMenuOpen(!menuOpen);
+    };
 
     const displaymenu = () => {
         setMenu(!menu)
     }
-
 
 
     useEffect(() => {
@@ -72,44 +86,78 @@ export function Landing() {
 
     }
 
+    const handleProgressChange = (progress: number) => {
+        if (progress <= 50) {
+            setCurrentSlide('Myslides');
+        } else {
+            setCurrentSlide('Slideshow');
+        }
+    };
+
     return (
-        <div className="mx-auto bg-neutral-300">
-            <div className={` flex flex-col pt-3 bg-no-repeat bg-cover bg-center h-96 lg:max-h-96 max-w-full block ${styles['background-slide']}`} style={{ backgroundImage: `url(${images[image]})` }}>
-                <div className="flex flex-row justify-between p-3">
+        <div className=" relative mx-auto bg-neutral-300">
+            <div className="flex flex-row justify-between items-center pl-10 pr-10 bg-gray-400 fixed top-0 left-0 w-full bg-white z-50">
+                <Image
+                    src="/dgi-white.webp"
+                    alt="icon 1"
+                    width={200}
+                    height={200}
+                    priority
+                />
+                {menuOpen ? (
+                    <button className="" onClick={toggleMenu}> <X /> </button>
+                ) : (
+                    <button className="" onClick={toggleMenu}> <Menu /> </button>
+                )}
+            </div>
+            <div className={`fixed top-0 left-0 w-full h-screen mt-20 bg-gray-800 bg-opacity-50 z-40 transition-transform duration-300 ${menuOpen ? 'transform-none' : '-translate-x-full'}`}>
+                <div className="flex flex-row justify-between p-3 fixed top-0 w-full absolute top-0 left-0 w-64 bg-white h-full">
                     <Image
-                        src="/dgi-white.webp"
+                        src="/img/menu-img.jpg"
                         alt="icon 1"
                         width={200}
                         height={350}
                         priority
+                        className="w-1/3 h-screen"
                     />
-                    <div className="">
-                        <button className="relative items-center justify-center lg:hidden block rounded-lg w-10 h-10 hover:bg-gray-300 hover:bg-opacity-40 focus:outline-none" onClick={displaymenu}>
-                            {menu ? (<X className='absolute inset-0 shrink-0 top-5 left-5 text-white transform -translate-x-1/2 -translate-y-1/2 fill-current ' />) : (<Menu className="absolute inset-0 shrink-0 top-5 left-5 text-white transform -translate-x-1/2 -translate-y-1/2 fill-current" />)}
-                        </button>
-                        <ThisMenu />
-                    </div>
+                    <ThisMenu />
                 </div>
-
-                <div className="flex flex-col lg:mb-10 w-full lg:w-2/4 place-self-center bg-transparent opacity-100 pl-8 space-y-4 lg:mt-10 pt-20 mt-10 overflow-x-hidden overflow-y-hidden">
-                    <h1 className="text-2xl text-center font-bold text-white inline-block ">Simuler vos Impôts conformément au Code Géneral des Impôts 2024</h1>
+            </div>
+            {/* <div className="flex flex-row justify-between p-3 fixed top-0 w-full">
+                <Image
+                    src="/dgi-white.webp"
+                    alt="icon 1"
+                    width={200}
+                    height={350}
+                    priority
+                />
+                <div className="">
+                    <button className="relative items-center justify-center lg:hidden block rounded-lg w-10 h-10 hover:bg-gray-300 hover:bg-opacity-40 focus:outline-none" onClick={displaymenu}>
+                        {menu ? (<X className='absolute inset-0 shrink-0 top-5 left-5 text-white transform -translate-x-1/2 -translate-y-1/2 fill-current ' />) : (<Menu className="absolute inset-0 shrink-0 top-5 left-5 text-white transform -translate-x-1/2 -translate-y-1/2 fill-current" />)}
+                    </button>
+                    <ThisMenu />
+                </div>
+            </div> */}
+            <div className="flex flex-col pt-3 bg-[url('/thebg.jpg')] bg-no-repeat bg-cover bg-center h-screen lg:max-h-96 max-w-full block">
+                <div className={`flex flex-col lg:mb-10 w-full lg:w-2/4 place-self-center bg-transparent opacity-100 pl-8 space-y-4 lg:mt-10 pt-20 mt-10 overflow-x-hidden overflow-y-hidden ${styles['zoom-in']}`}>
+                    <h1 className={`text-2xl text-center font-bold text-white inline-block`} > Simuler vos Impôts conformément au Code Géneral <TypedText /> </h1>
                     <Link href="" onClick={() => handleClick} className="mt-6 bg-white inline-block text-black font-bold py-2 px-6 rounded-lg self-center hover:bg-gray-400 transition duration-200">Simuler</Link>
                 </div>
             </div>
 
             <div className=" text-center w-full justify-center p-20 ">
                 <div className="flex flex-col justify-center mr-40 ml-40 p-30">
-                    <h1 className="font-bold self-center text-violet-900 inline-block text-xl">Comment simuler ses impôts ?</h1>
-                    <p className="pt-5 text-center text-md inline-block">
+                    <h1 className="font-bold self-center text-neutral-900 inline-block text-xl">Comment simuler ses impôts ?</h1>
+                    <p className="pt-5 text-center text-neutral-600 text-md inline-block">
                         Simuler ses impôts au Bénin est simple et rapide grâce à notre application intuitive. Suivez ces trois étapes faciles pour obtenir une estimation précise de vos impôts.
                     </p>
                 </div>
-                <div className="flex flex-col lg:flex-row justify-center items-center gap-y-10 lg:gap-x-10 pt-10 ">
+                <div className="flex flex-col lg:flex-row justify-center items-center gap-y-10 lg:gap-x-10 pt-10 transition ease-in-out duration-1000" data-aos="fade-up" data-aos-delay="400">
                     <Card className={`drop-shadow-md ${styles['card']}`}>
                         <CardHeader>
                             <div className="flex flex-col items-center">
                                 <Image
-                                    src="/img/c1.jpg"
+                                    src="/img/d1.jpg"
                                     alt="icon 1"
                                     width={100}
                                     height={100}
@@ -119,7 +167,7 @@ export function Landing() {
                             </div>
                         </CardHeader>
                         <CardContent className="space-y-2">
-                            <h2 className="uppercase font-bold inline-block text-center text-violet-800">Accéder à la plateforme</h2>
+                            <h2 className="uppercase font-bold inline-block text-center text-green-800">Accéder à la plateforme</h2>
                             <CardDescription className="text-sm p-1 text-semibold text-black">Accéder à l'application de simulation d'impôts et commencez par entrer vos informations de base.</CardDescription>
                         </CardContent>
                     </Card>
@@ -128,7 +176,7 @@ export function Landing() {
                         <CardHeader>
                             <div className="flex flex-col items-center">
                                 <Image
-                                    src="/img/c2.jpg"
+                                    src="/img/d2.jpg"
                                     alt="icon 1"
                                     width={100}
                                     height={100}
@@ -138,7 +186,7 @@ export function Landing() {
                             </div>
                         </CardHeader>
                         <CardContent className="space-y-2">
-                            <h2 className="uppercase font-bold inline-block text-center text-violet-800">Répondre aux questions </h2>
+                            <h2 className="uppercase font-bold inline-block text-center text-green-800">Répondre aux questions </h2>
                             <CardDescription className="text-sm p-1 text-semibold text-black">L'application vous posera une série de questions spécifiques concernant vos revenus, dépenses et situation fiscale.</CardDescription>
                         </CardContent>
                     </Card>
@@ -147,7 +195,7 @@ export function Landing() {
                         <CardHeader>
                             <div className="flex flex-col items-center">
                                 <Image
-                                    src="/img/c3.jpg"
+                                    src="/img/d3.jpg"
                                     alt="icon 1"
                                     width={100}
                                     height={100}
@@ -157,16 +205,16 @@ export function Landing() {
                             </div>
                         </CardHeader>
                         <CardContent className="space-y-2">
-                            <h2 className="uppercase font-bold inline-block text-center text-violet-800">Obtenir le résultat </h2>
+                            <h2 className="uppercase font-bold inline-block text-center text-green-800">Obtenir le résultat </h2>
                             <CardDescription className="text-sm p-1 text-semibold text-black">En fonction de vos réponses, vous recevrez une estimation détaillée de la nature de chaque impôt applicable.</CardDescription>
                         </CardContent>
                     </Card>
 
                 </div>
             </div>
-            <div className="pt-10 pr-20 pl-20 pb-20 space-y-20 bg-gray-500">
-                <Myslides />
-                <Slideshow /> 
+            <div className="pt-20 pr-20 pl-20 justify-center pb-20 space-y-10 bg-[url('/img/b2.jpg')] transition ease-in-out duration-1000" data-aos="fade-up" data-aos-delay="400">
+                <Theslide onProgressChange={handleProgressChange} />
+                {currentSlide === 'Myslides' ? <Myslides /> : <Slideshow />}
             </div>
 
             <footer className=" bg-gradient-to-b from-gray-200 to-neutral-800 w-full">
@@ -177,7 +225,7 @@ export function Landing() {
                                 <a className="flex-none text-xl font-semibold text-white" href="#" aria-label="Brand">
                                     <Image
                                         src="/dgi-white.webp"
-                                        
+
                                         alt="icon 1"
                                         width={200}
                                         height={350}
@@ -219,11 +267,6 @@ export function Landing() {
                     </div>
                 </div>
                 <p className="text-center text-white text-sm">© 2024 Direction Générale des Impots Bénin. Tous droits réservés.</p>
-                <div className="flex flex-row h-2">
-                    <span className="flex-1 bg-green-600"></span>
-                    <span className="flex-1 bg-yellow-500"></span>
-                    <span className="flex-1 bg-red-700"></span>
-                </div>
             </footer>
         </div >
     )

@@ -11,43 +11,56 @@ import { Data } from "@/lib/type/type"
 import Response from '@/components/ui/response'
 import { TypeInput } from './inputAnswers';
 import { CheckboxReactHookFormMultiple } from '@/components/ui/multipleCheck'
-import { useState, useContext } from 'react'
+import { useState, useContext,useEffect } from 'react'
 import { QuestionContext } from "@/lib/questionContext";
 import styles from '@/app/wizard.module.css'
 import { Button } from './button';
 import { HelpCircle, ChevronLeft } from 'lucide-react';
+import AnimatedText from '@/components/ui/AnimatedText';
+import {HoverInfo} from '@/components/informations/HoverInfo';
 
 interface BodyProps {
     onAnswer: (value: string[], nextQuestion: string, nowQuestion: string, name: string) => void;
-    onInfo: () => void;
     onBack: () => void;
     length: number
 }
 
-export const Body: React.FC<BodyProps> = ({ onAnswer, onInfo, onBack, length }) => {
+export const Body: React.FC<BodyProps> = ({ onAnswer, onBack, length }) => {
     const the_question = useContext(QuestionContext)
 
     const question =  the_question.question,
         type_answer = the_question.answers.type ,
         choiceOptions = the_question.answers.choiceOptions
+    const [questionEnd, setQuestionEnd] = useState(false)
 
+    function forEnd() {
+        setQuestionEnd(true)
+    }
+    useEffect(() => { 
+
+       setQuestionEnd(false)
+    }, [the_question.answers]);
+    
     return (
         <div className="flex flex-col gap-2 h-50 text-center pt-0">
 
           <Card className= "flex ml-0 mt-0.5 h-20 text-xs rounded-sm overflow-hidden ">
             <div className='flex ml-0 space-x-2 h-full'>
-     {length > 1 && <button className="rounded-l-sm overflow-hidden flex items-center justify-center content-center p-0 m-0 h-full w-11  bg-slate-200  hover:bg-slate-300 " onClick={onBack}><ChevronLeft className='size-[18px] hover:size-[21px] ' /></button>}
+               <button disabled = {length > 1 ? false : true} className="rounded-l-sm overflow-hidden flex items-center justify-center content-center p-0 m-0 h-full w-11 disabled:opacity-30  bg-slate-200  hover:bg-slate-300 " onClick={onBack}><ChevronLeft className='size-[18px] hover:size-[21px] ' /></button>
             </div>
-            <div className='flex space-x-1  w-full justify-center text-center m-auto px-2 '>
-                      <p className=' text-center'>{question}</p> 
-{the_question.info && (<div className='content-center'><button className='rounded-full' onClick={onInfo}><HelpCircle className='size-[16px] hover:bg-slate-300 rounded-full' /></button></div>)}
+            <div className='flex space-x-1 h-full  w-full justify-start  m-auto flex-wrap content-start px-2 pt-2'>
+               <p className=' text-start'><AnimatedText text={question} onEnd={forEnd} /></p> 
+            {(the_question.info && questionEnd) && (<div className='content-center'><HoverInfo  info = {the_question.info} /></div>)}
             </div>
           </Card>
           <Card className='bg-gray-200 bg-opacity-70 rounded-sm overflow-hidden'>
             <div className='flex justify-center content-center text-center h-60  gap-4 mx-1.5'>
-                <div className="content-center space-y-3 w-full text-x" >
-
+         <div className = {`${
+                        questionEnd ? 'translate-x-0' : 'translate-x-[600px]'
+                    } transition duration-700 ease-in-out transform content-center space-y-3 w-full text-x`}
+                    >
                     {(type_answer === "unique_choice") && (
+                        
                         choiceOptions.length<5? choiceOptions.map((choice) => (
                             <Response key={choice.value} nowQuestion={the_question.id} value={choice} onSelect={onAnswer} />
                         )): <p className='text-center text-red-700'>La limite de proposition de réponses est de 4 !</p>
@@ -60,7 +73,7 @@ export const Body: React.FC<BodyProps> = ({ onAnswer, onInfo, onBack, length }) 
                     {(type_answer === "input") && (
                         <TypeInput key={the_question.id} question={the_question} onSubmit={onAnswer} />
                     )}
-                </div>
+            </div>
 
             </div>
           </Card>

@@ -20,10 +20,9 @@ import { Htax,ResultInterface} from "@/lib/type/type"
 import { Exoneration } from './horsTax';
 import { CalculMode } from "@/components/ui/calculMode"
 import { ResultContext } from "@/lib/resultContext";
-
-
-
-
+import LoadingPercentage from '@/components/ui/LoadingPercentage';
+import AnimatedText from '@/components/ui/AnimatedText';
+import { numberFormatRegex } from "@/lib/regex/numberRegex"
 
 export interface ResultProps {
   tax: string;
@@ -45,7 +44,7 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
       , exoneration: "" 
       }
 
-
+  const myData = localStorage.getItem('myData');
 
   switch (tax) {
 
@@ -333,50 +332,190 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
     };
 
   return (
-    <div className=" lg:text-left h-full border rounded-3xl overflow-hidden border-teal-800 ">
+    <div className=" lg:text-left w-screen overflow-hidden h-screen flex flex-wrap justify-center bg-black p-0 ">
 
       {( isExoneration) ?
         <div>
           {isExoneration && <Exoneration Click = {backExoneration} val= {res.exoneration} />}
         </div> :
-        <div className=" bg-neutral-900 rounded-xl overflow-hidden p-8 pb-11   pt-0 pr-0  text-white ">
-        <div className=' flex justify-end flex-col '>
-              <div className='flex justify-end h-10  '>
-                <div className=' rounded-es-xl  bg-neutral-600 flex flex-wrap justify-end content-center w-80'> <ResultMoreOption onExoneration={forExoneration} /></div>
-              </div>
-          <div className=' mt-0 flex gap-y-1 justify-end '>
-            <div className='flex flex-col'>
-              
-            <Link href='' onClick={handleClick} className="  h-[25px] ">
-              <Button variant="secondary" className=" rounded-es-xl h-full bg-neutral-600 text-yellow-400 hover:bg-neutral-900 hover:text-white rounded-se-none rounded-ee-none rounded-ss-none">
-                <div className='flex gap-x-1 h-full flex-wrap content-center '>
-                  <RotateCcw className='size-4' />
-                  <p className=' text-center text-xs'>Faire une autre simulation</p>
+
+        <div className=" flex space-x-0 bg-neutral-600  overflow-hidden p-8 pb-11 w-full   pt-0 pr-0 mb-0  text-white ">
+          
+          <div className='w-1/3'>
+            <div className='bg-blue-300 h-full w-full'>
+                <ResultContext.Provider value={res}>
+                  <div className='flex flex-col'>
+                    <CalculMode  />
+                  </div>
+                </ResultContext.Provider>
+            </div>
+
+  {/*           <div className=' flex justify-start flex-col '>
+                <div className='flex justify-end h-8  '>
+                  <div className=' rounded-es-xl  bg-neutral-600 flex flex-wrap justify-start content-center w-80 text-neutral-200'> <ResultMoreOption onExoneration={forExoneration} /></div>
                 </div>
-              </Button>
+
+            <div className=' mt-0 flex gap-y-1 justify-end '>
+              <div className='flex flex-col'>
+                
+              <Link href='' onClick={handleClick} className="  h-[25px] ">
+                <Button variant="secondary" className=" rounded-es-xl h-full bg-neutral-600 text-yellow-400 hover:bg-neutral-900 hover:text-white rounded-se-none rounded-ee-none rounded-ss-none">
+                  <div className='flex gap-x-1 h-full flex-wrap content-center '>
+                    <RotateCcw className='size-4' />
+                    <p className=' text-center text-xs'>Faire une autre simulation</p>
+                  </div>
+                </Button>
+                </Link>
+                <Link href='' onClick={forAcceuil} className="  h-[25px] flex justify-end">
+                <Button variant="secondary" className="rounded-es-xl h-full bg-neutral-600 text-neutral-400 hover:bg-neutral-900 hover:text-white rounded-se-none rounded-ee-none rounded-ss-none ">
+                  <div className='flex gap-x-1 h-full flex-wrap content-center '>
+                    <Home className='size-4' />
+                    <p className=' text-center text-xs'>Accueil</p>
+                  </div>
+                </Button>
               </Link>
-              <Link href='' onClick={forAcceuil} className="  h-[25px] flex justify-end">
-              <Button variant="secondary" className="rounded-es-xl h-full bg-neutral-600 text-neutral-400 hover:bg-neutral-900 hover:text-white rounded-se-none rounded-ee-none rounded-ss-none ">
-                <div className='flex gap-x-1 h-full flex-wrap content-center '>
-                  <Home className='size-4' />
-                  <p className=' text-center text-xs'>Accueil</p>
-                </div>
-              </Button>
-            </Link>
+              </div>
             </div>
           </div>
-        </div>
-        <div className='pr-8 '>
-          <ResultContext.Provider value={res}>
-          <div className='flex flex-col'>
-            <CalculMode  />
-          </div>
-          </ResultContext.Provider>
-          
+          <div className='pr-8 '>
 
-        </div>
+            
 
-        </div>
+                </div> */}
+
+            </div>
+
+          <div className='w-2/3 h-svh  flex flex-col bg-emerald-300 p-10'>
+
+            <div className=' flex justify-end  h-1/5 bg-purple-500 '>
+                <div className='flex justify-end  h-auto w-2/3 bg-amber-300  '>
+                <div className=' rounded-none  bg-sky-400 flex flex-wrap justify-start content-center w-full text-neutral-200'>
+                  <div className='flex flex-col'>
+                    <p className='text-4xl '>Resultat</p>
+                    <p className='text-4xl  pl-11'>de la simulation</p>
+                  </div>
+                </div>
+                </div>
+
+                <div className=' mt-0 px-0 flex gap-x-3 w-1/3 h-auto bg-red-400 flex-wrap  content-center justify-center '>
+              
+                <Link href='' onClick={handleClick} className=" bg-sky-400  ">
+                  <Button variant="secondary" className=" rounded-none  bg-neutral-600 text-yellow-400 hover:bg-neutral-900 hover:text-white ">
+                    <div className='flex gap-x-1 h-full flex-wrap content-center '>
+                      <RotateCcw className='size-4' />
+                      <p className=' text-center text-xs'>Refaire une simulation</p>
+                    </div>
+                  </Button>
+                  </Link>
+                  <Link href='' onClick={forAcceuil} className="  flex justify-end">
+                  <Button variant="secondary" className=" h-full bg-neutral-600 text-neutral-400 hover:bg-neutral-900 hover:text-white rounded-full ">
+                    <div className='flex gap-x-1 h-full flex-wrap content-center '>
+                      <Home className='size-4' />
+                    </div>
+                  </Button>
+                </Link>
+                </div>
+            </div>
+            
+            <div className=' bg-lime-500 h-4/5'>
+
+              <div className=" h-1/2 w-full flex flex-col rounded-none overflow-hidden  bg-neutral-700 ">
+                    
+                    <div className="flex  items-center h-1/3 w-1/2 rounded-none mt-2 border-blue-900  bg-neutral-500">
+                        <div className=' flex space-x-0.5 h-full items-center   '>
+                            <p className='text-white  flex text-3xl text-center'>Type d'impôt </p>
+                        </div>
+                    </div>
+                    
+                        {res.taxName.length < 2 ?
+                        <div className=' bg-blue-300 h-2/3 flex flex-wrap content-center '>
+                            <p className='text-start text-5xl '>{res.taxName}</p>
+                        </div>
+                        :
+                        
+                            <ul className=' bg-blue-300 h-2/3 flex flex-col space-y-4 pt-4 justify-start '>
+                            <li className=' flex space-x-3 flex-wrap content-center '>
+                                <span className="flex h-2 w-2 translate-y-1 items-center rounded-full bg-lime-600" />
+                                <p className='text-start text-2xl '>{res.taxName[0]}</p>
+                            </li>
+                            <li className='flex space-x-3 flex-wrap content-center '>
+                                <span className="flex h-2 w-2 translate-y-1 items-center rounded-full bg-amber-600" />
+                                <p className='text-start text-2xl '>{res.taxName[1]}</p>
+                            </li>
+                            </ul>
+                        }
+
+              </div> 
+            
+
+              <div className=" h-1/2 w-full flex flex-col rounded-none overflow-hidden  bg-neutral-500 ">
+                    
+                    <div className="flex  items-center h-1/3 w-1/2 rounded-none mt-2 border-blue-900  bg-neutral-500">
+                        <div className=' flex space-x-0.5 h-full items-center   '>
+                            <p className='text-white  flex text-3xl text-center '>Montant à payer </p>
+                        </div>
+                    </div>
+                    
+                        {res.taxPrice.length ===1 &&
+                <div className="bg-blue-300 h-2/3 flex flex-wrap content-center ">
+                    <p className=" text-start text-4xl ">
+                        {String(res.taxPrice[0]).replace(...numberFormatRegex)} fcfa
+                    </p>
+                </div>
+                }
+                    
+                {res.taxPrice.length ===2 &&
+                  
+                    <div className="bg-blue-300 h-2/3 flex flex-wrap content-center">
+                        <p className="text-start text-4xl space-x-4">
+                            {String(res.taxPrice[0]).replace(...numberFormatRegex)} fcfa 
+                            à {String(res.taxPrice[1]).replace(...numberFormatRegex)} fcfa
+                        </p>
+                    </div>
+                        
+                
+                }
+                
+                        
+                {res.taxPrice.length === 3 &&
+                  
+                    <div className="flex flex-col h-2/3 space-y-1 pt-2 flex-wrap content-start pl-2 ">
+                        <div className="text-xsd flex items-start gap-x-1">
+                            <p className="text-lime-300">{res.taxName[0].split('(')[1].split(')')[0]} :</p>
+                            <p>{String(res.taxPrice[0]).replace(...numberFormatRegex)} fcfa</p>
+                        </div>
+
+                        <div className="text-xs flex items-start gap-x-1">
+                            <p className="text-amber-400">{res.taxName[1].split('(')[1].split(')')[0]} :</p>
+                            <div className="flex space-x-1">
+                                <p>entre </p>
+                               <p>{String(res.taxPrice[1]).replace(...numberFormatRegex)} </p>
+                               <p>et</p>
+                               <p>{String(res.taxPrice[2]).replace(...numberFormatRegex)} fcfa</p>
+                            </div>
+                        </div>
+                    </div>
+                        
+                
+                }
+
+                </div> 
+
+
+
+
+            </div>
+            <div className='bg-orange-500 h-1/6'>
+
+            </div>
+
+      </div>
+              
+
+
+        
+
+              </div>
       }
     </div>
   )

@@ -38,12 +38,13 @@ export const TypeInput = ({ onSubmit, question }: { onSubmit: (label: string[], 
     }
 
 return (
-  <div className="flex flex-col space-y-2 m-8 pt-12  h-full ">
+  <div className="flex flex-col space-y-2 mx-40 pt-12  h-full ">
     <Input
       type={question.answers.inputOption.type}
       value={montantValue}
       placeholder={question.answers.inputOption.label}
       onChange={handleAnswerSubmit}
+      className='text-md text-center'
     />
     {condition ? (
       <>

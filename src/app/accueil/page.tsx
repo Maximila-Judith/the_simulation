@@ -18,6 +18,7 @@ import { entry } from "@/components/questions/taxType/entry";
 import Link from "next/link";
 import { Button } from '@/components/ui/button';
 import { Alert } from '@/components/ui/alert';
+import LoadingPercentage from '@/components/ui/LoadingPercentage';
 
 export default function Home() {
     const [step, setStep] = useState<Data>(Questions.entry);
@@ -122,12 +123,6 @@ export default function Home() {
 
     }
 
-    const forInfo = () => {
-        setInfo(valInfo ? valInfo : infos.init)
-    }
-    const forClick = () => {
-        setInfo(infos.init)
-    }
         const forAlert = () => {
         setAlert("")
     }
@@ -149,12 +144,12 @@ export default function Home() {
         <QuestionContext.Provider value={step}>
             <main className="h-screen w-full bg-[url('/bgg.jpg')] relative bg-cover bg-no-repeat  bg-center overflow-hidden text-center md:text-left lg:text-righ">
                 <div className="absolute inset-0 bg-black opacity-85 "></div>
-                {!(info !== infos.init || taxType && level.length === 3 || alert)
+                {!(taxType && level.length === 3 || alert)
                     && <div className="flex flex-row item-center my-6 text-white relative z-9">
                     <Link href="" onClick={handleClick} className=" flex flex-row mx-8 gap-x-3">
                         <Button variant="secondary" className="w-full h-full bg-blue-200 hover:bg-blue-300 "><MoveLeft /> Retour</Button>
                     </Link>
-                </div>}
+                        </div>}
                 <div className="relative z-10 flex justify-center items-center md:w-1/2 mx-auto rounded-2xl pb-2 h-auto  ">
 
          {level.length < 3?
@@ -164,20 +159,21 @@ export default function Home() {
                             <Stepper currentStep={level} />
                             <div className='mt-10'></div>
                             <div className="min-w-80 "> 
-                    {(info !== infos.init || taxType && level.length ===3|| alert) ?
+                    {( taxType && level.length ===3 || alert) ?
                                <div>   
-    {info !== infos.init && <InfoCard onClick={forClick} infos={info} />}
                   {alert && <Alert alert = {alert} onClick={forAlert} />}
                                 </div> :
-                               <Body onAnswer={forAnswer} onInfo={forInfo} length={back.length} onBack={forBack} />
+                               <Body onAnswer={forAnswer} length={back.length} onBack={forBack} />
                             }
                             
                             </div>
                         </div>
                     </div>
                     :
-                    <div className=' mt-10'>
-                      <Result tax={taxType} answers={answers} />
+                    <div className=' h-screen w-screen'>
+                   <LoadingPercentage duration={2000} size={200} color="#34b365" thickness={10}>
+                                <Result tax={taxType} answers={answers} />
+                        </LoadingPercentage>
                     </div>
                     }
 

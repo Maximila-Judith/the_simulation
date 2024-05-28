@@ -44,19 +44,26 @@ import { Myslides } from "../ui/myslides";
 import { Menu, X } from "lucide-react";
 import { ThisMenu } from "../ui/thisMenu";
 import { Separator } from "@/components/ui/separator"
-
+import Router from 'next/router';
 
 
 export function Landing() {
     const images = ['/g1.jpg', '/g2.jpg', '/g3.jpg', '/333.jpg']
     const [image, setImage] = useState(0)
     const [menu, setMenu] = useState(false)
-
+  const [isClient, setIsClient] = useState(false);
     const displaymenu = () => {
         setMenu(!menu)
     }
 
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
+  if (isClient) {
+    // Ce code sera exécuté côté client uniquement
+    Router.push('/other-page');
+  }
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -71,6 +78,14 @@ export function Landing() {
         console.log(name)
 
     }
+
+    const handleButtonClick = () => {
+  // Stockez la donnée dans le stockage local
+  localStorage.setItem('myData', 'Hello, World!');
+
+  // Naviguez vers la deuxième page
+  Router.push('/second-page');
+};
 
     return (
         <div className="mx-auto bg-neutral-300">
@@ -104,6 +119,12 @@ export function Landing() {
                         Simuler ses impôts au Bénin est simple et rapide grâce à notre application intuitive. Suivez ces trois étapes faciles pour obtenir une estimation précise de vos impôts.
                     </p>
                 </div>
+
+    <div>
+      <h1>Première page</h1>
+      <Button onClick={handleButtonClick}>Naviguer vers la deuxième page</Button>
+    </div>
+
                 <div className="flex flex-col lg:flex-row justify-center items-center gap-y-10 lg:gap-x-10 pt-10 ">
                     <Card className={`drop-shadow-md ${styles['card']}`}>
                         <CardHeader>

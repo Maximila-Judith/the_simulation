@@ -8,7 +8,7 @@ import { Separator } from './separator';
 
 
 export const Myslides = () => {
-    const images = ['/img/b1.jpg', '/img/p2.jpg', '/img/p3.jpg']
+    const images = ['/img/t1.jpg', '/img/t2.jpg', '/img/t3.jpg']
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const next = () => {
@@ -24,7 +24,7 @@ export const Myslides = () => {
     }
 
     return (
-        <div className="flex flex-row jstify-center items-center gap-x-10 pl-20 ml-20">
+        <div className="flex lg:flex-row flex-col jstify-center items-center gap-x-10 pl-20 ml-20">
             <div className="relative flex items-center">
                 <button onClick={previous} className="absolute left-0 z-10 p-2 h-20 hover:bg-opacity-30 hover:bg-black shadow-md">
                     <ChevronLeft className='text-white' size={24} />
@@ -33,9 +33,9 @@ export const Myslides = () => {
                     src={images[currentIndex]}
                     alt={`image ${currentIndex + 1}`}
                     width={400}
-                    height={600}
+                    height={400}
                     priority
-                    className='rounded-xl'
+                    className='rounded-2xl'
                 />
                 <button onClick={next} className="absolute right-0 z-10 p-2 h-20 hover:bg-opacity-30 hover:bg-black shadow-md">
                     <ChevronRight className='text-white' size={24} />

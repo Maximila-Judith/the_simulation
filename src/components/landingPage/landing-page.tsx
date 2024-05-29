@@ -45,6 +45,7 @@ import { Menu, X } from "lucide-react";
 import { ThisMenu } from "../ui/thisMenu";
 import { Separator } from "@/components/ui/separator"
 import { Theslide } from "../ui/theslide";
+import { Step } from '../ui/step';
 import { TypedText } from "../ui/typetext";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -60,8 +61,10 @@ export function Landing() {
     const images = ['/g1.jpg', '/g2.jpg', '/g3.jpg', '/333.jpg']
     const [image, setImage] = useState(0)
     const [menu, setMenu] = useState(false)
-    const [currentSlide, setCurrentSlide] = useState('Myslides');
-    const [menuOpen, setMenuOpen] = useState(false);
+    const [currentSlide, setCurrentSlide] = useState('Myslides')
+    const [menuOpen, setMenuOpen] = useState(false)
+    const [currentStep, setCurrentStep] = useState(1)
+
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
@@ -70,7 +73,6 @@ export function Landing() {
     const displaymenu = () => {
         setMenu(!menu)
     }
-
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -92,11 +94,15 @@ export function Landing() {
         } else {
             setCurrentSlide('Slideshow');
         }
-    };
+    }
+
+    const handleStepChange = (step: number) => {
+        setCurrentStep(step)
+    }
 
     return (
         <div className=" relative mx-auto bg-neutral-300">
-            <div className="flex flex-row justify-between items-center pl-10 pr-10 bg-gray-400 fixed top-0 left-0 w-full bg-white z-50">
+            {/* <div className="flex flex-row justify-between items-center pl-10 pb-5 pr-10 bg-gray-400 fixed top-0 left-0 w-full bg-gray-600 z-50">
                 <Image
                     src="/dgi-white.webp"
                     alt="icon 1"
@@ -110,35 +116,34 @@ export function Landing() {
                     <button className="" onClick={toggleMenu}> <Menu /> </button>
                 )}
             </div>
-            <div className={`fixed top-0 left-0 w-full h-screen mt-20 bg-gray-800 bg-opacity-50 z-40 transition-transform duration-300 ${menuOpen ? 'transform-none' : '-translate-x-full'}`}>
-                <div className="flex flex-row justify-between p-3 fixed top-0 w-full absolute top-0 left-0 w-64 bg-white h-full">
+            <div className={`fixed top-0 left-0 w-full h-screen mt-20 bg-gray-800 bg-opacity-50 z-40 transition-transform duration-200 ${menuOpen ? 'transform-none' : '-translate-x-full'}`}>
+                <div className="flex flex-row justify-between p-3 fixed top-0 w-full absolute top-0 left-0 w-64 overflow-visible bg-white h-screen">
+                    <div className="bg-[url('/img/menu-img.jpg')] bg-no-repeat bg-cover h-screen w-1/2 "></div>
+                    <ThisMenu />
+                </div>
+            </div>
+             */}
+            <div className="flex flex-col pt-3 bg-[url('/img/b3.jpg')] bg-no-repeat bg-cover mt-20 bg-center h-screen lg:max-h-96 max-w-full block">
+                <div className="flex flex-row justify-between items-center p-3 fixed top-0 left-0 w-full bg-gray-400 z-50">
                     <Image
-                        src="/img/menu-img.jpg"
+                        src="/dgi-white.webp"
                         alt="icon 1"
                         width={200}
                         height={350}
                         priority
-                        className="w-1/3 h-screen"
                     />
-                    <ThisMenu />
+                    <div className="">
+                        <button className="relative items-center justify-center lg:hidden block rounded-lg w-10 h-10 hover:bg-gray-300 hover:bg-opacity-40 focus:outline-none" onClick={displaymenu}>
+                            {/* {menu ? (<X className='absolute inset-0 shrink-0 top-5 left-5 text-white transform -translate-x-1/2 -translate-y-1/2 fill-current ' />) : (<Menu className="absolute inset-0 shrink-0 top-5 left-5 text-white transform -translate-x-1/2 -translate-y-1/2 fill-current" />)} */}
+                            {menu ? (
+                                <button className="" > <X /> </button>
+                            ) : (
+                                <button className=""> <Menu /> </button>
+                            )}
+                        </button>
+                        <ThisMenu />
+                    </div>
                 </div>
-            </div>
-            {/* <div className="flex flex-row justify-between p-3 fixed top-0 w-full">
-                <Image
-                    src="/dgi-white.webp"
-                    alt="icon 1"
-                    width={200}
-                    height={350}
-                    priority
-                />
-                <div className="">
-                    <button className="relative items-center justify-center lg:hidden block rounded-lg w-10 h-10 hover:bg-gray-300 hover:bg-opacity-40 focus:outline-none" onClick={displaymenu}>
-                        {menu ? (<X className='absolute inset-0 shrink-0 top-5 left-5 text-white transform -translate-x-1/2 -translate-y-1/2 fill-current ' />) : (<Menu className="absolute inset-0 shrink-0 top-5 left-5 text-white transform -translate-x-1/2 -translate-y-1/2 fill-current" />)}
-                    </button>
-                    <ThisMenu />
-                </div>
-            </div> */}
-            <div className="flex flex-col pt-3 bg-[url('/thebg.jpg')] bg-no-repeat bg-cover bg-center h-screen lg:max-h-96 max-w-full block">
                 <div className={`flex flex-col lg:mb-10 w-full lg:w-2/4 place-self-center bg-transparent opacity-100 pl-8 space-y-4 lg:mt-10 pt-20 mt-10 overflow-x-hidden overflow-y-hidden ${styles['zoom-in']}`}>
                     <h1 className={`text-2xl text-center font-bold text-white inline-block`} > Simuler vos Impôts conformément au Code Géneral <TypedText /> </h1>
                     <Link href="" onClick={() => handleClick} className="mt-6 bg-white inline-block text-black font-bold py-2 px-6 rounded-lg self-center hover:bg-gray-400 transition duration-200">Simuler</Link>
@@ -212,9 +217,14 @@ export function Landing() {
 
                 </div>
             </div>
-            <div className="pt-20 pr-20 pl-20 justify-center pb-20 space-y-10 bg-[url('/img/b2.jpg')] transition ease-in-out duration-1000" data-aos="fade-up" data-aos-delay="400">
+            {/* <div className="pt-20 pr-20 pl-20 justify-center pb-20 space-y-10 bg-[url('/img/b2.jpg')] transition ease-in-out duration-1000" data-aos="fade-up" data-aos-delay="400">
                 <Theslide onProgressChange={handleProgressChange} />
                 {currentSlide === 'Myslides' ? <Myslides /> : <Slideshow />}
+            </div> */}
+            <div className="pt-20 pr-20 pl-20 justify-center pb-20 space-y-10 bg-[url('/img/b2.jpg')] transition ease-in-out duration-1000" data-aos="fade-up" data-aos-delay="400">
+                <Step currentStep={currentStep} onStepChange={handleStepChange} />
+                {/* <Theslide currentStep={currentStep} onStepChange={handleStepChange} /> */}
+                {currentStep === 1 ? <Myslides /> : <Slideshow />}
             </div>
 
             <footer className=" bg-gradient-to-b from-gray-200 to-neutral-800 w-full">
@@ -266,7 +276,7 @@ export function Landing() {
                         </div>
                     </div>
                 </div>
-                <p className="text-center text-white text-sm">© 2024 Direction Générale des Impots Bénin. Tous droits réservés.</p>
+                <p className="text-center pb-5 text-white text-sm">© 2024 Direction Générale des Impots Bénin. Tous droits réservés.</p>
             </footer>
         </div >
     )

@@ -1,35 +1,21 @@
-import React, { useEffect, useState } from 'react'
-import { Progress } from './progress'
+import React, { useEffect, useState } from 'react';
+import { Progress } from './progress';
 
 interface TheslideProps {
-    onProgressChange: (progress: number) => void;
+    currentStep: number;
+    onStepChange: (step: number) => void;
 }
-export const Theslide: React.FC<TheslideProps> = ({ onProgressChange }) => {
-    const [progress, setProgress] = useState(0);
+
+export const Theslide: React.FC<TheslideProps> = ({ currentStep, onStepChange }) => {
+    const [progress, setProgress] = useState(currentStep === 1 ? 0 : 50)
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setProgress((prevProgress) => {
-                const nextProgress = prevProgress + 1;
-                onProgressChange(nextProgress);
-                return nextProgress >= 100 ? 0 : nextProgress;
-            });
-        }, 100);
-        return () => clearInterval(interval);
-    }, [onProgressChange]);
+        setProgress(currentStep === 1 ? 0 : 50)
+    }, [currentStep])
 
     return (
-
         <div className="flex justify-center items-center">
             <Progress className="w-[60%]" value={progress} />
         </div>
-    )
+    );
 }
-
-
-
-
-
-
-
-

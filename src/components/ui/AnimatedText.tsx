@@ -13,7 +13,6 @@ export default function AnimatedText({ text, onEnd }: { text: string; onEnd? : (
       } else {
         if (index === text.length) {
           onEnd?.();
-          console.log('fini')
         }
         clearInterval(timer);
       }

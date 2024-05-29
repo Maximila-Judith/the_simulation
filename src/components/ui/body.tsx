@@ -56,7 +56,7 @@ export const Body: React.FC<BodyProps> = ({ onAnswer, onBack, length }) => {
           <Card className='bg-gray-200 bg-opacity-70 rounded-sm overflow-hidden'>
             <div className='flex justify-center content-center text-center h-60  gap-4 mx-1.5'>
          <div className = {`${
-                        questionEnd ? 'translate-x-0' : 'translate-x-[600px]'
+                        questionEnd ? 'translate-x-0 ' : 'translate-x-[600px]'
                     } transition duration-700 ease-in-out transform content-center space-y-3 w-full text-x`}
                     >
                     {(type_answer === "unique_choice") && (

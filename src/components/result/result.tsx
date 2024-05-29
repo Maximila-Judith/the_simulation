@@ -33,6 +33,8 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
 
   let price = [];
   const [isExoneration, setIsExoneration] = useState(false)
+  const [amountTyping, setAmountTyping] = useState(false)
+  const [callCalculmode, setCallCalculmode] = useState(false)
   let res:ResultInterface =  {
       taxName: [""],
       taxBase:[""],
@@ -324,91 +326,68 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
     return obj ? obj.response : [""]
   }
 
+  function forTypeTaxFinish() {
+   setAmountTyping(true)
+  }
+    function forAmountFinisht() {
+  setCallCalculmode(true)
+  }
+
+
   const handleClick = () => {
     window.location.href = '/accueil';
   };
     const forAcceuil = () => {
         window.location.href = '/';
-    };
+  };
+  
+
+
 
   return (
-    <div className=" lg:text-left w-screen overflow-hidden h-screen flex flex-wrap justify-center bg-black p-0 ">
+    <div className=" lg:text-left w-screen overflow-hidden h-screen flex flex-wrap justify-center bg-blue-400 p-0 ">
 
       {( isExoneration) ?
         <div>
           {isExoneration && <Exoneration Click = {backExoneration} val= {res.exoneration} />}
         </div> :
 
-        <div className=" flex space-x-0 bg-neutral-600  overflow-hidden p-8 pb-11 w-full   pt-0 pr-0 mb-0  text-white ">
+        <div className=" flex space-x-0 bg-emerald-200  overflow-hidden  w-full text-white ">
           
           <div className='w-1/3'>
-            <div className='bg-blue-300 h-full w-full'>
+            <div className='bg-emerald-200 h-full w-full'>
                 <ResultContext.Provider value={res}>
                   <div className='flex flex-col'>
-                    <CalculMode  />
+                  <CalculMode isCall={callCalculmode}  />
                   </div>
                 </ResultContext.Provider>
             </div>
-
-  {/*           <div className=' flex justify-start flex-col '>
-                <div className='flex justify-end h-8  '>
-                  <div className=' rounded-es-xl  bg-neutral-600 flex flex-wrap justify-start content-center w-80 text-neutral-200'> <ResultMoreOption onExoneration={forExoneration} /></div>
-                </div>
-
-            <div className=' mt-0 flex gap-y-1 justify-end '>
-              <div className='flex flex-col'>
-                
-              <Link href='' onClick={handleClick} className="  h-[25px] ">
-                <Button variant="secondary" className=" rounded-es-xl h-full bg-neutral-600 text-yellow-400 hover:bg-neutral-900 hover:text-white rounded-se-none rounded-ee-none rounded-ss-none">
-                  <div className='flex gap-x-1 h-full flex-wrap content-center '>
-                    <RotateCcw className='size-4' />
-                    <p className=' text-center text-xs'>Faire une autre simulation</p>
-                  </div>
-                </Button>
-                </Link>
-                <Link href='' onClick={forAcceuil} className="  h-[25px] flex justify-end">
-                <Button variant="secondary" className="rounded-es-xl h-full bg-neutral-600 text-neutral-400 hover:bg-neutral-900 hover:text-white rounded-se-none rounded-ee-none rounded-ss-none ">
-                  <div className='flex gap-x-1 h-full flex-wrap content-center '>
-                    <Home className='size-4' />
-                    <p className=' text-center text-xs'>Accueil</p>
-                  </div>
-                </Button>
-              </Link>
-              </div>
-            </div>
           </div>
-          <div className='pr-8 '>
 
-            
+          <div className='w-2/3 h-svh  flex flex-col bg-emerald-400 p-10 pl-4'>
 
-                </div> */}
-
-            </div>
-
-          <div className='w-2/3 h-svh  flex flex-col bg-emerald-300 p-10'>
-
-            <div className=' flex justify-end  h-1/5 bg-purple-500 '>
-                <div className='flex justify-end  h-auto w-2/3 bg-amber-300  '>
-                <div className=' rounded-none  bg-sky-400 flex flex-wrap justify-start content-center w-full text-neutral-200'>
+            <div className=' flex justify-end  h-1/3  '>
+                <div className='flex justify-end  h-auto w-2/3  '>
+                <div className=' rounded-none  flex flex-wrap justify-start content-center w-full text-neutral-200'>
                   <div className='flex flex-col'>
-                    <p className='text-4xl '>Resultat</p>
-                    <p className='text-4xl  pl-11'>de la simulation</p>
+                    <p className='text-5xl '>Resultat</p>
+                    <p className='text-5xl  pl-11'>de la simulation</p>
                   </div>
                 </div>
                 </div>
 
-                <div className=' mt-0 px-0 flex gap-x-3 w-1/3 h-auto bg-red-400 flex-wrap  content-center justify-center '>
+                <div className=' mt-0 px-0 flex  w-2/3 h-auto  flex-wrap  content-start pt-4 justify-center '>
               
-                <Link href='' onClick={handleClick} className=" bg-sky-400  ">
-                  <Button variant="secondary" className=" rounded-none  bg-neutral-600 text-yellow-400 hover:bg-neutral-900 hover:text-white ">
+                <Link href='' onClick={handleClick} className=" ">
+                  <Button variant="secondary" className=" rounded-none text-neutral-700 bg-emerald-400 hover:border-b hover:bg-emerald-400 border-teal-950 hover:shadow-3xl  ">
                     <div className='flex gap-x-1 h-full flex-wrap content-center '>
-                      <RotateCcw className='size-4' />
-                      <p className=' text-center text-xs'>Refaire une simulation</p>
+                      <RotateCcw className='size-5' />
+                      <p className=' text-center text-xl '>Refaire une autre simulation</p>
                     </div>
                   </Button>
                   </Link>
                   <Link href='' onClick={forAcceuil} className="  flex justify-end">
-                  <Button variant="secondary" className=" h-full bg-neutral-600 text-neutral-400 hover:bg-neutral-900 hover:text-white rounded-full ">
+                  <Button variant="secondary" className=" h-full hover:bg-emerald-400 bg-emerald-400 hover:border-b border-teal-950 hover:shadow-3xl  rounded-none w-16 ">
                     <div className='flex gap-x-1 h-full flex-wrap content-center '>
                       <Home className='size-4' />
                     </div>
@@ -417,83 +396,69 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
                 </div>
             </div>
             
-            <div className=' bg-lime-500 h-4/5'>
+            <div className='  py-10  h-3/5'>
 
-              <div className=" h-1/2 w-full flex flex-col rounded-none overflow-hidden  bg-neutral-700 ">
+              <div className=" h-1/2 w-full mb-5 flex rounded-none overflow-hidden flex-wrap content-center   ">
                     
-                    <div className="flex  items-center h-1/3 w-1/2 rounded-none mt-2 border-blue-900  bg-neutral-500">
-                        <div className=' flex space-x-0.5 h-full items-center   '>
-                            <p className='text-white  flex text-3xl text-center'>Type d'impôt </p>
+                    <div className="flex  items-center h-full w-1/4 rounded-none mt- border-r border-neutral-200  ">
+                        <div className=' flex space-x-0.5 h-full items-center flex-wrap content-start   '>
+                            <p className='text-white  flex text-2xl text-center'>Type d'impôt </p>
                         </div>
                     </div>
                     
                         {res.taxName.length < 2 ?
-                        <div className=' bg-blue-300 h-2/3 flex flex-wrap content-center '>
-                            <p className='text-start text-5xl '>{res.taxName}</p>
+                        <div className='  h-full flex flex-wrap content-center '>
+                            <p className='text-start text-3xl '><AnimatedText text = {res.taxName[0]} onEnd={forTypeTaxFinish} /></p>
                         </div>
                         :
                         
-                            <ul className=' bg-blue-300 h-2/3 flex flex-col space-y-4 pt-4 justify-start '>
-                            <li className=' flex space-x-3 flex-wrap content-center '>
-                                <span className="flex h-2 w-2 translate-y-1 items-center rounded-full bg-lime-600" />
-                                <p className='text-start text-2xl '>{res.taxName[0]}</p>
-                            </li>
-                            <li className='flex space-x-3 flex-wrap content-center '>
-                                <span className="flex h-2 w-2 translate-y-1 items-center rounded-full bg-amber-600" />
-                                <p className='text-start text-2xl '>{res.taxName[1]}</p>
-                            </li>
-                            </ul>
+                        <div className='  h-full flex flex-wrap content-center '>
+                            <p className='text-start text-xl'><AnimatedText text = {res.taxName[0]+' et '+res.taxName[1]} onEnd={forTypeTaxFinish} /></p>
+                        </div>
+                  
                         }
 
               </div> 
             
 
-              <div className=" h-1/2 w-full flex flex-col rounded-none overflow-hidden  bg-neutral-500 ">
+              <div className="h-1/2 w-full flex rounded-none overflow-hidden flex-wrap content-center   ">
                     
-                    <div className="flex  items-center h-1/3 w-1/2 rounded-none mt-2 border-blue-900  bg-neutral-500">
-                        <div className=' flex space-x-0.5 h-full items-center   '>
-                            <p className='text-white  flex text-3xl text-center '>Montant à payer </p>
+                    <div className="flex  items-center h-full w-1/4 rounded-none border-r border-neutral-200 ">
+                        <div className='  flex space-x-0.5 h-full items-center flex-wrap content-start   '>
+                            <p className='text-white  flex text-2xl text-center  '>Montant à payer </p>
                         </div>
                     </div>
                     
                         {res.taxPrice.length ===1 &&
-                <div className="bg-blue-300 h-2/3 flex flex-wrap content-center ">
-                    <p className=" text-start text-4xl ">
-                        {String(res.taxPrice[0]).replace(...numberFormatRegex)} fcfa
+                <div className=" h-full flex flex-wrap content-center ">
+                    <p className=" text-start text-3xl font-medium ">
+                   {amountTyping && <AnimatedText text = {String(res.taxPrice[0]).replace(...numberFormatRegex)+' fcfa'}  onEnd={forAmountFinisht} />}  
                     </p>
                 </div>
                 }
                     
                 {res.taxPrice.length ===2 &&
                   
-                    <div className="bg-blue-300 h-2/3 flex flex-wrap content-center">
-                        <p className="text-start text-4xl space-x-4">
-                            {String(res.taxPrice[0]).replace(...numberFormatRegex)} fcfa 
-                            à {String(res.taxPrice[1]).replace(...numberFormatRegex)} fcfa
+                    <div className="h-2/3 flex flex-wrap content-center">
+                        <p className="text-start text-3xl font-medium space-x-4">
+          {amountTyping && <AnimatedText text={String(res.taxPrice[0]).replace(...numberFormatRegex)+' fcfa à '+String(res.taxPrice[1]).replace(...numberFormatRegex)+' fcfa'}  onEnd={forAmountFinisht} />}  
                         </p>
-                    </div>
                         
+                    </div>
                 
                 }
                 
-                        
                 {res.taxPrice.length === 3 &&
                   
-                    <div className="flex flex-col h-2/3 space-y-1 pt-2 flex-wrap content-start pl-2 ">
-                        <div className="text-xsd flex items-start gap-x-1">
-                            <p className="text-lime-300">{res.taxName[0].split('(')[1].split(')')[0]} :</p>
-                            <p>{String(res.taxPrice[0]).replace(...numberFormatRegex)} fcfa</p>
-                        </div>
-
-                        <div className="text-xs flex items-start gap-x-1">
-                            <p className="text-amber-400">{res.taxName[1].split('(')[1].split(')')[0]} :</p>
-                            <div className="flex space-x-1">
-                                <p>entre </p>
-                               <p>{String(res.taxPrice[1]).replace(...numberFormatRegex)} </p>
-                               <p>et</p>
-                               <p>{String(res.taxPrice[2]).replace(...numberFormatRegex)} fcfa</p>
-                            </div>
-                        </div>
+                  <div className="flex flex-col h-2/3 space-y-1 pt-2 flex-wrap content-start pl-2 ">
+                    <div className=" h-full flex flex-wrap content-center ">
+                        <p className=" text-start font-medium ">
+                        {amountTyping && <AnimatedText text={String(res.taxPrice[0]).replace(...numberFormatRegex) + ' fcfa pour ' +
+                          res.taxName[0].split('(')[1].split(')')[0]+' et entre '+String(res.taxPrice[1]).replace(...numberFormatRegex)+
+                          ' et '+ String(res.taxPrice[2]).replace(...numberFormatRegex)+' fcfa pour '+res.taxName[1].split('(')[1].split(')')[0]
+    }  onEnd={forAmountFinisht} />}  
+                        </p>
+                   </div>
                     </div>
                         
                 
@@ -505,7 +470,7 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
 
 
             </div>
-            <div className='bg-orange-500 h-1/6'>
+            <div className=' h-1/4'>
 
             </div>
 

@@ -170,7 +170,7 @@ export default function Home() {
                         </div>
                     </div>
                     :
-                    <div className=' h-screen w-screen'>
+                    <div className=' h-screen w-screen '>
                    <LoadingPercentage duration={2000} size={200} color="#34b365" thickness={10}>
                                 <Result tax={taxType} answers={answers} />
                         </LoadingPercentage>

@@ -22,14 +22,14 @@ export const CalculMode = ({isCall}:{isCall:boolean}) => {
     return (
         <div className = {`${isCall ? 'translate-y-0' : 'translate-y-full'} transition duration-1000 ease-out transform flex opacity-100 justify-center bg-emerald-50 flex-wrap content-end h-full`} >
 
-         <div className=" flex flex-col space-y-4 bg-emerald-200 w-full h-screen p-8 px-14">    
+         <div className=" flex flex-col space-y-4 bg-gray-300 w-full h-screen p-8 px-14">    
                 <Card className={`${isCall ? 'translate-y-0' : 'translate-y-full'} transition duration-700 ease-in-out transform bg-neutral-700 border-zinc-500 hover:border-2 rounded-none  hover:border-lime-400 w-full h-[200px] p-0 mt-0 text-center`}>
                     <div className=" h-full flex flex-col ">
-                        <CardHeader className="flex h-1/5 p-0 bg-purple-500 pt-1 pl-2">
+                        <CardHeader className="flex h-1/5 p-0 bg-green-800 pt-1 pl-2">
                             <CardTitle>
                                 <div className="flex text-sm text-neutral-300 justify-start">
                                     <div className="flex flex-row items-center gap-2 ">
-                                        <Percent className="text-lime-400 bg-neutral-800 rounded-full p-1 size-8 " />
+                                        <Percent className="text-green-600 bg-white rounded-full p-1 size-6 " />
                                         <HoverCardDemo item = "Pourcentage appliqué" />
                                     </div>
                                 </div>
@@ -37,7 +37,7 @@ export const CalculMode = ({isCall}:{isCall:boolean}) => {
                         </CardHeader>
                         
                             {result.rate.length === 1 &&
-                        <CardContent className="flex justify-center flex-wrap content-center text-white bg-slate-500 h-4/5 p-0  ">
+                        <CardContent className="flex justify-center flex-wrap content-center text-white bg-gray-500 h-4/5 p-0  ">
                             <div className="">
                                <LoadingPercentage
                                     targetPercentage = {result.rate[0] as number} 
@@ -50,7 +50,7 @@ export const CalculMode = ({isCall}:{isCall:boolean}) => {
                         </CardContent>}
                             {
                             result.rate.length === 2 &&
-                        <CardContent className="flex justify-center flex-wrap content-center text-white bg-slate-500 h-4/5 p-0  ">
+                        <CardContent className="flex justify-center flex-wrap content-center text-white bg-gray-500 h-4/5 p-0  ">
                             <div className="flex space-x-3 items-center  ">
                                             <LoadingPercentage
                                             targetPercentage = {result.rate[0] as number}
@@ -71,7 +71,7 @@ export const CalculMode = ({isCall}:{isCall:boolean}) => {
 
                             {
                             result.rate.length === 3 && 
-                        <CardContent className="flex flex-col justify-center  text-white bg-slate-500 h-4/5 p-0   ">
+                        <CardContent className="flex flex-col justify-center  text-white bg-gray-500 h-4/5 p-0   ">
                                
                                     <div className="flex flex-wrap content-center h-1/2">
                                         <p className="text-xl uppercase h-full w-1/4 flex flex-wrap content-center justify-center border-r border-neutral-400">{result.taxName[0].split('(')[1].split(')')[0]}</p>
@@ -111,11 +111,11 @@ export const CalculMode = ({isCall}:{isCall:boolean}) => {
 
                 <Card className={`${isCall ? 'translate-y-0' : 'translate-y-full'} transition duration-700 ease-in transform bg-neutral-700 border-zinc-500 rounded-none hover:border-2  hover:border-yellow-500 w-full h-[200px] p-0 mt-0 text-center`}>
                     <div className="h-full flex flex-col">
-                        <CardHeader className="flex h-1/5 p-0 bg-purple-600 pt-1 pl-2">
+                        <CardHeader className="flex h-1/5 p-0 bg-green-800 pt-1 pl-2">
                             <CardTitle>
                                 <div className="flex text-sm text-neutral-300 justify-start">
                                     <div className="flex flex-row items-center gap-2">
-                                        <Plus className="text-yellow-500 bg-neutral-700 rounded-full p-1 size-8" />
+                                        <Plus className="text-green-600 bg-white rounded-full p-1 size-6" />
                                         <HoverCardDemo item= "Redevance additionnelle" />
                                     </div>
                                 </div>
@@ -123,7 +123,7 @@ export const CalculMode = ({isCall}:{isCall:boolean}) => {
                         </CardHeader>
                    {
                     result.priceAdd ?
-                        <CardContent className="flex justify-center flex-wrap content-center text-white bg-slate-500 h-4/5 p-0 ">
+                        <CardContent className="flex justify-center flex-wrap content-center text-white bg-gray-500 h-4/5 p-0 ">
                             <div className="text-white ">
                                 <div className=" flex space-x-2 items-center">
                                     <p className="text-2xl ">+{String(result.priceAdd).replace(...numberFormatRegex)}</p>
@@ -135,7 +135,7 @@ export const CalculMode = ({isCall}:{isCall:boolean}) => {
                            
                         </CardContent>
                           :
-                        <CardContent className="flex justify-center flex-wrap content-center text-white bg-slate-500 h-4/5 p-0 ">
+                        <CardContent className="flex justify-center flex-wrap content-center text-white bg-gray-500 h-4/5 p-0 ">
                             <div className="text-white ">
                                 <div className=" flex space-x-2 items-center">
                                     <p className="text-2xl ">0</p>
@@ -152,11 +152,11 @@ export const CalculMode = ({isCall}:{isCall:boolean}) => {
            
                 <Card className={`${isCall ? 'translate-y-0' : 'translate-y-full'} transition duration-700 ease-in transform bg-neutral-700 rounded-none hover:border-2 hover:border-red-400 w-full h-[200px] p-0 mt-0 text-center`}>
                     <div className="h-full flex flex-col">
-                        <CardHeader className="flex h-1/5 p-0 bg-purple-500 pt-1 pl-2">
+                        <CardHeader className="flex h-1/5 p-0 bg-green-800 pt-1 pl-2">
                             <CardTitle>
                                 <div className="flex text-sm text-neutral-300 justify-start">
                                     <div className="flex flex-row items-center gap-1">
-                                      <TriangleAlert className="text-red-400 bg-neutral-700 p-0.5 rounded-full size-8" />
+                                      <TriangleAlert className="text-green-600 bg-white p-0.5 rounded-full size-6" />
                                       <HoverCardDemo item ="Minimum de perception"  />
                                     </div>
                                 </div>
@@ -164,7 +164,7 @@ export const CalculMode = ({isCall}:{isCall:boolean}) => {
                            
                         </CardHeader> 
                 {result.minimum ?
-                        <CardContent className=" flex justify-center flex-wrap content-center text-white bg-slate-500 h-4/5 p-0 ">
+                        <CardContent className=" flex justify-center flex-wrap content-center text-white bg-gray-500 h-4/5 p-0 ">
                             <div className="text-white ">
                                 <div className=" flex space-x-2 items-center ">        
                                     <p className="text-2xl  ">{String(result.minimum).replace(...numberFormatRegex)}</p>
@@ -175,7 +175,7 @@ export const CalculMode = ({isCall}:{isCall:boolean}) => {
 
                         </CardContent>
                         :
-                        <CardContent className=" flex justify-center flex-wrap content-center text-white bg-slate-500 h-4/5 p-0 ">
+                        <CardContent className=" flex justify-center flex-wrap content-center text-white bg-gray-500 h-4/5 p-0 ">
                             <div className="text-white ">
                                 <div className=" flex space-x-2 items-center">
                                     <p className="text-2xl ">0</p>

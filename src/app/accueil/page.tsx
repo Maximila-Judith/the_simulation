@@ -144,8 +144,8 @@ export default function Home() {
 
     return (
         <QuestionContext.Provider value={step}>
-            <main className="h-screen w-full bg-[url('/bgg.jpg')] relative bg-cover bg-no-repeat  bg-center overflow-hidden text-center md:text-left lg:text-righ">
-                <div className="absolute inset-0 bg-black opacity-85 "></div>
+            <main className="h-screen w-full bg-gradient-to-r from-cyan-500 to-blue-900 relative bg-cover bg-no-repeat  bg-center overflow-hidden text-center md:text-left lg:text-righ">
+                <div className="absolute inset-0 bg-black opacity-70 "></div>
                 {!(taxType && level.length === 3 || alert)
                     && <div className="flex flex-row item-center my-6 text-white relative z-9">
                         <Link href="" onClick={handleClick} className=" flex flex-row mx-8 gap-x-3">

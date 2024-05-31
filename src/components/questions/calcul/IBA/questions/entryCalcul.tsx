@@ -3,7 +3,7 @@ import {
 } from "@/lib/type/type"
 export const entryCalcul: Data = {
     id: 'entryCalcul',
-    info:"infoCompany",
+    info: "infoCompany",
     question: "Quel genre de société êtes-vous ?",
     answers: {
         type: "unique_choice",
@@ -12,20 +12,22 @@ export const entryCalcul: Data = {
             label: "",
             type: "",
             condition: "",
-            alert:"",
+            alert: "",
             conditionValue: 0,
-            nextQuestion:""
+            nextQuestion: ""
         },
         choiceOptions: [
-            {   name: "",
+            {
+                name: "",
                 label: "Ecoles privées d'enseignement scolaire, universitaire, technique et professionnel.",
                 value: "school",
                 nextQuestion: "profit"
             },
-            {   name: "",
-            label: "Autre",
-            value: "other",
-            nextQuestion: "otherProfit"
+            {
+                name: "",
+                label: "Autre",
+                value: "other",
+                nextQuestion: "otherProfit"
             }
         ]
     },

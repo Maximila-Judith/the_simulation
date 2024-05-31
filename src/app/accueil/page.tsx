@@ -28,7 +28,7 @@ export default function Home() {
     const [info, setInfo] = useState<Info>(infos.init)
     const [valsTable, setValsTable] = useState(valQuestions)
     const [taxType, setTaxType] = useState("")
-    const [alert,setAlert] =useState("")
+    const [alert, setAlert] = useState("")
     const valInfo = (step) ? valInfos.find(info => info.id === step.info) : infos.init
 
 
@@ -41,19 +41,19 @@ export default function Home() {
 
         } else if (!next && !name && level.length < 2) {
             setAlert("Désolé, pas d'impôt")
-            setBack(before =>before.slice(1))
+            setBack(before => before.slice(1))
 
         } else if (!next && level.length > 1) {
             setLevel((before) => [before.length, ...before])
         }
 
         let valQuestion = valsTable.find(question => question.id === next)
-        valQuestion?setStep(valQuestion): setStep(before => before)
+        valQuestion ? setStep(valQuestion) : setStep(before => before)
         setBack(beforeBack => [valsTable.indexOf(valQuestion ? valQuestion : step), ...beforeBack])
 
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         if (level.length === 2) {
             switch (taxType) {
                 case "IS": {
@@ -75,7 +75,7 @@ export default function Home() {
                     val = add([...val], valQuestionsTFU, "entryTfu")
                     val = add([...val], valQuestionsTFU, "undevelopedProperties")
 
-                    setValsTable(val ? val: valQuestionsIBA);
+                    setValsTable(val ? val : valQuestionsIBA);
                     break;
                 }
                 case "IRF&TFU": {
@@ -113,8 +113,8 @@ export default function Home() {
         setBack([0])
     }, [level]);
 
-    useEffect(() => { 
-      setStep(valsTable[back[0]])
+    useEffect(() => {
+        setStep(valsTable[back[0]])
     }, [back]);
 
     const forBack = () => {
@@ -123,10 +123,10 @@ export default function Home() {
 
     }
 
-        const forAlert = () => {
+    const forAlert = () => {
         setAlert("")
     }
-    
+
     function result(quest: string) {
         let obj = answers.find(answer => answer.question === quest)
         return obj ? obj.response : [""]
@@ -140,41 +140,43 @@ export default function Home() {
         window.location.href = '/';
     };
 
+
+
     return (
         <QuestionContext.Provider value={step}>
             <main className="h-screen w-full bg-[url('/bgg.jpg')] relative bg-cover bg-no-repeat  bg-center overflow-hidden text-center md:text-left lg:text-righ">
                 <div className="absolute inset-0 bg-black opacity-85 "></div>
                 {!(taxType && level.length === 3 || alert)
                     && <div className="flex flex-row item-center my-6 text-white relative z-9">
-                    <Link href="" onClick={handleClick} className=" flex flex-row mx-8 gap-x-3">
-                        <Button variant="secondary" className="w-full h-full bg-blue-200 hover:bg-blue-300 "><MoveLeft /> Retour</Button>
-                    </Link>
-                        </div>}
+                        <Link href="" onClick={handleClick} className=" flex flex-row mx-8 gap-x-3">
+                            <Button variant="secondary" className="w-full h-full bg-blue-200 hover:bg-blue-300 "><MoveLeft /> Retour</Button>
+                        </Link>
+                    </div>}
                 <div className="relative z-10 flex justify-center items-center md:w-1/2 mx-auto rounded-2xl pb-2 h-auto  ">
 
-         {level.length < 3?
-                    <div className="mb-4 space-y-5 ">
+                    {level.length < 3 ?
+                        <div className="mb-4 space-y-5 ">
 
-                        <div className={styles.wizard}>
-                            <Stepper currentStep={level} />
-                            <div className='mt-10'></div>
-                            <div className="min-w-80 "> 
-                    {( taxType && level.length ===3 || alert) ?
-                               <div>   
-                  {alert && <Alert alert = {alert} onClick={forAlert} />}
-                                </div> :
-                               <Body onAnswer={forAnswer} length={back.length} onBack={forBack} />
-                            }
-                            
+                            <div className={styles.wizard}>
+                                <Stepper currentStep={level} />
+                                <div className='mt-10'></div>
+                                <div className="min-w-80 ">
+                                    {(taxType && level.length === 3 || alert) ?
+                                        <div>
+                                            {alert && <Alert alert={alert} onClick={forAlert} />}
+                                        </div> :
+                                        <Body onAnswer={forAnswer} length={back.length} onBack={forBack} />
+                                    }
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    :
-                    <div className=' h-screen w-screen '>
-                   <LoadingPercentage duration={2000} size={200} color="#34b365" thickness={10}>
+                        :
+                        <div className=' h-screen w-screen '>
+                            <LoadingPercentage duration={2000} size={200} color="#34b365" thickness={10}>
                                 <Result tax={taxType} answers={answers} />
-                        </LoadingPercentage>
-                    </div>
+                            </LoadingPercentage>
+                        </div>
                     }
 
                 </div>

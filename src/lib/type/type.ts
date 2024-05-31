@@ -46,3 +46,19 @@ export interface ResultInterface {
     taxPrice: Number[],
     exoneration: string
 }
+
+interface Result {
+    id?: number; // id est facultatif car il sera généré par la base de données
+    tax_name: string;
+    tax_base: number;
+    amount: number;
+    rate: number;
+    minimum: number;
+    price_add: number;
+}
+
+interface UserData {
+    email: string;
+    name: string;
+    result: Result;
+}

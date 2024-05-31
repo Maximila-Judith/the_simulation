@@ -30,14 +30,18 @@ export function ThisMenu() {
         window.location.href = '/accueil'
     }
 
+    const handleClickc = () => {
+        window.location.href = '/'
+    }
+
     const handleClickb = () => {
         window.location.href = '/props';
     }
 
     return (
-        <Menubar>
+        <Menubar >
             <MenubarMenu>
-                <MenubarTrigger className="text-neutral-900">Accueil</MenubarTrigger>
+                <MenubarTrigger className="text-neutral-900" onClick={handleClickc}>Accueil</MenubarTrigger>
             </MenubarMenu>
 
             <MenubarMenu>
@@ -116,7 +120,7 @@ export function ThisMenu() {
 
             <MenubarMenu>
                 <MenubarTrigger className="text-neutral-900">
-                    <Link href='' onClick={handleClickb}> A propos </Link>
+                    <Link href='' onClick={handleClickb}> Voir mes consultations </Link>
                 </MenubarTrigger>
             </MenubarMenu>
         </Menubar>

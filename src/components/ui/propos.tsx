@@ -1,196 +1,79 @@
-import React from 'react'
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
+"use client"
+import React, { useState } from 'react'
 import Image from "next/image"
 import styles from '@/app/diaporama.module.css'
+import { Menu, X } from "lucide-react"
 import { ThisMenu } from './thisMenu'
+import { ConsultMode } from "@/components/ui/consultMode"
 
 
 export const Propos = () => {
+
+    const [menuOpen, setMenuOpen] = useState(false)
+    const [callCalculmode, setCallCalculmode] = useState(false)
+
+    const toggleMenu = () => {
+        setMenuOpen(!menuOpen)
+    }
+
     return (
-        <div className="bg-neutral-300 text-center w-full justify-center p-20 ">
-            <ThisMenu />
-            <div className="flex flex-col lg:flex-row justify-center items-center gap-y-10 lg:gap-x-10 pt-10 ">
-                <Card className={`drop-shadow-md space-y-2 ${styles['card']}`}>
-                    <CardHeader>
-                        <div className="flex flex-col items-center">
-                            <Image
-                                src="/img/c1.jpg"
-                                alt="icon 1"
-                                width={100}
-                                height={100}
-                                priority
-                                className=""
-                            />
-                        </div>
-                    </CardHeader>
-                    <CardContent className="space-y-2">
-                        <h2 className="uppercase font-bold inline-block text-center text-violet-800">Accéder à la plateforme</h2>
-                        <CardDescription className="text-sm p-1 text-semibold text-black">Accéder à l'application de simulation d'impôts et commencez par entrer vos informations de base.</CardDescription>
-                    </CardContent>
-                </Card>
-
-                <Card className={`drop-shadow-md space-y-2 ${styles['card']}`}>
-                    <CardHeader>
-                        <div className="flex flex-col items-center">
-                            <Image
-                                src="/img/c2.jpg"
-                                alt="icon 1"
-                                width={100}
-                                height={100}
-                                priority
-                                className=""
-                            />
-                        </div>
-                    </CardHeader>
-                    <CardContent className="space-y-2">
-                        <h2 className="uppercase font-bold inline-block text-center text-violet-800">Répondre aux questions </h2>
-                        <CardDescription className="text-sm p-1 text-semibold text-black">L'application vous posera une série de questions spécifiques concernant vos revenus, dépenses et situation fiscale.</CardDescription>
-                    </CardContent>
-                </Card>
-
-                <Card className={`drop-shadow-md space-y-2 ${styles['card']}`}>
-                    <CardHeader>
-                        <div className="flex flex-col items-center">
-                            <Image
-                                src="/img/c3.jpg"
-                                alt="icon 1"
-                                width={100}
-                                height={100}
-                                priority
-                                className=""
-                            />
-                        </div>
-                    </CardHeader>
-                    <CardContent className="space-y-2">
-                        <h2 className="uppercase font-bold inline-block text-center text-violet-800">Obtenir le résultat </h2>
-                        <CardDescription className="text-sm p-1 text-semibold text-black">En fonction de vos réponses, vous recevrez une estimation détaillée de la nature de chaque impôt applicable.</CardDescription>
-                    </CardContent>
-                </Card>
+        <div className="flex justify-center bg-neutral-300 w-full p-20 ">
+            <div className="flex flex-row justify-between pl-5 items-center fixed top-0 left-0 w-full z-50 bg-neutral-200">
+                <Image
+                    src="/benin.png"
+                    alt="icon 1"
+                    width={80}
+                    height={80}
+                    priority
+                />
+                <div className="relative">
+                    <button
+                        onClick={toggleMenu}
+                        className="items-center left-10 right-10 -top-5 justify-center lg:hidden sm:block md:block rounded-lg w-10 h-10 hover:bg-gray-300 hover:bg-opacity-40 focus:outline-none"
+                    >
+                        {menuOpen ? <X className="absolute -left-20 -right-20" /> : <Menu className="absolute -left-20 -right-20" />}
+                    </button>
+                    <div
+                        className={`absolute -left-20 -right-20 mt-5 shadow-lg z-30 lg:flex lg:flex-row lg:static lg:mt-0 lg:bg-transparent lg:border-0 lg:shadow-none lg:z-auto ${menuOpen ? "block block" : "hidden hidden"
+                            }`}
+                    >
+                        <ThisMenu />
+                    </div>
+                </div>
             </div>
 
-            <div className="flex flex-col lg:flex-row justify-center items-center gap-y-10 lg:gap-x-10 pt-10 ">
-                <Card className={`drop-shadow-md space-y-2 ${styles['card']}`}>
-                    <CardHeader>
-                        <div className="flex flex-col items-center">
-                            <Image
-                                src="/img/c1.jpg"
-                                alt="icon 1"
-                                width={100}
-                                height={100}
-                                priority
-                                className=""
-                            />
+            <div className="flex flex-col gap-y-10 mt-10 p-10 bg-gray-200 w-1/2 h-full">
+                <h1 className='font-bold text-2xl'>Rapport de Simulation</h1>
+                <div className='flex flex-col justify-items-start gap-y-10'>
+                    <div className='text-left space-y-6'>
+                        <div className='flex flex-rows space-x-4'>
+                            <h2 className='font-bold'>Nom:</h2>
+                            <p>Lenom</p>
                         </div>
-                    </CardHeader>
-                    <CardContent className="space-y-2">
-                        <h2 className="uppercase font-bold inline-block text-center text-violet-800">Accéder à la plateforme</h2>
-                        <CardDescription className="text-sm p-1 text-semibold text-black">Accéder à l'application de simulation d'impôts et commencez par entrer vos informations de base.</CardDescription>
-                    </CardContent>
-                </Card>
+                        <div className='flex flex-rows space-x-4'>
+                            <h2 className='font-bold'>Prénom:</h2>
+                            <p>Lenom</p>
+                        </div>
+                        <div className='flex flex-rows space-x-4'>
+                            <h2 className='font-bold'>Email:</h2>
+                            <p>Lenom</p>
+                        </div>
+                        <div className='flex flex-rows space-x-4'>
+                            <h2 className='font-bold'>Profession:</h2>
+                            <p>Lenom</p>
+                        </div>
+                        <div className='flex flex-rows space-x-4'>
+                            <h2 className='font-bold'>Type d'impot:</h2>
+                            <p>Lenom</p>
+                        </div>
+                    </div>
 
-                <Card className={`drop-shadow-md space-y-2 ${styles['card']}`}>
-                    <CardHeader>
-                        <div className="flex flex-col items-center">
-                            <Image
-                                src="/img/c2.jpg"
-                                alt="icon 1"
-                                width={100}
-                                height={100}
-                                priority
-                                className=""
-                            />
-                        </div>
-                    </CardHeader>
-                    <CardContent className="space-y-2">
-                        <h2 className="uppercase font-bold inline-block text-center text-violet-800">Répondre aux questions </h2>
-                        <CardDescription className="text-sm p-1 text-semibold text-black">L'application vous posera une série de questions spécifiques concernant vos revenus, dépenses et situation fiscale.</CardDescription>
-                    </CardContent>
-                </Card>
+                    <div className='flex flex-rows items-center gap-x-5'>
+                        <ConsultMode isCall={callCalculmode} />
+                    </div>
+                </div>
 
-                <Card className={`drop-shadow-md space-y-2 ${styles['card']}`}>
-                    <CardHeader>
-                        <div className="flex flex-col items-center">
-                            <Image
-                                src="/img/c3.jpg"
-                                alt="icon 1"
-                                width={100}
-                                height={100}
-                                priority
-                                className=""
-                            />
-                        </div>
-                    </CardHeader>
-                    <CardContent className="space-y-2">
-                        <h2 className="uppercase font-bold inline-block text-center text-violet-800">Obtenir le résultat </h2>
-                        <CardDescription className="text-sm p-1 text-semibold text-black">En fonction de vos réponses, vous recevrez une estimation détaillée de la nature de chaque impôt applicable.</CardDescription>
-                    </CardContent>
-                </Card>
-            </div>
 
-            <div className="flex flex-col lg:flex-row justify-center items-center gap-y-10 lg:gap-x-10 pt-10 ">
-                <Card className={`drop-shadow-md space-y-2 ${styles['card']}`}>
-                    <CardHeader>
-                        <div className="flex flex-col items-center">
-                            <Image
-                                src="/img/c1.jpg"
-                                alt="icon 1"
-                                width={100}
-                                height={100}
-                                priority
-                                className=""
-                            />
-                        </div>
-                    </CardHeader>
-                    <CardContent className="space-y-2">
-                        <h2 className="uppercase font-bold inline-block text-center text-violet-800">Accéder à la plateforme</h2>
-                        <CardDescription className="text-sm p-1 text-semibold text-black">Accéder à l'application de simulation d'impôts et commencez par entrer vos informations de base.</CardDescription>
-                    </CardContent>
-                </Card>
-
-                <Card className={`drop-shadow-md space-y-2 ${styles['card']}`}>
-                    <CardHeader>
-                        <div className="flex flex-col items-center">
-                            <Image
-                                src="/img/c2.jpg"
-                                alt="icon 1"
-                                width={100}
-                                height={100}
-                                priority
-                                className=""
-                            />
-                        </div>
-                    </CardHeader>
-                    <CardContent className="space-y-2">
-                        <h2 className="uppercase font-bold inline-block text-center text-violet-800">Répondre aux questions </h2>
-                        <CardDescription className="text-sm p-1 text-semibold text-black">L'application vous posera une série de questions spécifiques concernant vos revenus, dépenses et situation fiscale.</CardDescription>
-                    </CardContent>
-                </Card>
-
-                <Card className={`drop-shadow-md space-y-2 ${styles['card']}`}>
-                    <CardHeader>
-                        <div className="flex flex-col items-center">
-                            <Image
-                                src="/img/c3.jpg"
-                                alt="icon 1"
-                                width={100}
-                                height={100}
-                                priority
-                                className=""
-                            />
-                        </div>
-                    </CardHeader>
-                    <CardContent className="space-y-2">
-                        <h2 className="uppercase font-bold inline-block text-center text-violet-800">Obtenir le résultat </h2>
-                        <CardDescription className="text-sm p-1 text-semibold text-black">En fonction de vos réponses, vous recevrez une estimation détaillée de la nature de chaque impôt applicable.</CardDescription>
-                    </CardContent>
-                </Card>
             </div>
         </div>
     )

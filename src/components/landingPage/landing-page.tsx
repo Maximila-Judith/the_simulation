@@ -60,18 +60,12 @@ AOS.init({
 export function Landing() {
     const images = ['/g1.jpg', '/g2.jpg', '/g3.jpg', '/333.jpg']
     const [image, setImage] = useState(0)
-    const [menu, setMenu] = useState(false)
-    const [currentSlide, setCurrentSlide] = useState('Myslides')
     const [menuOpen, setMenuOpen] = useState(false)
     const [currentStep, setCurrentStep] = useState(1)
 
-
     const toggleMenu = () => {
-        setMenuOpen(!menuOpen);
-    };
+        setMenuOpen(!menuOpen)
 
-    const displaymenu = () => {
-        setMenu(!menu)
     }
 
     useEffect(() => {
@@ -86,14 +80,6 @@ export function Landing() {
     const handleClick = (name: string) => {
         console.log(name)
 
-    }
-
-    const handleProgressChange = (progress: number) => {
-        if (progress <= 50) {
-            setCurrentSlide('Myslides');
-        } else {
-            setCurrentSlide('Slideshow');
-        }
     }
 
     const handleStepChange = (step: number) => {
@@ -124,25 +110,42 @@ export function Landing() {
             </div>
              */}
             <div className="flex flex-col pt-3 bg-[url('/img/b3.jpg')] bg-no-repeat bg-cover mt-20 bg-center h-screen lg:max-h-96 max-w-full block">
-                <div className="flex flex-row justify-between items-center p-3 fixed top-0 left-0 w-full bg-gray-400 z-50">
+                <div className="flex flex-row justify-between pl-5 items-center fixed top-0 left-0 w-full z-50 bg-neutral-200">
                     <Image
-                        src="/dgi-white.webp"
+                        src="/benin.png"
                         alt="icon 1"
-                        width={200}
-                        height={350}
+                        width={80}
+                        height={80}
                         priority
                     />
-                    <div className="">
-                        <button className="relative items-center justify-center lg:hidden block rounded-lg w-10 h-10 hover:bg-gray-300 hover:bg-opacity-40 focus:outline-none" onClick={displaymenu}>
-                            {/* {menu ? (<X className='absolute inset-0 shrink-0 top-5 left-5 text-white transform -translate-x-1/2 -translate-y-1/2 fill-current ' />) : (<Menu className="absolute inset-0 shrink-0 top-5 left-5 text-white transform -translate-x-1/2 -translate-y-1/2 fill-current" />)} */}
+                    <div className="relative">
+                        <button
+                            onClick={toggleMenu}
+                            className="items-center justify-center lg:hidden sm:block md:block rounded-lg w-10 h-10 hover:bg-gray-300 hover:bg-opacity-40 focus:outline-none"
+                        >
+                            {menuOpen ? <X className="" /> : <Menu className="" />}
+                        </button>
+                        <div
+                            className={`absolute left-0 right-0 mt-2 bg-white border rounded-lg shadow-lg z-10 lg:flex lg:flex-row lg:static lg:mt-0 lg:bg-transparent lg:border-0 lg:shadow-none lg:z-auto sm:p-4 sm:m-2 ${menuOpen ? "block " : " hidden"
+                                }`}
+                        >
+                            <ThisMenu />
+                        </div>
+                    </div>
+
+
+                    {/* <div className="flex flex-row">
+                        <button className="relative items-center justify-center lg:hidden block rounded-lg w-10 h-10 hover:bg-gray-300 hover:bg-opacity-40 focus:outline-none">
                             {menu ? (
-                                <button className="" > <X /> </button>
+                                <X className='absolute inset-0 shrink-0 top-5 left-5 text-white transform -translate-x-1/2 -translate-y-1/2 fill-current' />
                             ) : (
-                                <button className=""> <Menu /> </button>
+                                <Menu className="absolute inset-0 shrink-0 top-5 left-5 text-white transform -translate-x-1/2 -translate-y-1/2 fill-current" />
                             )}
                         </button>
-                        <ThisMenu />
-                    </div>
+                        <div className="hidden lg:flex lg:flex-row">
+                            <ThisMenu />
+                        </div>
+                    </div> */}
                 </div>
                 <div className={`flex flex-col lg:mb-10 w-full lg:w-2/4 place-self-center bg-transparent opacity-100 pl-8 space-y-4 lg:mt-10 pt-20 mt-10 overflow-x-hidden overflow-y-hidden ${styles['zoom-in']}`}>
                     <h1 className={`text-2xl text-center font-bold text-white inline-block`} > Simuler vos Impôts conformément au Code Géneral <TypedText /> </h1>
@@ -203,7 +206,7 @@ export function Landing() {
                                     src="/img/d3.jpg"
                                     alt="icon 1"
                                     width={100}
-                                    height={100}
+                                    height={150}
                                     priority
                                     className=""
                                 />

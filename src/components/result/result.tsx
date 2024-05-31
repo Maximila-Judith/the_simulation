@@ -9,14 +9,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import {HandCoins,Calculator,Coins,Percent, Plus,TriangleAlert,Equal,RotateCcw, Home} from 'lucide-react'
+import { HandCoins, Calculator, Coins, Percent, Plus, TriangleAlert, Equal, RotateCcw, Home } from 'lucide-react'
 import { taxCalcul } from '@/lib/functions/taxCalcul';
 import { useState } from 'react';
 import { Button } from "@/components/ui/button"
 import Link from 'next/link';
 import { ResultMoreOption } from "@/components/ui/navBarResult"
 import { Help } from './help';
-import { Htax,ResultInterface} from "@/lib/type/type"
+import { Htax, ResultInterface } from "@/lib/type/type"
 import { Exoneration } from './horsTax';
 import { CalculMode } from "@/components/ui/calculMode"
 import { ResultContext } from "@/lib/resultContext";
@@ -35,16 +35,16 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
   const [isExoneration, setIsExoneration] = useState(false)
   const [amountTyping, setAmountTyping] = useState(false)
   const [callCalculmode, setCallCalculmode] = useState(false)
-  let res:ResultInterface =  {
-      taxName: [""],
-      taxBase:[""],
-      amount: [0],
-      rate: [0],
-      minimum: 0,
-      priceAdd: 0,
-      taxPrice: [0]
-      , exoneration: "" 
-      }
+  let res: ResultInterface = {
+    taxName: [""],
+    taxBase: [""],
+    amount: [0],
+    rate: [0],
+    minimum: 0,
+    priceAdd: 0,
+    taxPrice: [0]
+    , exoneration: ""
+  }
 
   const myData = localStorage.getItem('myData');
 
@@ -69,21 +69,21 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
       min = min < 250000 ? 250000 : min
       let new_num = taxCalcul(amount, rate, min, 4000)
       price[0] = new_num ? new_num : 0
-       res= {
-         taxName: ["Impôt sur les sociétés"],
-         taxBase:["Chiffre d'affaire"], 
-         amount: [amount],
-         rate: [rate],
-         minimum: min,
-         priceAdd: 4000,
-         taxPrice: [price[0]],
-         exoneration : 'is'
-            }
-          
-     break;
+      res = {
+        taxName: ["Impôt sur les sociétés"],
+        taxBase: ["Chiffre d'affaire"],
+        amount: [amount],
+        rate: [rate],
+        minimum: min,
+        priceAdd: 4000,
+        taxPrice: [price[0]],
+        exoneration: 'is'
+      }
+
+      break;
     }
-    
- case  "IBA&TFU": {
+
+    case "IBA&TFU": {
       //IBA
       let profit = parseFloat(result('profit')[0])
       let amount = isNaN(profit) ? 0 : profit
@@ -96,54 +96,6 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
       let undeveloped = parseFloat(result('undevelopedProperties')[0])
       undeveloped = isNaN(undeveloped) ? 0 : undeveloped
 
-      let taxB = built !== 0 ?"Prix de propriété": undeveloped !== 0? "Prix de terrains": ""
-      let amountTfu = built !== 0 ? built : undeveloped !== 0 ? undeveloped : 0
-      let rate = built !== 0 ? [4, 8] : undeveloped !== 0 ? [3, 7] : [0]
-
-      if (built !== 0) {
-        let min = taxCalcul(built, 4, 0, 0)
-        price[1] = min ? min : 0
-        let max = taxCalcul(built, 8, 0, 0)
-        price[2] = max ? max : 0
-
-      } else if (undeveloped !== 0) {
-        let min = taxCalcul(undeveloped, 3, 0, 0)
-        price[1] = min ? min : 0
-        let max = taxCalcul(undeveloped, 7, 0, 0)
-        price[2] = max ? max : 0
-      }
-      
-    res = {
-      taxName: ["Impôt sur le Bénéfice d'Affaire (IBA)", "Taxe Foncière Unique (TFU)"],
-      taxBase:["Le chiffre d'affaire réalisé", taxB],
-      amount: [amount, amountTfu],
-      rate: [30, rate[0], rate[1]],
-      minimum: 0,
-      priceAdd: 0,
-        taxPrice: [price[0],price[1], price[2]]
-        , exoneration: ''
-      }
-      break;
-    }
-   
-  case  "IRF&TFU": {
-      //IRF
-      let amount = parseFloat(result('entryCalcul')[0])
-      let landlordsExp = parseFloat(result('landlordsExpensesPrice')[0])
-      landlordsExp = isNaN(landlordsExp) ? 0 : landlordsExp
-      let realEstateExp = parseFloat(result('realEstateExpensesPrice')[0])
-      realEstateExp = isNaN(realEstateExp) ? 0 : realEstateExp
-      let rev = amount + landlordsExp - realEstateExp
-
-      let new_num = taxCalcul(rev, 12, 0, 4000)
-      price[0] = new_num ? new_num : 0
-
-      //TFU
-      let built = parseFloat(result('builtProperties')[0])
-      built = isNaN(built) ? 0 : built
-      let undeveloped = parseFloat(result('undevelopedProperties')[0])
-      undeveloped = isNaN(undeveloped) ? 0 : undeveloped
-      
       let taxB = built !== 0 ? "Prix de propriété" : undeveloped !== 0 ? "Prix de terrains" : ""
       let amountTfu = built !== 0 ? built : undeveloped !== 0 ? undeveloped : 0
       let rate = built !== 0 ? [4, 8] : undeveloped !== 0 ? [3, 7] : [0]
@@ -161,20 +113,68 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
         price[2] = max ? max : 0
       }
 
-   res = {
-      taxName: ["Impôt sur les Revenus Fonciers (IRF)", "Taxe Foncière Unique (TFU)"],
-      taxBase:["Les revenus fonctiers", taxB],
-      amount: [rev, amountTfu],
-      rate: [30, rate[0], rate[1]],
-      minimum: 0,
-      priceAdd: 0,
-      taxPrice: [price[0],price[1], price[2]]
-      , exoneration: ''  
-  }
-  break;
+      res = {
+        taxName: ["Impôt sur le Bénéfice d'Affaire (IBA)", "Taxe Foncière Unique (TFU)"],
+        taxBase: ["Le chiffre d'affaire réalisé", taxB],
+        amount: [amount, amountTfu],
+        rate: [30, rate[0], rate[1]],
+        minimum: 0,
+        priceAdd: 0,
+        taxPrice: [price[0], price[1], price[2]]
+        , exoneration: ''
+      }
+      break;
     }
 
-     case  "IBA": {
+    case "IRF&TFU": {
+      //IRF
+      let amount = parseFloat(result('entryCalcul')[0])
+      let landlordsExp = parseFloat(result('landlordsExpensesPrice')[0])
+      landlordsExp = isNaN(landlordsExp) ? 0 : landlordsExp
+      let realEstateExp = parseFloat(result('realEstateExpensesPrice')[0])
+      realEstateExp = isNaN(realEstateExp) ? 0 : realEstateExp
+      let rev = amount + landlordsExp - realEstateExp
+
+      let new_num = taxCalcul(rev, 12, 0, 4000)
+      price[0] = new_num ? new_num : 0
+
+      //TFU
+      let built = parseFloat(result('builtProperties')[0])
+      built = isNaN(built) ? 0 : built
+      let undeveloped = parseFloat(result('undevelopedProperties')[0])
+      undeveloped = isNaN(undeveloped) ? 0 : undeveloped
+
+      let taxB = built !== 0 ? "Prix de propriété" : undeveloped !== 0 ? "Prix de terrains" : ""
+      let amountTfu = built !== 0 ? built : undeveloped !== 0 ? undeveloped : 0
+      let rate = built !== 0 ? [4, 8] : undeveloped !== 0 ? [3, 7] : [0]
+
+      if (built !== 0) {
+        let min = taxCalcul(built, 4, 0, 0)
+        price[1] = min ? min : 0
+        let max = taxCalcul(built, 8, 0, 0)
+        price[2] = max ? max : 0
+
+      } else if (undeveloped !== 0) {
+        let min = taxCalcul(undeveloped, 3, 0, 0)
+        price[1] = min ? min : 0
+        let max = taxCalcul(undeveloped, 7, 0, 0)
+        price[2] = max ? max : 0
+      }
+
+      res = {
+        taxName: ["Impôt sur les Revenus Fonciers (IRF)", "Taxe Foncière Unique (TFU)"],
+        taxBase: ["Les revenus fonctiers", taxB],
+        amount: [rev, amountTfu],
+        rate: [30, rate[0], rate[1]],
+        minimum: 0,
+        priceAdd: 0,
+        taxPrice: [price[0], price[1], price[2]]
+        , exoneration: ''
+      }
+      break;
+    }
+
+    case "IBA": {
       let profit = parseFloat(result('profit')[0])
       let otherProfit = parseFloat(result('otherProfit')[0])
       let amount = isNaN(profit) ? otherProfit : profit
@@ -197,27 +197,27 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
 
       let new_num = taxCalcul(amount, rate, min, 4000)
       price[0] = new_num ? new_num : 0
-    
-    res = {
+
+      res = {
         taxName: ["Impôt sur le Bénéfice d'Affaire (IBA)"],
         taxBase: ["Le bénéfice réalisé"],
-      amount: [amount],
-      rate: [rate],
-      minimum: min,
-      priceAdd: 4000,
-      taxPrice: [price[0]]
-      , exoneration: 'iba'  
-  }
-  break;
+        amount: [amount],
+        rate: [rate],
+        minimum: min,
+        priceAdd: 4000,
+        taxPrice: [price[0]]
+        , exoneration: 'iba'
+      }
+      break;
     }
 
-      case  "TFU":{
+    case "TFU": {
 
       let built = parseFloat(result('builtProperties')[0])
-          built = isNaN(built) ? 0 : built
+      built = isNaN(built) ? 0 : built
       let undeveloped = parseFloat(result('undevelopedProperties')[0])
-          undeveloped = isNaN(undeveloped) ? 0 : undeveloped
-      let taxB = built !== 0 ?"Le prix de propriété": undeveloped !== 0? "Le prix de terrains": ""
+      undeveloped = isNaN(undeveloped) ? 0 : undeveloped
+      let taxB = built !== 0 ? "Le prix de propriété" : undeveloped !== 0 ? "Le prix de terrains" : ""
       let amount = built !== 0 ? built : undeveloped !== 0 ? undeveloped : 0
       let rate = built !== 0 ? [4, 8] : undeveloped !== 0 ? [3, 7] : [0]
 
@@ -233,20 +233,20 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
         let max = taxCalcul(undeveloped, 7, 0, 0)
         price[1] = max ? max : 0
       }
- res = {
+      res = {
         taxName: ["Taxe Foncière Unique (TFU)"],
-        taxBase:[taxB],
-      amount: [amount],
-      rate: rate,
-      minimum: 0,
-      priceAdd: 0,
-      taxPrice: [price[0], price[1]]
-      , exoneration: 'tfu' 
+        taxBase: [taxB],
+        amount: [amount],
+        rate: rate,
+        minimum: 0,
+        priceAdd: 0,
+        taxPrice: [price[0], price[1]]
+        , exoneration: 'tfu'
       }
-  break;
+      break;
     }
 
-    case  "IRF": {
+    case "IRF": {
       let amount = parseFloat(result('entryCalcul')[0])
       let landlordsExp = parseFloat(result('landlordsExpensesPrice')[0])
       landlordsExp = isNaN(landlordsExp) ? 0 : landlordsExp
@@ -257,38 +257,38 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
       let new_num = taxCalcul(rev, 12, 0, 4000)
       price[0] = new_num ? new_num : 0
 
-   res = {
-      taxName: ["Impôt sur les Revenus Fonciers (IRF)"],
-      taxBase:["Les revenus fonctiers"],
-      amount: [rev],
-      rate: [12],
-      minimum: 0,
-      priceAdd: 4000,
-      taxPrice: [price[0]]
-      , exoneration: 'irf'  
+      res = {
+        taxName: ["Impôt sur les Revenus Fonciers (IRF)"],
+        taxBase: ["Les revenus fonctiers"],
+        amount: [rev],
+        rate: [12],
+        minimum: 0,
+        priceAdd: 4000,
+        taxPrice: [price[0]]
+        , exoneration: 'irf'
       }
-     break;
+      break;
     }
 
-      case "TPS" : {
+    case "TPS": {
       let ca = parseFloat(result('entryCalcul')[0])
-        let new_num = taxCalcul(ca, 5, 10000, 4000) 
+      let new_num = taxCalcul(ca, 5, 10000, 4000)
       price[0] = new_num ? new_num : 0
-     res = {
-      taxName: ["Taxe Professionnelle Synthétique (TPS)"],
-      taxBase:["Le chiffre d'affaire"],
-      amount: [ca],
-      rate: [5],
-      minimum: 10000,
-      priceAdd: 4000,
-      taxPrice: [price[0]]
-       , exoneration: 'tps' 
-       }
-     break;
+      res = {
+        taxName: ["Taxe Professionnelle Synthétique (TPS)"],
+        taxBase: ["Le chiffre d'affaire"],
+        amount: [ca],
+        rate: [5],
+        minimum: 10000,
+        priceAdd: 4000,
+        taxPrice: [price[0]]
+        , exoneration: 'tps'
+      }
+      break;
     }
 
-      case "ITS" :{
-    
+    case "ITS": {
+
       let salaryMonth = result('entryCalcul')[0]
       let fee = (salaryMonth === 'march') ? 1000 : (salaryMonth === 'june') ? 3000 : 0
       let sal = parseFloat(result('salary')[0])
@@ -297,28 +297,28 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
       let new_num = taxCalcul(sal, rate, 0, fee)
       price[0] = new_num ? new_num : 0
 
-   res = {
-      taxName: ["Impôt sur les Traitements et Salaire (ITS)"],
-      taxBase:["Le salaire reçu"],
-      amount: [sal],
-      rate: [rate],
-      minimum: 0,
-      priceAdd: fee,
-      taxPrice: [price[0]]
-      , exoneration: 'its'  
-  }
-  break;
-  
+      res = {
+        taxName: ["Impôt sur les Traitements et Salaire (ITS)"],
+        taxBase: ["Le salaire reçu"],
+        amount: [sal],
+        rate: [rate],
+        minimum: 0,
+        priceAdd: fee,
+        taxPrice: [price[0]]
+        , exoneration: 'its'
+      }
+      break;
+
     }
   }
 
-  
-  const forExoneration = () => {   
+
+  const forExoneration = () => {
     setIsExoneration(true)
   }
 
-    const backExoneration = ()=> {
-      setIsExoneration(false)
+  const backExoneration = () => {
+    setIsExoneration(false)
   }
 
   function result(quest: string) {
@@ -327,57 +327,57 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
   }
 
   function forTypeTaxFinish() {
-   setAmountTyping(true)
+    setAmountTyping(true)
   }
-    function forAmountFinisht() {
-  setCallCalculmode(true)
+  function forAmountFinisht() {
+    setCallCalculmode(true)
   }
 
 
   const handleClick = () => {
     window.location.href = '/accueil';
   };
-    const forAcceuil = () => {
-        window.location.href = '/';
+  const forAcceuil = () => {
+    window.location.href = '/';
   };
-  
+
 
 
 
   return (
     <div className=" lg:text-left w-screen overflow-hidden h-screen flex flex-wrap justify-center bg-blue-400 p-0 ">
 
-      {( isExoneration) ?
+      {(isExoneration) ?
         <div>
-          {isExoneration && <Exoneration Click = {backExoneration} val= {res.exoneration} />}
+          {isExoneration && <Exoneration Click={backExoneration} val={res.exoneration} />}
         </div> :
 
         <div className=" flex space-x-0 bg-emerald-200  overflow-hidden  w-full text-white ">
-          
+
           <div className='w-1/3'>
             <div className='bg-emerald-200 h-full w-full'>
-                <ResultContext.Provider value={res}>
-                  <div className='flex flex-col'>
-                  <CalculMode isCall={callCalculmode}  />
-                  </div>
-                </ResultContext.Provider>
+              <ResultContext.Provider value={res}>
+                <div className='flex flex-col'>
+                  <CalculMode isCall={callCalculmode} />
+                </div>
+              </ResultContext.Provider>
             </div>
           </div>
 
           <div className='w-2/3 h-svh  flex flex-col bg-emerald-400 p-10 pl-4'>
 
             <div className=' flex justify-end  h-1/3  '>
-                <div className='flex justify-end  h-auto w-2/3  '>
+              <div className='flex justify-end  h-auto w-2/3  '>
                 <div className=' rounded-none  flex flex-wrap justify-start content-center w-full text-neutral-200'>
                   <div className='flex flex-col'>
                     <p className='text-5xl '>Resultat</p>
                     <p className='text-5xl  pl-11'>de la simulation</p>
                   </div>
                 </div>
-                </div>
+              </div>
 
-                <div className=' mt-0 px-0 flex  w-2/3 h-auto  flex-wrap  content-start pt-4 justify-center '>
-              
+              <div className=' mt-0 px-0 flex  w-2/3 h-auto  flex-wrap  content-start pt-4 justify-center '>
+
                 <Link href='' onClick={handleClick} className=" ">
                   <Button variant="secondary" className=" rounded-none text-neutral-700 bg-emerald-400 hover:border-b hover:bg-emerald-400 border-teal-950 hover:shadow-3xl  ">
                     <div className='flex gap-x-1 h-full flex-wrap content-center '>
@@ -385,86 +385,86 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
                       <p className=' text-center text-xl '>Refaire une autre simulation</p>
                     </div>
                   </Button>
-                  </Link>
-                  <Link href='' onClick={forAcceuil} className="  flex justify-end">
+                </Link>
+                <Link href='' onClick={forAcceuil} className="  flex justify-end">
                   <Button variant="secondary" className=" h-full hover:bg-emerald-400 bg-emerald-400 hover:border-b border-teal-950 hover:shadow-3xl  rounded-none w-16 ">
                     <div className='flex gap-x-1 h-full flex-wrap content-center '>
                       <Home className='size-4' />
                     </div>
                   </Button>
                 </Link>
-                </div>
+              </div>
             </div>
-            
+
             <div className='  py-10  h-3/5'>
 
               <div className=" h-1/2 w-full mb-5 flex rounded-none overflow-hidden flex-wrap content-center   ">
-                    
-                    <div className="flex  items-center h-full w-1/4 rounded-none mt- border-r border-neutral-200  ">
-                        <div className=' flex space-x-0.5 h-full items-center flex-wrap content-start   '>
-                            <p className='text-white  flex text-2xl text-center'>Type d'impôt </p>
-                        </div>
-                    </div>
-                    
-                        {res.taxName.length < 2 ?
-                        <div className='  h-full flex flex-wrap content-center '>
-                            <p className='text-start text-3xl '><AnimatedText text = {res.taxName[0]} onEnd={forTypeTaxFinish} /></p>
-                        </div>
-                        :
-                        
-                        <div className='  h-full flex flex-wrap content-center '>
-                            <p className='text-start text-xl'><AnimatedText text = {res.taxName[0]+' et '+res.taxName[1]} onEnd={forTypeTaxFinish} /></p>
-                        </div>
-                  
-                        }
 
-              </div> 
-            
+                <div className="flex  items-center h-full w-1/4 rounded-none mt- border-r border-neutral-200  ">
+                  <div className=' flex space-x-0.5 h-full items-center flex-wrap content-start   '>
+                    <p className='text-white  flex text-2xl text-center'>Type d'impôt </p>
+                  </div>
+                </div>
+
+                {res.taxName.length < 2 ?
+                  <div className='  h-full flex flex-wrap content-center '>
+                    <p className='text-start text-3xl '><AnimatedText text={res.taxName[0]} onEnd={forTypeTaxFinish} /></p>
+                  </div>
+                  :
+
+                  <div className='  h-full flex flex-wrap content-center '>
+                    <p className='text-start text-xl'><AnimatedText text={res.taxName[0] + ' et ' + res.taxName[1]} onEnd={forTypeTaxFinish} /></p>
+                  </div>
+
+                }
+
+              </div>
+
 
               <div className="h-1/2 w-full flex rounded-none overflow-hidden flex-wrap content-center   ">
-                    
-                    <div className="flex  items-center h-full w-1/4 rounded-none border-r border-neutral-200 ">
-                        <div className='  flex space-x-0.5 h-full items-center flex-wrap content-start   '>
-                            <p className='text-white  flex text-2xl text-center  '>Montant à payer </p>
-                        </div>
-                    </div>
-                    
-                        {res.taxPrice.length ===1 &&
-                <div className=" h-full flex flex-wrap content-center ">
-                    <p className=" text-start text-3xl font-medium ">
-                   {amountTyping && <AnimatedText text = {String(res.taxPrice[0]).replace(...numberFormatRegex)+' fcfa'}  onEnd={forAmountFinisht} />}  
-                    </p>
+
+                <div className="flex  items-center h-full w-1/4 rounded-none border-r border-neutral-200 ">
+                  <div className='  flex space-x-0.5 h-full items-center flex-wrap content-start   '>
+                    <p className='text-white  flex text-2xl text-center  '>Montant à payer </p>
+                  </div>
                 </div>
-                }
-                    
-                {res.taxPrice.length ===2 &&
-                  
-                    <div className="h-2/3 flex flex-wrap content-center">
-                        <p className="text-start text-3xl font-medium space-x-4">
-          {amountTyping && <AnimatedText text={String(res.taxPrice[0]).replace(...numberFormatRegex)+' fcfa à '+String(res.taxPrice[1]).replace(...numberFormatRegex)+' fcfa'}  onEnd={forAmountFinisht} />}  
-                        </p>
-                        
-                    </div>
-                
-                }
-                
-                {res.taxPrice.length === 3 &&
-                  
-                  <div className="flex flex-col h-2/3 space-y-1 pt-2 flex-wrap content-start pl-2 ">
-                    <div className=" h-full flex flex-wrap content-center ">
-                        <p className=" text-start font-medium ">
-                        {amountTyping && <AnimatedText text={String(res.taxPrice[0]).replace(...numberFormatRegex) + ' fcfa pour ' +
-                          res.taxName[0].split('(')[1].split(')')[0]+' et entre '+String(res.taxPrice[1]).replace(...numberFormatRegex)+
-                          ' et '+ String(res.taxPrice[2]).replace(...numberFormatRegex)+' fcfa pour '+res.taxName[1].split('(')[1].split(')')[0]
-    }  onEnd={forAmountFinisht} />}  
-                        </p>
-                   </div>
-                    </div>
-                        
-                
+
+                {res.taxPrice.length === 1 &&
+                  <div className=" h-full flex flex-wrap content-center ">
+                    <p className=" text-start text-3xl font-medium ">
+                      {amountTyping && <AnimatedText text={String(res.taxPrice[0]).replace(...numberFormatRegex) + ' fcfa'} onEnd={forAmountFinisht} />}
+                    </p>
+                  </div>
                 }
 
-                </div> 
+                {res.taxPrice.length === 2 &&
+
+                  <div className="h-2/3 flex flex-wrap content-center">
+                    <p className="text-start text-3xl font-medium space-x-4">
+                      {amountTyping && <AnimatedText text={String(res.taxPrice[0]).replace(...numberFormatRegex) + ' fcfa à ' + String(res.taxPrice[1]).replace(...numberFormatRegex) + ' fcfa'} onEnd={forAmountFinisht} />}
+                    </p>
+
+                  </div>
+
+                }
+
+                {res.taxPrice.length === 3 &&
+
+                  <div className="flex flex-col h-2/3 space-y-1 pt-2 flex-wrap content-start pl-2 ">
+                    <div className=" h-full flex flex-wrap content-center ">
+                      <p className=" text-start font-medium ">
+                        {amountTyping && <AnimatedText text={String(res.taxPrice[0]).replace(...numberFormatRegex) + ' fcfa pour ' +
+                          res.taxName[0].split('(')[1].split(')')[0] + ' et entre ' + String(res.taxPrice[1]).replace(...numberFormatRegex) +
+                          ' et ' + String(res.taxPrice[2]).replace(...numberFormatRegex) + ' fcfa pour ' + res.taxName[1].split('(')[1].split(')')[0]
+                        } onEnd={forAmountFinisht} />}
+                      </p>
+                    </div>
+                  </div>
+
+
+                }
+
+              </div>
 
 
 
@@ -474,13 +474,13 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
 
             </div>
 
-      </div>
-              
+          </div>
 
 
-        
 
-              </div>
+
+
+        </div>
       }
     </div>
   )

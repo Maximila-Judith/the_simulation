@@ -35,7 +35,9 @@
     "src/components/ui/multipleCheck.tsx",
     "src/components/ui/inputAnswers.tsx",
     "src/app/page.tsx",
-    "src/components/questions/typeImpot"
+    "src/components/questions/typeImpot",
+    "api/save-results.js",
+    "src/app/accueil/test/page.tsx"
   ],
   "exclude": [
     "node_modules"

@@ -6,7 +6,7 @@ import { Separator } from './separator'
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const Slideshow = () => {
-    const images = ['/img/r1.jpg', '/img/r2.jpg', '/img/r3.jpg']
+    const images = ['/img/t1.jpg', '/img/r2.jpg', '/img/r3.jpg']
     const [currentIndex, setCurrentIndex] = useState(0)
 
     const next = () => {
@@ -24,9 +24,9 @@ export const Slideshow = () => {
     return (
         <div className="flex lg:flex-row flex-col jstify-center items-center gap-x-10 pl-20 ml-20">
             <div className="relative flex items-center">
-                <button onClick={previous} className="absolute left-0 z-10 p-2 h-20 hover:bg-opacity-30 hover:bg-black shadow-md">
+                {/* <button onClick={previous} className="absolute left-0 z-10 p-2 h-20 hover:bg-opacity-30 hover:bg-black shadow-md">
                     <ChevronLeft className='text-white' size={24} />
-                </button>
+                </button> */}
                 <Image
                     src={images[currentIndex]}
                     alt={`image ${currentIndex + 1}`}
@@ -35,9 +35,9 @@ export const Slideshow = () => {
                     priority
                     className='rounded-2xl'
                 />
-                <button onClick={next} className="absolute right-0 z-10 p-2 h-20 hover:bg-opacity-30 hover:bg-black shadow-md">
+                {/* <button onClick={next} className="absolute right-0 z-10 p-2 h-20 hover:bg-opacity-30 hover:bg-black shadow-md">
                     <ChevronRight className='text-white' size={24} />
-                </button>
+                </button> */}
             </div>
             <div className="flex flex-row items-center w-1/2 space-x-4">
                 <Separator />

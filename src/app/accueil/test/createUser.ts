@@ -1,7 +1,5 @@
-// /pages/api/createUser.ts
 import { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@prisma/client';
-import crypto from 'crypto';
 
 const prisma = new PrismaClient();
 
@@ -10,30 +8,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const { email, name, result } = req.body;
 
         try {
-            // Générer un code unique pour le résultat
-            const resultCode = crypto.randomBytes(3).toString('hex').toUpperCase();
-
-            // Créer un nouvel utilisateur et un résultat associé avec le code unique
             const newUser = await prisma.user.create({
                 data: {
                     email,
                     name,
                     result: {
-                        create: {
-                            ...result,
-                            resultCode,
-                        },
-                    },
+                        create: result
+                    }
                 },
                 include: {
-                    result: true,
-                },
+                    result: true
+                }
             });
-
-            // Envoyer le code à l'utilisateur (retourner la réponse)
-            res.status(201).json({ newUser, resultCode });
+            res.status(201).json(newUser);
         } catch (error) {
-            console.error('Erreur lors de la création de l\'utilisateur:', error);
             res.status(500).json({ error: 'Failed to create user' });
         }
     } else {

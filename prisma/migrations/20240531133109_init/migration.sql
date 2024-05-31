@@ -14,12 +14,12 @@ CREATE TABLE `User` (
 CREATE TABLE `Result` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `tax_name` VARCHAR(191) NOT NULL,
-    `tax_base` DOUBLE NOT NULL,
-    `amount` DOUBLE NOT NULL,
-    `rate` DOUBLE NOT NULL,
+    `tax_base` VARCHAR(191) NOT NULL,
+    `amount` VARCHAR(191) NOT NULL,
+    `rate` VARCHAR(191) NOT NULL,
     `minimum` DOUBLE NOT NULL,
     `price_add` DOUBLE NOT NULL,
-    `tax_price` DOUBLE NOT NULL,
+    `tax_price` VARCHAR(191) NOT NULL,
     `user_id` INTEGER NULL,
 
     UNIQUE INDEX `Result_user_id_key`(`user_id`),

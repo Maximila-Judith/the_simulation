@@ -1,72 +1,43 @@
+
 'use client'
+
 import React from 'react';
 
-interface Result {
-    id?: number; // id est facultatif car il sera généré par la base de données
-    tax_name: string;
-    tax_base: string;
-    amount: string;
-    rate: string;
-    minimum: number;
-    price_add: number;
-}
-interface UserData {
-    email: string;
-    name: string;
-    result: Result;
-}
-
-const createUser = async (userData: UserData): Promise<UserData> => {
+const sendResultCode = async (userId: number, email: string) => {
     try {
-        const response = await fetch('/api/createUser', {
+        const response = await fetch('/api/sendResultCode', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(userData),
+            body: JSON.stringify({ userId, email }),
         });
 
         if (!response.ok) {
+            console.log(userId)
             const errorData = await response.json();
-            throw new Error(errorData.error || 'Failed to create user');
+            throw new Error(errorData.error || 'Failed to send user ID');
         }
 
         const data = await response.json();
-        return data;
+        console.log(data.message);
     } catch (error) {
-        console.error('Erreur lors de la création de l\'utilisateur:', error);
-        throw new Error('Failed to create user');
+        console.error('Error sending user ID:', error);
     }
 };
 
-// Utilisation de la fonction createUser
-const createNewUser = async () => {
-    try {
-        const newUser = await createUser({
-            email: 'john.doe@belgos.com',
-            name: 'John Doe',
-            result: {
-                tax_name: 'Example Tax',
-                tax_base: '100',
-                amount: '20',
-                rate: '0.2',
-                minimum: 10,
-                price_add: 5,
-            },
-        });
-        console.log('Nouvel utilisateur créé:', newUser);
-    } catch (error) {
-        console.error('Erreur lors de la création de l\'utilisateur:', error); // Imprimez l'erreur réelle ici
-    }
-};
+const ReceiveCodeButton = () => {
+    const userId = 1;
+    const email = 'houngbo.maximila@gmail.com';
 
-const TestPage = () => {
+    const handleReceiveCode = () => {
+        sendResultCode(userId, email);
+    };
+
     return (
-        <div>
-            <h1>Test Page</h1>
-            <button onClick={createNewUser}>Create User</button>
-        </div>
+        <button onClick={handleReceiveCode}>Receive Code</button>
     );
 };
 
-export default TestPage;
+export default ReceiveCodeButton;
+

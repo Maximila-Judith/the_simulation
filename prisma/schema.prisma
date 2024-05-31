@@ -18,12 +18,12 @@ model User {
 model Result {
   id        Int     @id @default(autoincrement())
   tax_name  String
-  tax_base  Float
-  amount    Float
-  rate      Float
+  tax_base  String
+  amount    String
+  rate      String
   minimum   Float
   price_add Float
-  tax_price Float
+  tax_price String
   user_id   Int?    @unique
   user      User?   @relation(fields: [user_id], references: [id])
 }

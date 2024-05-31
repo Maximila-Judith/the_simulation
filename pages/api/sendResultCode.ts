@@ -8,28 +8,29 @@ const prisma = new PrismaClient();
 const transporter = nodemailer.createTransport({
     service: 'your-email-service', // par exemple, 'gmail'
     auth: {
-        user: 'your-email@example.com',
-        pass: 'your-email-password'
+        user: 'emmanuelsrgbelgos@gmail.com',
+        pass: ''
     }
 });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
-        const { userId, email } = req.body;
+        const { email } = req.body;
 
         try {
-            // Vérifier si l'utilisateur existe avec l'ID fourni
+            // Rechercher l'utilisateur par email
             const user = await prisma.user.findUnique({
-                where: { id: userId },
+                where: { email },
             });
 
             if (!user) {
                 return res.status(404).json({ error: 'User not found' });
             }
 
-            // Configurer les détails de l'email
+            const userId = user.id;
+
             const mailOptions = {
-                from: 'your-email@example.com',
+                from: 'emmanuelsrgbelgos@gmail.com',
                 to: email,
                 subject: 'Your User ID',
                 text: `Your user ID is ${userId}. Use this ID to retrieve your results.`

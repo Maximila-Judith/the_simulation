@@ -32,14 +32,13 @@ export const Body: React.FC<BodyProps> = ({ onAnswer, onBack, length }) => {
         type_answer = the_question.answers.type ,
         choiceOptions = the_question.answers.choiceOptions
     const [questionEnd, setQuestionEnd] = useState(false)
+    const [typing, setTyping] = useState(false)
 
-    function forEnd() {
+    function forEnd(typ:boolean) {
+        setTyping(typ)
         setQuestionEnd(true)
     }
-    useEffect(() => { 
-
-       setQuestionEnd(false)
-    }, [the_question.answers]);
+    console.log(typing)
     
     return (
         <div className="flex flex-col gap-2 h-50 text-center pt-0">
@@ -57,7 +56,7 @@ export const Body: React.FC<BodyProps> = ({ onAnswer, onBack, length }) => {
           <div className='bg-green-800 bg-opacity-70 rounded-sm overflow-hidden'>
             <div className='flex justify-center content-center text-center h-60  gap-4 mx-1.5'>
          <div className = {`${
-                        questionEnd ? 'translate-x-0 ' : 'translate-x-[600px]'
+                        questionEnd ? 'opacity-100' :typing? 'opacity-0':''
                     } transition duration-700 ease-in-out transform content-center space-y-3 w-full text-x`}
                     >
                     {(type_answer === "unique_choice") && (

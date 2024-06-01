@@ -1,18 +1,6 @@
 "use client"
 import React from 'react'
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import {
   AlertDialog,
@@ -25,79 +13,166 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import {Save} from 'lucide-react'
+import { Save } from 'lucide-react'
+import { Label } from "@/components/ui/label";
+import { ReactNode, useState } from 'react';
+import CreateNewUser from "@/components/APIcomponents/saveUser"
 
-const formSchema = z.object({
-  username: z.string().min(2).max(50),
-  email: z.string().min(2).max(50),
-})
+interface Result {
+    tax_name: string;
+    tax_base: string;
+    amount: string;
+    rate: string;
+    minimum: number;
+    price_add: number;
+    tax_price: string; // Assurez-vous d'ajouter ce champ
+}
 
+interface UserData {
+    email: string;
+    name: string;
+    result: Result;
+}
 
-export const SaveForms = () => {
-    const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      username: "",
-      email: "",
-    },
-    })
+export const SaveForms = ({data }:{ data: Result }) => {
+    
+const [nameValue, setNameValue] = useState<string>('');
+  const [emailValue, setEmailValue] = useState<string>('');
+  const [isNameValid, setIsNameValid] = useState<boolean>(true);
+  const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        
-        console.log(values)
+  const nameRegex = /^[a-zA-ZÀ-ÖØ-öø-ÿ' -]{1,50}$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const validateName = (name: string) => nameRegex.test(name);
+  const validateEmail = (email: string) => emailRegex.test(email);
+
+  const nameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setNameValue(value);
+    setIsNameValid(validateName(value));
+  };
+
+  const emailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setEmailValue(value);
+    setIsEmailValid(validateEmail(value));
+    };
+    
+
+    const createUserWithResult = async (userData: UserData): Promise<{ id: number }> => {
+    try {
+        const response = await fetch('/api/createUserWithResult', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Failed to create user');
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Erreur lors de la création de l\'utilisateur:', error);
+        throw new Error('Failed to create user');
     }
+    };
+    
+    const [userId, setUserId] = useState<number | null>();
+    const [message, setMessage] = useState("")
 
+    const handleCreateUser = async () => {
+        try {
+            const newUser = await createUserWithResult({
+                email: emailValue,
+                name: nameValue,
+                result: {
+                    tax_name: data.tax_name,
+                    tax_base: data.tax_base,
+                    amount: data.amount,
+                    rate: data.rate,
+                    minimum: data.minimum,
+                    price_add: data.price_add,
+                    tax_price: data.tax_price,
+                },
+            });
+            setUserId(newUser.id);
+            setMessage('votre code de vérification est ' + userId)
+            console.log('votre code de vérification est ' + userId)
+        } catch (error) {
+
+            setMessage('Erreur lors de la création de l\'utilisateur');
+            console.log('Erreur lors de la création de l\'utilisateur')
+        }
+    };
+    
+  
     return (
         <div>
             <AlertDialog>
                 <AlertDialogTrigger asChild>
                         <Save className='size-8 hover:text-green-300' /> 
                 </AlertDialogTrigger>
-                <AlertDialogContent>
+{ message ? <AlertDialogContent>
                     <AlertDialogHeader>
-                    <AlertDialogTitle>Insérer vos informations</AlertDialogTitle>
-                    <AlertDialogDescription>
-                        <Form {...form}>
-                            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                                <FormField
-                                control={form.control}
-                                name="username"
-                                render={({ field }) => ( 
-                                    <FormItem>
-                                    <FormLabel>Username</FormLabel> 
-                                    <FormControl>
-                                        <Input placeholder="username" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                    </FormItem>
-                                )}
-                                />
-                                </form>
-                                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                                    <FormField
-                                    control={form.control}
-                                    name="email"
-                                    render={({ field }) => ( 
-                                        <FormItem>
-                                        <FormLabel>Email</FormLabel> 
-                                        <FormControl>
-                                            <Input placeholder="email" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                            </form>
-                        </Form>
-                    </AlertDialogDescription>
+                    <AlertDialogTitle>Message</AlertDialogTitle>
+                       <AlertDialogDescription>
+                            {message}
+                        </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
                         <AlertDialogAction>
-                            <Button type="submit">Envoyer</Button>
+                          <Button onClick={()=>setMessage("")}>ok</Button>
                         </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
+                :
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                    <AlertDialogTitle>Insérez vos informations</AlertDialogTitle>
+                       <AlertDialogDescription>
+                            Remplissez ce formulaire
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                <div className="grid gap-4 py-4">
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="name" className="text-right">
+                        Nom
+                        </Label>
+                        <Input
+                        id="name"
+                        value={nameValue}
+                        className={`col-span-3 ${!isNameValid ? 'border-red-500' : ''}`}
+                        onChange={nameChange}
+                        />
+                        {!isNameValid && <p className="col-span-4 text-red-500">Nom invalide</p>}
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="email" className="text-right">
+                        Email
+                        </Label>
+                        <Input
+                        id="email"
+                        value={emailValue}
+                        className={`col-span-3 ${!isEmailValid ? 'border-red-500' : ''}`}
+                        onChange={emailChange}
+                        />
+                        {!isEmailValid && <p className="col-span-4 text-red-500">Email invalide</p>}
+                    </div>
+                    </div>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction>
+                           <Button onClick={handleCreateUser}>Envoyer</Button>
+                        </AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>}
+
             </AlertDialog>
         </div>
     )

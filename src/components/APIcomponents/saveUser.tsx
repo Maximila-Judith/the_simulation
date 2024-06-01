@@ -1,20 +1,5 @@
+// Composant React pour enregistrer les résultats et récupérer l'ID
 'use client'
-
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { Save } from 'lucide-react'
-import { Label } from "@/components/ui/label";
 import React, { useState } from 'react';
 
 interface Result {
@@ -56,37 +41,35 @@ const createUserWithResult = async (userData: UserData): Promise<{ id: number }>
     }
 };
 
-const CreateNewUser = () => {
-    const [userId, setUserId] = useState<number | null>(null);
+const CreateNewUser = ( userdata :UserData) => {
+    const [userId, setUserId] = useState<number | null>();
+    const [message, setMessage] = useState("")
 
     const handleCreateUser = async () => {
         try {
             const newUser = await createUserWithResult({
-                email: 'johndoe@bels.com',
-                name: 'John Doe',
+                email: userdata.email,
+                name: userdata.name,
                 result: {
-                    tax_name: 'Example Tax',
-                    tax_base: 'edees',
-                    amount: '20',
-                    rate: '0.2',
-                    minimum: 10,
-                    price_add: 5,
-                    tax_price: '20', // Assurez-vous d'ajouter ce champ
+                    tax_name: userdata.result.tax_name,
+                    tax_base: userdata.result.tax_base,
+                    amount: userdata.result.amount,
+                    rate: userdata.result.rate,
+                    minimum: userdata.result.minimum,
+                    price_add: userdata.result.price_add,
+                    tax_price: userdata.result.tax_price,
                 },
             });
             setUserId(newUser.id);
+            setMessage('votre code de vérification est '+userId )
         } catch (error) {
-            console.error('Erreur lors de la création de l\'utilisateur:', error);
+
+           setMessage('Erreur lors de la création de l\'utilisateur');
         }
     };
+    handleCreateUser();
 
-    return (
-        <div>
-            <h1>Create User</h1>
-            <button onClick={handleCreateUser}>Create User</button>
-            {userId && <p>User ID: {userId}</p>}
-        </div>
-    );
+    return message
 };
 
 export default CreateNewUser;

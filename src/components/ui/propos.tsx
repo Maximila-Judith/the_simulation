@@ -16,7 +16,10 @@ export const Propos = () => {
         setMenuOpen(!menuOpen)
     }
 
+
+
     return (
+        
         <div className="flex justify-center bg-neutral-300 w-full p-20 ">
             <div className="flex flex-row justify-between pl-5 items-center fixed top-0 left-0 w-full z-50 bg-neutral-200">
                 <Image

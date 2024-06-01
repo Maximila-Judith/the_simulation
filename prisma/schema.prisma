@@ -8,11 +8,11 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
-  name     String?
-  result   Result?
-  result_id Int?   @unique
+  id          Int     @id @default(autoincrement())
+  email       String  @unique
+  name        String?
+  result      Result?
+  result_code String? @unique
 }
 
 model Result {
@@ -24,6 +24,6 @@ model Result {
   minimum   Float
   price_add Float
   tax_price String
-  user_id   Int?    @unique
-  user      User?   @relation(fields: [user_id], references: [id])
+  code      String? @unique
+  user      User?   @relation(fields: [code], references: [result_code])
 }

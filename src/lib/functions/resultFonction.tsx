@@ -1,26 +1,30 @@
 
 import { ResultInterface } from "../type/type";
+/**
+ * Fonction de calcul de l'impôt.
+ * @param {string} tax - type d'impôt déja déterminé au niveau du questionnaire.
+ * @param {{ question: string; response: string[] }[]} answers - reponses de l'utilisateur au questionnaire.
+ * @returns {ResultInterface} - resultat complet de la simulation.
+ */
 
-export function resultFind(tax: string, answers: { question: string; response: string[] }[]) {
+export function findResult(tax: string, answers: { question: string; response: string[] }[]) {
   
-  let price = [];
-  let res: ResultInterface = {
-    taxName: [""],
-    taxBase: [""],
-    amount: [0],
-    rate: [0],
-    minimum: 0,
-    priceAdd: 0,
-    taxPrice: [0]
-    , exoneration: ""
-  }
+        let price = [];
+        let res: ResultInterface = {
+          taxName: [""],
+          taxBase: [""],
+          amount: [0],
+          rate: [0],
+          minimum: 0,
+          priceAdd: 0,
+          taxPrice: [0]
+          , exoneration: ""
+        }
 
-    function result(quest: string) {
-    let obj = answers.find(answer => answer.question === quest)
-    return obj ? obj.response : [""]
-  }
-
-  const myData = localStorage.getItem('myData');
+        function result(quest: string) {
+        let obj = answers.find(answer => answer.question === quest)
+        return obj ? obj.response : [""]
+      }
 
   switch (tax) {
 
@@ -44,7 +48,7 @@ export function resultFind(tax: string, answers: { question: string; response: s
       let new_num = taxCalcul(amount, rate, min, 4000)
       price[0] = new_num ? new_num : 0
     return  res = {
-        taxName: ["Impôt sur les sociétés"],
+        taxName: ["Impôt sur les sociétés(IS)"],
         taxBase: ["Chiffre d'affaire"],
         amount: [amount],
         rate: [rate],
@@ -88,7 +92,7 @@ export function resultFind(tax: string, answers: { question: string; response: s
       }
 
       return res = {
-        taxName: ["Impôt sur le Bénéfice d'Affaire (IBA)", "Taxe Foncière Unique (TFU)"],
+        taxName: ["Impôt sur les Bénéfices d'Affaires (IBA)", "Taxe Foncière Unique (TFU)"],
         taxBase: ["Le chiffre d'affaire réalisé", taxB],
         amount: [amount, amountTfu],
         rate: [30, rate[0], rate[1]],
@@ -173,7 +177,7 @@ export function resultFind(tax: string, answers: { question: string; response: s
       price[0] = new_num ? new_num : 0
 
     return  res = {
-        taxName: ["Impôt sur le Bénéfice d'Affaire (IBA)"],
+        taxName: ["Impôt sur les Bénéfices d'Affaires (IBA)"],
         taxBase: ["Le bénéfice réalisé"],
         amount: [amount],
         rate: [rate],

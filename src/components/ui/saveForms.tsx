@@ -116,7 +116,7 @@ const [nameValue, setNameValue] = useState<string>('');
         <div>
             <AlertDialog>
                 <AlertDialogTrigger asChild>
-                        <Save className='size-8 hover:text-green-300' /> 
+                       <p className=' text-center text-sm hover:text-neutral-400'>Enrégistrer</p> 
                 </AlertDialogTrigger>
 { message ? <AlertDialogContent>
                     <AlertDialogHeader>

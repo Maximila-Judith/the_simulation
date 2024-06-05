@@ -6,8 +6,9 @@ import crypto from 'crypto';
 const prisma = new PrismaClient();
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+   
     if (req.method === 'POST') {
-        const { email, name, result } = req.body;
+        const { email, name, result_code} = req.body;
 
         try {
             // Générer un code unique pour le résultat
@@ -18,12 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 data: {
                     email,
                     name,
-                    result: {
-                        create: {
-                            ...result,
-                            resultCode,
-                        },
-                    },
+                result_code,
                 },
                 include: {
                     result: true,
@@ -31,7 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             });
 
             // Envoyer le code à l'utilisateur (retourner la réponse)
-            res.status(201).json({ newUser, resultCode });
+            res.status(201).json({ newUser, result_code });
         } catch (error) {
             console.error('Erreur lors de la création de l\'utilisateur:', error);
             res.status(500).json({ error: 'Failed to create user' });

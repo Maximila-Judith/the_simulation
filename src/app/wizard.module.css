@@ -4,19 +4,7 @@
     height: 60vh;
     opacity: 0.78;
 }
-.response{
-color: rgb(29, 17, 17);
-width: 100%;
-padding: 0%;
-font-size: 75%;
-background-color: rgb(199, 207, 218);
 
-}
-.response:hover{
-color: rgb(37, 38, 41);
-font-size:80%;
-background-color: rgb(118, 133, 151);
-}
 .resultCard{
     overflow: hidden;
     background-color: rgb(26, 66, 53);

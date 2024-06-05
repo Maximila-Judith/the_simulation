@@ -77,9 +77,9 @@ export function Landing() {
         return () => clearInterval(interval)
     }, [])
 
-    const handleClick = (name: string) => {
-        console.log(name)
-
+    const handleClick = () => {
+        window.location.href = '/accueil';
+        console.log('ok')
     }
 
     const handleStepChange = (step: number) => {
@@ -149,7 +149,7 @@ export function Landing() {
                 </div>
                 <div className={`flex flex-col lg:mb-10 w-full lg:w-2/4 place-self-center bg-transparent opacity-100 pl-8 space-y-4 lg:mt-10 pt-20 mt-10 overflow-x-hidden overflow-y-hidden ${styles['zoom-in']}`}>
                     <h1 className={`text-2xl text-center font-bold text-white inline-block`} > Simuler vos Impôts conformément au Code Géneral <TypedText /> </h1>
-                    <Link href="" onClick={() => handleClick} className="mt-6 bg-white inline-block text-black font-bold py-2 px-6 rounded-lg self-center hover:bg-gray-400 transition duration-200">Simuler</Link>
+                    <Link href="" onClick={handleClick} className="mt-6 bg-white inline-block text-black font-bold py-2 px-6 rounded-lg self-center hover:bg-gray-400 transition duration-200">Faire une simulation</Link>
                 </div>
             </div>
 

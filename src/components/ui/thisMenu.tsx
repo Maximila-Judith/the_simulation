@@ -45,7 +45,7 @@ export function ThisMenu() {
             </MenubarMenu>
 
             <MenubarMenu>
-                <MenubarTrigger className="text-neutral-900">Simulation</MenubarTrigger>
+                <MenubarTrigger className="text-neutral-900">Simulation rapide</MenubarTrigger>
                 <MenubarContent>
                     <MenubarItem>
                         <Link href='' onClick={handleClick}>
@@ -120,7 +120,7 @@ export function ThisMenu() {
 
             <MenubarMenu>
                 <MenubarTrigger className="text-neutral-900">
-                    <Link href='' onClick={handleClickb}> Voir mes consultations </Link>
+                    <Link href='' onClick={handleClickb}> Consulter mes resultats </Link>
                 </MenubarTrigger>
             </MenubarMenu>
         </Menubar>

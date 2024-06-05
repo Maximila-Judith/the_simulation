@@ -10,7 +10,7 @@ const Response = ({ onSelect, value, nowQuestion }: { onSelect: (value: string[]
 
     return (
         <div className='gap-2'>
-            <Button variant="secondary" onClick={handleSelect} className={styles.response}><div className='mx-0 truncate w-full'>{value.label}</div></Button>
+            <button onClick={handleSelect} className='w-full text-xs h-10 hover:bg-gradient-to-r from-teal-700 to-blue-900 hover:text-neutral-100 text-neutral-300'><div className='mx-0 truncate w-full'>{value.label}</div></button>
         </div>
     )
 }

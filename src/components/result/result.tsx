@@ -17,14 +17,12 @@ import Link from 'next/link';
 import { ResultMoreOption } from "@/components/ui/navBarResult"
 import { Help } from './help';
 import { Htax, ResultInterface } from "@/lib/type/type"
-import { Exoneration } from './horsTax';
 import { CalculMode } from "@/components/ui/calculMode"
 import { ResultContext } from "@/lib/resultContext";
-import LoadingPercentage from '@/components/ui/LoadingPercentage';
 import AnimatedText from '@/components/ui/AnimatedText';
 import { numberFormatRegex } from "@/lib/regex/numberRegex"
 import { SaveForms } from '../ui/saveForms';
-import { resultFind } from '@/lib/functions/resultFonction';
+import { findResult } from '@/lib/functions/resultFonction';
 
 export interface ResultProps {
   tax: string;
@@ -65,7 +63,7 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
     taxPrice: [0]
     , exoneration: ""
   }
-  res = resultFind(tax, answers)
+  res = findResult(tax, answers)
   let dbRes: Result = {
     tax_name: res.taxName.join('&') ,
     tax_base: res.taxBase.join('&'),
@@ -121,23 +119,13 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
             </div>
           </div>
 
-          <div className='w-2/3 h-svh  flex flex-col bg-cyan-800 space-y-10 p-10 pl-10'>
+          <div className='w-2/3  flex flex-col bg-cyan-800 space-y-10 p-10 pt-10 pl-5 pr-4'>
 
-            <div className=' flex flex-rows justify-between  '>
-              <div className='flex justify-end  h-auto '>
-                <div className=' rounded-none  flex flex-wrap justify-start content-center w-full text-neutral-200'>
-                  <div className='flex flex-col'>
-                    <p className='text-3xl font-bold mt-20 pt-11'>Resultat de la simulation</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className=' mt-0 mb-10 px-0 flex h-auto flex-rows items-center space-x-8 content-start pt-4 justify-center '>
+            <div className=' flex flex-col space-y-20 h-1/4 '>
+             
+              <div className='  px-0 flex h-auto flex-rows items-center space-x-4 content-start  justify-end '>
                 <Link href='' onClick={handleClick} className=" ">
-                  <div className='flex gap-x-1 h-full flex-wrap content-center '>
-                    <RotateCcw className='size-8 hover:text-green-300' />
-                    {/* <p className=' text-center text-xl '>Refaire une autre simulation</p> */}
-                  </div>
+                     <p className=' text-center text-sm hover:text-neutral-400'>Refaire une autre simulation</p> 
                 </Link>
                 <Link href='' className="  flex justify-end">
                   <div className='flex gap-x-1 h-full flex-wrap content-center '>
@@ -145,48 +133,50 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
                   </div>
                 </Link>
                 <Link href='' onClick={forAcceuil} className="  flex justify-end">
-                  <div className='flex gap-x-1 h-full flex-wrap content-center '>
-                    <Home className='size-8 hover:text-green-300' />
-                  </div>
+                    <p className=' text-center text-sm hover:text-neutral-400'>Page d'accueil</p> 
                 </Link>
+            </div>
+            <div className='flex justify-end  '>
+                <div className=' rounded-none  flex flex-wrap justify-start content-center w-full text-neutral-300'>
+                  <div className='flex flex-col'>
+                    <p className='text-4xl font-bold '>Resultat de la simulation</p>
+                  </div>
+                </div>
               </div>
+
             </div>
 
-            <div className='  py-10  h-3/5 space-y-20'>
-              <div className=" w-full mb-5 flex rounded-none overflow-hidden flex-wrap content-center   ">
-                <div className="flex  flex-row space-x-4 items-center h-full  rounded-none  ">
-                  <div className=' flex space-x-0.5 h-full items-center flex-wrap content-start   '>
-                    <p className='text-white font-semibold text-blue-500 flex text-2xl text-center'>Type d'impôt :</p>
+            <div className='  h-4/5 flex-wrap content-center '>
+
+                <div className="flex   w-full flex-col h-1/2 rounded-none overflow-hidden justify-start">
+                  <div className=' flex space-x-0.5 h-full flex-wrap content-end w-full  '>
+                    <p className='text-neutral-400 flex text-2xl text-center'>Type d'impôt </p>
                   </div>
                   {res.taxName.length < 2 ?
-                    <div className='  h-full flex content-center '>
-                      <p className='text-start text-xl '><AnimatedText text={res.taxName[0]} onEnd={forTypeTaxFinish} /></p>
+                    <div className='  h-full flex flex-wrap content-center'>
+                      <p className=' text-start text-xl'><AnimatedText text={res.taxName[0]} onEnd={forTypeTaxFinish} /></p>
                     </div>
                     :
 
-                    <div className='  h-full flex content-center '>
-                      <p className='text-start text-xl'><AnimatedText text={res.taxName[0] + ' et ' + res.taxName[1]} onEnd={forTypeTaxFinish} /></p>
+                    <div className='  h-full flex flex-wrap content-center'>
+                      <p className=' text-xl'><AnimatedText text={res.taxName[0] + ' et ' + res.taxName[1]} onEnd={forTypeTaxFinish} /></p>
                     </div>
 
                   }
                 </div>
 
 
+              <div className=" w-full  flex flex-col h-1/2 rounded-none overflow-hidden justify-start   ">
 
-              </div>
-
-
-              <div className=" w-full flex flex-rows space-x-4 items-center rounded-none overflow-hidden flex-wrap content-center   ">
-
-                <div className="flex items-center h-full rounded-none">
-                  <div className='  flex space-x-0.5 h-full items-center flex-wrap content-start   '>
-                    <p className='text-white font-semibold text-blue-500 flex text-2xl text-center  '>Montant à payer :</p>
+                <div className="flex items-center h-full  rounded-none">
+                  <div className='  space-x-0.5 h-full justify-start flex-wrap content-end w-full    '>
+                    <p className='text-neutral-400 flex text-2xl text-center  '>Montant à payer</p>
                   </div>
                 </div>
 
                 {res.taxPrice.length === 1 &&
                   <div className=" h-full flex flex-wrap content-center ">
-                    <p className=" text-start text-xl font-medium ">
+                    <p className=" text-start text-xl  ">
                       {amountTyping && <AnimatedText text={String(res.taxPrice[0]).replace(...numberFormatRegex) + ' fcfa'} onEnd={forAmountFinisht} />}
                     </p>
                   </div>
@@ -195,7 +185,7 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
                 {res.taxPrice.length === 2 &&
 
                   <div className="h-2/3 flex flex-wrap content-center">
-                    <p className="text-start text-xl font-medium space-x-4">
+                    <p className="text-start text-xl  space-x-4">
                       {amountTyping && <AnimatedText text={String(res.taxPrice[0]).replace(...numberFormatRegex) + ' fcfa à ' + String(res.taxPrice[1]).replace(...numberFormatRegex) + ' fcfa'} onEnd={forAmountFinisht} />}
                     </p>
 
@@ -205,9 +195,9 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
 
                 {res.taxPrice.length === 3 &&
 
-                  <div className="flex flex-col h-2/3 space-y-1 pt-2 flex-wrap content-start pl-2 ">
+                  <div className="flex flex-col h-2/3 flex-wrap content-start  ">
                     <div className=" h-full flex flex-wrap content-center ">
-                      <p className=" text-start font-medium ">
+                      <p className=" text-start  text-xl">
                         {amountTyping && <AnimatedText text={String(res.taxPrice[0]).replace(...numberFormatRegex) + ' fcfa pour ' +
                           res.taxName[0].split('(')[1].split(')')[0] + ' et entre ' + String(res.taxPrice[1]).replace(...numberFormatRegex) +
                           ' et ' + String(res.taxPrice[2]).replace(...numberFormatRegex) + ' fcfa pour ' + res.taxName[1].split('(')[1].split(')')[0]

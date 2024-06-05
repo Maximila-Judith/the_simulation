@@ -25,11 +25,11 @@ export const CalculMode = ({isCall}:{isCall:boolean}) => {
          <div className=" flex flex-col space-y-4 bg-gray-300 w-full h-screen p-8 px-14">    
                 <Card className={`${isCall ? 'translate-y-0' : 'translate-y-full'} transition duration-700 ease-in-out transform bg-neutral-700 border-zinc-500 hover:border-2 rounded-none  hover:border-lime-400 w-full h-[200px] p-0 mt-0 text-center`}>
                     <div className=" h-full flex flex-col ">
-                        <CardHeader className="flex h-1/5 p-0 bg-green-800 pt-1 pl-2">
+                        <CardHeader className="flex h-1/5 p-0 bg-purple-500 pt-1 pl-2">
                             <CardTitle>
                                 <div className="flex text-sm text-neutral-300 justify-start">
                                     <div className="flex flex-row items-center gap-2 ">
-                                        <Percent className="text-green-600 bg-white rounded-full p-1 size-6 " />
+                                        <Percent className="text-lime-400 bg-neutral-700  rounded-full p-1 size-6 " />
                                         <HoverCardDemo item = "Pourcentage appliqué" />
                                     </div>
                                 </div>
@@ -111,11 +111,11 @@ export const CalculMode = ({isCall}:{isCall:boolean}) => {
 
                 <Card className={`${isCall ? 'translate-y-0' : 'translate-y-full'} transition duration-700 ease-in transform bg-neutral-700 border-zinc-500 rounded-none hover:border-2  hover:border-yellow-500 w-full h-[200px] p-0 mt-0 text-center`}>
                     <div className="h-full flex flex-col">
-                        <CardHeader className="flex h-1/5 p-0 bg-green-800 pt-1 pl-2">
+                        <CardHeader className="flex h-1/5 p-0 bg-purple-500 pt-1 pl-2">
                             <CardTitle>
                                 <div className="flex text-sm text-neutral-300 justify-start">
                                     <div className="flex flex-row items-center gap-2">
-                                        <Plus className="text-green-600 bg-white rounded-full p-1 size-6" />
+                                        <Plus className="text-yellow-500 bg-neutral-700  rounded-full p-1 size-6" />
                                         <HoverCardDemo item= "Redevance additionnelle" />
                                     </div>
                                 </div>
@@ -152,11 +152,11 @@ export const CalculMode = ({isCall}:{isCall:boolean}) => {
            
                 <Card className={`${isCall ? 'translate-y-0' : 'translate-y-full'} transition duration-700 ease-in transform bg-neutral-700 rounded-none hover:border-2 hover:border-red-400 w-full h-[200px] p-0 mt-0 text-center`}>
                     <div className="h-full flex flex-col">
-                        <CardHeader className="flex h-1/5 p-0 bg-green-800 pt-1 pl-2">
+                        <CardHeader className="flex h-1/5 p-0 bg-purple-500 pt-1 pl-2">
                             <CardTitle>
                                 <div className="flex text-sm text-neutral-300 justify-start">
                                     <div className="flex flex-row items-center gap-1">
-                                      <TriangleAlert className="text-green-600 bg-white p-0.5 rounded-full size-6" />
+                                      <TriangleAlert className="text-red-400  bg-neutral-700  p-0.5 rounded-full size-6" />
                                       <HoverCardDemo item ="Minimum de perception"  />
                                     </div>
                                 </div>

@@ -110,13 +110,14 @@ export function Landing() {
             </div>
              */}
             <div className="flex flex-col pt-3 bg-[url('/img/b3.jpg')] bg-no-repeat bg-cover mt-20 bg-center h-screen lg:max-h-96 max-w-full block">
-                <div className="flex flex-row justify-between pl-5 items-center fixed top-0 left-0 w-full z-50 bg-neutral-200">
+                <div className="flex flex-row justify-between pl-5 items-center fixed top-0 left-0 w-full z-50 bg-gray-400">
                     <Image
-                        src="/benin.png"
+                        src="/img/benin.png"
                         alt="icon 1"
-                        width={80}
-                        height={80}
+                        width={150}
+                        height={150}
                         priority
+                        className="opacity-100"
                     />
                     <div className="relative">
                         <button
@@ -237,7 +238,7 @@ export function Landing() {
                             <div className="col-span-full lg:col-span-1">
                                 <a className="flex-none text-xl font-semibold text-white" href="#" aria-label="Brand">
                                     <Image
-                                        src="/dgi-white.webp"
+                                        src="/img/benin.png"
 
                                         alt="icon 1"
                                         width={200}

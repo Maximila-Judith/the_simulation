@@ -40,7 +40,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             // Vérifier si l'utilisateur existe déjà
             const existingUser = await prisma.user.findUnique({
                 where: { email },
-                include: { result: true },
+                include: { results: true },
             });
 
             let resultCode;
@@ -67,7 +67,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         email,
                         name,
                         result_code: resultCode,
-                        result: {
+                        results: {
                             create: {
                                 tax_name: result.tax_name,
                                 tax_base: result.tax_base,

@@ -17,7 +17,6 @@ export function HoverCardDemo({ item }:{item: string}) {
       <HoverCardContent className="w-80">
         <div className="flex justify-between space-x-4">
           <div className="space-y-1">
-            <h4 className="text-sm font-semibold">{item}</h4>
             
             {item === "Pourcentage appliqué" &&
             

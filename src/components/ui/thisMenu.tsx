@@ -41,11 +41,11 @@ export function ThisMenu() {
     return (
         <Menubar >
             <MenubarMenu>
-                <MenubarTrigger className="text-neutral-900" onClick={handleClickc}>Accueil</MenubarTrigger>
+                <MenubarTrigger className="text-white" onClick={handleClickc}>Accueil</MenubarTrigger>
             </MenubarMenu>
 
-            <MenubarMenu>
-                <MenubarTrigger className="text-neutral-900">Simulation</MenubarTrigger>
+            {/* <MenubarMenu>
+                <MenubarTrigger className="text-neutral-900">Simulation rapide</MenubarTrigger>
                 <MenubarContent>
                     <MenubarItem>
                         <Link href='' onClick={handleClick}>
@@ -96,10 +96,10 @@ export function ThisMenu() {
                         </Link>
                     </MenubarItem>
                 </MenubarContent>
-            </MenubarMenu>
+            </MenubarMenu> */}
 
             <MenubarMenu>
-                <MenubarTrigger className="text-neutral-900">Documentation</MenubarTrigger>
+                <MenubarTrigger className="text-white">Documentation</MenubarTrigger>
                 <MenubarContent>
                     <MenubarItem>
                         <Link href='https://api.impots.bj/media/65d5ae32a155a_B%C3%A9nin-Code%20G%C3%A9n%C3%A9ral%20des%20Imp%C3%B4ts%202024.pdf'>
@@ -119,8 +119,8 @@ export function ThisMenu() {
             </MenubarMenu>
 
             <MenubarMenu>
-                <MenubarTrigger className="text-neutral-900">
-                    <Link href='' onClick={handleClickb}> Voir mes consultations </Link>
+                <MenubarTrigger className="text-white">
+                    <Link href='' onClick={handleClickb}> Consulter mes resultats </Link>
                 </MenubarTrigger>
             </MenubarMenu>
         </Menubar>

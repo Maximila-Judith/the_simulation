@@ -7,14 +7,6 @@ datasource db {
   url      = "mysql://root:@localhost:3306/simulation"
 }
 
-model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
-  name     String?
-  result   Result?
-  result_id Int?   @unique
-}
-
 model Result {
   id        Int     @id @default(autoincrement())
   tax_name  String
@@ -24,6 +16,15 @@ model Result {
   minimum   Float
   price_add Float
   tax_price String
-  user_id   Int?    @unique
-  user      User?   @relation(fields: [user_id], references: [id])
+  code      String? 
+  user      User?   @relation(fields: [userId], references: [id])
+  userId    Int?
+}
+
+model User {
+  id          Int     @id @default(autoincrement())
+  email       String  @unique
+  name        String?
+  result_code String?
+  results     Result[]
 }

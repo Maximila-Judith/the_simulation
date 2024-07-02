@@ -34,7 +34,7 @@ export const ThatMenu = () => {
                     </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                    <NavigationMenuTrigger className=" relative text-md bg-transparent">Simulation</NavigationMenuTrigger>
+                    <NavigationMenuTrigger className=" relative text-md bg-transparent">Simulation rapide</NavigationMenuTrigger>
                     <NavigationMenuContent >
                         <div className=" relative bg-gray-100" style={{ left: '40px' }}>
                             <ul className="grid lg:grid-cols-[1fr] -space-y-4 text-start md:w-[200px] lg:w-[350px]">

@@ -41,7 +41,7 @@ import {
 } from "@/components/ui/card"
 import { Slideshow } from "../ui/slideshow";
 import { Myslides } from "../ui/myslides";
-import { Menu, X } from "lucide-react";
+import { Menu, Newspaper, X, Building2, Shield, TableCellsMerge, Layers3, MoveRight, Home } from "lucide-react";
 import { ThisMenu } from "../ui/thisMenu";
 import { Separator } from "@/components/ui/separator"
 import { Theslide } from "../ui/theslide";
@@ -58,7 +58,7 @@ AOS.init({
 
 
 export function Landing() {
-    const images = ['/g1.jpg', '/g2.jpg', '/g3.jpg', '/333.jpg']
+    const images = ['/111.jpg', '/g2.jpg', '/nnn.jpg', '/333.jpg']
     const [image, setImage] = useState(0)
     const [menuOpen, setMenuOpen] = useState(false)
     const [currentStep, setCurrentStep] = useState(1)
@@ -77,9 +77,9 @@ export function Landing() {
         return () => clearInterval(interval)
     }, [])
 
-    const handleClick = (name: string) => {
-        console.log(name)
-
+    const handleClick = () => {
+        window.location.href = '/accueil';
+        console.log('ok')
     }
 
     const handleStepChange = (step: number) => {
@@ -88,28 +88,8 @@ export function Landing() {
 
     return (
         <div className=" relative mx-auto bg-neutral-300">
-            {/* <div className="flex flex-row justify-between items-center pl-10 pb-5 pr-10 bg-gray-400 fixed top-0 left-0 w-full bg-gray-600 z-50">
-                <Image
-                    src="/dgi-white.webp"
-                    alt="icon 1"
-                    width={200}
-                    height={200}
-                    priority
-                />
-                {menuOpen ? (
-                    <button className="" onClick={toggleMenu}> <X /> </button>
-                ) : (
-                    <button className="" onClick={toggleMenu}> <Menu /> </button>
-                )}
-            </div>
-            <div className={`fixed top-0 left-0 w-full h-screen mt-20 bg-gray-800 bg-opacity-50 z-40 transition-transform duration-200 ${menuOpen ? 'transform-none' : '-translate-x-full'}`}>
-                <div className="flex flex-row justify-between p-3 fixed top-0 w-full absolute top-0 left-0 w-64 overflow-visible bg-white h-screen">
-                    <div className="bg-[url('/img/menu-img.jpg')] bg-no-repeat bg-cover h-screen w-1/2 "></div>
-                    <ThisMenu />
-                </div>
-            </div>
-             */}
-            <div className="flex flex-col pt-3 bg-[url('/img/b3.jpg')] bg-no-repeat bg-cover mt-20 bg-center h-screen lg:max-h-96 max-w-full block">
+
+            <div className={` flex flex-col pt-3 bg-no-repeat bg-cover bg-center h-screen lg:max-h-96 max-w-full block ${styles['background-slide']}`} style={{ backgroundImage: `url(${images[image]})` }}>
                 <div className="flex flex-row justify-between pl-5 items-center fixed top-0 left-0 w-full z-50 bg-gray-400">
                     <Image
                         src="/img/benin.png"
@@ -127,100 +107,142 @@ export function Landing() {
                             {menuOpen ? <X className="" /> : <Menu className="" />}
                         </button>
                         <div
-                            className={`absolute left-0 right-0 mt-2 bg-white border rounded-lg shadow-lg z-10 lg:flex lg:flex-row lg:static lg:mt-0 lg:bg-transparent lg:border-0 lg:shadow-none lg:z-auto sm:p-4 sm:m-2 ${menuOpen ? "block " : " hidden"
+                            className={`absolute left-0 right-0 mt-2 mb-20 bg-white border rounded-lg shadow-lg z-10 lg:flex lg:flex-row lg:static lg:mt-0 lg:bg-transparent lg:border-0 lg:shadow-none lg:z-auto sm:p-4 sm:m-2 ${menuOpen ? "block " : " hidden"
                                 }`}
                         >
                             <ThisMenu />
                         </div>
                     </div>
-
-
-                    {/* <div className="flex flex-row">
-                        <button className="relative items-center justify-center lg:hidden block rounded-lg w-10 h-10 hover:bg-gray-300 hover:bg-opacity-40 focus:outline-none">
-                            {menu ? (
-                                <X className='absolute inset-0 shrink-0 top-5 left-5 text-white transform -translate-x-1/2 -translate-y-1/2 fill-current' />
-                            ) : (
-                                <Menu className="absolute inset-0 shrink-0 top-5 left-5 text-white transform -translate-x-1/2 -translate-y-1/2 fill-current" />
-                            )}
-                        </button>
-                        <div className="hidden lg:flex lg:flex-row">
-                            <ThisMenu />
-                        </div>
-                    </div> */}
                 </div>
-                <div className={`flex flex-col lg:mb-10 w-full lg:w-2/4 place-self-center bg-transparent opacity-100 pl-8 space-y-4 lg:mt-10 pt-20 mt-10 overflow-x-hidden overflow-y-hidden ${styles['zoom-in']}`}>
-                    <h1 className={`text-2xl text-center font-bold text-white inline-block`} > Simuler vos Impôts conformément au Code Géneral <TypedText /> </h1>
-                    <Link href="" onClick={() => handleClick} className="mt-6 bg-white inline-block text-black font-bold py-2 px-6 rounded-lg self-center hover:bg-gray-400 transition duration-200">Simuler</Link>
+                <div className={`flex flex-col lg:mb-10 w-full lg:w-2/4 place-self-center bg-transparent opacity-100 pl-8 space-y-4 lg:mt-10 pt-20 mt-10 overflow-x-hidden overflow-y-hidden `}>
+                    <h1 className={`text-2xl text-center mt-10 font-bold text-white inline-block`} > Simuler vos Impôts conformément au Code Géneral des Impôts 2024 </h1>
+                    <Link href="" onClick={handleClick} className="mt-6 bg-white inline-block text-black font-bold py-2 px-6 rounded-lg self-center hover:bg-gray-400 transition duration-200">Simulation rapide</Link>
                 </div>
             </div>
 
-            <div className=" text-center w-full justify-center p-20 ">
+            <div className=" text-center gap-y-10 w-full justify-center p-20 ">
                 <div className="flex flex-col justify-center mr-40 ml-40 p-30">
-                    <h1 className="font-bold self-center text-neutral-900 inline-block text-xl">Comment simuler ses impôts ?</h1>
-                    <p className="pt-5 text-center text-neutral-600 text-md inline-block">
-                        Simuler ses impôts au Bénin est simple et rapide grâce à notre application intuitive. Suivez ces trois étapes faciles pour obtenir une estimation précise de vos impôts.
-                    </p>
+                    <h1 className="font-bold uppercase self-center text-neutral-900 inline-block text-2xl">Les types d'impôts au Bénin </h1>
                 </div>
                 <div className="flex flex-col lg:flex-row justify-center items-center gap-y-10 lg:gap-x-10 pt-10 transition ease-in-out duration-1000" data-aos="fade-up" data-aos-delay="400">
                     <Card className={`drop-shadow-md ${styles['card']}`}>
                         <CardHeader>
                             <div className="flex flex-col items-center">
-                                <Image
-                                    src="/img/d1.jpg"
-                                    alt="icon 1"
-                                    width={100}
-                                    height={100}
-                                    priority
-                                    className=""
-                                />
+                                <div className="flex flex-rows items-center space-x-6 hover:text-blue-900 hover:font-bold">
+                                    <div className="bg-slate-200 p-2 rounded-full">
+                                        <TableCellsMerge className="fill-black-600 text-black-950 size-8 " />
+                                    </div>
+                                    <h2 className="uppercase text-sm font-bold inline-block text-left ">Taxe Professionnelle Synthétique (TPS)</h2>
+                                </div>
                             </div>
+                            <Separator />
                         </CardHeader>
                         <CardContent className="space-y-2">
-                            <h2 className="uppercase font-bold inline-block text-center text-green-800">Accéder à la plateforme</h2>
-                            <CardDescription className="text-sm p-1 text-semibold text-black">Accéder à l'application de simulation d'impôts et commencez par entrer vos informations de base.</CardDescription>
+                            <CardDescription className="text-md p-1 text-semibold text-black">La TPS s'applique à tout contribuable dont le chiffre d'affaires est inférieur ou égal à 50 millions de francs CFA.</CardDescription>
+                            <Link href="" onClick={handleClick} className="mt-6 bg-gradient-to-l from-gray-400 to-gray-500 uppercase inline-block text-white py-2 px-20 justify-center hover:bg-gray-400 transition duration-200">Simuler</Link>
                         </CardContent>
                     </Card>
 
                     <Card className={`drop-shadow-md ${styles['card']}`}>
                         <CardHeader>
                             <div className="flex flex-col items-center">
-                                <Image
-                                    src="/img/d2.jpg"
-                                    alt="icon 1"
-                                    width={100}
-                                    height={100}
-                                    priority
-                                    className=""
-                                />
+                                <div className="flex flex-rows items-center space-x-6 hover:text-blue-900 hover:font-bold">
+                                    <div className="bg-slate-200 p-2 rounded-full">
+                                        <Building2 className="fill-black-600 text-black-950 size-8" />
+                                    </div>
+                                    <h2 className="uppercase text-sm font-bold inline-block text-left ">Impôt sur les Revenus Fonciers (IRF)</h2>
+                                </div>
                             </div>
+                            <Separator />
                         </CardHeader>
                         <CardContent className="space-y-2">
-                            <h2 className="uppercase font-bold inline-block text-center text-green-800">Répondre aux questions </h2>
-                            <CardDescription className="text-sm p-1 text-semibold text-black">L'application vous posera une série de questions spécifiques concernant vos revenus, dépenses et situation fiscale.</CardDescription>
+                            <CardDescription className="text-md p-1 text-semibold text-black">L'Impôt sur les Revenus Fonciers (IRF) est dû par les personnes physiques qui ont des revenus fonciers.</CardDescription>
+                            <Link href="" onClick={handleClick} className="mt-6 bg-gradient-to-l from-gray-400 to-gray-500 uppercase inline-block text-white font-bold py-2 px-20 justify-center hover:bg-gray-400 transition duration-200">Simuler</Link>
                         </CardContent>
                     </Card>
 
                     <Card className={`drop-shadow-md ${styles['card']}`}>
                         <CardHeader>
                             <div className="flex flex-col items-center">
-                                <Image
-                                    src="/img/d3.jpg"
-                                    alt="icon 1"
-                                    width={100}
-                                    height={150}
-                                    priority
-                                    className=""
-                                />
+                                <div className="flex flex-rows items-center space-x-6 hover:text-blue-900 hover:font-bold">
+                                    <div className="bg-slate-200 p-2 rounded-full">
+                                        <Layers3 className="fill-black-600 text-black-950 size-8" />
+                                    </div>
+                                    <h2 className="uppercase text-sm font-bold inline-block text-left">Impôt sur les Bénéfices d'Affaires (IBA) </h2>
+                                </div>
                             </div>
+                            <Separator />
                         </CardHeader>
                         <CardContent className="space-y-2">
-                            <h2 className="uppercase font-bold inline-block text-center text-green-800">Obtenir le résultat </h2>
-                            <CardDescription className="text-sm p-1 text-semibold text-black">En fonction de vos réponses, vous recevrez une estimation détaillée de la nature de chaque impôt applicable.</CardDescription>
+                            <CardDescription className="text-md p-1 text-semibold text-black">L'Impôt sur les Bénéfices d'Affaires concerne les personnes physiques et leur propre compte.</CardDescription>
+                            <Link href="" onClick={handleClick} className="mt-6 bg-gradient-to-l from-gray-400 to-gray-500 uppercase inline-block text-white font-bold py-2 px-20 justify-center hover:bg-gray-400 transition duration-200">Simuler</Link>
+                        </CardContent>
+                    </Card>
+                </div>
+
+                <div className="flex flex-col lg:flex-row justify-center items-center gap-y-10 lg:gap-x-10 pt-10 transition ease-in-out duration-1000" data-aos="fade-up" data-aos-delay="400">
+                    <Card className={`drop-shadow-md ${styles['card']}`}>
+                        <CardHeader>
+                            <div className="flex flex-col items-center">
+                                <div className="flex flex-rows items-center space-x-6 hover:text-blue-900 hover:font-bold">
+                                    <div className="bg-slate-200 p-2 rounded-full">
+                                        <Shield className="fill-black-600 text-black-950 size-8 " />
+                                    </div>
+                                    <h2 className="uppercase text-sm font-bold inline-block text-left ">Taxe sur les Armes à Feu</h2>
+                                </div>
+                            </div>
+                            <Separator />
+                        </CardHeader>
+                        <CardContent className="space-y-2">
+                            <CardDescription className="text-md p-1 text-semibold text-black">La taxe sur les armes à feu est une taxe qui comprend un droit fixe et une taxe annuelle perçue au profit des communes.</CardDescription>
+                            <Link href="" onClick={handleClick} className="mt-6 bg-gradient-to-l from-gray-400 to-gray-500 uppercase inline-block text-white font-bold py-2 px-20 justify-center hover:bg-gray-400 transition duration-200">Simuler</Link>
+                        </CardContent>
+                    </Card>
+
+                    <Card className={`drop-shadow-md ${styles['card']}`}>
+                        <CardHeader>
+                            <div className="flex flex-col items-center">
+                                <div className="flex flex-rows items-center space-x-6 hover:text-blue-900 hover:font-bold">
+                                    <div className="bg-slate-200 p-2 rounded-full">
+                                        <Newspaper className="fill-black-600 text-black-950 size-8" />
+                                    </div>
+                                    <h2 className="uppercase text-sm font-bold inline-block text-left ">Impôt sur les Sociétés (IS)</h2>
+                                </div>
+                            </div>
+                            <Separator />
+                        </CardHeader>
+                        <CardContent className="space-y-2">
+                            <CardDescription className="text-md p-1 text-semibold text-black">L'Impôt sur les Sociétés s'applique aux bénéfices réalisés par les sociétés et autres personnes morales comme dans le CGI.</CardDescription>
+                            <Link href="" onClick={handleClick} className="mt-6 bg-gradient-to-l from-gray-400 to-gray-500 uppercase inline-block text-white font-bold py-2 px-20 justify-center hover:bg-gray-400 transition duration-200">Simuler</Link>
+                        </CardContent>
+                    </Card>
+
+                    <Card className={`drop-shadow-md ${styles['card']}`}>
+                        <CardHeader>
+                            <div className="flex flex-col items-center">
+                                <div className="flex flex-rows items-center space-x-6 hover:text-blue-900 hover:font-bold">
+                                    <div className="bg-slate-200 p-2 rounded-full">
+                                        <Home className="fill-black-600 text-black-950 size-8" />
+                                    </div>
+                                    <h2 className="uppercase text-sm font-bold inline-block text-left">Taxe Foncière Unique (TFU) </h2>
+                                </div>
+                            </div>
+                            <Separator />
+                        </CardHeader>
+                        <CardContent className="space-y-2">
+                            <CardDescription className="text-md p-1 text-semibold text-black">La Taxe Foncière Unique (TFU) est une contribution annuelle sur les propriétés foncières sises en République du Bénin.</CardDescription>
+                            <Link href="" onClick={handleClick} className="mt-6 bg-gradient-to-l from-gray-400 to-gray-500 uppercase inline-block text-white font-bold py-2 px-20 justify-center hover:bg-gray-400 transition duration-200">Simuler</Link>
                         </CardContent>
                     </Card>
 
                 </div>
+                <Link href="" onClick={handleClick} className="uppercase flex flex-rows items-center gap-x-6 mt-6 inline-block text-black font-bold py-2 px-6 rounded-lg self-center hover:bg-gray-400 transition duration-200">
+                    Voir tous les impôts
+                    {/* <MoveRight /> */}
+                </Link>
+
             </div>
+
             {/* <div className="pt-20 pr-20 pl-20 justify-center pb-20 space-y-10 bg-[url('/img/b2.jpg')] transition ease-in-out duration-1000" data-aos="fade-up" data-aos-delay="400">
                 <Theslide onProgressChange={handleProgressChange} />
                 {currentSlide === 'Myslides' ? <Myslides /> : <Slideshow />}

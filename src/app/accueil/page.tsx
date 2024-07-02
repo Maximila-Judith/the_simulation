@@ -1,6 +1,6 @@
 'use client'
 import styles from '@/app/wizard.module.css'
-import { CheckCircle, CircleHelp, CornerUpLeft, MoveLeft } from "lucide-react"
+import { MoveLeft } from "lucide-react"
 import { Body } from "@/components/ui/body";
 import React, { useEffect, useState } from 'react';
 import { Stepper } from '@/components/ui/stepper'
@@ -8,7 +8,6 @@ import { Questions, valQuestions } from '@/components/questions/globalQuestion'
 import { Data, Info } from "@/lib/type/type"
 import { Result } from "@/components/result/result";
 import { QuestionContext } from "@/lib/questionContext";
-import { InfoCard } from "@/components/informations";
 import { infos, valInfos } from "@/components/informations/globalInfo";
 import {
     valQuestionsIBA, valQuestionsIS, valQuestionsIRF,

@@ -276,7 +276,7 @@ export function findResult(tax: string, answers: { question: string; response: s
       price[0] = new_num ? new_num : 0
 
     return  res = {
-        taxName: ["Impôt sur les Traitements et Salaire (ITS)"],
+        taxName: ["Impôt sur les Traitements et Salaires (ITS)"],
         taxBase: ["Le salaire reçu"],
         amount: [sal],
         rate: [rate],

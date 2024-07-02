@@ -124,16 +124,16 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
             <div className=' flex flex-col space-y-20 h-1/4 '>
              
               <div className='  px-0 flex h-auto flex-rows items-center space-x-4 content-start  justify-end '>
-                <Link href='' onClick={handleClick} className=" ">
+                <Link href='' onClick={handleClick} className=" bg-cyan-600 p-3">
                      <p className=' text-center text-sm hover:text-neutral-400'>Refaire une autre simulation</p> 
                 </Link>
-                <Link href='' className="  flex justify-end">
+{/*                 <Link href='' className="  flex justify-end">
                   <div className='flex gap-x-1 h-full flex-wrap content-center '>
                     <SaveForms data = {dbRes} />
                   </div>
-                </Link>
+                </Link> */}
                 <Link href='' onClick={forAcceuil} className="  flex justify-end">
-                    <p className=' text-center text-sm hover:text-neutral-400'>Page d'accueil</p> 
+                    <p className=' text-center text-sm hover:text-neutral-400'>Aller à la page d'accueil</p> 
                 </Link>
             </div>
             <div className='flex justify-end  '>
@@ -149,8 +149,8 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
             <div className='  h-4/5 flex-wrap content-center '>
 
                 <div className="flex   w-full flex-col h-1/2 rounded-none overflow-hidden justify-start">
-                  <div className=' flex space-x-0.5 h-full flex-wrap content-end w-full  '>
-                    <p className='text-neutral-400 flex text-2xl text-center'>Type d'impôt </p>
+                  <div className=' flex space-x-0.5 h-full flex-wrap content-end w-full '>
+                    <p className='text-neutral-300 flex text-2xl text-center bg-cyan-900 p-2 pl-0'>Type d'impôt </p>
                   </div>
                   {res.taxName.length < 2 ?
                     <div className='  h-full flex flex-wrap content-center'>
@@ -170,7 +170,7 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
 
                 <div className="flex items-center h-full  rounded-none">
                   <div className='  space-x-0.5 h-full justify-start flex-wrap content-end w-full    '>
-                    <p className='text-neutral-400 flex text-2xl text-center  '>Montant à payer</p>
+                    <p className='text-neutral-300 flex text-2xl text-center w-[210px]  bg-cyan-900 p-2 pl-0'>Montant à payer</p>
                   </div>
                 </div>
 
@@ -210,9 +210,6 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
                 }
 
               </div>
-
-
-
 
             </div>
             <div className=' h-1/4'>

@@ -1,6 +1,6 @@
 @keyframes backgroundAnimation {
     0% {
-        background-image: url('/g1.jpg');
+        background-image: url('/111.jpg');
     }
 
     25% {
@@ -8,7 +8,7 @@
     }
 
     50% {
-        background-image: url('/g3.jpg');
+        background-image: url('/nnn.jpg');
     }
 
     75% {
@@ -17,7 +17,7 @@
     }
 
     100% {
-        background-image: url('/g1.jpg');
+        background-image: url('/111.jpg');
 
     }
 }

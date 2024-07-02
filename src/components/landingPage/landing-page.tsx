@@ -41,7 +41,7 @@ import {
 } from "@/components/ui/card"
 import { Slideshow } from "../ui/slideshow";
 import { Myslides } from "../ui/myslides";
-import { Menu, Newspaper, X } from "lucide-react";
+import { Menu, Newspaper, X, Building2, Shield, TableCellsMerge, Layers3, MoveRight, Home } from "lucide-react";
 import { ThisMenu } from "../ui/thisMenu";
 import { Separator } from "@/components/ui/separator"
 import { Theslide } from "../ui/theslide";
@@ -120,27 +120,26 @@ export function Landing() {
                 </div>
             </div>
 
-            <div className=" text-center w-full justify-center p-20 ">
+            <div className=" text-center gap-y-10 w-full justify-center p-20 ">
                 <div className="flex flex-col justify-center mr-40 ml-40 p-30">
-                    <h1 className="font-bold self-center text-neutral-900 inline-block text-3xl">Les différents impôts au Bénin </h1>
-                    <p className="pt-5 text-center text-md inline-block">
-                        Simuler ses impôts au Bénin est simple et rapide grâce à notre application intuitive. Suivez ces trois étapes faciles pour obtenir une estimation précise de vos impôts.
-                    </p>
+                    <h1 className="font-bold uppercase self-center text-neutral-900 inline-block text-2xl">Les types d'impôts au Bénin </h1>
                 </div>
                 <div className="flex flex-col lg:flex-row justify-center items-center gap-y-10 lg:gap-x-10 pt-10 transition ease-in-out duration-1000" data-aos="fade-up" data-aos-delay="400">
                     <Card className={`drop-shadow-md ${styles['card']}`}>
                         <CardHeader>
                             <div className="flex flex-col items-center">
                                 <div className="flex flex-rows items-center space-x-6 hover:text-blue-900 hover:font-bold">
-                                    <Newspaper className="fill-black-600 text-black-950 size-10 " />
-                                    <h2 className="uppercase font-bold inline-block text-left ">Impôt sur les Bénéfices d'Affaires (IBA)</h2>
+                                    <div className="bg-slate-200 p-2 rounded-full">
+                                        <TableCellsMerge className="fill-black-600 text-black-950 size-8 " />
+                                    </div>
+                                    <h2 className="uppercase text-sm font-bold inline-block text-left ">Taxe Professionnelle Synthétique (TPS)</h2>
                                 </div>
                             </div>
                             <Separator />
                         </CardHeader>
                         <CardContent className="space-y-2">
-                            <CardDescription className="text-md p-1 text-semibold text-black">L'Impôt sur les Bénéfices d'Affaires concerne les personnes physiques qui accomplissent, pour leur propre compte, une activité à caractère lucratif.</CardDescription>
-                            <Link href="" onClick={handleClick} className="mt-6 bg-gray-500 inline-block text-black font-bold py-2 px-20 justify-center hover:bg-gray-400 transition duration-200">Simuler</Link>
+                            <CardDescription className="text-md p-1 text-semibold text-black">La TPS s'applique à tout contribuable dont le chiffre d'affaires est inférieur ou égal à 50 millions de francs CFA.</CardDescription>
+                            <Link href="" onClick={handleClick} className="mt-6 bg-gradient-to-l from-gray-400 to-gray-500 uppercase inline-block text-white py-2 px-20 justify-center hover:bg-gray-400 transition duration-200">Simuler</Link>
                         </CardContent>
                     </Card>
 
@@ -148,15 +147,17 @@ export function Landing() {
                         <CardHeader>
                             <div className="flex flex-col items-center">
                                 <div className="flex flex-rows items-center space-x-6 hover:text-blue-900 hover:font-bold">
-                                    <Newspaper className="fill-black-600 text-black-950 size-9" />
-                                    <h2 className="uppercase font-bold inline-block text-left ">Impôt sur les Revenus Fonciers (IRF)</h2>
+                                    <div className="bg-slate-200 p-2 rounded-full">
+                                        <Building2 className="fill-black-600 text-black-950 size-8" />
+                                    </div>
+                                    <h2 className="uppercase text-sm font-bold inline-block text-left ">Impôt sur les Revenus Fonciers (IRF)</h2>
                                 </div>
                             </div>
                             <Separator />
                         </CardHeader>
-                        <CardContent className="space-y-8">
-                            <CardDescription className="text-md p-1 text-semibold text-black">L'Impôt sur les Revenus Fonciers (IRF) est dû par les personnes physiques et assimilées qui perçoivent des revenus fonciers.</CardDescription>
-                            <Link href="" onClick={handleClick} className="mt-6 bg-gray-500 inline-block text-black font-bold py-2 px-20 justify-center hover:bg-gray-400 transition duration-200">Simuler</Link>
+                        <CardContent className="space-y-2">
+                            <CardDescription className="text-md p-1 text-semibold text-black">L'Impôt sur les Revenus Fonciers (IRF) est dû par les personnes physiques qui ont des revenus fonciers.</CardDescription>
+                            <Link href="" onClick={handleClick} className="mt-6 bg-gradient-to-l from-gray-400 to-gray-500 uppercase inline-block text-white font-bold py-2 px-20 justify-center hover:bg-gray-400 transition duration-200">Simuler</Link>
                         </CardContent>
                     </Card>
 
@@ -164,20 +165,83 @@ export function Landing() {
                         <CardHeader>
                             <div className="flex flex-col items-center">
                                 <div className="flex flex-rows items-center space-x-6 hover:text-blue-900 hover:font-bold">
-                                    <Newspaper className="fill-black-600 text-black-950 size-7" />
-                                    <h2 className="uppercase font-bold inline-block text-left">Impôt sur les Sociétés (IS)</h2>
+                                    <div className="bg-slate-200 p-2 rounded-full">
+                                        <Layers3 className="fill-black-600 text-black-950 size-8" />
+                                    </div>
+                                    <h2 className="uppercase text-sm font-bold inline-block text-left">Impôt sur les Bénéfices d'Affaires (IBA) </h2>
                                 </div>
                             </div>
                             <Separator />
                         </CardHeader>
                         <CardContent className="space-y-2">
-                            <CardDescription className="text-md p-1 text-semibold text-black">L'Impôt sur les Sociétés s'applique aux bénéfices réalisés par les sociétés et autres personnes morales telles que désignées par le Code Général des Impôts</CardDescription>
-                            <Link href="" onClick={handleClick} className="mt-6 bg-gray-500 inline-block text-black font-bold py-2 px-20 justify-center hover:bg-gray-400 transition duration-200">Simuler</Link>
+                            <CardDescription className="text-md p-1 text-semibold text-black">L'Impôt sur les Bénéfices d'Affaires concerne les personnes physiques et leur propre compte.</CardDescription>
+                            <Link href="" onClick={handleClick} className="mt-6 bg-gradient-to-l from-gray-400 to-gray-500 uppercase inline-block text-white font-bold py-2 px-20 justify-center hover:bg-gray-400 transition duration-200">Simuler</Link>
                         </CardContent>
                     </Card>
                 </div>
 
+                <div className="flex flex-col lg:flex-row justify-center items-center gap-y-10 lg:gap-x-10 pt-10 transition ease-in-out duration-1000" data-aos="fade-up" data-aos-delay="400">
+                    <Card className={`drop-shadow-md ${styles['card']}`}>
+                        <CardHeader>
+                            <div className="flex flex-col items-center">
+                                <div className="flex flex-rows items-center space-x-6 hover:text-blue-900 hover:font-bold">
+                                    <div className="bg-slate-200 p-2 rounded-full">
+                                        <Shield className="fill-black-600 text-black-950 size-8 " />
+                                    </div>
+                                    <h2 className="uppercase text-sm font-bold inline-block text-left ">Taxe sur les Armes à Feu</h2>
+                                </div>
+                            </div>
+                            <Separator />
+                        </CardHeader>
+                        <CardContent className="space-y-2">
+                            <CardDescription className="text-md p-1 text-semibold text-black">La taxe sur les armes à feu est une taxe qui comprend un droit fixe et une taxe annuelle perçue au profit des communes.</CardDescription>
+                            <Link href="" onClick={handleClick} className="mt-6 bg-gradient-to-l from-gray-400 to-gray-500 uppercase inline-block text-white font-bold py-2 px-20 justify-center hover:bg-gray-400 transition duration-200">Simuler</Link>
+                        </CardContent>
+                    </Card>
+
+                    <Card className={`drop-shadow-md ${styles['card']}`}>
+                        <CardHeader>
+                            <div className="flex flex-col items-center">
+                                <div className="flex flex-rows items-center space-x-6 hover:text-blue-900 hover:font-bold">
+                                    <div className="bg-slate-200 p-2 rounded-full">
+                                        <Newspaper className="fill-black-600 text-black-950 size-8" />
+                                    </div>
+                                    <h2 className="uppercase text-sm font-bold inline-block text-left ">Impôt sur les Sociétés (IS)</h2>
+                                </div>
+                            </div>
+                            <Separator />
+                        </CardHeader>
+                        <CardContent className="space-y-2">
+                            <CardDescription className="text-md p-1 text-semibold text-black">L'Impôt sur les Sociétés s'applique aux bénéfices réalisés par les sociétés et autres personnes morales comme dans le CGI.</CardDescription>
+                            <Link href="" onClick={handleClick} className="mt-6 bg-gradient-to-l from-gray-400 to-gray-500 uppercase inline-block text-white font-bold py-2 px-20 justify-center hover:bg-gray-400 transition duration-200">Simuler</Link>
+                        </CardContent>
+                    </Card>
+
+                    <Card className={`drop-shadow-md ${styles['card']}`}>
+                        <CardHeader>
+                            <div className="flex flex-col items-center">
+                                <div className="flex flex-rows items-center space-x-6 hover:text-blue-900 hover:font-bold">
+                                    <div className="bg-slate-200 p-2 rounded-full">
+                                        <Home className="fill-black-600 text-black-950 size-8" />
+                                    </div>
+                                    <h2 className="uppercase text-sm font-bold inline-block text-left">Taxe Foncière Unique (TFU) </h2>
+                                </div>
+                            </div>
+                            <Separator />
+                        </CardHeader>
+                        <CardContent className="space-y-2">
+                            <CardDescription className="text-md p-1 text-semibold text-black">La Taxe Foncière Unique (TFU) est une contribution annuelle sur les propriétés foncières sises en République du Bénin.</CardDescription>
+                            <Link href="" onClick={handleClick} className="mt-6 bg-gradient-to-l from-gray-400 to-gray-500 uppercase inline-block text-white font-bold py-2 px-20 justify-center hover:bg-gray-400 transition duration-200">Simuler</Link>
+                        </CardContent>
+                    </Card>
+                </div>
+                <Link href="" onClick={handleClick} className="uppercase flex flex-rows items-center gap-x-6 mt-6 inline-block text-black font-bold py-2 px-6 rounded-lg self-center hover:bg-gray-400 transition duration-200">
+                    Voir tous les impôts
+                    {/* <MoveRight /> */}
+                </Link>
+
             </div>
+
             {/* <div className="pt-20 pr-20 pl-20 justify-center pb-20 space-y-10 bg-[url('/img/b2.jpg')] transition ease-in-out duration-1000" data-aos="fade-up" data-aos-delay="400">
                 <Theslide onProgressChange={handleProgressChange} />
                 {currentSlide === 'Myslides' ? <Myslides /> : <Slideshow />}

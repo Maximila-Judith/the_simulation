@@ -148,7 +148,7 @@ export default function Home() {
                 {!(taxType && level.length === 3 || alert)
                     && <div className="flex flex-row item-center my-6 text-white relative z-9">
                         <Link href="" onClick={handleClick} className=" flex flex-row mx-8 gap-x-3">
-                            <Button variant="secondary" className="w-full h-full bg-blue-200 hover:bg-blue-300 "><MoveLeft /> Retour</Button>
+                            <Button variant="secondary" className="w-full h-full bg-blue-400 hover:bg-blue-300 "><MoveLeft /> Retour</Button>
                         </Link>
                     </div>}
                 <div className="relative z-10 flex justify-center pr-7 md:w-1/2 mx-auto rounded-none h-auto w-[500px] bg-teal-900 bg-opacity-25  ">
@@ -166,7 +166,6 @@ export default function Home() {
                                         </div> :
                                         <Body onAnswer={forAnswer} length={back.length} onBack={forBack} />
                                     }
-
                                 </div>
                             </div>
                         </div>

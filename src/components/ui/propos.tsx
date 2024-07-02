@@ -46,34 +46,46 @@ export const Propos = () => {
             </div>
 
             <div className="flex flex-col gap-y-10 mt-10 p-10 bg-gray-200 w-1/2 h-full">
-                <h1 className='font-bold text-2xl'>Rapport de Simulation</h1>
+                <h1 className='font-bold text-2xl text-center'>Rapport de Simulation</h1>
                 <div className='flex flex-col justify-items-start gap-y-10'>
                     <div className='text-left space-y-6'>
                         <div className='flex flex-rows space-x-4'>
                             <h2 className='font-bold'>Nom:</h2>
-                            <p>Lenom</p>
+                            <p>AHOLOU</p>
                         </div>
                         <div className='flex flex-rows space-x-4'>
-                            <h2 className='font-bold'>Prénom:</h2>
-                            <p>Lenom</p>
+                            <h2 className='font-bold'>Prénoms:</h2>
+                            <p>John Doe</p>
                         </div>
                         <div className='flex flex-rows space-x-4'>
                             <h2 className='font-bold'>Email:</h2>
-                            <p>Lenom</p>
-                        </div>
-                        <div className='flex flex-rows space-x-4'>
-                            <h2 className='font-bold'>Profession:</h2>
-                            <p>Lenom</p>
+                            <p>johndoe@gmail.com</p>
                         </div>
                         <div className='flex flex-rows space-x-4'>
                             <h2 className='font-bold'>Type d'impot:</h2>
-                            <p>Lenom</p>
+                            <p>Impot sur les bénéfices d'affaire (IBA)</p>
+                        </div>
+                        <div className='flex flex-rows space-x-4'>
+                            <h2 className='font-bold'>Montant à payer:</h2>
+                            <p>25 666 000 F CFA</p>
+                        </div>
+                        <div className='flex flex-rows space-x-4'>
+                            <h2 className='font-bold'>Pourcentage appliqué :</h2>
+                            <p>25 %</p>
+                        </div>
+                        <div className='flex flex-rows space-x-4'>
+                            <h2 className='font-bold'>Redevance additionnelle:</h2>
+                            <p>+ 4000 F CFA sur l'impot</p>
+                        </div>
+                        <div className='flex flex-rows space-x-4'>
+                            <h2 className='font-bold'>Minimum de perception:</h2>
+                            <p>500 000 F CFA au moins</p>
                         </div>
                     </div>
 
-                    <div className='flex flex-rows items-center gap-x-5'>
+                    {/*  <div className='flex flex-rows items-center gap-x-5'>
                         <ConsultMode isCall={callCalculmode} />
-                    </div>
+                    </div> */}
                 </div>
 
 

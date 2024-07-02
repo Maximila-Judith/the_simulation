@@ -40,7 +40,6 @@ export const Slideshow = () => {
                 </button> */}
             </div>
             <div className="flex flex-row items-center w-1/2 space-x-4">
-                <Separator />
                 <div className='flex flex-col space-y-3'>
                     <h1 className="font-bold text-lg text-white text-left">Impôt pour entreprise</h1>
                     <p className="text-sm text-left text-white">

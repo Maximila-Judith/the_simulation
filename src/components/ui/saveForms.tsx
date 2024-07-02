@@ -60,7 +60,7 @@ const [nameValue, setNameValue] = useState<string>('');
     };
     
 
-    const createUserWithResult = async (userData: UserData): Promise<{ id: number }> => {
+    const createUserWithResult = async (userData: UserData): Promise<{ code: string }> => {
     try {
         const response = await fetch('/api/createUserWithResult', {
             method: 'POST',
@@ -83,7 +83,7 @@ const [nameValue, setNameValue] = useState<string>('');
     }
     };
     
-    const [userId, setUserId] = useState<number | null>();
+    const [userId, setUserId] = useState<string | null>();
     const [message, setMessage] = useState("")
 
     const handleCreateUser = async () => {
@@ -101,7 +101,7 @@ const [nameValue, setNameValue] = useState<string>('');
                     tax_price: data.tax_price,
                 },
             });
-            setUserId(newUser.id);
+            setUserId(newUser.code);
             setMessage('votre code de vérification est ' + userId)
             console.log('votre code de vérification est ' + userId)
         } catch (error) {
@@ -167,9 +167,7 @@ const [nameValue, setNameValue] = useState<string>('');
                     </div>
                     <AlertDialogFooter>
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction>
                            <Button onClick={handleCreateUser}>Envoyer</Button>
-                        </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>}
 

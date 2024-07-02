@@ -25,18 +25,18 @@ export function HoverInfo({ info }: { info: string }) {
       <HoverCardTrigger asChild>
         <button className="flex flex-wrap content-start h-auto ml-0 pt-0 pl-0 items-center space-x-0.5 hover:text-neutral-100 "><HelpCircle className='size-[16px] hover:bg-slate-300 rounded-full' /></button>
       </HoverCardTrigger>
-      <HoverCardContent className="w-80">
+      <HoverCardContent className="w-[500px] ">
         <div className="text-center md:text-left lg:text-left text-xs">
       <div className=" bg-white md:text-left lg:text-left rounded-sm overflow-hidden">
         <CardHeader className="flex justify-center pt-0 h-full w-full">
-          <CardTitle className=" text-center text-xl ">{valInfo?.title}</CardTitle>
+          <CardTitle className=" text-center ">{valInfo?.title}</CardTitle>
         </CardHeader>
-        <CardContent className="grid gap-4">
+        <CardContent className="grid gap-2">
           <div>
             {valInfo?.values.map((info, index) => (
               <div
                 key={index}
-                className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
+                className="mb-2 grid grid-cols-[25px_1fr] items-start pb-2 last:mb-0 last:pb-0"
               >
                 <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
                 <div className="space-y-1">

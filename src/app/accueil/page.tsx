@@ -144,15 +144,15 @@ export default function Home() {
 
     return (
         <QuestionContext.Provider value={step}>
-            <main className="h-screen w-full bg-gradient-to-r from-cyan-500 to-blue-900 relative bg-cover bg-no-repeat  bg-center overflow-hidden text-center md:text-left lg:text-righ">
-                <div className="absolute inset-0 bg-black opacity-70 "></div>
+            <main className="h-screen w-full bg-[url('/333.jpg')] relative bg-cover bg-no-repeat  bg-center overflow-hidden text-center md:text-left lg:text-righ">
+                <div className="absolute inset-0 bg-teal-800 opacity-80 "></div>
                 {!(taxType && level.length === 3 || alert)
                     && <div className="flex flex-row item-center my-6 text-white relative z-9">
                         <Link href="" onClick={handleClick} className=" flex flex-row mx-8 gap-x-3">
                             <Button variant="secondary" className="w-full h-full bg-blue-400 hover:bg-blue-300 "><MoveLeft /> Retour</Button>
                         </Link>
                     </div>}
-                <div className="relative z-10 flex justify-center items-center md:w-1/2 mx-auto rounded-2xl pb-2 h-auto  ">
+                <div className="relative z-10 flex justify-center pr-7 md:w-1/2 mx-auto rounded-none h-auto w-[500px] bg-teal-900 bg-opacity-25  ">
 
                     {level.length < 3 ?
                         <div className="mb-4 space-y-5 ">

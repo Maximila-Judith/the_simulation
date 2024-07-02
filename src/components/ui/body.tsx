@@ -38,7 +38,7 @@ export const Body: React.FC<BodyProps> = ({ onAnswer, onBack, length }) => {
     }
 
     return (
-        <div className="flex flex-col gap-2 h-50 text-center pt-0">
+        <div className="flex flex-col gap-2 text-center pt-0 opacity-100 w-[550px]">
 
             <div className="flex ml-0 mt-0.5 h-20 text-xs overflow-hidden ">
                 <div className='flex ml-0 space-x-2 h-full'>

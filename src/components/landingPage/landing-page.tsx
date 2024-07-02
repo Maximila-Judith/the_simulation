@@ -234,7 +234,6 @@ export function Landing() {
                             <Link href="" onClick={handleClick} className="mt-6 bg-gradient-to-l from-gray-400 to-gray-500 uppercase inline-block text-white font-bold py-2 px-20 justify-center hover:bg-gray-400 transition duration-200">Simuler</Link>
                         </CardContent>
                     </Card>
-
                 </div>
                 <Link href="" onClick={handleClick} className="uppercase flex flex-rows items-center gap-x-6 mt-6 inline-block text-black font-bold py-2 px-6 rounded-lg self-center hover:bg-gray-400 transition duration-200">
                     Voir tous les impôts

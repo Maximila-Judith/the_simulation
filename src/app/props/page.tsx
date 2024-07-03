@@ -1,11 +1,36 @@
-import { Propos } from '@/components/ui/propos'
+/* import { DataTable } from '@/components/ui/data-table'
 import React from 'react'
 
-function page() {
+function () {
     return (
         <div>
-            <Propos />
+            <DataTable />
         </div>
     )
 }
-export default page
+export default page */
+import { Payment, columns } from "@/components/columns/columns"
+import { DataTable } from "@/components/ui/data-table"
+
+async function getData(): Promise<Payment[]> {
+    // Fetch data from your API here.
+    return [
+        {
+            id: "728ed52f",
+            amount: 100,
+            status: "pending",
+            email: "m@example.com",
+        },
+        // ...
+    ]
+}
+
+export default async function Page() {
+    const data = await getData()
+
+    return (
+        <div className="container mx-auto py-10">
+            <DataTable columns={columns} data={data} />
+        </div>
+    )
+}

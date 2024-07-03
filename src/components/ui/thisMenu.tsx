@@ -37,6 +37,9 @@ export function ThisMenu() {
     const handleClickb = () => {
         window.location.href = '/props';
     }
+    const handleClicka = () => {
+        window.location.href = '/sign';
+    }
 
     return (
         <Menubar >
@@ -121,6 +124,12 @@ export function ThisMenu() {
             <MenubarMenu>
                 <MenubarTrigger className="text-white">
                     <Link href='' onClick={handleClickb}> Consulter mes resultats </Link>
+                </MenubarTrigger>
+            </MenubarMenu>
+
+            <MenubarMenu>
+                <MenubarTrigger className="text-white">
+                    <Link href='' onClick={handleClicka}> Déconnexion </Link>
                 </MenubarTrigger>
             </MenubarMenu>
         </Menubar>

@@ -1,5 +1,5 @@
-'use client'
 // pages/profile.tsx
+'use client'
 import { useEffect, useState } from 'react';
 import { parseCookies, destroyCookie } from 'nookies';
 import jwt from 'jsonwebtoken';
@@ -22,16 +22,16 @@ const Profile: React.FC = () => {
       } catch (error) {
         console.error('Error decoding token:', error);
         destroyCookie(null, 'token');
-        /* router.push('/login'); */
+        router.push('/accueil/user/login');
       }
     } else {
-      /* router.push('/login'); */
+      router.push('/user/login');
     }
   }, [router]);
 
   const handleLogout = () => {
     destroyCookie(null, 'token');
-    /* router.push('/login'); */
+    router.push('/user/login');
   };
 
   if (!decodedToken) {

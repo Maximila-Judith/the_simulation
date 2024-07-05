@@ -32,7 +32,7 @@ AOS.init({
 });
 
 
-export function Landing() {
+export default function Page() {
     const images = ['/111.jpg', '/g2.jpg', '/nnn.jpg', '/333.jpg']
     const [image, setImage] = useState(0)
     const [menuOpen, setMenuOpen] = useState(false)
@@ -60,17 +60,8 @@ export function Landing() {
   function logout() {
     setToken('')
     localStorage.removeItem('jwt-token')
-    router.push('/login');
-  }
-
-  if (!token) {
-    return (
-      <>
-        <main style={{ padding: '50px' }}>
-          <p>You&apos;re not logged in.</p>
-        </main>
-      </>
-    )
+    console.log('cc')
+    router.push('/login')
   }
 
 
@@ -80,7 +71,7 @@ export function Landing() {
 
     }
 
-/*     useEffect(() => {
+   useEffect(() => {
         const interval = setInterval(() => {
             setImage((index) =>
                 index === images.length - 1 ? 0 : index + 1
@@ -88,7 +79,7 @@ export function Landing() {
         }, 4000)
         return () => clearInterval(interval)
     }, [])
- */
+ 
     const handleClick = () => {
          router.push('/accueil');
     }
@@ -100,7 +91,7 @@ export function Landing() {
     return (
         <div className=" relative mx-auto bg-neutral-300">
 
-            <div className={` flex flex-col pt-3 bg-no-repeat bg-cover bg-center h-screen lg:max-h-96 max-w-full block ${styles['background-slide']}`} style={{ backgroundImage: `url(${images[image]})` }}>
+            <div className={` flex-col pt-3 bg-no-repeat bg-cover bg-center h-screen lg:max-h-96 max-w-full block ${styles['background-slide']}`} style={{ backgroundImage: `url(${images[image]})` }}>
                 <div className="flex flex-row justify-between pl-5 items-center fixed top-0 left-0 w-full z-50 bg-gray-400">
                     <Image
                         src="/img/benin.png"
@@ -133,7 +124,7 @@ export function Landing() {
 
             <div className=" text-center gap-y-10 w-full justify-center p-20 ">
                 <div className="flex flex-col justify-center mr-40 ml-40 p-30">
-                    <h1 className="font-bold uppercase self-center text-neutral-900 inline-block text-2xl">{userData.userName}Les types d'impôts au Bénin </h1>
+                    <h1 className="font-bold uppercase self-center text-neutral-900 inline-block text-2xl">Les types d'impôts au Bénin </h1>
                 </div>
                 <div className="flex flex-col lg:flex-row justify-center items-center gap-y-10 lg:gap-x-10 pt-10 transition ease-in-out duration-1000" data-aos="fade-up" data-aos-delay="400">
                     <Card className={`drop-shadow-md ${styles['card']}`}>

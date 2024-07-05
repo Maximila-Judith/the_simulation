@@ -4,6 +4,9 @@ import { z } from "zod"
 
 const formSchema = z.object({
     username: z.string().min(2).max(50),
+    email: z.string().min(2).max(50),
+    password: z.string().min(2).max(50),
+    confpassword: z.string().min(2).max(50),
 })
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -19,7 +22,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
-
+import { useRouter } from 'next/navigation';
 
 export default function SignInForm() {
 
@@ -27,15 +30,47 @@ export default function SignInForm() {
         resolver: zodResolver(formSchema),
         defaultValues: {
             username: "",
+            email: "",
+            password: "",
+            confpassword: "",
         },
     })
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+  const router = useRouter();
+
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        const username = values.username
+        const email = values.email
+        const password = values.password
+        const confpassword = values.confpassword
+
+    if (password !== confpassword) {
+      alert("Passwords don't match");
+      return;
     }
 
+    const res = await fetch('/api/auth/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, email, password }),
+    });
+
+        if (res.ok) {
+        localStorage.setItem('tempUsername', username);
+        localStorage.setItem('tempPassword', password);
+         console.log(values)
+         router.push('/login'); 
+    } else {
+      const data = await res.json();
+      alert(data.message);
+    }
+  };
+
     return (
-        <div className="flex flex-row item-center gap-20 w-full justify-center mt-20">
+        <div className="flex flex-row item-center gap-20 w-full justify-cen
+        ter mt-20">
             <div className="w-1/2 mt-20">
                 <Image
                     src="/img/sign.jpg"
@@ -56,7 +91,7 @@ export default function SignInForm() {
                                 <FormItem className="flex flex-col space-y-2 items-left">
                                     <FormLabel>Nom de l'utilisateur</FormLabel>
                                     <FormControl>
-                                        <input className="p-2 rounded-sm w-full" placeholder="shadcn" {...field} />
+                                        <input className="p-2 rounded-sm w-full" placeholder="shadcn"  required {...field} />
                                     </FormControl>
                                 </FormItem>
 
@@ -64,36 +99,36 @@ export default function SignInForm() {
                         />
                         <FormField
                             control={form.control}
-                            name="username"
+                            name="email"
                             render={({ field }) => (
                                 <FormItem className="flex flex-col space-y-2 items-left">
                                     <FormLabel>Email</FormLabel>
                                     <FormControl>
-                                        <input className="p-2 rounded-sm w-full" placeholder="shadcn" {...field} />
+                                        <input className="p-2 rounded-sm w-full" type="email" placeholder="shadcn" {...field} />
                                     </FormControl>
                                 </FormItem>
                             )}
                         />
                         <FormField
                             control={form.control}
-                            name="username"
+                            name="password"
                             render={({ field }) => (
                                 <FormItem className="flex flex-col space-y-2 items-left">
                                     <FormLabel>Password</FormLabel>
                                     <FormControl>
-                                        <input className="p-2 rounded-sm w-full" placeholder="shadcn" {...field} />
+                                        <input className="p-2 rounded-sm w-full" type="password" required placeholder="shadcn" {...field} />
                                     </FormControl>
                                 </FormItem>
                             )}
                         />
                         <FormField
                             control={form.control}
-                            name="username"
+                            name="confpassword"
                             render={({ field }) => (
                                 <FormItem className="flex flex-col space-y-2 items-left">
                                     <FormLabel>Confirm password</FormLabel>
                                     <FormControl>
-                                        <input className="p-2 rounded-sm w-full" placeholder="shadcn" {...field} />
+                                        <input className="p-2 rounded-sm w-full" type="password"  required placeholder="shadcn" {...field} />
                                     </FormControl>
                                 </FormItem>
                             )}

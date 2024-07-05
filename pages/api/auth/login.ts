@@ -26,13 +26,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(401).json({ message: 'Invalid username or password' });
       }
 
-      const secret = process.env.JWT_SECRET;
+      const secret = process.env.NEXT_PUBLIC_JWT_SECRET;
       if (!secret) {
         throw new Error('JWT_SECRET is not defined');
       }
 
-      const token = jwt.sign({ userId: user.id }, secret, {
-        expiresIn: '1h',
+      const token = jwt.sign({ userName: user.name }, secret, {
+        expiresIn: '10y',
       });
 
       res.status(200).json({ message: 'Login successful', token });

@@ -24,7 +24,7 @@ import {
 import { Building2, Home, Layers3, Newspaper, Shield, TableCellsMerge } from "lucide-react"
 
 
-export function ThisMenu() {
+export function ThisMenu({ handleClicka}: { handleClicka:() => void}) {
 
     const handleClick = () => {
         window.location.href = '/accueil'
@@ -36,9 +36,6 @@ export function ThisMenu() {
 
     const handleClickb = () => {
         window.location.href = '/props';
-    }
-    const handleClicka = () => {
-        window.location.href = '/sign';
     }
 
     return (

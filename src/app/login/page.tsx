@@ -26,12 +26,13 @@ export default function LoginForm() {
     })
 
      const router = useRouter();
-
+    const tempUsername = localStorage.getItem('tempUsername')
+    const tempPassword = localStorage.getItem('tempPassword')
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            username: "",
-            password: "",
+            username: tempUsername?tempUsername:'',
+            password: tempPassword?tempPassword:'',
         },
     })
 
@@ -50,17 +51,11 @@ export default function LoginForm() {
 
     if (res.ok) {
         const { token } = await res.json();
-        setCookie(null, 'token', token, {
-            path: '/',
-            maxAge: 60 * 60,
-            sameSite: 'strict',
-        }
-        );
-
-        console.log(document.cookie)
-         router.push('/profile')
+        localStorage.setItem('jwt-token', token)
+        localStorage.removeItem('tempUsername');
+        localStorage.removeItem('tempPassword');
+        router.push('/accueil');
     } else {
-      console.log('no')
       const data = await res.json();
       alert(data.message);
     }
@@ -102,7 +97,7 @@ export default function LoginForm() {
                                 <FormItem className="flex flex-col space-y-2 items-left">
                                     <FormLabel>Password</FormLabel>
                                     <FormControl>
-                                        <input className="p-2 rounded-sm w-full" placeholder="shadcn" {...field} />
+                                        <input className="p-2 rounded-sm w-full" placeholder="shadcn" type = 'password' {...field} />
                                     </FormControl>
                                 </FormItem>
                             )}

@@ -1,6 +1,6 @@
 'use client'
 import styles from '@/app/wizard.module.css'
-import { MoveLeft } from "lucide-react"
+import { Home, MoveLeft, } from "lucide-react"
 import { Body } from "@/components/ui/body";
 import React, { useEffect, useState } from 'react';
 import { Stepper } from '@/components/ui/stepper'
@@ -19,7 +19,7 @@ import { Button } from '@/components/ui/button';
 import { Alert } from '@/components/ui/alert';
 import LoadingPercentage from '@/components/ui/LoadingPercentage';
 
-export default function Home() {
+export default function Simulation() {
     const [step, setStep] = useState<Data>(Questions.entry);
     const [back, setBack] = useState([0]);
     const [answers, setAnswers] = useState([{ question: '', response: [''] }])
@@ -143,15 +143,15 @@ export default function Home() {
 
     return (
         <QuestionContext.Provider value={step}>
-            <main className="h-screen w-full bg-[url('/333.jpg')] relative bg-cover bg-no-repeat  bg-center overflow-hidden text-center md:text-left lg:text-righ">
+            <main className="h-screen w-full bg-[url('/333.jpg')] relative bg-cover bg-no-repeat bg-center overflow-hidden text-center md:text-left lg:text-righ">
                 <div className="absolute inset-0 bg-teal-800 opacity-80 "></div>
                 {!(taxType && level.length === 3 || alert)
                     && <div className="flex flex-row item-center my-6 text-white relative z-9">
-                        <Link href="" onClick={handleClick} className=" flex flex-row mx-8 gap-x-3">
-                            <Button variant="secondary" className="w-full h-full bg-blue-400 hover:bg-blue-300 "><MoveLeft /> Retour</Button>
-                        </Link>
+                        {/* <Link href="" onClick={handleClick} className=" flex flex-row mx-8 gap-x-3 mt-20">
+                            <Home className="fill-black-600 text-black-950 size-6" />
+                        </Link> */}
                     </div>}
-                <div className="relative z-10 flex justify-center pr-7 md:w-1/2 mx-auto rounded-none h-auto w-[500px] bg-teal-900 bg-opacity-25  ">
+                <div className="relative z-10 mt-20 flex justify-center pr-7 md:w-1/2 mx-auto rounded-none h-auto w-[500px] bg-teal-900 bg-opacity-25  ">
 
                     {level.length < 3 ?
                         <div className="mb-4 space-y-5 ">

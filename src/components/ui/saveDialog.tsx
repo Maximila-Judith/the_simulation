@@ -12,79 +12,143 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ReactNode, useState } from 'react';
 
-export function SaveDialog({ children, forSave }: { children: ReactNode; forSave: (name: string, email: string) => void }) {
-  const [nameValue, setNameValue] = useState<string>('');
-  const [emailValue, setEmailValue] = useState<string>('');
-  const [isNameValid, setIsNameValid] = useState<boolean>(true);
-  const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
+import { z } from "zod"
 
-  const nameRegex = /^[a-zA-ZÀ-ÖØ-öø-ÿ' -]{1,50}$/;
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const formSchema = z.object({
+    username: z.string().min(2).max(50),
+    email: z.string().min(2).max(50),
+    password: z.string().min(2).max(50),
+    confpassword: z.string().min(2).max(50),
+})
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form"
+import Image from "next/image"
+import { useRouter } from 'next/navigation';
 
-  const validateName = (name: string) => nameRegex.test(name);
-  const validateEmail = (email: string) => emailRegex.test(email);
+export function SignIn({ children }: { children: ReactNode }) {
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            username: "",
+            email: "",
+            password: "",
+            confpassword: "",
+        },
+    })
 
-  const nameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setNameValue(value);
-    setIsNameValid(validateName(value));
-  };
+  const router = useRouter();
 
-  const emailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setEmailValue(value);
-    setIsEmailValid(validateEmail(value));
-  };
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        const username = values.username
+        const email = values.email
+        const password = values.password
+        const confpassword = values.confpassword
 
-  const onSave = () => {
-    if (isNameValid && isEmailValid) {
-      forSave(nameValue, emailValue);
+    if (password !== confpassword) {
+      alert("Passwords don't match");
+      return;
+    }
+
+    const res = await fetch('/api/auth/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, email, password }),
+    });
+
+        if (res.ok) {
+        localStorage.setItem('tempUsername', username);
+        localStorage.setItem('tempPassword', password);
+         console.log(values)
+         router.push('/login'); 
     } else {
-      alert("Veuillez corriger les erreurs dans le formulaire.");
+      const data = await res.json();
+      alert(data.message);
     }
   };
+
+
+
+  
 
   return (
     <Dialog>
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] rounded-none">
+      <DialogContent className=" rounded-none ">
         <DialogHeader>
-          <DialogTitle>Formulaire</DialogTitle>
+          <DialogTitle>Inscription</DialogTitle>
           <DialogDescription>
-            Remplissez ce formulaire
+            Inscrivez-vous
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Nom
-            </Label>
-            <Input
-              id="name"
-              value={nameValue}
-              className={`col-span-3 ${!isNameValid ? 'border-red-500' : ''}`}
-              onChange={nameChange}
-            />
-            {!isNameValid && <p className="col-span-4 text-red-500">Nom invalide</p>}
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="email" className="text-right">
-              Email
-            </Label>
-            <Input
-              id="email"
-              value={emailValue}
-              className={`col-span-3 ${!isEmailValid ? 'border-red-500' : ''}`}
-              onChange={emailChange}
-            />
-            {!isEmailValid && <p className="col-span-4 text-red-500">Email invalide</p>}
-          </div>
-        </div>
-        <DialogFooter>
-          <Button type="submit" onClick={onSave}>Enrégistrer</Button>
-        </DialogFooter>
+                   <div className=" rounded-md w-full">
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                        <FormField
+                            control={form.control}
+                            name="username"
+                            render={({ field }) => (
+                                <FormItem className="flex flex-col space-y-2 items-left">
+                                    <FormLabel>Nom de l'utilisateur</FormLabel>
+                                    <FormControl>
+                                        <input className="p-2 rounded-sm w-full" placeholder="shadcn"  required {...field} />
+                                    </FormControl>
+                                </FormItem>
+
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                                <FormItem className="flex flex-col space-y-2 items-left">
+                                    <FormLabel>Email</FormLabel>
+                                    <FormControl>
+                                        <input className="p-2 rounded-sm w-full" type="email" placeholder="shadcn" {...field} />
+                                    </FormControl>
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="password"
+                            render={({ field }) => (
+                                <FormItem className="flex flex-col space-y-2 items-left">
+                                    <FormLabel>Password</FormLabel>
+                                    <FormControl>
+                                        <input className="p-2 rounded-sm w-full" type="password" required placeholder="shadcn" {...field} />
+                                    </FormControl>
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="confpassword"
+                            render={({ field }) => (
+                                <FormItem className="flex flex-col space-y-2 items-left">
+                                    <FormLabel>Confirm password</FormLabel>
+                                    <FormControl>
+                                        <input className="p-2 rounded-sm w-full" type="password"  required placeholder="shadcn" {...field} />
+                                    </FormControl>
+                                </FormItem>
+                            )}
+                        />
+                        <button className="bg-blue-600 p-2 rounded-sm text-center hover:bg-blue-800" type="submit">S'inscrire</button>
+                    </form>
+                </Form>
+            </div>
       </DialogContent>
     </Dialog>
   );

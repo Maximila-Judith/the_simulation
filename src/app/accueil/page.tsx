@@ -24,6 +24,7 @@ import { TypedText } from "@/components/ui/typetext";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useRouter } from 'next/navigation';
+import { SignIn } from "@/components/ui/saveDialog"
 
 AOS.init({
     duration: 1500,
@@ -38,40 +39,33 @@ export default function Page() {
     const [menuOpen, setMenuOpen] = useState(false)
     const [currentStep, setCurrentStep] = useState(1)
 
-  const router = useRouter();
-  const [token, setToken] = useState('')
-  const [userData, setUserData] = useState({ userName: ''})
+    const router = useRouter();
+    const [token, setToken] = useState('')
+    const [userData, setUserData] = useState({ userName: '' })
 
-  useEffect(() => {
-    let token = localStorage.getItem('jwt-token');
-        token = token?token:''
-    setToken(token);
+    useEffect(() => {
+        let token = localStorage.getItem('jwt-token');
+        token = token ? token : ''
+        setToken(token);
 
-    fetch('/api/auth/safehouse', {
-      headers: {
-        'jwt-token': token,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setUserData(data))
-  }, [])
-
-
-  function logout() {
-    setToken('')
-    localStorage.removeItem('jwt-token')
-    console.log('cc')
-    router.push('/login')
-  }
+        fetch('/api/auth/safehouse', {
+            headers: {
+                'jwt-token': token,
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => setUserData(data))
+    }, [])
 
 
-
-    const toggleMenu = () => {
-        setMenuOpen(!menuOpen)
-
+    function logout() {
+        setToken('')
+        localStorage.removeItem('jwt-token')
+        console.log('cc')
+        router.push('/login')
     }
 
-   useEffect(() => {
+    useEffect(() => {
         const interval = setInterval(() => {
             setImage((index) =>
                 index === images.length - 1 ? 0 : index + 1
@@ -79,9 +73,9 @@ export default function Page() {
         }, 4000)
         return () => clearInterval(interval)
     }, [])
- 
+
     const handleClick = () => {
-         router.push('/accueil');
+        router.push('/accueil');
     }
 
     const handleStepChange = (step: number) => {
@@ -92,7 +86,7 @@ export default function Page() {
         <div className=" relative mx-auto bg-neutral-300">
 
             <div className={` flex-col pt-3 bg-no-repeat bg-cover bg-center h-screen lg:max-h-96 max-w-full block ${styles['background-slide']}`} style={{ backgroundImage: `url(${images[image]})` }}>
-                <div className="flex flex-row justify-between pl-5 items-center fixed top-0 left-0 w-full z-50 bg-gray-400">
+                {/* <div className="flex flex-row justify-between pl-5 items-center fixed top-0 left-0 w-full z-50 bg-gray-400">
                     <Image
                         src="/img/benin.png"
                         alt="icon 1"
@@ -115,10 +109,10 @@ export default function Page() {
                             <ThisMenu handleClicka ={logout} />
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div className={`flex flex-col lg:mb-10 w-full lg:w-2/4 place-self-center bg-transparent opacity-100 pl-8 space-y-4 lg:mt-10 pt-20 mt-10 overflow-x-hidden overflow-y-hidden `}>
                     <h1 className={`text-2xl text-center mt-10 font-bold text-white inline-block`} > Simuler vos Impôts conformément au Code Géneral des Impôts 2024 </h1>
-                    <Link href="" onClick={handleClick} className="mt-6 bg-white inline-block text-black font-bold py-2 px-6 rounded-lg self-center hover:bg-gray-400 transition duration-200">Simulation rapide</Link>
+                    <SignIn><Link href="" onClick={handleClick} className="mt-6 bg-white inline-block text-black font-bold py-2 px-6 rounded-lg self-center hover:bg-gray-400 transition duration-200">Simulation rapide</Link></SignIn>
                 </div>
             </div>
 

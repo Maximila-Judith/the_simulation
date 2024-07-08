@@ -40,19 +40,19 @@ export const Body: React.FC<BodyProps> = ({ onAnswer, onBack, length }) => {
     return (
         <div className="flex flex-col gap-2 text-center pt-0 opacity-100 w-[550px]">
 
-            <div className="flex ml-0 mt-0.5 h-20 text-xs overflow-hidden ">
+            <div className="flex ml-0 mt-0.5 h-20 text-xs overflow-hidden bg-white ">
                 <div className='flex ml-0 space-x-2 h-full'>
                     <button disabled={length > 1 ? false : true} className="rounded-l-sm overflow-hidden  text-white border-r  flex items-center justify-center content-center p-0 m-0 h-full w-11 disabled:opacity-20  bg-opacity-0 " onClick={onBack}>
-                        <ChevronLeft className='size-[25px] hover:size-[30px] ' />
+                        <ChevronLeft className='size-[25px] hover:size-[30px] text-black fill-current' />
                     </button>
                 </div>
-                <div className='flex space-x-1 text-white h-full  w-full pt-5 justify-start items-center m-auto flex-wrap content-start px-2'>
+                <div className='flex space-x-1 text-black font-bold h-full  w-full pt-5 justify-start items-center m-auto flex-wrap content-start px-2'>
                     <p className=' text-start '><AnimatedText text={question} onEnd={forEnd} /></p>
                     {(the_question.info && questionEnd) && (<div className='content-center'><HoverInfo info={the_question.info} /></div>)}
                 </div>
             </div>
 
-            <div className='bg-blue-950 bg-opacity-70 rounded-sm overflow-hidden'>
+            <div className='bg-white rounded-sm overflow-hidden'>
                 <div className='flex justify-center content-center text-center h-60  gap-4 mx-1.5'>
                     <div className={`${questionEnd ? 'opacity-100' : 'opacity-0'
                         } transition duration-900 ease-in-out transform content-center space-y-4 w-full text-x`}

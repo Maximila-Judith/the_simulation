@@ -22,9 +22,10 @@ import {
     MenubarTrigger,
 } from "@/components/ui/menubar"
 import { Building2, Home, Layers3, Newspaper, Shield, TableCellsMerge } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 
-export function ThisMenu({ handleClicka}: { handleClicka:() => void}) {
+export function ThisMenu({ handleClicka }: { handleClicka: () => void }) {
 
     const handleClick = () => {
         window.location.href = '/accueil'
@@ -34,8 +35,10 @@ export function ThisMenu({ handleClicka}: { handleClicka:() => void}) {
         window.location.href = '/'
     }
 
+    const router = useRouter();
+
     const handleClickb = () => {
-        window.location.href = '/props';
+        router.push('/props');
     }
 
     return (

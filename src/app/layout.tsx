@@ -7,6 +7,14 @@ import { ThisMenu } from "@/components/ui/thisMenu";
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import Lavatar from "@/components/ui/lavatar";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card"
+import { Separator } from "@/components/ui/separator";
+
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -90,7 +98,30 @@ export default function RootLayout({
                   }`}
               >
                 <ThisMenu handleClicka={logout} />
+                <HoverCard>
+                  <HoverCardTrigger><Lavatar /></HoverCardTrigger>
+                  <HoverCardContent>
+                    <div className="flex flex-col justify-center items-center space-y-3">
+                      <Lavatar />
+                      <div className="flex flex-col items-center space-y-1">
+                        <h4 className="text-sm font-semibold">John Doe</h4>
+                        <p className="text-sm">johndoe@gmail.com</p>
+                      </div>
+                      <Separator />
+                      <div className="flex flex-col self-start space-y-3">
+                        <span className="text-xs text-muted-foreground">
+                          Connexion
+                        </span>
+                        <span className="text-xs text-muted-foreground">
+                          Déconnexion
+                        </span>
+                      </div>
+                    </div>
+                  </HoverCardContent>
+                </HoverCard>
+
               </div>
+
             </div>
           </div>
         </header>

@@ -105,7 +105,7 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
 
 
   return (
-    <div className=" lg:text-left w-screen overflow-hidden h-screen flex flex-wrap justify-center bg-blue-900 p-0 mt-10">
+    <div className=" lg:text-left w-screen overflow-hidden h-screen flex flex-wrap justify-center bg-blue-900 p-0">
 
       <div className=" flex space-x-0 bg-emerald-200  overflow-hidden  w-full text-white ">
 
@@ -143,71 +143,68 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
                 </div>
               </div>
             </div>
-
           </div>
 
-          <div className='  h-4/5 flex-wrap content-center '>
+          <div className='flex flex-col items-center space-y-5 content-center '>
+            <div className="flex w-full flex-col rounded-none overflow-hidden justify-start">
+              <div className=' flex flex-row space-x-5 h-full items-center content-end w-full '>
+                <p className='text-neutral-300 flex text-2xl text-center p-2 pl-0'>✔ Type d'impôt : </p>
+                <div>
+                  {res.taxName.length < 2 ?
+                    <div className='  h-full flex flex-wrap content-center'>
+                      <p className=' text-start text-xl'><AnimatedText text={res.taxName[0]} onEnd={forTypeTaxFinish} /></p>
+                    </div>
+                    :
 
-            <div className="flex   w-full flex-col h-1/2 rounded-none overflow-hidden justify-start">
-              <div className=' flex space-x-0.5 h-full flex-wrap content-end w-full '>
-                <p className='text-neutral-300 flex text-2xl text-center bg-cyan-900 p-2 pl-0'>✔ Type d'impôt </p>
+                    <div className='  h-full flex flex-wrap content-center'>
+                      <p className=' text-xl'><AnimatedText text={res.taxName[0] + ' et ' + res.taxName[1]} onEnd={forTypeTaxFinish} /></p>
+                    </div>
+                  }
+                </div>
               </div>
-              {res.taxName.length < 2 ?
-                <div className='  h-full flex flex-wrap content-center'>
-                  <p className=' text-start text-xl'><AnimatedText text={res.taxName[0]} onEnd={forTypeTaxFinish} /></p>
-                </div>
-                :
-
-                <div className='  h-full flex flex-wrap content-center'>
-                  <p className=' text-xl'><AnimatedText text={res.taxName[0] + ' et ' + res.taxName[1]} onEnd={forTypeTaxFinish} /></p>
-                </div>
-              }
             </div>
 
+            <div className=" w-full flex flex-col rounded-none overflow-hidden justify-start">
+              <div className="flex items-center rounded-none">
+                <div className='justify-start flex flex-row space-x-5 items-center content-end w-full'>
+                  <p className='text-neutral-300 flex text-2xl text-center w-[250px] p-2 pl-0'>✔ Montant à payer : </p>
+                  <div>
+                    {res.taxPrice.length === 1 &&
+                      <div className=" h-full flex flex-wrap content-center">
+                        <p className=" text-start text-xl ">
+                          {amountTyping && <AnimatedText text={String(res.taxPrice[0]).replace(...numberFormatRegex) + ' fcfa'} onEnd={forAmountFinisht} />}
+                        </p>
+                      </div>
+                    }
 
-            <div className=" w-full  flex flex-col h-1/2 rounded-none overflow-hidden justify-start   ">
+                    {res.taxPrice.length === 2 &&
 
-              <div className="flex items-center h-full  rounded-none">
-                <div className='  space-x-0.5 h-full justify-start flex-wrap content-end w-full    '>
-                  <p className='text-neutral-300 flex text-2xl text-center w-[210px]  bg-cyan-900 p-2 pl-0'>✔ Montant à payer</p>
+                      <div className="h-2/3 flex flex-wrap content-center">
+                        <p className="text-start text-xl  space-x-4">
+                          {amountTyping && <AnimatedText text={String(res.taxPrice[0]).replace(...numberFormatRegex) + ' fcfa à ' + String(res.taxPrice[1]).replace(...numberFormatRegex) + ' fcfa'} onEnd={forAmountFinisht} />}
+                        </p>
+
+                      </div>
+
+                    }
+
+                    {res.taxPrice.length === 3 &&
+
+                      <div className="flex flex-col h-2/3 flex-wrap content-start  ">
+                        <div className=" h-full flex flex-wrap content-center ">
+                          <p className=" text-start  text-xl">
+                            {amountTyping && <AnimatedText text={String(res.taxPrice[0]).replace(...numberFormatRegex) + ' fcfa pour ' +
+                              res.taxName[0].split('(')[1].split(')')[0] + ' et entre ' + String(res.taxPrice[1]).replace(...numberFormatRegex) +
+                              ' et ' + String(res.taxPrice[2]).replace(...numberFormatRegex) + ' fcfa pour ' + res.taxName[1].split('(')[1].split(')')[0]
+                            } onEnd={forAmountFinisht} />}
+                          </p>
+                        </div>
+                      </div>
+                    }
+                  </div>
+
                 </div>
               </div>
-
-              {res.taxPrice.length === 1 &&
-                <div className=" h-full flex flex-wrap content-center">
-                  <p className=" text-start text-xl ">
-                    {amountTyping && <AnimatedText text={String(res.taxPrice[0]).replace(...numberFormatRegex) + ' fcfa'} onEnd={forAmountFinisht} />}
-                  </p>
-                </div>
-              }
-
-              {res.taxPrice.length === 2 &&
-
-                <div className="h-2/3 flex flex-wrap content-center">
-                  <p className="text-start text-xl  space-x-4">
-                    {amountTyping && <AnimatedText text={String(res.taxPrice[0]).replace(...numberFormatRegex) + ' fcfa à ' + String(res.taxPrice[1]).replace(...numberFormatRegex) + ' fcfa'} onEnd={forAmountFinisht} />}
-                  </p>
-
-                </div>
-
-              }
-
-              {res.taxPrice.length === 3 &&
-
-                <div className="flex flex-col h-2/3 flex-wrap content-start  ">
-                  <div className=" h-full flex flex-wrap content-center ">
-                    <p className=" text-start  text-xl">
-                      {amountTyping && <AnimatedText text={String(res.taxPrice[0]).replace(...numberFormatRegex) + ' fcfa pour ' +
-                        res.taxName[0].split('(')[1].split(')')[0] + ' et entre ' + String(res.taxPrice[1]).replace(...numberFormatRegex) +
-                        ' et ' + String(res.taxPrice[2]).replace(...numberFormatRegex) + ' fcfa pour ' + res.taxName[1].split('(')[1].split(')')[0]
-                      } onEnd={forAmountFinisht} />}
-                    </p>
-                  </div>
-                </div>
-
-
-              }
-
             </div>
 
           </div>

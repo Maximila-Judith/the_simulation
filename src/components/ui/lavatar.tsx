@@ -4,14 +4,15 @@ import {
     AvatarFallback,
     AvatarImage,
 } from "@/components/ui/avatar";
+import { User } from 'lucide-react';
 
 const lavatar = () => {
     return (
         <div>
             <Avatar className='relative'>
+                <AvatarImage src="/img/user.png" alt="@shadcn" />
                 <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <span className="flex h-2 w-2 translate-x-8 -mt-1.5 rounded-full bg-sky-500" />
         </div>
     )
 }

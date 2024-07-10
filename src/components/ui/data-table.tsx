@@ -48,7 +48,7 @@ export function DataTable<TData, TValue>({
 
     return (
         <div className="rounded-md border flex justify-center bg-neutral-300 w-full p-10 mt-20">
-            <div className="flex flex-row justify-between pl-5 items-center fixed top-0 left-0 w-full z-50 bg-gray-400">
+            {/* <div className="flex flex-row justify-between pl-5 items-center fixed top-0 left-0 w-full z-50 bg-gray-400">
                 <Image
                     src="/benin.png"
                     alt="icon 1"
@@ -70,8 +70,7 @@ export function DataTable<TData, TValue>({
                         <ThisMenu />
                     </div>
                 </div>
-            </div>
-
+            </div> */}
             <Table>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (

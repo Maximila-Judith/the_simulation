@@ -123,18 +123,18 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
 
           <div className=' flex flex-col space-y-20 h-1/4 '>
 
-            <div className='  px-0 flex h-auto flex-rows items-center space-x-4 content-start  justify-end '>
-              <Link href='' onClick={handleClick} className=" bg-cyan-600 p-3">
+            <div >
+              {/* <Link href='' onClick={handleClick} className=" bg-cyan-600 p-3">
                 <p className=' text-center text-sm hover:text-neutral-400'>Refaire une autre simulation</p>
-              </Link>
+              </Link> */}
               {/*                 <Link href='' className="  flex justify-end">
                   <div className='flex gap-x-1 h-full flex-wrap content-center '>
                     <SaveForms data = {dbRes} />
                   </div>
                 </Link> */}
-              <Link href='' onClick={forAcceuil} className="  flex justify-end">
+              {/* <Link href='' onClick={forAcceuil} className="  flex justify-end">
                 <p className=' text-center text-sm hover:text-neutral-400'>Aller à la page d'accueil</p>
-              </Link>
+              </Link> */}
             </div>
             <div className='flex justify-end  '>
               <div className=' rounded-none  flex flex-wrap justify-start content-center w-full text-neutral-300'>
@@ -202,16 +202,18 @@ export const Result: React.FC<ResultProps> = ({ tax, answers }) => {
                       </div>
                     }
                   </div>
-
                 </div>
               </div>
             </div>
-
           </div>
-          <div className=' h-1/4'>
-
+          <div className='px-0 flex h-auto flex-rows items-center space-x-4 content-start justify-end'>
+            <Link href='' onClick={handleClick} className=" bg-cyan-600 p-3">
+              <p className=' text-center text-sm hover:text-neutral-400'>Refaire une autre simulation</p>
+            </Link>
+            <Link href='' onClick={forAcceuil} className="  flex justify-end">
+              <p className=' text-center text-sm hover:text-neutral-400'>Aller à la page d'accueil</p>
+            </Link>
           </div>
-
         </div>
 
 
